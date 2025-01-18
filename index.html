@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <title>Radio Streaming</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="description" content="Bienvenid@s">
+    <meta name="theme-color" content="#5e2760">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./img/logo.png">
+    <link rel="apple-touch-startup-image" href="./img/logo.png">
+    <link rel="manifest" href="./manifest.json">
+	<link rel="stylesheet" href="style.css">
+	</head>
+
+  <body>
+    <div class="container">
+      <div class="row center">
+        <div class="col s12">
+          <figure>
+            <img src="https://i.ibb.co/dMpz83s/as.png" width="100px" alt="Zoom Musical">
+          </figure>
+        </div>
+      </div>
+
+      <div class="row center" style="margin-top: 20px;">
+        <!-- Reproductor -->
+        <div class="player-container">
+          <div class="vinyl" id="vinyl">
+            <img src="https://i.ibb.co/mBPcC7x/146.jpg" alt="Disco">
+          </div>
+          <div class="metadata">
+            <h5 id="song-title">Cargando...</h5>
+            <p id="artist-name">Artista: Desconocido</p>
+          </div>
+          <!-- Botón rectangular -->
+          <button class="play-button" id="play-button">
+            <i class="material-icons">play_arrow</i>
+          </button>
+          <div class="volume-control">
+            <label for="volume">Volumen:</label>
+            <input type="range" id="volume" min="0" max="1" step="0.01">
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto deslizante debajo del reproductor -->
+      <div class="scrolling-container" style="margin-top: 20px;">
+        <div class="scrolling-text">
+          Gracias por escucharnos...
+        </div>
+      </div>
+
+      <div class="adookia">
+        <a href="https:--------" target="_blank"><img class="---------" src="img/etiqueta.svg" alt="-----"></a>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+      const audio = new Audio('https://stream.zeno.fm/dfxxkhvkxs8uv'); // Cambia por tu URL Shoutcast/Icecast
+      const playButton = document.getElementById('play-button');
+      const vinyl = document.getElementById('vinyl');
+      const volumeControl = document.getElementById('volume');
+
+      // Metadata simulada
+      const songTitle = document.getElementById('song-title');
+      const artistName = document.getElementById('artist-name');
+
+      // Simular metadata (reemplázalo con la funcionalidad para extraer metadata real si es necesario)
+      setInterval(() => {
+        songTitle.innerText = 'Canción de Prueba'; // Reemplaza con datos reales
+        artistName.innerText = 'Artista de Prueba'; // Reemplaza con datos reales
+      }, 3000);
+
+      playButton.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          vinyl.style.animationPlayState = 'running';
+          playButton.innerHTML = '<i class="material-icons">pause</i>';
+        } else {
+          audio.pause();
+          vinyl.style.animationPlayState = 'paused';
+          playButton.innerHTML = '<i class="material-icons">play_arrow</i>';
+        }
+      });
+
+      volumeControl.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+      });
+    </script>
+
+    <!-- CSS -->
+    <style>
+      body {
+        background-color: #f4f4f4;
+        font-family: 'Raleway', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .scrolling-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background: linear-gradient(90deg, #6a11cb, #2575fc42);
+        padding: 6px 0;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+
+      .scrolling-text {
+        display: inline-block;
+        white-space: nowrap;
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: bold;
+        animation: scroll-left 10s linear infinite;
+      }
+
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .player-container {
+        text-align: center;
+        background-color: #ffff0000;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .vinyl {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto 20px;
+        background-color: #000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: spin 3s linear infinite;
+        animation-play-state: paused;
+      }
+
+      .vinyl img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .metadata {
+        margin-bottom: 20px;
+      }
+
+      .metadata h5 {
+        margin: 0;
+      }
+
+      .volume-control {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .volume-control input[type="range"] {
+        -webkit-appearance: none;
+        width: 150px;
+        height: 5px;
+        background: #ccc;
+        border-radius: 5px;
+        outline: none;
+      }
+
+      .volume-control input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 15px;
+        height: 15px;
+        background: #6c829b;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .play-button {
+        padding: 10px 25px;
+        font-size: 10px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #0056b3;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .play-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </body>
+</html>
