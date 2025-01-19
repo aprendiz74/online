@@ -25,209 +25,275 @@
 	<link rel="stylesheet" href="style.css">
 	</head>
 
+
+
+
+
+
+    
+
+  
+]]></b:skin>
+
+  </head>
   <body>
-    <div class="container">
-      <div class="row center">
-        <div class="col s12">
-          <figure>
-            <img src="https://i.ibb.co/dMpz83s/as.png" width="100px" alt="Zoom Musical">
-          </figure>
-        </div>
-      </div>
+    <b:section class='main' id='main' showaddelement='yes'>
+      <b:widget id='HTML2' locked='false' title='' type='HTML'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<!doctype html>
 
-      <div class="row center" style="margin-top: 20px;">
-        <!-- Reproductor -->
-        <div class="player-container">
-          <div class="vinyl" id="vinyl">
-            <img src="https://i.ibb.co/mBPcC7x/146.jpg" alt="Disco">
-          </div>
-          <div class="metadata">
-            <h5 id="song-title">Cargando...</h5>
-            <p id="artist-name">Artista: Desconocido</p>
-          </div>
-          <!-- Botón rectangular -->
-          <button class="play-button" id="play-button">
-            <i class="material-icons">play_arrow</i>
-          </button>
-          <div class="volume-control">
-            <label for="volume">Volumen:</label>
-            <input type="range" id="volume" min="0" max="1" step="0.01">
-          </div>
-        </div>
-      </div>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 85vh;
+      background: url('https://blogger.googleusercontent.com/img/a/AVvXsEihNGOZAaFQG6gr4NHm-qytBjyqUs1Q7vcoTEP7AvhRH4aGr2cPG20eMMaUWL7RAiUJ50GD5c5hx_JgohcdU-uD89SJZ3XL8cxEPO8D6DQmJ3tZT0Pt-TZGtXqLt_79aypRK-pbTIjvECqAirLmwv0mw9tZn7oLIzUZ3-TgZY_Y0HqbV_TNNDmw0YSvmyo=s1024') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Franklin Gothic', Arial, sans-serif;
+      color: #dfdcd0;
+    }
+    .player {
+      text-align: center;
+      max-width: 300px;
+      width: 90%;
+    }
+    .vinyl {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: #0a0a0a;
+      border: 5px solid #878787;
+      animation: spin 3s linear infinite;
+      animation-play-state: paused; /* Initial state */
+    }
+    .vinyl img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    button {
+      background-color: #98d9af;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1ed760;
+    }
+    
+    .slider {
+      width: 100%;
+      max-width: 200px;
+    }
+    .metadata {
+      margin-top: 10px;
+    }
+    .album-info {
+      margin-top: 5px;
+      font-size: 0.8em;
+      color: #ccc;
+    }
+   
+    
+  </style>
 
-      <!-- Texto deslizante debajo del reproductor -->
-      <div class="scrolling-container" style="margin-top: 20px;">
-        <div class="scrolling-text">
-          Gracias por escucharnos...
-        </div>
-      </div>
 
-      <div class="adookia">
-        <a href="https://playzoommusical.blogspot.com/" target="_blank"><img class="---------" src="img/etiqueta.svg" alt="-----"></a>
-      </div>
+  <div class="player">
+    <div class="vinyl" id="vinyl">
+      <img id="cover" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHucU6hbJwDADMODkGoUaBTKCflLT37iDXeX58d6SdYN0GfZFTYZ0eyWuMhGZmPNoyblOMOOVf0hdlrdfrzxO13ayyZ9AoLtPoIJ8gmWx2u4nOzay4TDdeDt-zc1xvNY6DDs9JeJynar9Y2EdAaEx69ln61nBCwGYqzyt0bGEtVpJAHpkBWSURtxJXFwY=s160" alt="Album Cover" />
     </div>
+    <div class="metadata">
+      <h2 id="title">ZOOM MUSICAL</h2>
+      <p class="album-info" id="album"></p>
+    </div>
+    <div class="controls">
+      <button id="play-pause">Play</button>
+    </div>
+   
+    <audio id="audio" src="https://stream.zeno.fm/dfxxkhvkxs8uv" preload="auto" crossorigin="anonymous"></audio>
+  </div>
+  
+ <!-- Incluye Font Awesome desde su CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+
+<style>
+  .social-links a {
+    margin: 0 10px;
+    color: #dfdcd0;
+    font-size: 1.8em;
+    transition: color 0.3s;
+  }
+  .social-links a:hover {
+    color: #1ed760;
+  }
+</style>
+
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseButton = document.getElementById('play-pause');
+    const vinyl = document.getElementById('vinyl');
+    const volumeSlider = document.getElementById('volume');
+
+    // Toggle play/pause
+    playPauseButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseButton.textContent = 'Pause';
+        vinyl.style.animationPlayState = 'running';
+      } else {
+        audio.pause();
+        playPauseButton.textContent = 'Play';
+        vinyl.style.animationPlayState = 'paused';
+      }
+    });
+
+   
+
+    // Error handling
+    audio.addEventListener('error', (e) => {
+      console.error('Error loading or playing the audio stream:', e);
+    });
+  </script>
+</div>
+</!doctype>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
+      </b:widget>
+      <b:widget id='HTML1' locked='false' title='' type='HTML'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<br />
+<div class="scrolling-container">
+  <div class="scrolling-text">
+    Gracias por escucharnos...
+  </div>
+</div>
+
+<style>
+  /* Contenedor fijo para evitar que todo se mueva */
+  .scrolling-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Asegura que el texto no se salga del área visible */
+    background: linear-gradient(90deg, #6a11cb, #2575fc42); /* Fondo degradado */
+    padding: 6px 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    color: #ffffff; /* Color del texto */
+    font-size: 20px; /* Ajusta el tamaño del texto */
+    font-weight: bold;
+    animation: scroll-left 10s linear infinite;
+  }
+
+  /* Animación del texto */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Ajustes para dispositivos móviles */
+  @media (max-width: 768px) {
+    .scrolling-text {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .scrolling-text {
+      font-size: 16px;
+    }
+  }
+</style>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
+      </b:widget>
+    </b:section>
     <script>
-      const audio = new Audio('https://stream.zeno.fm/dfxxkhvkxs8uv'); // Cambia por tu URL Shoutcast/Icecast
-      const playButton = document.getElementById('play-button');
-      const vinyl = document.getElementById('vinyl');
-      const volumeControl = document.getElementById('volume');
+      const audioPlayer = document.getElementById(&#39;audioPlayer&#39;);
+      const playPauseButton = document.getElementById(&#39;playPauseButton&#39;);
+      const vinyl = document.getElementById(&#39;vinyl&#39;);
+      const volumeSlider = document.getElementById(&#39;volumeSlider&#39;);
 
-      // Metadata simulada
-      const songTitle = document.getElementById('song-title');
-      const artistName = document.getElementById('artist-name');
-
-      // Simular metadata (reemplázalo con la funcionalidad para extraer metadata real si es necesario)
-      setInterval(() => {
-        songTitle.innerText = 'ZOOM MUSICAL'; // Reemplaza con datos reales
-        artistName.innerText = ''; // Reemplaza con datos reales
-      }, 3000);
-
-      playButton.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          vinyl.style.animationPlayState = 'running';
-          playButton.innerHTML = '<i class="material-icons">pause</i>';
+      // Control de reproducción
+      playPauseButton.addEventListener(&#39;click&#39;, () =&gt; {
+        if (audioPlayer.paused) {
+          audioPlayer.play();
+          playPauseButton.textContent = &#39;Pause&#39;;
+          vinyl.style.animationPlayState = &#39;running&#39;; // Inicia el giro
         } else {
-          audio.pause();
-          vinyl.style.animationPlayState = 'paused';
-          playButton.innerHTML = '<i class="material-icons">play_arrow</i>';
+          audioPlayer.pause();
+          playPauseButton.textContent = &#39;Play&#39;;
+          vinyl.style.animationPlayState = &#39;paused&#39;; // Detiene el giro
         }
       });
 
-      volumeControl.addEventListener('input', (e) => {
-        audio.volume = e.target.value;
+      // Control de volumen
+      volumeSlider.addEventListener(&#39;input&#39;, (e) =&gt; {
+        audioPlayer.volume = e.target.value;
       });
+
+      // Manejo de errores
+      audioPlayer.addEventListener(&#39;error&#39;, (e) =&gt; {
+        console.error(&#39;Error al cargar o reproducir el flujo de audio:&#39;, e);
+      });
+            
+      
     </script>
-
-    <!-- CSS -->
-    <style>
-      body {
-        background-color: #f4f4f4;
-        font-family: 'Raleway', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-
-      .scrolling-container {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        background: linear-gradient(90deg, #6a11cb, #2575fc42);
-        padding: 6px 0;
-        border-radius: 10px;
-        box-sizing: border-box;
-      }
-
-      .scrolling-text {
-        display: inline-block;
-        white-space: nowrap;
-        color: #ffffff;
-        font-size: 20px;
-        font-weight: bold;
-        animation: scroll-left 10s linear infinite;
-      }
-
-      @keyframes scroll-left {
-        0% {
-          transform: translateX(100%);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-
-      .player-container {
-        text-align: center;
-        background-color: #ffff0000;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 300px;
-        margin: 0 auto;
-      }
-
-      .vinyl {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin: 0 auto 20px;
-        background-color: #000;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        animation: spin 3s linear infinite;
-        animation-play-state: paused;
-      }
-
-      .vinyl img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .metadata {
-        margin-bottom: 20px;
-      }
-
-      .metadata h5 {
-        margin: 0;
-      }
-
-      .volume-control {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .volume-control input[type="range"] {
-        -webkit-appearance: none;
-        width: 150px;
-        height: 5px;
-        background: #ccc;
-        border-radius: 5px;
-        outline: none;
-      }
-
-      .volume-control input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 15px;
-        height: 15px;
-        background: #6c829b;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .play-button {
-        padding: 10px 25px;
-        font-size: 10px;
-        font-weight: bold;
-        color: #ffffff;
-        background-color: #0056b3;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .play-button:hover {
-        background-color: #0056b3;
-      }
-    </style>
   </body>
 </html>
