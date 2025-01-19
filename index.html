@@ -1,299 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!--Let browser know website is optimized for mobile-->
+    <!-- Let browser know website is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8">
     <title>Zoom Musical</title>
-    <!--Import Google Icon Font-->
+
+    <!-- Import Google Icon Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
+
+    <!-- Import materialize.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Meta description and theme color -->
     <meta name="description" content="Bienvenid@s">
     <meta name="theme-color" content="#5e2760">
+
+    <!-- Mobile optimization and PWA settings -->
     <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Icons and manifest for PWA -->
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="./img/logo.png">
     <link rel="apple-touch-startup-image" href="./img/logo.png">
     <link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" href="style.css">
-	</head>
-
-
-
-
-
-
-    
-
-  
-]]></b:skin>
-
   </head>
   <body>
-    <b:section class='main' id='main' showaddelement='yes'>
-      <b:widget id='HTML2' locked='false' title='' type='HTML'>
-        <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[<!doctype html>
+    <div class="container">
+      <div class="player">
+        <!-- Disco de vinilo -->
+        <div class="vinyl" id="vinyl">
+          <img id="cover" src="https://via.placeholder.com/200" alt="Album Cover">
+        </div>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 85vh;
-      background: url('https://blogger.googleusercontent.com/img/a/AVvXsEihNGOZAaFQG6gr4NHm-qytBjyqUs1Q7vcoTEP7AvhRH4aGr2cPG20eMMaUWL7RAiUJ50GD5c5hx_JgohcdU-uD89SJZ3XL8cxEPO8D6DQmJ3tZT0Pt-TZGtXqLt_79aypRK-pbTIjvECqAirLmwv0mw9tZn7oLIzUZ3-TgZY_Y0HqbV_TNNDmw0YSvmyo=s1024') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Franklin Gothic', Arial, sans-serif;
-      color: #dfdcd0;
-    }
-    .player {
-      text-align: center;
-      max-width: 300px;
-      width: 90%;
-    }
-    .vinyl {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 0 auto;
-      border-radius: 50%;
-      background: #0a0a0a;
-      border: 5px solid #878787;
-      animation: spin 3s linear infinite;
-      animation-play-state: paused; /* Initial state */
-    }
-    .vinyl img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 70%;
-      height: 70%;
-      border-radius: 50%;
-      border: 3px solid #fff;
-    }
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-    .controls {
-      margin-top: 20px;
-    }
-    button {
-      background-color: #98d9af;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1ed760;
-    }
-    
-    .slider {
-      width: 100%;
-      max-width: 200px;
-    }
-    .metadata {
-      margin-top: 10px;
-    }
-    .album-info {
-      margin-top: 5px;
-      font-size: 0.8em;
-      color: #ccc;
-    }
-   
-    
-  </style>
+        <!-- Botón de reproducción -->
+        <div class="controls">
+          <button id="play-pause" class="play-button">
+            <i class="material-icons">play_arrow</i>
+          </button>
+        </div>
 
+        <!-- Barra de volumen -->
+        <div class="volume-container">
+          <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider">
+        </div>
 
-  <div class="player">
-    <div class="vinyl" id="vinyl">
-      <img id="cover" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHucU6hbJwDADMODkGoUaBTKCflLT37iDXeX58d6SdYN0GfZFTYZ0eyWuMhGZmPNoyblOMOOVf0hdlrdfrzxO13ayyZ9AoLtPoIJ8gmWx2u4nOzay4TDdeDt-zc1xvNY6DDs9JeJynar9Y2EdAaEx69ln61nBCwGYqzyt0bGEtVpJAHpkBWSURtxJXFwY=s160" alt="Album Cover" />
+        <!-- Metadatos -->
+        <div class="metadata">
+          <h5 id="title">Zoom Musical</h5>
+          <p id="artist">Artista: Desconocido</p>
+          <p id="album">Álbum: Desconocido</p>
+        </div>
+
+        <!-- Reproductor de audio -->
+        <audio id="audio" src="https://stream.zeno.fm/dfxxkhvkxs8uv" preload="auto" crossorigin="anonymous"></audio>
+      </div>
+
+      <!-- Texto deslizante -->
+      <div class="scrolling-container">
+        <div class="scrolling-text">Gracias por escucharnos...</div>
+      </div>
     </div>
-    <div class="metadata">
-      <h2 id="title">ZOOM MUSICAL</h2>
-      <p class="album-info" id="album"></p>
-    </div>
-    <div class="controls">
-      <button id="play-pause">Play</button>
-    </div>
-   
-    <audio id="audio" src="https://stream.zeno.fm/dfxxkhvkxs8uv" preload="auto" crossorigin="anonymous"></audio>
-  </div>
-  
- <!-- Incluye Font Awesome desde su CDN -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-
-
-<style>
-  .social-links a {
-    margin: 0 10px;
-    color: #dfdcd0;
-    font-size: 1.8em;
-    transition: color 0.3s;
-  }
-  .social-links a:hover {
-    color: #1ed760;
-  }
-</style>
-
-
-  <script>
-    const audio = document.getElementById('audio');
-    const playPauseButton = document.getElementById('play-pause');
-    const vinyl = document.getElementById('vinyl');
-    const volumeSlider = document.getElementById('volume');
-
-    // Toggle play/pause
-    playPauseButton.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        playPauseButton.textContent = 'Pause';
-        vinyl.style.animationPlayState = 'running';
-      } else {
-        audio.pause();
-        playPauseButton.textContent = 'Play';
-        vinyl.style.animationPlayState = 'paused';
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url('https://via.placeholder.com/800') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        flex-direction: column;
       }
-    });
 
-   
+      .container {
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+      }
 
-    // Error handling
-    audio.addEventListener('error', (e) => {
-      console.error('Error loading or playing the audio stream:', e);
-    });
-  </script>
-</div>
-</!doctype>]]></b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-  <!-- only display title if it's non-empty -->
-  <b:if cond='data:title != &quot;&quot;'>
-    <h2 class='title'><data:title/></h2>
-  </b:if>
-  <div class='widget-content'>
-    <data:content/>
-  </div>
+      .vinyl {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: #000;
+        border: 5px solid #555;
+        animation: spin 3s linear infinite;
+        animation-play-state: paused;
+      }
 
-  <b:include name='quickedit'/>
-</b:includable>
-      </b:widget>
-      <b:widget id='HTML1' locked='false' title='' type='HTML'>
-        <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[<br />
-<div class="scrolling-container">
-  <div class="scrolling-text">
-    Gracias por escucharnos...
-  </div>
-</div>
+      .vinyl img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 70%;
+        border-radius: 50%;
+      }
 
-<style>
-  /* Contenedor fijo para evitar que todo se mueva */
-  .scrolling-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden; /* Asegura que el texto no se salga del área visible */
-    background: linear-gradient(90deg, #6a11cb, #2575fc42); /* Fondo degradado */
-    padding: 6px 0;
-    border-radius: 10px;
-    box-sizing: border-box;
-  }
+      .controls {
+        margin-top: 20px;
+      }
 
-  .scrolling-text {
-    display: inline-block;
-    white-space: nowrap;
-    color: #ffffff; /* Color del texto */
-    font-size: 20px; /* Ajusta el tamaño del texto */
-    font-weight: bold;
-    animation: scroll-left 10s linear infinite;
-  }
+      .play-button {
+        background: none;
+        border: none;
+        font-size: 48px;
+        color: #1ed760;
+        cursor: pointer;
+      }
 
-  /* Animación del texto */
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
+      .play-button i {
+        font-size: 48px;
+      }
 
-  /* Ajustes para dispositivos móviles */
-  @media (max-width: 768px) {
-    .scrolling-text {
-      font-size: 18px;
-    }
-  }
+      .volume-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+      }
 
-  @media (max-width: 480px) {
-    .scrolling-text {
-      font-size: 16px;
-    }
-  }
-</style>]]></b:widget-setting>
-        </b:widget-settings>
-        <b:includable id='main'>
-  <!-- only display title if it's non-empty -->
-  <b:if cond='data:title != &quot;&quot;'>
-    <h2 class='title'><data:title/></h2>
-  </b:if>
-  <div class='widget-content'>
-    <data:content/>
-  </div>
+      .volume-slider {
+        width: 60%; /* Más corta */
+        height: 6px;
+        border-radius: 5px;
+        background-color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-  <b:include name='quickedit'/>
-</b:includable>
-      </b:widget>
-    </b:section>
+      .volume-slider::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #1ed760;
+        border: 2px solid #1ed760;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .metadata {
+        margin-top: 20px;
+      }
+
+      .scrolling-container {
+        width: 100%;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 0;
+        margin-top: 40px; /* Mueve el contenedor más abajo */
+      }
+
+      .scrolling-text {
+        display: inline-block;
+        white-space: nowrap;
+        color: #fff;
+        font-size: 16px;
+        animation: scroll-left 10s linear infinite;
+      }
+
+      @keyframes scroll-left {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
     <script>
-      const audioPlayer = document.getElementById(&#39;audioPlayer&#39;);
-      const playPauseButton = document.getElementById(&#39;playPauseButton&#39;);
-      const vinyl = document.getElementById(&#39;vinyl&#39;);
-      const volumeSlider = document.getElementById(&#39;volumeSlider&#39;);
+      const audio = document.getElementById('audio');
+      const playPauseButton = document.getElementById('play-pause');
+      const vinyl = document.getElementById('vinyl');
+      const volumeSlider = document.getElementById('volume');
 
-      // Control de reproducción
-      playPauseButton.addEventListener(&#39;click&#39;, () =&gt; {
-        if (audioPlayer.paused) {
-          audioPlayer.play();
-          playPauseButton.textContent = &#39;Pause&#39;;
-          vinyl.style.animationPlayState = &#39;running&#39;; // Inicia el giro
+      // Botón de play/pausa
+      playPauseButton.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          playPauseButton.innerHTML = '<i class="material-icons">pause</i>';
+          vinyl.style.animationPlayState = 'running';
         } else {
-          audioPlayer.pause();
-          playPauseButton.textContent = &#39;Play&#39;;
-          vinyl.style.animationPlayState = &#39;paused&#39;; // Detiene el giro
+          audio.pause();
+          playPauseButton.innerHTML = '<i class="material-icons">play_arrow</i>';
+          vinyl.style.animationPlayState = 'paused';
         }
       });
 
-      // Control de volumen
-      volumeSlider.addEventListener(&#39;input&#39;, (e) =&gt; {
-        audioPlayer.volume = e.target.value;
+      // Control de volumen con cambio de color dinámico
+      volumeSlider.addEventListener('input', (e) => {
+        const volume = e.target.value;
+        const red = Math.floor(volume * 255);
+        volumeSlider.style.background = `rgb(${red}, 0, 0)`; // De blanco a rojo
+        audio.volume = volume;
       });
-
-      // Manejo de errores
-      audioPlayer.addEventListener(&#39;error&#39;, (e) =&gt; {
-        console.error(&#39;Error al cargar o reproducir el flujo de audio:&#39;, e);
-      });
-            
-      
     </script>
   </body>
 </html>
