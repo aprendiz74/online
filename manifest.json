@@ -1,8 +1,8 @@
 {
   "name": "zoom musical",
   "short_name": "Zoom Musical",
-  "description": "Bienvenid@s , Aqui escucharas la mejor musica 24/7 ",
-  "background_color": "#FFFFFF",
+  "description": "Aqui escucharas la mejor musica 24/7 ",
+  "background_color": "#d78522",
   "theme_color": "#5e2760",
   "orientation": "portrait",
   "display": "standalone",
