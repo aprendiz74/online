@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color:#5e2760;
-  background: url("https://github.com/aprendiz74/online/tree/main/img") no-repeat center center fixed;
+  background: url("img/bg.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
