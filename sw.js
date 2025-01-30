@@ -1,5 +1,5 @@
 //asignar un nombre y versión al cache
-const CACHE_NAME = 'v1_adookia',
+const CACHE_NAME = 'v1_zoom',
   urlsToCache = [
     './',
     'http://ibizaglobalradio.streaming-pro.com:8024/;?type=http&nocache=14583',
