@@ -3,7 +3,7 @@
   "short_name": "zoom musical",
   "description": "Siempre con la mejor musica",
   "background_color": "#d78522",
-  "theme_color": "#5e2760",
+  "theme_color": "#d78522",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "./?utm_source=web_app_manifest",
