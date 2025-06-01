@@ -6,7 +6,7 @@
   "theme_color": "#d78522",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "https://radiozoommusical.blogspot.com/",
   "scope": "./",
   "lang": "es-UY",
   "icons": [
