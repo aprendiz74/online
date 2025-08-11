@@ -3,7 +3,7 @@
   "short_name": "zoom musical",
   "description": "Siempre con la mejor musica",
   "background_color": "#d78522",
-  "theme_color": "#d78522",
+  "theme_color": "#121211",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "https://radiozoommusical.blogspot.com/",
