@@ -1,5 +1,7 @@
 ﻿#EXTM3U
-#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", Planeta Terror | REGIOFLIX
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", ANUNCIO RADIO
+https://ia601004.us.archive.org/14/items/radio-spot-anuncio/RADIO-SPOT-ANUNCIO.ia.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", Planeta Terror
 https://ia600209.us.archive.org/33/items/planeta-terror/Planeta%20Terror.mp4
 #EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", cortina
 https://ia601602.us.archive.org/28/items/cortina-rv-zoom/cortina-rv-zoom.mp4
@@ -57,8 +59,12 @@ https://ia600202.us.archive.org/20/items/no-ballas-a-colgar/No%20ballas%20a%20co
 https://dn710005.ca.archive.org/0/items/la-carrera-mortal-4/La%20Carrera%20Mortal%204.mp4
 #EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", cortina ZOOM
 https://ia601602.us.archive.org/28/items/cortina-rv-zoom/cortina-rv-zoom.mp4
-#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", clasicos de condorito
-https://dn721609.ca.archive.org/0/items/condorito-animado-clasico/Condorito%20animado%20clasico.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", CINE CRISTIANO-01
+https://ia800507.us.archive.org/33/items/al-juicio-final/cine%20C%20%284%29.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", CINE CRISTIANO-02
+https://ia800507.us.archive.org/33/items/al-juicio-final/cine%20C%20%283%29.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", CINE CRISTIANO-03
+https://ia800507.us.archive.org/33/items/al-juicio-final/Al%20juicio%20final.mp4
 #EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", la chica de alado
 https://dn710203.ca.archive.org/0/items/chica-de-alado/chica%20de%20alado.mp4
 #EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", species
@@ -81,6 +87,21 @@ https://ia801002.us.archive.org/8/items/dibujo_20250918/dibujo.mp4
 https://ia601009.us.archive.org/28/items/cine-c-1/cine%20C%20%281%29.mp4
 #EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", CINE -C-2
 https://ia800300.us.archive.org/17/items/cine-c-2/cine%20C%20%282%29.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", MI BELLA GENIO -C-1
+https://ia601404.us.archive.org/11/items/mi-bella-genio.-temp-1-cap-17/Mi%20Bella%20Genio.%20Temp%201%20cap%2010.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", MI BELLA GENIO -C-2
+https://ia601404.us.archive.org/11/items/mi-bella-genio.-temp-1-cap-17/Mi%20Bella%20Genio.%20Temp%201%20cap%2011.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", MI BELLA GENIO -C-3
+https://ia801404.us.archive.org/11/items/mi-bella-genio.-temp-1-cap-17/Mi%20Bella%20Genio.%20Temp%201%20cap%2012.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", MI BELLA GENIO -C-4
+https://ia801404.us.archive.org/11/items/mi-bella-genio.-temp-1-cap-17/Mi%20Bella%20Genio.%20Temp%201%20cap%2014.mp4
+#EXTINF:-1 group-title="peliculas" tvg-logo="https://i.ibb.co/k8DJXSG/descarga-1.jpg", MI BELLA GENIO -C-5
+https://ia801404.us.archive.org/11/items/mi-bella-genio.-temp-1-cap-17/Mi%20Bella%20Genio.%20Temp%201%20cap%2015.mp4
+
+
+
+
+
 
 
 
