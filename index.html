@@ -477,7 +477,21 @@
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('resize', checkScroll);
     document.addEventListener('DOMContentLoaded', checkScroll);
-  </script>
+</script>
+
+  <script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
+  
 </body>
 </html>
+
 
