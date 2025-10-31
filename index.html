@@ -37,7 +37,7 @@
     main{padding:24px 0}
     .grid{display:grid;grid-template-columns:1fr;gap:24px}
     .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
-   respective .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
     .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
     .section{padding:20px}
     .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
@@ -111,14 +111,14 @@
       background: rgba(255, 255, 255, 0.97);
       backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: 14px;
+      padding: 10px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       text-align: center;
       border: 1px solid rgba(0, 198, 198, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .mobile-banner-sticky {
       display: none;
@@ -128,7 +128,7 @@
       right: 0;
       background: rgba(255, 255, 255, 0.98);
       border-top: 1px solid rgba(0, 198, 198, 0.3);
-      padding: 12px 16px;
+      padding: 8px 16px;
       z-index: 998;
       animation: slideUp 0.4s ease-out;
       box-shadow: 0 -8px 20px rgba(0,0,0,.1);
@@ -147,8 +147,8 @@
       justify-content: center;
     }
     .mobile-banner-sticky .brand-badge {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
     }
     .mobile-banner-sticky .brand-title {
       font-size: 18px;
@@ -175,15 +175,12 @@
       to { transform: translateY(0); opacity: 1; }
     }
     footer {
-      background: #f6f7fb;
+      background: #00A6A6 !important;
+      color: #fff !important;
       padding: 20px 0;
       margin-top: 20px;
       position: relative;
       z-index: 1;
-    }
-    footer {
-      background: #00A6A6 !important; /* Fondo verde oscuro */
-      color: #fff !important; /* Texto blanco */
     }
   </style>
 </head>
@@ -260,9 +257,14 @@
                   <div class="brand-sub" style="margin:0; font-size:10px; color:var(--cyan-deep)">Tu Mejor Elección</div>
                 </div>
               </div>
-              <div style="margin-top:12px; font-size:12px; color:#334155">
+              <div style="margin-top:12px; font-size:12px; color:#334155; display:flex; align-items:center; gap:6px; flex-wrap:wrap">
                 <p style="margin:6px 0">Síguenos en:</p>
-                <a href="https://facebook.com/" style="color:#1877F2; font-weight:700; font-size:13px; text-decoration:none">/facebook</a>
+                <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                    <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+                  </svg>
+                  /facebook
+                </a>
               </div>
             </div>
           </div>
@@ -370,7 +372,7 @@
         </div>
         <div class="social-text" style="display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
           <span>Síguenos en:</span>
-          <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+          <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
               <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
             </svg>
