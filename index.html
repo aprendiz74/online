@@ -1,12 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Radio Maicito – Tu Mejor Elección. Escucha en vivo, noticias, ranking, programación y más. ¡La radio que te acompaña!">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RADIO MAICITO – Tu Mejor Elección</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23FFE000'/><path d='M35 30v35l30-17.5z' fill='%23000'/></svg>" type="image/svg+xml">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root{--cyan:#00C6C6;--cyan-deep:#00A6A6;--pink:#FF157E;--pink-2:#FF4BA5;--lemon:#FFE000;--text:#0f172a}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -21,9 +19,10 @@
     .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
     .brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-    .brand-badge img{width:100%;height:100%;object-fit:contain}
+    .brand-badge svg{width:28px;height:28px}
     .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
     .brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
+
     .live-btn {
       display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-deep); color: #fff; border: none; border-radius: 999px; padding: 10px 14px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.12); cursor: pointer; font-size: 13px; transition: all .2s;
     }
@@ -33,67 +32,10 @@
     .live-btn.playing .stop-icon { display: block; }
     .live-btn .live-text { margin-left: 4px; }
 
-    /* === MENÚ: PC TURQUESA | MÓVIL NEGRO === */
-    nav {
-      background: #00A6A6;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .menu {
-      display: flex;
-      justify-content: center;
-      flex: 1;
-      gap: 10px;
-    }
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-    }
-    .menu a:hover, .menu a.active {
-      background: #3498db;
-    }
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: #2c3e50;
-        padding: 10px 0;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      }
-      .menu.active { display: flex; }
-      .menu a {
-        text-align: center;
-        padding: 14px 20px;
-        border-radius: 0;
-      }
-      .menu a:hover, .menu a.active {
-        background: #3498db;
-      }
-    }
-
+    nav{background:var(--pink);color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
+    .menu a{opacity:.98;transition:.2s}
+    .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
     main{padding:24px 0}
     .grid{display:grid;grid-template-columns:1fr;gap:24px}
     .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
@@ -125,6 +67,7 @@
     .ranking-meta{color:#fff}
     .ranking-meta .artist{font-weight:800;font-size:14px}
     .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
+
     .play {
       margin-left: auto; width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,.25); display: grid; place-items: center; cursor: pointer; transition: background .2s;
     }
@@ -132,6 +75,7 @@
     .play svg { width: 16px; height: 16px; fill: #fff; }
     .play.playing .play-icon { display: none; }
     .play.playing .stop-icon { display: block; }
+
     .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:20px}
     .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
     .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
@@ -141,6 +85,7 @@
     .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
     .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
     .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
+
     @media (min-width: 768px) {
       .hero { height: 360px; }
       .news { grid-template-columns: repeat(3, 1fr); }
@@ -155,41 +100,112 @@
       .hero-panel { display: none !important; }
       main { padding-bottom: 80px !important; }
     }
+
+    /* === PANEL MÓVIL: FLOTANTE + BANNER STICKY (SIN BOTÓN EN VIVO) === */
     .mobile-panel-box {
-      display: none; position: fixed; bottom: 16px; right: 12px; z-index: 997; max-width: 280px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.9;
+      display: none;
+      position: fixed;
+      bottom: 16px;
+      right: 12px;
+      z-index: 997;
+      max-width: 280px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.9;
     }
     .mobile-panel-box:hover { opacity: 1; }
+
     .mobile-panel-box .panel-box {
-      background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(12px); border-radius: 16px; padding: 14px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); text-align: center; border: 1px solid rgba(0, 198, 198, 0.2); display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 1px solid rgba(0, 198, 198, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
+
     .mobile-banner-sticky {
-      display: none; position: sticky; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); border-top: 1px solid rgba(0, 198, 198, 0.3); padding: 12px 16px; z-index: 998; animation: slideUp 0.4s ease-out; box-shadow: 0 -8px 20px rgba(0,0,0,.1);
+      display: none;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid rgba(0, 198, 198, 0.3);
+      padding: 12px 16px;
+      z-index: 998;
+      animation: slideUp 0.4s ease-out;
+      box-shadow: 0 -8px 20px rgba(0,0,0,.1);
     }
-    .mobile-banner-sticky .panel-box { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; max-width: 100%; }
-    .mobile-banner-sticky .brand { gap: 8px; min-width: 140px; justify-content: center; }
-    .mobile-banner-sticky .brand-badge { width: 36px; height: 36px; }
-    .mobile-banner-sticky .brand-title { font-size: 18px; }
-    .mobile-banner-sticky .brand-sub { font-size: 9px; }
-    .mobile-banner-sticky .social-text { text-align: center; font-size: 13px; color: #334155; }
-    .mobile-banner-sticky .social-text a { color: #1877F2; font-weight: 800; }
+
+    .mobile-banner-sticky .panel-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .mobile-banner-sticky .brand {
+      gap: 8px;
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    .mobile-banner-sticky .brand-badge {
+      width: 36px;
+      height: 36px;
+    }
+
+    .mobile-banner-sticky .brand-title {
+      font-size: 18px;
+    }
+
+    .mobile-banner-sticky .brand-sub {
+      font-size: 9px;
+    }
+
+    .mobile-banner-sticky .social-text {
+      text-align: center;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .mobile-banner-sticky .social-text a {
+      color: #1877F2;
+      font-weight: 800;
+    }
+
     @media (max-width: 767px) {
       .mobile-panel-box { display: block; }
       .mobile-banner-sticky { display: block; }
       .mobile-panel-box.banner-active { display: none !important; }
     }
+
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
     footer {
-      background: #00A6A6 !important; color: #fff !important; text-align: center; padding: 25px; margin-top: 60px; font-size: 0.9rem;
+      background: #f6f7fb;
+      padding: 20px 0;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
     }
-    footer a { color: #a8e6cf; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+	footer {
+  background: #00A6A6 !important;  /* Fondo verde oscuro */
+  color: #fff !important;          /* Texto blanco */
+}
   </style>
 </head>
 <body>
-
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="container topbar-inner">
@@ -207,7 +223,7 @@
     <div class="header-inner">
       <div class="brand">
         <div class="brand-badge">
-          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo RADIO MAICITO">
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="RADIO MAICITO" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <div>
           <div class="brand-title">RADIO MAICITO</div>
@@ -215,17 +231,20 @@
         </div>
       </div>
       <button id="live-btn" class="live-btn">
-        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+          <path d="M6 6h12v12H6z"/>
+        </svg>
         <span class="live-text">EN VIVO</span>
       </button>
     </div>
   </header>
 
-  <!-- MENÚ -->
+  <!-- NAV -->
   <nav>
     <div class="container">
-      <button class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
       <div class="menu">
         <a href="index.html" class="active">INICIO</a>
         <a href="quienes-somos.html">QUIÉNES SOMOS</a>
@@ -250,11 +269,13 @@
             <div class="hero-slide" style="background-image:url('https://blogger.googleusercontent.com/img/a/AVvXsEiB_N3Qz97_D8q_xpUnzaqDq2Dy-gbOLUeUJ9Jh_twgIS1mDKlvUH5UXRj_wrEBWs0W4ZdTJ86fAfPyFBlZTIq5hC0FFW5S4f6_wyFft5CfKj7spipLgksFteqEq-vkUkPu3B5wl6yg2M0g2YGaJYEsqhUNtqt9hj1PRDaYb3kwS3JM0fqLpvwSW7VjnN7b=s1024')"></div>
           </div>
           <div class="hero-overlay"></div>
+
+          <!-- PANEL ORIGINAL (SOLO EN PC) -->
           <div class="hero-panel">
             <div class="panel-box">
               <div class="brand" style="gap:10px; align-items:center">
                 <div class="brand-badge" style="width:40px;height:40px">
-                  <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo RADIO MAICITO">
+                  <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo RADIO MAICITO" style="width:100%; height:100%; object-fit:contain;">
                 </div>
                 <div>
                   <div class="brand-title" style="font-size:22px; margin:0; line-height:1">RADIO MAICITO</div>
@@ -267,6 +288,7 @@
               </div>
             </div>
           </div>
+
           <div class="dots">
             <span class="dot active" onclick="goToSlide(0)"></span>
             <span class="dot" onclick="goToSlide(1)"></span>
@@ -274,12 +296,12 @@
           </div>
         </section>
 
-        <!-- PANEL MÓVIL FLOTANTE -->
+        <!-- PANEL MÓVIL FLOTANTE (SIN BOTÓN) -->
         <div class="mobile-panel-box" id="mobile-panel">
           <div class="panel-box">
             <div class="brand" style="gap:10px; align-items:center; justify-content:center">
               <div class="brand-badge" style="width:38px;height:38px">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
               </div>
               <div>
                 <div class="brand-title" style="font-size:20px; margin:0; line-height:1">RADIO MAICITO</div>
@@ -340,11 +362,8 @@
             </a>
           </div>
         </section>
-
-        <!-- REPRODUCTORES -->
         <audio id="audio-player" preload="none"></audio>
-        <audio id="global-player" preload="auto"></audio>
-
+        <audio id="live-player" preload="none"></audio>
         <section class="cta">
           <div class="title">DESCARGA LA APP</div>
           <p>Escucha en vivo y vota por tu canción.</p>
@@ -356,15 +375,15 @@
             DESCARGAR AHORA
           </a>
         </section>
-      </aside>
+      </div>
     </div>
 
-    <!-- BANNER STICKY -->
+    <!-- BANNER STICKY (SIN BOTÓN EN VIVO) -->
     <div class="mobile-banner-sticky" id="mobile-banner">
       <div class="panel-box">
         <div class="brand">
           <div class="brand-badge">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo">
+            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiznpF19YHglZAsv0GEq31xy4RVVqVim9D7DiXnGzKbQBM510BWQIsqzWj6mLy5iQR5It0Y7leuytyQnAkoMKDtIKu7BWQaMjvGqsbJ-h14Hw1b0rcZHSKaDwgiR3j9bqkiU8GkBYkLdhiQ7adMzEMfUSw39hwiBci_EWH8-PNPKm-vRsnH1yFpU-fT54gE=s512" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
           </div>
           <div>
             <div class="brand-title">RADIO MAICITO</div>
@@ -381,15 +400,14 @@
 
   <!-- FOOTER -->
   <footer class="container">
-    <p>© 2025 <strong>Radio Maicito</strong>. Todos los derechos reservados.</p>
+    <p>© 2025 Radio Maicito. Derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT UNIFICADO -->
+  <!-- SCRIPT -->
   <script>
-    // === FECHA ===
     document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
 
-    // === SLIDER HERO ===
+    // SLIDER HERO
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.dot');
@@ -406,50 +424,26 @@
     }
     setInterval(nextSlide, 5000);
 
-    // === AUDIO GLOBAL (EN VIVO) ===
-    const STREAM_URL = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-    const globalPlayer = document.getElementById('global-player');
+    // AUDIO (SOLO HEADER)
+    const livePlayer = document.getElementById('live-player');
     const liveBtn = document.getElementById('live-btn');
-    const liveText = liveBtn?.querySelector('.live-text');
+    const liveText = liveBtn.querySelector('.live-text');
+    const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
 
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('radioPlaying', !globalPlayer.paused);
-      if (!globalPlayer.paused) localStorage.setItem('radioTime', globalPlayer.currentTime);
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const isPlaying = localStorage.getItem('radioPlaying') === 'true';
-      const savedTime = parseFloat(localStorage.getItem('radioTime')) || 0;
-      if (isPlaying && liveBtn) {
-        globalPlayer.src = STREAM_URL;
-        globalPlayer.currentTime = savedTime;
-        globalPlayer.play().catch(() => console.log("Autoplay bloqueado"));
+    liveBtn.addEventListener('click', () => {
+      if (livePlayer.paused) {
+        livePlayer.src = liveStream;
+        livePlayer.play().catch(() => alert("Error en el stream"));
         liveBtn.classList.add('playing');
-        liveText.textContent = 'PAUSAR';
+        liveText.textContent = "PAUSAR";
+      } else {
+        livePlayer.pause();
+        liveBtn.classList.remove('playing');
+        liveText.textContent = "EN VIVO";
       }
     });
 
-    if (liveBtn) {
-      liveBtn.addEventListener('click', () => {
-        if (globalPlayer.paused) {
-          globalPlayer.src = STREAM_URL;
-          globalPlayer.play();
-          liveBtn.classList.add('playing');
-          liveText.textContent = 'PAUSAR';
-          localStorage.setItem('radioPlaying', 'true');
-        } else {
-          globalPlayer.pause();
-          liveBtn.classList.remove('playing');
-          liveText.textContent = 'EN VIVO';
-          localStorage.setItem('radioPlaying', 'false');
-        }
-      });
-      globalPlayer.addEventListener('timeupdate', () => {
-        if (!globalPlayer.paused) localStorage.setItem('radioTime', globalPlayer.currentTime);
-      });
-    }
-
-    // === RANKING ===
+    // RANKING
     let currentPlayBtn = null;
     const rankingData = [
       {pos:1,artista:"ALEJANDRO ZANS",cancion:"CORAZÓN PARTIDO",mp3:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/003%20Coraz%C3%B3n%20part%C3%ADo%20%28Alejandro%20Sanz%29.mp3"},
@@ -458,9 +452,9 @@
       {pos:4,artista:"CRISTIAN CASTRO",cancion:"VOLVER AMAR",mp3:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/038%20Volver%20a%20Amar%20%28Cristian%20Castro%29.mp3"},
       {pos:5,artista:"JULIO IGLESIAS",cancion:"FRAGIL",mp3:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/017%20Fragile%20%28Julio%20Iglesias%29.mp3"}
     ];
+
     const list = document.getElementById('ranking-list');
-    const songPlayer = document.getElementById('audio-player');
-    rankingData.forEach(item => {
+    rankingData.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'ranking-item';
       div.innerHTML = `
@@ -476,32 +470,26 @@
       `;
       list.appendChild(div);
     });
-    list.addEventListener('click', e => {
+
+    const audio = document.getElementById('audio-player');
+    list.addEventListener('click', (e) => {
       const playBtn = e.target.closest('.play');
       if (!playBtn) return;
       const mp3 = playBtn.dataset.mp3;
-      if (currentPlayBtn === playBtn && !songPlayer.paused) {
-        songPlayer.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
+
+      if (currentPlayBtn === playBtn && !audio.paused) {
+        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
       }
       if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
-      songPlayer.src = mp3; songPlayer.play().catch(() => alert("Error al reproducir"));
+      audio.src = mp3; audio.play().catch(() => alert("Error al reproducir"));
       playBtn.classList.add('playing'); currentPlayBtn = playBtn;
     });
-    songPlayer.addEventListener('ended', () => {
+
+    audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
 
-    // === MENÚ MÓVIL ===
-    const toggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => menu.classList.toggle('active'));
-      document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', () => menu.classList.remove('active'));
-      });
-    }
-
-    // === BANNER MÓVIL ===
+    // OCULTAR FLOTANTE CUANDO EL BANNER APARECE
     const panel = document.getElementById('mobile-panel');
     const banner = document.getElementById('mobile-banner');
     function checkScroll() {
@@ -515,9 +503,6 @@
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('resize', checkScroll);
     document.addEventListener('DOMContentLoaded', checkScroll);
-
-    // === DESBLOQUEO MÓVIL ===
-    document.body.addEventListener('touchstart', () => {}, { once: true });
   </script>
 </body>
 </html>
