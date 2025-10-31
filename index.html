@@ -22,7 +22,6 @@
     .brand-badge svg{width:28px;height:28px}
     .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
     .brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
-
     .live-btn {
       display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-deep); color: #fff; border: none; border-radius: 999px; padding: 10px 14px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.12); cursor: pointer; font-size: 13px; transition: all .2s;
     }
@@ -31,7 +30,6 @@
     .live-btn.playing .play-icon { display: none; }
     .live-btn.playing .stop-icon { display: block; }
     .live-btn .live-text { margin-left: 4px; }
-
     nav{background:var(--pink);color:#fff}
     .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
     .menu a{opacity:.98;transition:.2s}
@@ -39,7 +37,7 @@
     main{padding:24px 0}
     .grid{display:grid;grid-template-columns:1fr;gap:24px}
     .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
-    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
+   respective .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
     .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
     .section{padding:20px}
     .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
@@ -67,7 +65,6 @@
     .ranking-meta{color:#fff}
     .ranking-meta .artist{font-weight:800;font-size:14px}
     .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
-
     .play {
       margin-left: auto; width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,.25); display: grid; place-items: center; cursor: pointer; transition: background .2s;
     }
@@ -75,7 +72,6 @@
     .play svg { width: 16px; height: 16px; fill: #fff; }
     .play.playing .play-icon { display: none; }
     .play.playing .stop-icon { display: block; }
-
     .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:20px}
     .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
     .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
@@ -85,7 +81,6 @@
     .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
     .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
     .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
-
     @media (min-width: 768px) {
       .hero { height: 360px; }
       .news { grid-template-columns: repeat(3, 1fr); }
@@ -100,7 +95,6 @@
       .hero-panel { display: none !important; }
       main { padding-bottom: 80px !important; }
     }
-
     /* === PANEL MÓVIL: FLOTANTE + BANNER STICKY (SIN BOTÓN EN VIVO) === */
     .mobile-panel-box {
       display: none;
@@ -113,7 +107,6 @@
       opacity: 0.9;
     }
     .mobile-panel-box:hover { opacity: 1; }
-
     .mobile-panel-box .panel-box {
       background: rgba(255, 255, 255, 0.97);
       backdrop-filter: blur(12px);
@@ -127,7 +120,6 @@
       align-items: center;
       gap: 8px;
     }
-
     .mobile-banner-sticky {
       display: none;
       position: sticky;
@@ -141,7 +133,6 @@
       animation: slideUp 0.4s ease-out;
       box-shadow: 0 -8px 20px rgba(0,0,0,.1);
     }
-
     .mobile-banner-sticky .panel-box {
       display: flex;
       align-items: center;
@@ -150,48 +141,39 @@
       flex-wrap: wrap;
       max-width: 100%;
     }
-
     .mobile-banner-sticky .brand {
       gap: 8px;
       min-width: 140px;
       justify-content: center;
     }
-
     .mobile-banner-sticky .brand-badge {
       width: 36px;
       height: 36px;
     }
-
     .mobile-banner-sticky .brand-title {
       font-size: 18px;
     }
-
     .mobile-banner-sticky .brand-sub {
       font-size: 9px;
     }
-
     .mobile-banner-sticky .social-text {
       text-align: center;
       font-size: 13px;
       color: #334155;
     }
-
     .mobile-banner-sticky .social-text a {
       color: #1877F2;
       font-weight: 800;
     }
-
     @media (max-width: 767px) {
       .mobile-panel-box { display: block; }
       .mobile-banner-sticky { display: block; }
       .mobile-panel-box.banner-active { display: none !important; }
     }
-
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     footer {
       background: #f6f7fb;
       padding: 20px 0;
@@ -199,10 +181,10 @@
       position: relative;
       z-index: 1;
     }
-	footer {
-  background: #00A6A6 !important;  /* Fondo verde oscuro */
-  color: #fff !important;          /* Texto blanco */
-}
+    footer {
+      background: #00A6A6 !important; /* Fondo verde oscuro */
+      color: #fff !important; /* Texto blanco */
+    }
   </style>
 </head>
 <body>
@@ -217,7 +199,6 @@
       </div>
     </div>
   </div>
-
   <!-- HEADER -->
   <header class="container">
     <div class="header-inner">
@@ -241,7 +222,6 @@
       </button>
     </div>
   </header>
-
   <!-- NAV -->
   <nav>
     <div class="container">
@@ -255,7 +235,6 @@
       </div>
     </div>
   </nav>
-
   <!-- MAIN -->
   <main class="container">
     <div class="grid">
@@ -269,7 +248,6 @@
             <div class="hero-slide" style="background-image:url('https://blogger.googleusercontent.com/img/a/AVvXsEiB_N3Qz97_D8q_xpUnzaqDq2Dy-gbOLUeUJ9Jh_twgIS1mDKlvUH5UXRj_wrEBWs0W4ZdTJ86fAfPyFBlZTIq5hC0FFW5S4f6_wyFft5CfKj7spipLgksFteqEq-vkUkPu3B5wl6yg2M0g2YGaJYEsqhUNtqt9hj1PRDaYb3kwS3JM0fqLpvwSW7VjnN7b=s1024')"></div>
           </div>
           <div class="hero-overlay"></div>
-
           <!-- PANEL ORIGINAL (SOLO EN PC) -->
           <div class="hero-panel">
             <div class="panel-box">
@@ -288,14 +266,12 @@
               </div>
             </div>
           </div>
-
           <div class="dots">
             <span class="dot active" onclick="goToSlide(0)"></span>
             <span class="dot" onclick="goToSlide(1)"></span>
             <span class="dot" onclick="goToSlide(2)"></span>
           </div>
         </section>
-
         <!-- PANEL MÓVIL FLOTANTE (SIN BOTÓN) -->
         <div class="mobile-panel-box" id="mobile-panel">
           <div class="panel-box">
@@ -308,14 +284,17 @@
                 <div class="brand-sub" style="margin:0; font-size:9px; color:var(--cyan-deep)">Tu Mejor Elección</div>
               </div>
             </div>
-            <div class="social-text" style="font-size:12px; color:#334155; text-align:center">
-  <span>Síguenos en: </span>
-  <a href="https://facebook.com/" 
-     style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; margin-left:4px;">
-    /facebook
-  </a>
-</div>
-
+            <div class="social-text" style="font-size:12px; color:#334155; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
+              <span>Síguenos en:</span>
+              <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+                </svg>
+                /facebook
+              </a>
+            </div>
+          </div>
+        </div>
         <!-- NOTICIAS -->
         <section class="card">
           <div class="card-head">ÚLTIMAS NOTICIAS</div>
@@ -344,7 +323,6 @@
           </div>
         </section>
       </div>
-
       <!-- DERECHA -->
       <aside class="sidebar">
         <section class="card">
@@ -378,7 +356,6 @@
         </section>
       </div>
     </div>
-
     <!-- BANNER STICKY (SIN BOTÓN EN VIVO) -->
     <div class="mobile-banner-sticky" id="mobile-banner">
       <div class="panel-box">
@@ -391,23 +368,25 @@
             <div class="brand-sub">Tu Mejor Elección</div>
           </div>
         </div>
-        <div class="social-text">
-          <span>Síguenos en: </span>
-          <a href="https://facebook.com/">/facebook</a>
+        <div class="social-text" style="display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
+          <span>Síguenos en:</span>
+          <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+              <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+            </svg>
+            /facebook
+          </a>
         </div>
       </div>
     </div>
   </main>
-
   <!-- FOOTER -->
   <footer class="container">
     <p>© 2025 Radio Maicito. Derechos reservados.</p>
   </footer>
-
   <!-- SCRIPT -->
   <script>
     document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
-
     // SLIDER HERO
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
@@ -424,13 +403,11 @@
       showSlide(currentSlide);
     }
     setInterval(nextSlide, 5000);
-
     // AUDIO (SOLO HEADER)
     const livePlayer = document.getElementById('live-player');
     const liveBtn = document.getElementById('live-btn');
     const liveText = liveBtn.querySelector('.live-text');
     const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
     liveBtn.addEventListener('click', () => {
       if (livePlayer.paused) {
         livePlayer.src = liveStream;
@@ -443,7 +420,6 @@
         liveText.textContent = "EN VIVO";
       }
     });
-
     // RANKING
     let currentPlayBtn = null;
     const rankingData = [
@@ -453,7 +429,6 @@
       {pos:4,artista:"CRISTIAN CASTRO",cancion:"VOLVER AMAR",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/4.mp3"},
       {pos:5,artista:"JULIO IGLESIAS",cancion:"FRAGIL",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/5.mp3"}
     ];
-
     const list = document.getElementById('ranking-list');
     rankingData.forEach((item) => {
       const div = document.createElement('div');
@@ -471,13 +446,11 @@
       `;
       list.appendChild(div);
     });
-
     const audio = document.getElementById('audio-player');
     list.addEventListener('click', (e) => {
       const playBtn = e.target.closest('.play');
       if (!playBtn) return;
       const mp3 = playBtn.dataset.mp3;
-
       if (currentPlayBtn === playBtn && !audio.paused) {
         audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
       }
@@ -485,11 +458,9 @@
       audio.src = mp3; audio.play().catch(() => alert("Error al reproducir"));
       playBtn.classList.add('playing'); currentPlayBtn = playBtn;
     });
-
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-
     // OCULTAR FLOTANTE CUANDO EL BANNER APARECE
     const panel = document.getElementById('mobile-panel');
     const banner = document.getElementById('mobile-banner');
@@ -507,5 +478,3 @@
   </script>
 </body>
 </html>
-
-
