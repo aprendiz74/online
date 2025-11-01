@@ -72,123 +72,134 @@
     .play svg { width: 16px; height: 16px; fill: #fff; }
     .play.playing .play-icon { display: none; }
     .play.playing .stop-icon { display: block; }
-    .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
+    .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:20px}
     .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
     .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
     .btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
     .btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
-    registered
     .btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
     .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
     .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
     .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
-
-    /* BANNER SOLO EN MÓVILES */
-    .final-banner-mobile {
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(0, 198, 198, 0.3);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.1);
-      backdrop-filter: blur(8px);
-      margin: 12px 0 20px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .final-banner-mobile .brand {
-      gap: 8px;
-      min-width: 140px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-    }
-    .final-banner-mobile .brand-badge {
-      width: 36px;
-      height: 36px;
-    }
-    .final-banner-mobile .brand-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--pink);
-    }
-    .final-banner-mobile .brand-sub {
-      font-size: 10px;
-      color: var(--cyan-deep);
-    }
-    .final-banner-mobile .social-text {
-      text-align: center;
-      font-size: 13px;
-      color: #334155;
-    }
-    .final-banner-mobile .social-text a {
-      color: #1877F2;
-      font-weight: 800;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
     @media (min-width: 768px) {
       .hero { height: 360px; }
       .news { grid-template-columns: repeat(3, 1fr); }
       .grid { grid-template-columns: 2fr 1fr !important; }
       .sidebar { position: sticky; top: 20px; align-self: flex-start; }
       .ranking-item { padding: 16px 20px; }
-      .final-banner-mobile { display: none !important; }
     }
     @media (max-width: 767px) {
       .main-col { order: 1; }
       .sidebar { order: 2; margin-top: 24px; }
       .hero { height: 260px !important; }
       .hero-panel { display: none !important; }
-      main { padding-bottom: 80px; }
-      .final-banner-mobile { display: flex; }
+      main { padding-bottom: 80px !important; }
     }
-
-    footer {
-      background: #00c6c6;
-      color: #fff;
-      padding: 32px 0;
-      margin-top: 40px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 70px;
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    footer p {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 600;
-      text-align: center;
-      letter-spacing: 0.5px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      opacity: 0.98;
-    }
-
-    /* AUDIO GLOBAL OCULTO */
-    #global-live-player {
+    /* === PANEL MÓVIL: FLOTANTE + BANNER STICKY (SIN BOTÓN EN VIVO) === */
+    .mobile-panel-box {
+      display: none;
       position: fixed;
-      top: -100px;
-      left: -100px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      pointer-events: none;
+      bottom: 16px;
+      right: 12px;
+      z-index: 997;
+      max-width: 280px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.9;
     }
+    .mobile-panel-box:hover { opacity: 1; }
+    .mobile-panel-box .panel-box {
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 1px solid rgba(0, 198, 198, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .mobile-banner-sticky {
+      display: none;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid rgba(0, 198, 198, 0.3);
+      padding: 8px 16px;
+      z-index: 998;
+      animation: slideUp 0.4s ease-out;
+      box-shadow: 0 -8px 20px rgba(0,0,0,.1);
+    }
+    .mobile-banner-sticky .panel-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+    .mobile-banner-sticky .brand {
+      gap: 8px;
+      min-width: 140px;
+      justify-content: center;
+    }
+    .mobile-banner-sticky .brand-badge {
+      width: 32px;
+      height: 32px;
+    }
+    .mobile-banner-sticky .brand-title {
+      font-size: 18px;
+    }
+    .mobile-banner-sticky .brand-sub {
+      font-size: 9px;
+    }
+    .mobile-banner-sticky .social-text {
+      text-align: center;
+      font-size: 13px;
+      color: #334155;
+    }
+    .mobile-banner-sticky .social-text a {
+      color: #1877F2;
+      font-weight: 800;
+    }
+    @media (max-width: 767px) {
+      .mobile-panel-box { display: block; }
+      .mobile-banner-sticky { display: block; }
+      .mobile-panel-box.banner-active { display: none !important; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+footer {
+  background: #00c6c6;
+  color: #fff; /* ← Quita el !important */
+  padding: 32px 0;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+footer p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0.98;
+}
   </style>
 </head>
 <body>
-  <!-- AUDIO GLOBAL (EN VIVO) -->
-  <audio id="global-live-player" preload="none"></audio>
-
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="container topbar-inner">
@@ -278,7 +289,29 @@
             <span class="dot" onclick="goToSlide(2)"></span>
           </div>
         </section>
-
+        <!-- PANEL MÓVIL FLOTANTE (SIN BOTÓN) -->
+        <div class="mobile-panel-box" id="mobile-panel">
+          <div class="panel-box">
+            <div class="brand" style="gap:10px; align-items:center; justify-content:center">
+              <div class="brand-badge" style="width:38px;height:38px">
+                <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
+              </div>
+              <div>
+                <div class="brand-title" style="font-size:20px; margin:0; line-height:1">RADIO MAICITO</div>
+                <div class="brand-sub" style="margin:0; font-size:9px; color:var(--cyan-deep)">Tu Mejor Elección</div>
+              </div>
+            </div>
+            <div class="social-text" style="font-size:12px; color:#334155; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
+              <span>Síguenos en:</span>
+              <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+                </svg>
+                /facebook
+              </a>
+            </div>
+          </div>
+        </div>
         <!-- NOTICIAS -->
         <section class="card">
           <div class="card-head">ÚLTIMAS NOTICIAS</div>
@@ -325,9 +358,8 @@
             </a>
           </div>
         </section>
-
         <audio id="audio-player" preload="none"></audio>
-
+        <audio id="live-player" preload="none"></audio>
         <section class="cta">
           <div class="title">DESCARGA LA APP</div>
           <p>Escucha en vivo y vota por tu canción.</p>
@@ -339,42 +371,39 @@
             DESCARGAR AHORA
           </a>
         </section>
-
-        <!-- BANNER SOLO EN MÓVILES -->
-        <div class="final-banner-mobile">
-          <div class="brand">
-            <div class="brand-badge">
-              <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
-            </div>
-            <div>
-              <div class="brand-title">RADIO MAICITO</div>
-              <div class="brand-sub">Tu Mejor Elección</div>
-            </div>
+      </div>
+    </div>
+    <!-- BANNER STICKY (SIN BOTÓN EN VIVO) -->
+    <div class="mobile-banner-sticky" id="mobile-banner">
+      <div class="panel-box">
+        <div class="brand">
+          <div class="brand-badge">
+            <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
           </div>
-          <div class="social-text">
-            <span>Síguenos en:</span>
-            <a href="https://www.facebook.com/maicitoradio">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
-                <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
-              </svg>
-              /facebook
-            </a>
+          <div>
+            <div class="brand-title">RADIO MAICITO</div>
+            <div class="brand-sub">Tu Mejor Elección</div>
           </div>
         </div>
-
-      </aside>
+        <div class="social-text" style="display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
+          <span>Síguenos en:</span>
+          <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+              <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+            </svg>
+            /facebook
+          </a>
+        </div>
+      </div>
     </div>
   </main>
   <!-- FOOTER -->
   <footer class="container">
     <p>© 2025 Radio Maicito. Derechos reservados.</p>
   </footer>
-
-  <!-- SCRIPT GLOBAL (AJUSTADO PARA AUDIO GLOBAL) -->
+  <!-- SCRIPT -->
   <script>
-    // Fecha
     document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
-
     // SLIDER HERO
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
@@ -391,37 +420,25 @@
       showSlide(currentSlide);
     }
     setInterval(nextSlide, 5000);
-
-    // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
-    const player = document.getElementById('global-live-player');
-    const btn = document.getElementById('live-btn');
-    const text = btn.querySelector('.live-text');
-    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
-    const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-    if (isPlaying) {
-      player.src = stream;
-      player.play().catch(() => {});
-      btn.classList.add('playing');
-      text.textContent = 'PAUSAR';
-    }
-
-    btn.addEventListener('click', () => {
-      if (player.paused) {
-        player.src = stream;
-        player.play().catch(() => alert('Error al reproducir'));
-        btn.classList.add('playing');
-        text.textContent = 'PAUSAR';
-        localStorage.setItem('radio-live-playing', 'true');
+    // AUDIO (SOLO HEADER)
+    const livePlayer = document.getElementById('live-player');
+    const liveBtn = document.getElementById('live-btn');
+    const liveText = liveBtn.querySelector('.live-text');
+    const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+    liveBtn.addEventListener('click', () => {
+      if (livePlayer.paused) {
+        livePlayer.src = liveStream;
+        livePlayer.play().catch(() => alert("Error en el stream"));
+        liveBtn.classList.add('playing');
+        liveText.textContent = "PAUSAR";
       } else {
-        player.pause();
-        btn.classList.remove('playing');
-        text.textContent = 'EN VIVO';
-        localStorage.setItem('radio-live-playing', 'false');
+        livePlayer.pause();
+        liveBtn.classList.remove('playing');
+        liveText.textContent = "EN VIVO";
       }
     });
-
-    // RANKING (usando nuevo audio player)
+    // RANKING
+    let currentPlayBtn = null;
     const rankingData = [
       {pos:1,artista:"ALEJANDRO ZANS",cancion:"CORAZÓN PARTIDO",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/1.mp3"},
       {pos:2,artista:"JULIO IGLESIAS",cancion:"HEY",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/2.mp3"},
@@ -430,10 +447,7 @@
       {pos:5,artista:"JULIO IGLESIAS",cancion:"FRAGIL",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/5.mp3"}
     ];
     const list = document.getElementById('ranking-list');
-    let currentPlay = null;
-    const audio = new Audio();
-
-    rankingData.forEach(item => {
+    rankingData.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'ranking-item';
       div.innerHTML = `
@@ -449,34 +463,49 @@
       `;
       list.appendChild(div);
     });
-
-    list.addEventListener('click', e => {
-      const btn = e.target.closest('.play');
-      if (!btn) return;
-      const mp3 = btn.dataset.mp3;
-      if (currentPlay === btn && !audio.paused) {
-        audio.pause(); btn.classList.remove('playing'); currentPlay = null; return;
+    const audio = document.getElementById('audio-player');
+    list.addEventListener('click', (e) => {
+      const playBtn = e.target.closest('.play');
+      if (!playBtn) return;
+      const mp3 = playBtn.dataset.mp3;
+      if (currentPlayBtn === playBtn && !audio.paused) {
+        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
       }
-      if (currentPlay) currentPlay.classList.remove('playing');
-      audio.src = mp3; audio.play();
-      btn.classList.add('playing'); currentPlay = btn;
+      if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
+      audio.src = mp3; audio.play().catch(() => alert("Error al reproducir"));
+      playBtn.classList.add('playing'); currentPlayBtn = playBtn;
     });
-
     audio.addEventListener('ended', () => {
-      if (currentPlay) { currentPlay.classList.remove('playing'); currentPlay = null; }
+      if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-  </script>
+    // OCULTAR FLOTANTE CUANDO EL BANNER APARECE
+    const panel = document.getElementById('mobile-panel');
+    const banner = document.getElementById('mobile-banner');
+    function checkScroll() {
+      const rect = banner.getBoundingClientRect();
+      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+        panel.classList.add('banner-active');
+      } else {
+        panel.classList.remove('banner-active');
+      }
+    }
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+    document.addEventListener('DOMContentLoaded', checkScroll);
+</script>
 
-  <!-- PROTECCIÓN -->
   <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
-    });
-  </script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
+  
 </body>
 </html>
+
