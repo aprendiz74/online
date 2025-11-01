@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -91,13 +91,8 @@
 
     /* RESPONSIVE: MÓVIL */
     @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-      .live-btn {
-        font-size: 0.8rem;
-        padding: 7px 12px;
-      }
+      .menu-toggle { display: block; }
+      .live-btn { font-size: 0.8rem; padding: 7px 12px; }
       .menu {
         display: none;
         flex-direction: column;
@@ -109,9 +104,7 @@
         padding: 10px 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       }
-      .menu.active {
-        display: flex;
-      }
+      .menu.active { display: flex; }
       .menu a {
         text-align: center;
         padding: 14px 20px;
@@ -156,7 +149,7 @@
       margin-top: 50px;
     }
 
-       /* AUDIO GLOBAL OCULTO (MEJORADO) */
+    /* AUDIO GLOBAL OCULTO (MEJORADO) */
     #global-live-player {
       position: fixed;
       top: -9999px;
@@ -210,13 +203,23 @@
   <div class="content">
     <h1>Contáctanos</h1>
     <p>Escríbenos y te responderemos en menos de 24 horas.</p>
-    <form action="https://formspree.io/f/tu-email-aqui" method="POST">
+
+    <!-- FORMULARIO FORMSubmit -->
+    <form action="https://formsubmit.co/tu-correo@ejemplo.com" method="POST">
       <input type="text" name="nombre" placeholder="Tu nombre" required>
       <input type="email" name="email" placeholder="Tu correo" required>
       <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+
+      <!-- CAMPOS OPCIONALES DE CONFIGURACIÓN -->
+      <input type="hidden" name="_next" value="https://tu-pagina-gracias.html"> <!-- Redirección -->
+      <input type="hidden" name="_subject" value="Nuevo mensaje desde Radio Maicito 📩">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
       <button type="submit">Enviar Mensaje</button>
     </form>
-    <p><small>Usamos <a href="https://formspree.io" target="_blank" style="color:#3498db;">Formspree</a> para recibir mensajes sin backend.</small></p>
+
+    <p><small>Usamos <a href="https://formsubmit.co" target="_blank" style="color:#3498db;">FormSubmit</a> para recibir mensajes de forma segura y gratuita.</small></p>
   </div>
 
   <footer>
@@ -269,5 +272,4 @@
     });
   </script>
 </body>
-
 </html>
