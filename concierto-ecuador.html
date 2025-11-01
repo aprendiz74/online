@@ -190,7 +190,7 @@
       .noticia-content { padding: 25px; }
     }
 
-    /* AUDIO GLOBAL OCULTO (MEJORADO) ← AÑADIDO */
+        /* AUDIO GLOBAL OCULTO (MEJORADO) */
     #global-live-player {
       position: fixed;
       top: -9999px;
@@ -202,6 +202,9 @@
       pointer-events: none;
       z-index: -9999;
     }
+
+    /* OCULTAR BOTÓN EN VIVO */
+    #live-btn { display: none !important; }
   </style>
 </head>
 <body>
@@ -323,4 +326,5 @@
     });
   </script>
 </body>
+
 </html>
