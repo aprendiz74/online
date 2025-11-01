@@ -186,7 +186,7 @@
 </head>
 <body>
   <!-- AUDIO GLOBAL (EN VIVO) -->
-  <audio id="global-live-player" preload="auto"></audio>
+  <audio id="global-live-player" preload="none"></audio>
 
   <!-- TOPBAR -->
   <div class="topbar">
@@ -253,7 +253,7 @@
             <div class="panel-box">
               <div class="brand" style="gap:10px; align-items:center">
                 <div class="brand-badge" style="width:40px;height:40px">   
-                  <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo RADIO MAICITO" style="width:100%; height:100%; object-fit:contain;">
+                  <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo RADIO MAICITO" style="width:100%; height:100%; object-fit:container;">
                 </div>
                 <div>
                   <div class="brand-title" style="font-size:22px; margin:0; line-height:1">RADIO MAICITO</div>
@@ -300,7 +300,7 @@
               <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/3.png')"></div>
               <div class="section">
                 <h3><a href="entrevista-jbalvin.html" class="news-link">COMUNICADO: LigaPro decidió mantener en suspenso </a></h3>
-                <p>cualquier modificación en la clasificación del Hexagonal de Rozamiento.</p>
+                <p>cualquier modificación en la clasificación del Hexagonal de Ascenso.</p>
               </div>
             </article>
           </div>
@@ -371,8 +371,7 @@
 
   <!-- SCRIPT -->
   <script>
-    // Fecha actual
-    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2', month: 'long', year: 'numeric' }).format(new Date());
+    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
 
     // SLIDER HERO
     let currentSlide = 0;
@@ -391,75 +390,64 @@
     }
     setInterval(nextSlide, 5000);
 
-    // === AUDIO GLOBAL EN VIVO (CORREGIDO) ===
+    // === AUDIO GLOBAL EN VIVO (CORREGIDO Y PERSISTENTE) ===
     const globalPlayer = document.getElementById('global-live-player');
     const liveBtn = document.getElementById('live-btn');
     const liveText = liveBtn.querySelector('.live-text');
     const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
 
-    let isPlaying = false;
-
-    // Restaurar estado visual
-    const savedState = localStorage.getItem('radio-live-playing') === 'true';
-    if (savedState) {
+    // Función para iniciar reproducción
+    function startLive() {
+      if (globalPlayer.src !== liveStream) {
+        globalPlayer.src = liveStream;
+      }
+      globalPlayer.play().catch(err => {
+        console.warn("Error al reproducir stream:", err);
+      });
       liveBtn.classList.add('playing');
       liveText.textContent = "PAUSAR";
+      localStorage.setItem('radio-live-playing', 'true');
     }
 
-    // Iniciar reproducción (solo tras clic)
-    function startLive() {
-      if (isPlaying) return;
-
-      globalPlayer.src = liveStream;
-      const playPromise = globalPlayer.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            isPlaying = true;
-            liveBtn.classList.add('playing');
-            liveText.textContent = "PAUSAR";
-            localStorage.setItem('radio-live-playing', 'true');
-          })
-          .catch(err => {
-            console.warn("Reproducción bloqueada:", err);
-            liveText.textContent = "EN VIVO";
-            liveBtn.classList.remove('playing');
-            isPlaying = false;
-          });
-      }
-    }
-
-    // Pausar
+    // Función para pausar
     function pauseLive() {
       globalPlayer.pause();
-      isPlaying = false;
       liveBtn.classList.remove('playing');
       liveText.textContent = "EN VIVO";
       localStorage.setItem('radio-live-playing', 'false');
     }
 
-    // Manejo de errores y reconexión
+    // Cargar estado al inicio
+    const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
+    if (shouldPlay) {
+      globalPlayer.src = liveStream;
+      startLive();
+    }
+
+    // Evento del botón
+    liveBtn.addEventListener('click', () => {
+      if (liveBtn.classList.contains('playing')) {
+        pauseLive();
+      } else {
+        startLive();
+      }
+    });
+
+    // Reconexión automática si falla el stream
     globalPlayer.addEventListener('error', () => {
-      if (isPlaying) {
+      if (liveBtn.classList.contains('playing')) {
         liveText.textContent = "RECONECTANDO...";
         setTimeout(() => {
-          if (isPlaying) {
-            globalPlayer.src = liveStream;
-            globalPlayer.play().catch(() => {});
+          if (liveBtn.classList.contains('playing')) {
+            startLive();
           }
         }, 3000);
       }
     });
 
-    // Botón EN VIVO / PAUSAR
-    liveBtn.addEventListener('click', () => {
-      if (liveBtn.classList.contains('playing
-
-')) {
-        pauseLive();
-      } else {
-        startLive();
+    globalPlayer.addEventListener('canplay', () => {
+      if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
+        liveText.textContent = "PAUSAR";
       }
     });
 
@@ -504,17 +492,20 @@
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-
-    // PROTECCIÓN
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
-    });
   </script>
+
+  <script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
 
 </body>
 </html>
+
