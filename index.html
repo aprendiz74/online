@@ -93,57 +93,59 @@
       .sidebar { order: 2; margin-top: 24px; }
       .hero { height: 260px !important; }
       .hero-panel { display: none !important; }
-      main { padding-bottom: 90px !important; }
+      main { padding-bottom: 120px !important; }
     }
 
-    /* === BANNER FIJO INFERIOR EN MÓVILES === */
-    .mobile-banner-fixed {
+    /* === BANNER QUE APARECE AL FINAL Y SE QUEDA FIJO === */
+    .final-banner {
       display: none;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid rgba(0, 198, 198, 0.3);
+      padding: 12px 16px;
+      box-shadow: 0 -8px 20px rgba(0,0,0,.1);
+      backdrop-filter: blur(8px);
+      z-index: 997;
+      transition: all 0.4s ease;
+    }
+    .final-banner.active {
+      display: block;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.98);
-      border-top: 1px solid rgba(0, 198, 198, 0.3);
-      padding: 10px 16px;
-      z-index: 998;
-      box-shadow: 0 -8px 20px rgba(0,0,0,.1);
-      backdrop-filter: blur(8px);
     }
-    .mobile-banner-fixed .panel-box {
+    .final-banner .panel-box {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
       max-width: 100%;
+      margin: 0 auto;
     }
-    .mobile-banner-fixed .brand {
+    .final-banner .brand {
       gap: 8px;
       min-width: 140px;
       justify-content: center;
     }
-    .mobile-banner-fixed .brand-badge {
+    .final-banner .brand-badge {
       width: 32px;
       height: 32px;
     }
-    .mobile-banner-fixed .brand-title {
+    .final-banner .brand-title {
       font-size: 18px;
     }
-    .mobile-banner-fixed .brand-sub {
+    .final-banner .brand-sub {
       font-size: 9px;
     }
-    .mobile-banner-fixed .social-text {
+    .final-banner .social-text {
       text-align: center;
       font-size: 13px;
       color: #334155;
     }
-    .mobile-banner-fixed .social-text a {
+    .final-banner .social-text a {
       color: #1877F2;
       font-weight: 800;
-    }
-    @media (max-width: 767px) {
-      .mobile-banner-fixed { display: block !important; }
     }
 
     footer {
@@ -321,30 +323,32 @@
             DESCARGAR AHORA
           </a>
         </section>
-      </div>
-    </div>
-    <!-- BANNER FIJO INFERIOR (MÓVILES) -->
-    <div class="mobile-banner-fixed" id="mobile-banner">
-      <div class="panel-box">
-        <div class="brand">
-          <div class="brand-badge">
-            <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
-          </div>
-          <div>
-            <div class="brand-title">RADIO MAICITO</div>
-            <div class="brand-sub">Tu Mejor Elección</div>
+
+        <!-- BANNER QUE APARECE AL FINAL Y SE QUEDA FIJO -->
+        <div class="final-banner" id="final-banner">
+          <div class="panel-box">
+            <div class="brand">
+              <div class="brand-badge">
+                <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
+              </div>
+              <div>
+                <div class="brand-title">RADIO MAICITO</div>
+                <div class="brand-sub">Tu Mejor Elección</div>
+              </div>
+            </div>
+            <div class="social-text" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap">
+              <span>Síguenos en:</span>
+              <a href="https://www.facebook.com/maicitoradio" style="color:#1877F2; font-weight:900; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+                </svg>
+                /facebook
+              </a>
+            </div>
           </div>
         </div>
-        <div class="social-text" style="display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
-          <span>Síguenos en:</span>
-          <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
-              <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
-            </svg>
-            /facebook
-          </a>
-        </div>
-      </div>
+
+      </aside>
     </div>
   </main>
   <!-- FOOTER -->
@@ -427,6 +431,25 @@
     });
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
+    });
+
+    // === MOSTRAR BANNER AL LLEGAR AL FINAL ===
+    const banner = document.getElementById('final-banner');
+    let triggered = false;
+
+    window.addEventListener('scroll', () => {
+      const triggerPoint = document.documentElement.scrollHeight - window.innerHeight - 200;
+      
+      if (window.scrollY > triggerPoint && !triggered) {
+        banner.classList.add('active');
+        triggered = true;
+      }
+      
+      // Si sube mucho, lo oculta de nuevo (opcional)
+      if (window.scrollY < 300 && triggered) {
+        banner.classList.remove('active');
+        triggered = false;
+      }
     });
   </script>
 
