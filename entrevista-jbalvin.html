@@ -192,16 +192,21 @@
       .noticia-content { padding: 25px; }
     }
 
-    /* AUDIO GLOBAL OCULTO */
+       /* AUDIO GLOBAL OCULTO (MEJORADO) */
     #global-live-player {
       position: fixed;
-      top: -100px;
-      left: -100px;
+      top: -9999px;
+      left: -9999px;
       width: 1px;
       height: 1px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
+      z-index: -9999;
     }
+
+    /* OCULTAR BOTÓN EN VIVO */
+    #live-btn { display: none !important; }
   </style>
 </head>
 <body>
@@ -307,4 +312,5 @@
     });
   </script>
 </body>
+
 </html>
