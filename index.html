@@ -34,7 +34,8 @@
     .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
     .menu a{opacity:.98;transition:.2s}
     .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
-    main{padding:24px 0}
+    main{padding:24px 0;padding-bottom:24px;transition:padding-bottom .4s ease}
+    main.banner-active{padding-bottom:120px}
     .grid{display:grid;grid-template-columns:1fr;gap:24px}
     .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
     .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
@@ -87,6 +88,8 @@
       .grid { grid-template-columns: 2fr 1fr !important; }
       .sidebar { position: sticky; top: 20px; align-self: flex-start; }
       .ranking-item { padding: 16px 20px; }
+      .final-banner.active { display: none !important; }
+      main.banner-active { padding-bottom: 24px !important; }
     }
     @media (max-width: 767px) {
       .main-col { order: 1; }
@@ -154,7 +157,7 @@
       padding: 32px 0;
       margin-top: 40px;
       position: relative;
-      z-index: 1;
+      z-index: 998;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -433,21 +436,30 @@
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
 
-    // === MOSTRAR BANNER AL LLEGAR AL FINAL ===
+    // === MOSTRAR BANNER AL LLEGAR AL FINAL (SOLO MÓVIL) ===
     const banner = document.getElementById('final-banner');
+    const mainElement = document.querySelector('main');
     let triggered = false;
 
     window.addEventListener('scroll', () => {
-      const triggerPoint = document.documentElement.scrollHeight - window.innerHeight - 200;
-      
-      if (window.scrollY > triggerPoint && !triggered) {
-        banner.classList.add('active');
-        triggered = true;
-      }
-      
-      // Si sube mucho, lo oculta de nuevo (opcional)
-      if (window.scrollY < 300 && triggered) {
+      const footer = document.querySelector('footer');
+      const footerTop = footer.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const triggerPoint = document.documentElement.scrollHeight - window.innerHeight - 400;
+
+      if (window.innerWidth < 768) {
+        if (window.scrollY > triggerPoint && !triggered && footerTop > windowHeight + 100) {
+          banner.classList.add('active');
+          mainElement.classList.add('banner-active');
+          triggered = true;
+        } else if (window.scrollY < 300 && triggered) {
+          banner.classList.remove('active');
+          mainElement.classList.remove('banner-active');
+          triggered = false;
+        }
+      } else {
         banner.classList.remove('active');
+        mainElement.classList.remove('banner-active');
         triggered = false;
       }
     });
