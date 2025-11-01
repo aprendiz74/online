@@ -1,15 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiénes Somos</title>
+  <title>Quiénes Somos | Radio Maicito</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #333; }
 
-    /* NAVEGACIÓN CORREGIDA */
+    /* NAVEGACIÓN */
     nav {
       background: #00A6A6;
       height: 64px;
@@ -81,13 +81,9 @@
       height: 14px;
       fill: currentColor;
     }
-    .live-btn .live-text {
-      margin-left: 4px;
-    }
 
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
-      .live-btn { font-size: 0.8rem; padding: 7px 12px; }
       .menu {
         display: none;
         flex-direction: column;
@@ -111,11 +107,18 @@
       padding: 60px 20px;
       text-align: center;
       min-height: 70vh;
+      max-width: 900px;
+      margin: auto;
     }
     .content h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
       color: #2c3e50;
+    }
+    .content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
     }
     footer {
       background: #00A6A6;
@@ -124,7 +127,7 @@
       padding: 20px;
     }
 
-        /* AUDIO GLOBAL OCULTO (MEJORADO) */
+    /* AUDIO GLOBAL OCULTO */
     #global-live-player {
       position: fixed;
       top: -9999px;
@@ -143,10 +146,10 @@
 </head>
 <body>
 
-  <!-- AUDIO GLOBAL (EN VIVO) -->
+  <!-- AUDIO GLOBAL -->
   <audio id="global-live-player" preload="none"></audio>
 
-  <!-- NAVEGACIÓN CON BOTÓN EN VIVO -->
+  <!-- NAVEGACIÓN -->
   <nav>
     <div class="container">
       <button class="menu-toggle" aria-label="Menú">
@@ -177,16 +180,19 @@
 
   <div class="content">
     <h1>Quiénes Somos</h1>
-    <p>Somos un equipo apasionado por [tu tema]. Llevamos X años ayudando a personas como tú.</p>
-    <p><strong>Misión:</strong> [Tu misión aquí]</p>
-    <p><strong>Visión:</strong> [Tu visión aquí]</p>
+    <p><strong>Radio Maicito</strong> es una emisora digital que nació con el propósito de conectar corazones a través de la música, la información y el entretenimiento. Nos impulsa la pasión por comunicar, compartir y acompañar a nuestra audiencia en cada momento del día.</p>
+    <p>Desde nuestros inicios, nos hemos caracterizado por ofrecer una programación fresca, diversa y cercana. En <strong>Radio Maicito</strong> creemos en el poder de la radio online para crear comunidad, dar voz a nuevos talentos y mantener viva la esencia de la buena música.</p>
+
+    <p><strong>Misión:</strong> Difundir contenidos musicales, culturales y de entretenimiento que inspiren, informen y generen conexión con nuestra audiencia, apoyando a los artistas emergentes y promoviendo valores positivos en cada transmisión.</p>
+
+    <p><strong>Visión:</strong> Ser una emisora digital líder en Latinoamérica, reconocida por su innovación, su compromiso con la audiencia y su contribución al desarrollo cultural y musical de nuestra región.</p>
   </div>
 
   <footer>
-    <p>© 2025 Radio Maicito. Derechos reservados.</p>
+    <p>© 2025 Radio Maicito. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- JS: MENÚ + AUDIO GLOBAL -->
+  <!-- JS -->
   <script>
     // Menú móvil
     const toggle = document.querySelector('.menu-toggle');
@@ -195,12 +201,10 @@
       menu.classList.toggle('active');
     });
     document.querySelectorAll('.menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
-      });
+      link.addEventListener('click', () => menu.classList.remove('active'));
     });
 
-    // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
+    // AUDIO EN VIVO
     const player = document.getElementById('global-live-player');
     const btn = document.getElementById('live-btn');
     const text = btn.querySelector('.live-text');
@@ -230,6 +234,4 @@
     });
   </script>
 </body>
-
 </html>
-
