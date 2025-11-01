@@ -93,47 +93,24 @@
       .sidebar { order: 2; margin-top: 24px; }
       .hero { height: 260px !important; }
       .hero-panel { display: none !important; }
-      main { padding-bottom: 80px !important; }
+      main { padding-bottom: 90px !important; }
     }
-    /* === PANEL MÓVIL: FLOTANTE + BANNER STICKY (SIN BOTÓN EN VIVO) === */
-    .mobile-panel-box {
+
+    /* === BANNER FIJO INFERIOR EN MÓVILES === */
+    .mobile-banner-fixed {
       display: none;
       position: fixed;
-      bottom: 16px;
-      right: 12px;
-      z-index: 997;
-      max-width: 280px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0.9;
-    }
-    .mobile-panel-box:hover { opacity: 1; }
-    .mobile-panel-box .panel-box {
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 10px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      border: 1px solid rgba(0, 198, 198, 0.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .mobile-banner-sticky {
-      display: none;
-      position: sticky;
       bottom: 0;
       left: 0;
       right: 0;
       background: rgba(255, 255, 255, 0.98);
       border-top: 1px solid rgba(0, 198, 198, 0.3);
-      padding: 8px 16px;
+      padding: 10px 16px;
       z-index: 998;
-      animation: slideUp 0.4s ease-out;
       box-shadow: 0 -8px 20px rgba(0,0,0,.1);
+      backdrop-filter: blur(8px);
     }
-    .mobile-banner-sticky .panel-box {
+    .mobile-banner-fixed .panel-box {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -141,62 +118,57 @@
       flex-wrap: wrap;
       max-width: 100%;
     }
-    .mobile-banner-sticky .brand {
+    .mobile-banner-fixed .brand {
       gap: 8px;
       min-width: 140px;
       justify-content: center;
     }
-    .mobile-banner-sticky .brand-badge {
+    .mobile-banner-fixed .brand-badge {
       width: 32px;
       height: 32px;
     }
-    .mobile-banner-sticky .brand-title {
+    .mobile-banner-fixed .brand-title {
       font-size: 18px;
     }
-    .mobile-banner-sticky .brand-sub {
+    .mobile-banner-fixed .brand-sub {
       font-size: 9px;
     }
-    .mobile-banner-sticky .social-text {
+    .mobile-banner-fixed .social-text {
       text-align: center;
       font-size: 13px;
       color: #334155;
     }
-    .mobile-banner-sticky .social-text a {
+    .mobile-banner-fixed .social-text a {
       color: #1877F2;
       font-weight: 800;
     }
     @media (max-width: 767px) {
-      .mobile-panel-box { display: block; }
-      .mobile-banner-sticky { display: block; }
-      .mobile-panel-box.banner-active { display: none !important; }
+      .mobile-banner-fixed { display: block !important; }
     }
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+
+    footer {
+      background: #00c6c6;
+      color: #fff;
+      padding: 32px 0;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
-footer {
-  background: #00c6c6;
-  color: #fff; /* ← Quita el !important */
-  padding: 32px 0;
-  margin-top: 40px;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-footer p {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  opacity: 0.98;
-}
+    footer p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      opacity: 0.98;
+    }
   </style>
 </head>
 <body>
@@ -289,29 +261,7 @@ footer p {
             <span class="dot" onclick="goToSlide(2)"></span>
           </div>
         </section>
-        <!-- PANEL MÓVIL FLOTANTE (SIN BOTÓN) -->
-        <div class="mobile-panel-box" id="mobile-panel">
-          <div class="panel-box">
-            <div class="brand" style="gap:10px; align-items:center; justify-content:center">
-              <div class="brand-badge" style="width:38px;height:38px">
-                <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
-              </div>
-              <div>
-                <div class="brand-title" style="font-size:20px; margin:0; line-height:1">RADIO MAICITO</div>
-                <div class="brand-sub" style="margin:0; font-size:9px; color:var(--cyan-deep)">Tu Mejor Elección</div>
-              </div>
-            </div>
-            <div class="social-text" style="font-size:12px; color:#334155; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap">
-              <span>Síguenos en:</span>
-              <a href="https://facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
-                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
-                </svg>
-                /facebook
-              </a>
-            </div>
-          </div>
-        </div>
+
         <!-- NOTICIAS -->
         <section class="card">
           <div class="card-head">ÚLTIMAS NOTICIAS</div>
@@ -373,8 +323,8 @@ footer p {
         </section>
       </div>
     </div>
-    <!-- BANNER STICKY (SIN BOTÓN EN VIVO) -->
-    <div class="mobile-banner-sticky" id="mobile-banner">
+    <!-- BANNER FIJO INFERIOR (MÓVILES) -->
+    <div class="mobile-banner-fixed" id="mobile-banner">
       <div class="panel-box">
         <div class="brand">
           <div class="brand-badge">
@@ -478,21 +428,7 @@ footer p {
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-    // OCULTAR FLOTANTE CUANDO EL BANNER APARECE
-    const panel = document.getElementById('mobile-panel');
-    const banner = document.getElementById('mobile-banner');
-    function checkScroll() {
-      const rect = banner.getBoundingClientRect();
-      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-        panel.classList.add('banner-active');
-      } else {
-        panel.classList.remove('banner-active');
-      }
-    }
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('resize', checkScroll);
-    document.addEventListener('DOMContentLoaded', checkScroll);
-</script>
+  </script>
 
   <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
@@ -504,8 +440,7 @@ footer p {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
     if (e.key === 'F12') e.preventDefault();
   });
-</script>
+  </script>
   
 </body>
 </html>
-
