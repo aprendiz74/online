@@ -199,6 +199,11 @@
   <div class="content">
     <h1 style="text-align:center;">Últimas Noticias</h1>
       
+	  <div class="noticia">
+      <h3>TENDENCIAS</h3>
+      <p class="fecha">1 de noviembre de 2025</p>
+      <p>La IA impulsa la demanda de discos duros de Western Digital y Seagate</p>
+    </div>
     <div class="noticia">
       <h3>GRAN NOTICIA DEPORTIVA</h3>
       <p class="fecha">1 de noviembre de 2025</p>
@@ -275,6 +280,19 @@
       }
     });
   </script>
+  
+  
+  <script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
 </body>
 
 </html>

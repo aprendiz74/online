@@ -11,10 +11,66 @@
     html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
     a{color:inherit;text-decoration:none}
     .container{max-width:1120px;margin:0 auto;padding:0 12px}
-    .topbar{background:var(--cyan);color:#fff;font-size:12px}
-    .topbar-inner{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:8px 12px}
-    .social a{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;opacity:.95}
-    .social a:hover{opacity:.8}
+   
+    /* TOPBAR CON RELIEVE OSCURO – AJUSTADO PARA #00c6c6 */
+.topbar {
+  background: linear-gradient(to bottom, #00d6d6 0%, #00a6a6 100%);
+  color: #fff;
+  font-size: 12px;
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.28);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 100;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+    .topbar-inner {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+
+    #today {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      backdrop-filter: blur(4px);
+      opacity: 1;
+      transition: all 0.25s ease;
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .social a:hover {
+      transform: translateY(-2px) scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      opacity: 1;
+    }
+
+    .social a svg {
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+    }
+
     header{padding:16px 0}
     .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
@@ -149,7 +205,7 @@
     }
 
     footer {
-      background: #00c6c6;
+      background: #00a6a6;
       color: #fff;
       padding: 32px 0;
       margin-top: 40px;
@@ -285,21 +341,21 @@
             <article>
               <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/1.png')"></div>
               <div class="section">
-                <h3><a href="concierto-ecuador.html" class="news-link">LA JOYA DE ECUADOR: Kendry Páez</a></h3>
+                <h3><a href="noticia-1.html" class="news-link">LA JOYA DE ECUADOR: Kendry Páez</a></h3>
                 <p>sumó minutos en la goleada de Racing de Estrasburgo sobre Auxerre en la Ligue 1</p>
               </div>
             </article>
             <article>
               <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/2.png')"></div>
               <div class="section">
-                <h3><a href="nueva-programacion.html" class="news-link">CR7 NO PUEDE GANAR TÍTULOS EN ARABIA:</a></h3>
+                <h3><a href="noticia-2.html" class="news-link">CR7 NO PUEDE GANAR TÍTULOS EN ARABIA:</a></h3>
                 <p>Karim Benzema deja a Cristiano Ronaldo fuera de la King’s Cup.</p>
               </div>
             </article>
             <article>
               <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/3.png')"></div>
               <div class="section">
-                <h3><a href="entrevista-jbalvin.html" class="news-link">COMUNICADO: LigaPro decidió mantener en suspenso </a></h3>
+                <h3><a href="noticia-3.html" class="news-link">COMUNICADO: LigaPro decidió mantener en suspenso </a></h3>
                 <p>cualquier modificación en la clasificación del Hexagonal de Ascenso.</p>
               </div>
             </article>
@@ -378,7 +434,7 @@
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.dot');
     function showSlide(n) {
-      slides.forEach(s => s.classList.remove('active'));
+      slides.forEach(s => s.classList.remove('activeıl'));
       dots.forEach(d => d.classList.remove('active'));
       slides[n].classList.add('active');
       dots[n].classList.add('active');
@@ -508,7 +564,3 @@
 
 </body>
 </html>
-
-
-
-
