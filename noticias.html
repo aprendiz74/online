@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -108,18 +108,48 @@
       .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
     }
 
-    /* CONTENIDO */
-    .content { padding: 60px 20px; text-align: center; }
-    .content h1 { font-size: 2.5rem; color: #2c3e50; margin-bottom: 40px; }
+    /* CONTENIDO - GRID RESPONSIVE */
+    .content {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .content h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 40px;
+    }
 
+    .noticias-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 2 COLUMNAS EN PC */
+    @media (min-width: 769px) {
+      .noticias-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* 3 COLUMNAS EN PANTALLAS GRANDES (OPCIONAL) */
+    @media (min-width: 1200px) {
+      .noticias-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* NOTICIAS */
     .noticia {
       background: white;
-      margin: 25px auto;
       padding: 22px;
-      max-width: 800px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       transition: all 0.3s ease;
+      margin: 0;
+      height: fit-content;
     }
 
     /* ENLACE QUE OCUPA TODO EL BLOQUE */
@@ -158,7 +188,7 @@
       font-weight: 500;
     }
 
-    .noticia p:last-child {
+    .noticia p:not(.leer-mas) {
       color: #34495e;
       font-size: 1.05rem;
       line-height: 1.6;
@@ -259,58 +289,60 @@
   <div class="content">
     <h1>Últimas Noticias</h1>
 
-    <div class="noticia">
-      <a href="noticia-tendencias.html" class="noticia-link">
-        <h3>TENDENCIAS</h3>
-        <p class="fecha">1 de noviembre de 2025</p>
-        <p>La IA impulsa la demanda de discos duros de Western Digital y Seagate</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
-    </div>
+    <div class="noticias-grid">
+      <div class="noticia">
+        <a href="noticia-tendencias.html" class="noticia-link">
+          <h3>TENDENCIAS</h3>
+          <p class="fecha">1 de noviembre de 2025</p>
+          <p>La IA impulsa la demanda de discos duros de Western Digital y Seagate</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
 
-    <div class="noticia">
-      <a href="noticia-cristiano-jr.html" class="noticia-link">
-        <h3>GRAN NOTICIA DEPORTIVA</h3>
-        <p class="fecha">1 de noviembre de 2025</p>
-        <p>Cristiano Ronaldo Jr convierte su primer gol con Portugal sub16</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
-    </div>
+      <div class="noticia">
+        <a href="noticia-cristiano-jr.html" class="noticia-link">
+          <h3>GRAN NOTICIA DEPORTIVA</h3>
+          <p class="fecha">1 de noviembre de 2025</p>
+          <p>Cristiano Ronaldo Jr convierte su primer gol con Portugal sub16</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
 
-    <div class="noticia">
-      <a href="noticia-bayern.html" class="noticia-link">
-        <h3>¡PALIZA EN EL CLÁSICO!</h3>
-        <p class="fecha">1 de noviembre de 2025</p>
-        <p>Bayern Múnich golea por (3-0) al Leverkusen en la Bundesliga</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
-    </div>
+      <div class="noticia">
+        <a href="noticia-bayern.html" class="noticia-link">
+          <h3>¡PALIZA EN EL CLÁSICO!</h3>
+          <p class="fecha">1 de noviembre de 2025</p>
+          <p>Bayern Múnich golea por (3-0) al Leverkusen en la Bundesliga</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
 
-    <div class="noticia">
-      <a href="noticia-psg.html" class="noticia-link">
-        <h3>¡AGÓNICA VICTORIA!</h3>
-        <p class="fecha">1 de noviembre de 2025</p>
-        <p>PSG venció sobre la hora (1-0) al Niza en la Ligue 1</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
-    </div>
+      <div class="noticia">
+        <a href="noticia-psg.html" class="noticia-link">
+          <h3>¡AGÓNICA VICTORIA!</h3>
+          <p class="fecha">1 de noviembre de 2025</p>
+          <p>PSG venció sobre la hora (1-0) al Niza en la Ligue 1</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
 
-    <div class="noticia">
-      <a href="noticia-brasil.html" class="noticia-link">
-        <h3>HEGEMONÍA EN SUDAMÉRICA</h3>
-        <p class="fecha">31 de octubre de 2025</p>
-        <p>Brasil alcanzó 10 finalistas en las últimas 12 ediciones de la copa libertadores</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
-    </div>
+      <div class="noticia">
+        <a href="noticia-brasil.html" class="noticia-link">
+          <h3>HEGEMONÍA EN SUDAMÉRICA</h3>
+          <p class="fecha">31 de octubre de 2025</p>
+          <p>Brasil alcanzó 10 finalistas en las últimas 12 ediciones de la copa libertadores</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
 
-    <div class="noticia">
-      <a href="noticia-robinho.html" class="noticia-link">
-        <h3>¡IMPACTANTE REVELACIÓN!</h3>
-        <p class="fecha">29 de octubre de 2025</p>
-        <p>Robinho y su vida en la cárcel: «Han estado diciendo mentiras de que soy un líder acá adentro»</p>
-        <p class="leer-mas">→ Ver noticia completa</p>
-      </a>
+      <div class="noticia">
+        <a href="noticia-robinho.html" class="noticia-link">
+          <h3>¡IMPACTANTE REVELACIÓN!</h3>
+          <p class="fecha">29 de octubre de 2025</p>
+          <p>Robinho y su vida en la cárcel: «Han estado diciendo mentiras de que soy un líder acá adentro»</p>
+          <p class="leer-mas">→ Ver noticia completa</p>
+        </a>
+      </div>
     </div>
   </div>
 
