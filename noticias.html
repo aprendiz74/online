@@ -164,6 +164,38 @@
       line-height: 1.6;
     }
 
+    /* VER NOTICIA COMPLETA - GUÍA AMIGABLE */
+    .leer-mas {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #00A6A6;
+      font-style: italic;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      opacity: 0.9;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      font-weight: 500;
+    }
+
+    .noticia-link:hover .leer-mas,
+    .noticia-link:active .leer-mas {
+      opacity: 1;
+      transform: translateX(4px);
+      color: #007a7a;
+    }
+
+    /* En móvil: efecto al tocar */
+    @media (max-width: 768px) {
+      .noticia-link:active {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+      }
+      .noticia-link:active .leer-mas {
+        transform: translateX(6px);
+        color: #e74c3c;
+      }
+    }
+
     footer {
       background: #00A6A6;
       color: white;
@@ -232,6 +264,7 @@
         <h3>TENDENCIAS</h3>
         <p class="fecha">1 de noviembre de 2025</p>
         <p>La IA impulsa la demanda de discos duros de Western Digital y Seagate</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
 
@@ -240,6 +273,7 @@
         <h3>GRAN NOTICIA DEPORTIVA</h3>
         <p class="fecha">1 de noviembre de 2025</p>
         <p>Cristiano Ronaldo Jr convierte su primer gol con Portugal sub16</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
 
@@ -248,6 +282,7 @@
         <h3>¡PALIZA EN EL CLÁSICO!</h3>
         <p class="fecha">1 de noviembre de 2025</p>
         <p>Bayern Múnich golea por (3-0) al Leverkusen en la Bundesliga</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
 
@@ -256,6 +291,7 @@
         <h3>¡AGÓNICA VICTORIA!</h3>
         <p class="fecha">1 de noviembre de 2025</p>
         <p>PSG venció sobre la hora (1-0) al Niza en la Ligue 1</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
 
@@ -264,6 +300,7 @@
         <h3>HEGEMONÍA EN SUDAMÉRICA</h3>
         <p class="fecha">31 de octubre de 2025</p>
         <p>Brasil alcanzó 10 finalistas en las últimas 12 ediciones de la copa libertadores</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
 
@@ -272,6 +309,7 @@
         <h3>¡IMPACTANTE REVELACIÓN!</h3>
         <p class="fecha">29 de octubre de 2025</p>
         <p>Robinho y su vida en la cárcel: «Han estado diciendo mentiras de que soy un líder acá adentro»</p>
+        <p class="leer-mas">→ Ver noticia completa</p>
       </a>
     </div>
   </div>
