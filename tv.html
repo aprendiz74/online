@@ -99,15 +99,15 @@
       fill: #fff;
     }
 
-    /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
+    /* === GIRO MÓVIL === */
     @media (max-width: 768px) {
       .tv-inner {
         transform: rotate(90deg);
         transform-origin: center center;
-        width: 70vh;
+        width: 100vh;
         height: 100vw;
         left: 50%;
-        top: 30%;
+        top: 50%;
         translate: -50% -50%;
       }
       #videoTv {
@@ -116,11 +116,14 @@
         object-fit: cover;
       }
       .black-bar { height: 35px; }
+      
+      /* AJUSTE DEL LOGO EN MÓVIL: MÁS ABAJO Y ALEJADO DEL BORDE DERECHO */
       .tv-logo {
         width: 70px;
-        top: 15px;
-        right: 15px;
+        top: 65px;     /* ← Más abajo (antes 15px) */
+        right: 45px;   /* ← Alejado del borde derecho */
       }
+      
       .close-btn {
         top: 15px;
         left: 15px;
@@ -133,7 +136,7 @@
 </head>
 <body>
 
-  <!-- MODAL TV (como el segundo código) -->
+  <!-- MODAL TV -->
   <div id="tvModal" style="display:none;">
     <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
       <svg viewBox="0 0 24 24">
@@ -200,12 +203,12 @@
         });
     }
 
-    function closeTVPlayer() {
+    function closeTVataePlayer() {
       const modal = document.getElementById('tvModal');
       if (player) player.pause();
       modal.style.display = 'none';
       document.getElementById('logo').classList.remove('show');
-      window.location.href = "index.html"; // ← Vuelve a la página principal
+      window.location.href = "index.html";
     }
 
     // Eventos
