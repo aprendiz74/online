@@ -16,35 +16,28 @@
       justify-content: center;
       align-items: center;
       background: #000;
+      z-index: 12000;
     }
 
-    /* VIDEO SIN ROTACIÓN */
-    #videoTv {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      background: #000;
-    }
-
-    .loading {
+    .tv-inner {
       position: absolute;
-      color: #fff;
-      font-family: system-ui;
-      font-weight: bold;
-      font-size: 1.2rem;
-      z-index: 10;
-      text-align: center;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .error {
-      color: #ff6b6b;
-      text-align: center;
-      padding: 20px;
-      font-family: system-ui;
-      font-size: 1rem;
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    #videoTv {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
     }
 
     .black-bar {
@@ -106,42 +99,58 @@
       fill: #fff;
     }
 
-    /* MÓVIL: PANTALLA COMPLETA HORIZONTAL */
+    /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
     @media (max-width: 768px) {
-      .black-bar { height: 35px; }
-      .tv-logo { 
-        width: 70px; 
-        top: 15px; 
-        right: 15px; 
+      .tv-inner {
+        transform: rotate(90deg);
+        transform-origin: center center;
+        width: 100vh;
+        height: 100vw;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
       }
-      .close-btn { 
-        top: 15px; 
-        left: 15px; 
-        width: 40px; 
-        height: 40px; 
+      #videoTv {
+        width: 100vh;
+        height: 100vw;
+        object-fit: cover;
+      }
+      .black-bar { height: 35px; }
+      .tv-logo {
+        width: 70px;
+        top: 15px;
+        right: 15px;
+      }
+      .close-btn {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
       }
       .close-btn svg { width: 16px; height: 16px; }
     }
   </style>
 </head>
 <body>
-  <div id="tvContainer">
-    <div class="black-bar top"></div>
-    <div class="black-bar bottom"></div>
-   
-    <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
-    <div class="loading" id="status">Cargando TV en vivo...</div>
 
-    <!-- LOGO -->
-    <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
-         alt="Logo TV" class="tv-logo" id="logo" />
-
-    <!-- BOTÓN CERRAR -->
-    <button class="close-btn" title="Volver a Radio" onclick="goHome()">
+  <!-- MODAL TV (como el segundo código) -->
+  <div id="tvModal" style="display:none;">
+    <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg
+      </svg>
     </button>
+
+    <div class="tv-inner">
+      <div class="video-wrapper">
+        <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
+        <div class="black-bar top"></div>
+        <div class="black-bar bottom"></div>
+      </div>
+
+      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
+           alt="Logo TV" class="tv-logo" id="logo" />
+    </div>
   </div>
 
   <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
@@ -149,86 +158,63 @@
     let player = null;
     const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv/stream.txt?t=" + Date.now();
 
-    function goHome() {
-      if (player) player.dispose();
-      window.location.href = "index.html";
-    }
+    function openTVPlayer() {
+      const modal = document.getElementById('tvModal');
+      modal.style.display = 'block';
 
-    function goFullscreen() {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) elem.requestFullscreen();
-      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-    }
+      const logo = document.getElementById('logo');
+      logo.classList.remove('show');
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (document.fullscreenElement) document.exitFullscreen();
-        goHome();
+      if (!player) {
+        player = videojs('videoTv', {
+          autoplay: true,
+          controls: true,
+          fluid: true,
+          fill: true,
+          sources: [],
+          html5: {
+            vhs: { overrideNative: true },
+            nativeVideoTracks: false,
+            nativeAudioTracks: false,
+            nativeTextTracks: false
+          }
+        });
       }
-    });
 
-    async function loadStream() {
-      try {
-        const res = await fetch(GITHUB_STREAM_URL);
-        if (!res.ok) throw new Error("No se pudo cargar el enlace");
-        const url = (await res.text()).trim();
-        if (!url.includes('.m3u8')) throw new Error("Enlace inválido");
-        initPlayer(url);
-      } catch (err) {
-        document.getElementById('status').innerHTML = `
-          <div class="error">
-            Error: ${err.message}<br>
-            <small><a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
-          </div>`;
-      }
+      // Cargar stream desde GitHub
+      fetch(GITHUB_STREAM_URL)
+        .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
+        .then(url => {
+          const streamUrl = url.trim();
+          if (!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
+          player.src({ src: streamUrl, type: 'application/x-mpegURL' });
+          player.play().catch(() => {});
+          setTimeout(() => logo.classList.add('show'), 3000);
+        })
+        .catch(err => {
+          document.querySelector('.video-wrapper').innerHTML += `
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;font-family:system-ui;">
+              Error: ${err.message}<br>
+              <small><a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
+            </div>`;
+        });
     }
 
-    function initPlayer(streamUrl) {
-      document.getElementById('status').textContent = "Conectando...";
-
-      player = videojs('videoTv', {
-        autoplay: true,
-        controls: true,
-        fluid: true,
-        fill: true,
-        sources: [{ src: streamUrl, type: 'application/x-mpegURL' }],
-        html5: {
-          vhs: {
-            overrideNative: true,
-            enableLowInitialPlaylist: true
-          },
-          nativeVideoTracks: false,
-          nativeAudioTracks: false,
-          nativeTextTracks: false
-        }
-      });
-
-      player.ready(() => {
-        document.getElementById('status').remove();
-        goFullscreen();
-        setTimeout(() => document.getElementById('logo').classList.add('show'), 3000);
-      });
-
-      player.on('error', () => {
-        const error = player.error();
-        document.getElementById('status').innerHTML = `
-          <div class="error">
-            Stream no disponible<br>
-            <small>Código: ${error?.code || 'N/A'}</small>
-          </div>`;
-      });
+    function closeTVPlayer() {
+      const modal = document.getElementById('tvModal');
+      if (player) player.pause();
+      modal.style.display = 'none';
+      document.getElementById('logo').classList.remove('show');
+      window.location.href = "index.html"; // ← Vuelve a la página principal
     }
 
-    // SOLO EN MÓVIL: SUGERIR GIRO
-    if (window.innerWidth <= 768) {
-      document.addEventListener("DOMContentLoaded", () => {
-        // No rotamos, solo pedimos pantalla completa
-        goFullscreen();
-      });
-    }
+    // Eventos
+    document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
+    document.getElementById('tvModal').onclick = (e) => { if (e.target === e.currentTarget) closeTVPlayer(); };
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTVPlayer(); });
 
-    document.addEventListener("DOMContentLoaded", loadStream);
+    // ABRIR AUTOMÁTICAMENTE
+    document.addEventListener("DOMContentLoaded", openTVPlayer);
   </script>
 </body>
 </html>
