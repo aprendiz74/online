@@ -1,236 +1,592 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>TV MAICITO - En Vivo</title>
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { height:100%; overflow:hidden; background:#000; }
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO Y GOOGLE -->
+  <title>RADIO MAICITO - Tu Mejor Elección | Escucha en Vivo 24/7</title>
+  <meta name="description" content="Escucha RADIO MAICITO en vivo las 24 horas. Música variada, noticias, ranking musical y la mejor programación. ¡Tu mejor elección en radio online desde Ecuador!">
+  
+  <!-- FAVICONS -->
+  <link rel="icon" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/logo-favi.png" type="image/png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/logo-favi-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/logo-favi-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/logo-favi.png">
 
-    /* FORZAR HORIZONTAL EN MÓVIL */
-    @media screen and (max-width: 768px) {
-      html, body {
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(90deg);
-        transform-origin: center;
-        position: fixed;
-        top: 0; left: 0;
-        overflow: hidden;
-      }
-      #tvContainer {
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(-90deg);
-        transform-origin: center;
-        position: absolute;
-        top: 50%; left: 50%;
-        margin-left: -50vw;
-        margin-top: -50vh;
-      }
-    }
+  <!-- OPEN GRAPH (FACEBOOK, WHATSAPP, etc.) -->
+  <meta property="og:title" content="RADIO MAICITO - Tu Mejor Elección">
+  <meta property="og:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking. ¡La radio que te acompaña siempre!">
+  <meta property="og:image" content="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/og-image.jpg">
+  <meta property="og:url" content="https://radiomaicito.com"> <!-- CAMBIA POR TU DOMINIO -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
 
-    #tvContainer {
-      position: fixed;
-      inset: 0;
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RADIO MAICITO - Tu Mejor Elección">
+  <meta name="twitter:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/og-image.jpg">
+
+  <!-- CANÓNICA -->
+  <link rel="canonical" href="https://radiomaicito.com"> <!-- CAMBIA POR TU DOMINIO -->
+  <style>            
+    :root{--cyan:#00C6C6;--cyan-deep:#00A6A6;--pink:#FF157E;--pink-2:#FF4BA5;--lemon:#FFE000;--text:#0f172a}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 12px}
+   
+    /* TOPBAR CON RELIEVE OSCURO – AJUSTADO PARA #00c6c6 */
+.topbar {
+  background: linear-gradient(to bottom, #00d6d6 0%, #00a6a6 100%);
+  color: #fff;
+  font-size: 12px;
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.28);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 100;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+    .topbar-inner {
       display: flex;
-      justify-content: center;
+      gap: 16px;
       align-items: center;
-      background: #000;
+      justify-content: space-between;
+      padding: 10px 12px;
     }
-    #videoTv {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-    }
-    .loading {
-      position: absolute;
-      color: #fff;
-      font-family: system-ui;
-      font-weight: bold;
-      font-size: 1.2rem;
-      z-index: 10;
-      text-align: center;
-      width: 100%;
-    }
-    .error {
-      color: #ff6b6b;
-      text-align: center;
-      padding: 20px;
-      font-family: system-ui;
-    }
-    .black-bar {
-      position: absolute;
-      width: 100%;
-      height: 50px;
-      background: #000;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .black-bar.top { top: 0; }
-    .black-bar.bottom { bottom: 0; }
 
-    /* LOGO ARRIBA DERECHA */
-    .tv-logo {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      width: 100px;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity 0.6s;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+    #today {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
-    .tv-logo.show { opacity: 1; }
 
-    @keyframes neon {
-      0%, 100% { filter: drop-shadow(0 0 6px #000); }
-      50% { filter: drop-shadow(0 0 14px #000); }
-    }
-    .tv-logo { animation: neon 3s infinite; }
-
-    /* BOTÓN CERRAR */
-    .close-btn {
-      position: fixed;
-      top: 30px;
-      left: 30px;
-      z-index: 15;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
-    }
-    .close-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
+      backdrop-filter: blur(4px);
+      opacity: 1;
+      transition: all 0.25s ease;
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
     }
 
-    /* AJUSTES MÓVIL */
-    @media (max-width: 768px) {
-      .tv-logo { 
-        width: 70px; 
-        top: 15px; 
-        right: 15px; 
-      }
-      .black-bar { height: 35px; }
-      .close-btn {
-        top: 15px;
-        left: 15px;
-        width: 42px;
-        height: 42px;
-      }
-      .close-btn svg { width: 18px; height: 18px; }
+    .social a:hover {
+      transform: translateY(-2px) scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      opacity: 1;
+    }
+
+    .social a svg {
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+    }
+
+    header{padding:16px 0}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .brand-badge svg{width:28px;height:28px}
+    .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
+    .brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
+    .live-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-deep); color: #fff; border: none; border-radius: 999px; padding: 10px 14px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.12); cursor: pointer; font-size: 13px; transition: all .2s;
+    }
+    .live-btn.playing { background: #fff; color: var(--cyan-deep); }
+    .live-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .live-btn.playing .play-icon { display: none; }
+    .live-btn.playing .stop-icon { display: block; }
+    .live-btn .live-text { margin-left: 4px; }
+    nav{background:var(--pink);color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
+    .menu a{opacity:.98;transition:.2s}
+    .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
+    main{padding:24px 0}
+    .grid{display:grid;grid-template-columns:1fr;gap:24px}
+    .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
+    .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
+    .section{padding:20px}
+    .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
+    .hero-slides{position:relative;width:100%;height:100%}
+    .hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;background:center/cover no-repeat;opacity:0;transition:opacity 1s}
+    .hero-slide.active{opacity:1}
+    .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, var(--pink) 0%, var(--pink) 35%, transparent 35%), linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.15))}
+    .hero-panel{position:absolute;right:0;bottom:0;padding:24px;display:flex;justify-content:flex-end}
+    .panel-box{background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(4px);border-radius:14px;padding:16px;max-width:380px}
+    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:10}
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer}
+    .dot.active{background:#fff}
+    .news{display:grid;grid-template-columns:1fr;gap:18px;padding:18px}
+    .news article{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+    .news .thumb{height:140px;background:#e5e7eb;background-size:cover;background-position:center}
+    .news h3{font-size:14px;margin:10px 0 6px;font-weight:700}
+    .news p{font-size:12px;color:#475569;margin:0;line-height:1.4}
+    .news .section{flex:1;padding:0 16px 16px}
+    .news-link{color:inherit;text-decoration:none;font-weight:700;transition:color .2s}
+    .news-link:hover{color:var(--pink)}
+    .ranking-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.15)}
+    .ranking-item:nth-child(odd){background:var(--pink)}
+    .ranking-item:nth-child(even){background:var(--pink-2)}
+    .ranking-pos{min-width:40px;height:40px;display:grid;place-items:center;background:var(--lemon);font-weight:900;font-size:18px;border-radius:8px}
+    .ranking-meta{color:#fff}
+    .ranking-meta .artist{font-weight:800;font-size:14px}
+    .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
+    .play {
+      margin-left: auto; width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,.25); display: grid; place-items: center; cursor: pointer; transition: background .2s;
+    }
+    .play:hover { background: rgba(255,255,255,.35); }
+    .play svg { width: 16px; height: 16px; fill: #fff; }
+    .play.playing .play-icon { display: none; }
+    .play.playing .stop-icon { display: block; }
+    .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
+    .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
+    .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
+    .btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
+    .btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
+    .btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
+    .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
+    .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
+    .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
+
+    /* BANNER SOLO EN MÓVILES */
+    .final-banner-mobile {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(0, 198, 198, 0.3);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.1);
+      backdrop-filter: blur(8px);
+      margin: 12px 0 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .final-banner-mobile .brand {
+      gap: 8px;
+      min-width: 140px;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+    .final-banner-mobile .brand-badge {
+      width: 36px;
+      height: 36px;
+    }
+    .final-banner-mobile .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--pink);
+    }
+    .final-banner-mobile .brand-sub {
+      font-size: 10px;
+      color: var(--cyan-deep);
+    }
+    .final-banner-mobile .social-text {
+      text-align: center;
+      font-size: 13px;
+      color: #334155;
+    }
+    .final-banner-mobile .social-text a {
+      color: #1877F2;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .hero { height: 360px; }
+      .news { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: 2fr 1fr !important; }
+      .sidebar { position: sticky; top: 20px; align-self: flex-start; }
+      .ranking-item { padding: 16px 20px; }
+      .final-banner-mobile { display: none !important; }
+    }
+    @media (max-width: 767px) {
+      .main-col { order: 1; }
+      .sidebar { order: 2; margin-top: 24px; }
+      .hero { height: 260px !important; }
+      .hero-panel { display: none !important; }
+      main { padding-bottom: 80px; }
+      .final-banner-mobile { display: flex; }
+    }
+
+    footer {
+      background: #00a6a6;
+      color: #fff;
+      padding: 32px 0;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    footer p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      opacity: 0.98;
+    }
+
+    /* AUDIO GLOBAL OCULTO */
+    #global-live-player {
+      position: fixed;
+      top: -100px;
+      left: -100px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div id="tvContainer">
-    <div class="black-bar top"></div>
-    <div class="black-bar bottom"></div>
-   
-    <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
-    <div class="loading" id="status">Cargando TV en vivo...</div>
+  <!-- AUDIO GLOBAL (EN VIVO) -->
+  <audio id="global-live-player" preload="none"></audio>
 
-    <!-- LOGO -->
-    <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
-         alt="Logo TV" class="tv-logo" id="logo" />
-
-    <!-- BOTÓN CERRAR -->
-    <button class="close-btn" title="Volver a Radio Maicito" onclick="goHome()">
-      <svg viewBox="0 0 24 24">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg>
-    </button>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="today">Cargando...</span>
+<div class="social">
+  <a href="tv.html" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg></a>  
+  <a href="https://www.facebook.com/maicitoradio" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg></a>
+  <a href="https://wa.me/+593988118313" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.47 2 2 6.47 2 12.04c0 2.18.69 4.19 1.86 5.85l-1.24 4.58 4.7-1.23c1.62 1.1 3.57 1.73 5.72 1.73 5.57 0 10.04-4.47 10.04-10.04C22.08 6.47 17.61 2 12.04 2zm5.8 14.24c-.29.82-1.08 1.52-1.94 1.7-.79.17-1.83.17-2.94-.36c-.91-.44-1.69-.99-2.45-1.68c-1.77-1.6-2.9-3.57-3.25-5.76c-.15-.93.04-1.79.53-2.51c.34-.5.81-.79 1.35-.79c.17 0 .34.02.5.06c.53.13 1.05.55 1.45.99c.52.58.99 1.2 1.4 1.86c.32.52.56 1.08.5 1.69c-.06.53-.34.99-.73 1.35c-.27.25-.24.48.02.72c.53.48 1.15 1.03 1.77 1.58c.62.55 1.34 1.07 2.12 1.47c.44.22.75.14 1-.17c.28-.35.6-.7.88-1.06c.25-.32.52-.36.85-.24c.36.13.73.26 1.09.4c.43.16.76.34.92.62c.24.41.22.9-.07 1.33z"/></svg></a>
+</div>
+    </div>
   </div>
+  <!-- HEADER -->
+  <header class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-badge">
+          <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="RADIO MAICITO" style="width:100%; height:100%; object-fit:contain;">
+        </div>
+        <div>
+          <div class="brand-title">RADIO MAICITO</div>
+          <div class="brand-sub">Tu Mejor Elección</div>
+        </div>
+      </div>
+      <button id="live-btn" class="live-btn">
+        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+          <path d="M6 6h12v12H6z"/>
+        </svg>
+        <span class="live-text">EN VIVO</span>
+      </button>
+    </div>
+  </header>
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <div class="menu">
+        <a href="index.html" class="active">INICIO</a>
+        <a href="quienes-somos.html">QUIÉNES SOMOS</a>
+        <a href="ranking.html">RANKING</a>
+        <a href="programacion.html">PROGRAMACIÓN</a>
+        <a href="noticias.html">NOTICIAS</a>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+      </div>
+    </div>
+  </nav>
+  <!-- MAIN -->
+  <main class="container">
+    <div class="grid">
+      <!-- IZQUIERDA -->
+      <div class="main-col">
+        <!-- HERO -->
+        <section class="hero">
+          <div class="hero-slides">
+            <div class="hero-slide active" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/01.webp')"></div>
+            <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/02.webp')"></div>
+            <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/03.webp')"></div>
+          </div>
+          <div class="hero-overlay"></div>
+          <!-- PANEL ORIGINAL (SOLO EN PC) -->
+          <div class="hero-panel">
+            <div class="panel-box">
+              <div class="brand" style="gap:10px; align-items:center">
+                <div class="brand-badge" style="width:40px;height:40px">   
+                  <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo RADIO MAICITO" style="width:100%; height:100%; object-fit:container;">
+                </div>
+                <div>
+                  <div class="brand-title" style="font-size:22px; margin:0; line-height:1">RADIO MAICITO</div>
+                  <div class="brand-sub" style="margin:0; font-size:10px; color:var(--cyan-deep)">Tu Mejor Elección</div>
+                </div>
+              </div>
+              <div style="margin-top:12px; font-size:12px; color:#334155; display:flex; align-items:center; gap:6px; flex-wrap:wrap">
+                <p style="margin:6px 0">Síguenos en:</p>
+                <a href="https://www.facebook.com/maicitoradio" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                    <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+                  </svg>
+                  /facebook
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+          </div>
+        </section>
 
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+        <!-- NOTICIAS -->
+        <section class="card">
+          <div class="card-head">ÚLTIMAS NOTICIAS</div>
+          <div class="news">
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/1.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-1.html" class="news-link">LA JOYA DE ECUADOR: Kendry Páez</a></h3>
+                <p>sumó minutos en la goleada de Racing de Estrasburgo sobre Auxerre en la Ligue 1</p>
+              </div>
+            </article>
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/2.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-2.html" class="news-link">CR7 NO PUEDE GANAR TÍTULOS EN ARABIA:</a></h3>
+                <p>Karim Benzema deja a Cristiano Ronaldo fuera de la King’s Cup.</p>
+              </div>
+            </article>
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/3.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-3.html" class="news-link">COMUNICADO: LigaPro decidió mantener en suspenso </a></h3>
+                <p>cualquier modificación en la clasificación del Hexagonal de Ascenso.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+      <!-- DERECHA -->
+      <aside class="sidebar">
+        <section class="card">
+          <div class="card-head">LAS MÁS PEDIDAS</div>
+          <div id="ranking-list"></div>
+          <div class="section" style="background:var(--cyan);padding:18px 20px">
+            <a href="ranking.html" class="btn-relief btn-ranking">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 3h18v18H3z"></path>
+                <path d="M3 9h18"></path>
+                <path d="M3 15h18"></path>
+                <path d="M9 9v12"></path>
+                <path d="M15 9v12"></path>
+              </svg>
+              VER RANKING MUSICAL
+            </a>
+          </div>
+        </section>
+
+        <audio id="audio-player" preload="none"></audio>
+
+        <section class="cta">
+          <div class="title">DESCARGA LA APP</div>
+          <p>Escucha en vivo y vota por tu canción.</p>
+          <a href="https://play.google.com/store/apps/details?id=maicitoradio.apppze" class="btn-relief btn-app">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M19 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path>
+              <path d="M7 11V7a5 5 0 1 1 10 0v4"></path>
+            </svg>
+            DESCARGAR AHORA
+          </a>
+        </section>
+
+        <!-- BANNER SOLO EN MÓVILES -->
+        <div class="final-banner-mobile">
+          <div class="brand">
+            <div class="brand-badge">
+              <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+              <div class="brand-title">RADIO MAICITO</div>
+              <div class="brand-sub">Tu Mejor Elección</div>
+            </div>
+          </div>
+          <div class="social-text">
+            <span>Síguenos en:</span>
+            <a href="https://www.facebook.com/maicitoradio">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2">
+                <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/>
+              </svg>
+              /facebook
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <footer class="container">
+    <p>© 2025 Radio Maicito. Derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT -->
   <script>
-    let player = null;
-    const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv/stream.txt?t=" + Date.now();
+    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
 
-    // VOLVER A index.html
-    function goHome() {
-      if (player) player.dispose();
-      window.location.href = "index.html";
+    // SLIDER HERO
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    function showSlide(n) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      slides[n].classList.add('active');
+      dots[n].classList.add('active');
+      currentSlide = n;
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    setInterval(nextSlide, 5000);
+
+    // === AUDIO GLOBAL EN VIVO (CORREGIDO Y PERSISTENTE) ===
+    const globalPlayer = document.getElementById('global-live-player');
+    const liveBtn = document.getElementById('live-btn');
+    const liveText = liveBtn.querySelector('.live-text');
+    const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+
+    // Función para iniciar reproducción
+    function startLive() {
+      if (globalPlayer.src !== liveStream) {
+        globalPlayer.src = liveStream;
+      }
+      globalPlayer.play().catch(err => {
+        console.warn("Error al reproducir stream:", err);
+      });
+      liveBtn.classList.add('playing');
+      liveText.textContent = "PAUSAR";
+      localStorage.setItem('radio-live-playing', 'true');
     }
 
-    function goFullscreen() {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) elem.requestFullscreen();
-      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    // Función para pausar
+    function pauseLive() {
+      globalPlayer.pause();
+      liveBtn.classList.remove('playing');
+      liveText.textContent = "EN VIVO";
+      localStorage.setItem('radio-live-playing', 'false');
     }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (document.fullscreenElement) document.exitFullscreen();
-        goHome();
+    // Cargar estado al inicio
+    const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
+    if (shouldPlay) {
+      globalPlayer.src = liveStream;
+      startLive();
+    }
+
+    // Evento del botón
+    liveBtn.addEventListener('click', () => {
+      if (liveBtn.classList.contains('playing')) {
+        pauseLive();
+      } else {
+        startLive();
       }
     });
 
-    async function loadStream() {
-      try {
-        const res = await fetch(GITHUB_STREAM_URL);
-        if (!res.ok) throw new Error("No se pudo cargar el enlace");
-        const url = (await res.text()).trim();
-        if (!url.includes('.m3u8')) throw new Error("Enlace inválido");
-        initPlayer(url);
-      } catch (err) {
-        document.getElementById('status').innerHTML = `
-          <div class="error">
-            Error: ${err.message}<br>
-            <small>Verifica: <a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">GitHub → stream.txt</a></small>
-          </div>`;
+    // Reconexión automática si falla el stream
+    globalPlayer.addEventListener('error', () => {
+      if (liveBtn.classList.contains('playing')) {
+        liveText.textContent = "RECONECTANDO...";
+        setTimeout(() => {
+          if (liveBtn.classList.contains('playing')) {
+            startLive();
+          }
+        }, 3000);
       }
-    }
+    });
 
-    function initPlayer(streamUrl) {
-      document.getElementById('status').textContent = "Conectando...";
-      player = videojs('videoTv', {
-        autoplay: true,
-        controls: true,
-        fluid: true,
-        sources: [{ src: streamUrl, type: 'application/x-mpegURL' }]
-      });
-      player.ready(() => {
-        document.getElementById('status').remove();
-        goFullscreen();
-        setTimeout(() => document.getElementById('logo').classList.add('show'), 3000);
-      });
-      player.on('error', () => {
-        document.getElementById('status').innerHTML = `
-          <div class="error">
-            Stream no disponible<br>
-            <small>Verifica el enlace en GitHub</small>
-          </div>`;
-      });
-    }
+    globalPlayer.addEventListener('canplay', () => {
+      if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
+        liveText.textContent = "PAUSAR";
+      }
+    });
 
-    // FORZAR ORIENTACIÓN EN MÓVIL
-    if (window.innerWidth <= 768) {
-      // Solo aplica en móvil
-      document.addEventListener("DOMContentLoaded", () => {
-        screen.orientation?.lock?.('landscape').catch(() => {});
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", loadStream);
+    // RANKING
+    let currentPlayBtn = null;
+    const rankingData = [
+      {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/1.mp3"},
+      {pos:2,artista:"Cuco",cancion:"Para ti",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/2.mp3"},
+      {pos:3,artista:"Arthur y Carlos Vives",cancion:"GOODBYE",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/3.mp3"},
+      {pos:4,artista:"Judeline",cancion:"Chica de cristal",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/4.mp3"},
+      {pos:5,artista:"Miguel Bueno",cancion:"Solcito",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/5.mp3"}
+    ];
+    const list = document.getElementById('ranking-list');
+    rankingData.forEach((item) => {
+      const div = document.createElement('div');
+      div.className = 'ranking-item';
+      div.innerHTML = `
+        <div class="ranking-pos">${item.pos}</div>
+        <div class="ranking-meta">
+          <div class="artist">${item.artista}</div>
+          <div class="song">${item.cancion}</div>
+        </div>
+        <div class="play" data-mp3="${item.mp3}">
+          <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+        </div>
+      `;
+      list.appendChild(div);
+    });
+    const audio = document.getElementById('audio-player');
+    list.addEventListener('click', (e) => {
+      const playBtn = e.target.closest('.play');
+      if (!playBtn) return;
+      const mp3 = playBtn.dataset.mp3;
+      if (currentPlayBtn === playBtn && !audio.paused) {
+        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
+      }
+      if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
+      audio.src = mp3; audio.play().catch(() => {});
+      playBtn.classList.add('playing'); currentPlayBtn = playBtn;
+    });
+    audio.addEventListener('ended', () => {
+      if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
+    });
   </script>
+
+  <script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
+
 </body>
+
 </html>
