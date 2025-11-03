@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -64,12 +64,13 @@
     }
     .tv-logo.show { opacity: 1; }
 
-    @keyframes neon {
+    /* Eliminar animación de neón */
+    /* @keyframes neon {
       0%, 100% { filter: drop-shadow(0 0 6px #000); }
       50% { filter: drop-shadow(0 0 14px #000); }
     }
-    .tv-logo { animation: neon 3s infinite; }
-
+    .tv-logo { animation: neon 3s infinite; } */
+    
     /* BOTÓN CERRAR */
     .close-btn {
       position: fixed;
@@ -99,40 +100,39 @@
       fill: #fff;
     }
 
+    /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
+    @media (max-width: 768px) {
+      .tv-inner {
+        transform: rotate(90deg);
+        transform-origin: center center;
+        width: 100vh;
+        height: 100vw;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+      }
+      #videoTv {
+        width: 100vh;
+        height: 100vw;
+        object-fit: cover;
+      }
+      .black-bar { height: 35px; }
+      
+      /* Ajuste del logo en móvil para hacerlo más visible pero sin estar pegado */
+      .tv-logo {
+        width: 80px;   /* Tamaño del logo */
+        top: 40px;     /* Aumenté el margen superior a 60px */
+        right: 40px;   /* Aumenté el margen derecho a 60px */
+      }
 
-/* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
-@media (max-width: 768px) {
-  .tv-inner {
-    transform: rotate(90deg);
-    transform-origin: center center;
-    width: 100vh;
-    height: 100vw;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-  }
-  #videoTv {
-    width: 100vh;
-    height: 100vw;
-    object-fit: cover;
-  }
-  .black-bar { height: 35px; }
-  
-  /* Ajuste del logo en móvil para hacerlo más visible pero sin estar pegado */
-  .tv-logo {
-    width: 80px;   /* Tamaño del logo */
-    top: 40px;     /* Aumenté el margen superior a 60px */
-    right: 40px;   /* Aumenté el margen derecho a 60px */
-  }
-
-  .close-btn {
-    top: 15px;
-    left: 15px;
-    width: 40px;
-    height: 40px;
-  }
-  .close-btn svg { width: 16px; height: 16px; }
-}
+      .close-btn {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+      }
+      .close-btn svg { width: 16px; height: 16px; }
+    }
 
   </style>
 </head>
@@ -235,4 +235,5 @@
 </script>
 
 </body>
+
 </html>
