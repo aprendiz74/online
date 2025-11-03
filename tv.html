@@ -100,35 +100,40 @@
     }
 
     /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
-    @media (max-width: 768px) {
-      .tv-inner {
-        transform: rotate(90deg);
-        transform-origin: center center;
-        width: 100vh;
-        height: 100vw;
-        left: 50%;
-        top: 50%;
-        translate: -50% -50%;
-      }
-      #videoTv {
-        width: 100vh;
-        height: 100vw;
-        object-fit: cover;
-      }
-      .black-bar { height: 35px; }
-      .tv-logo {
-        width: 70px;
-        top: 15px;
-        right: 15px;
-      }
-      .close-btn {
-        top: 15px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-      }
-      .close-btn svg { width: 16px; height: 16px; }
-    }
+  /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
+@media (max-width: 768px) {
+  .tv-inner {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: 100vh;
+    height: 100vw;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+  }
+  #videoTv {
+    width: 100vh;
+    height: 100vw;
+    object-fit: cover;
+  }
+  .black-bar { height: 35px; }
+  
+  /* Ajuste del logo en móvil para hacerlo más visible pero sin estar pegado */
+  .tv-logo {
+    width: 80px; /* Un poco más grande para parecer un logo de TV */
+    top: 20px; /* Ajusto el margen superior */
+    right: 20px; /* Ajusto el margen derecho */
+  }
+
+  .close-btn {
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+  }
+  .close-btn svg { width: 16px; height: 16px; }
+}
+
   </style>
 </head>
 <body>
