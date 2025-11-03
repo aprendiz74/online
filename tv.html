@@ -17,10 +17,13 @@
       align-items: center;
       background: #000;
     }
+
+    /* VIDEO SIN ROTACIÓN */
     #videoTv {
       width: 100vw;
       height: 100vh;
       object-fit: contain;
+      background: #000;
     }
 
     .loading {
@@ -32,12 +35,16 @@
       z-index: 10;
       text-align: center;
       width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
     }
+
     .error {
       color: #ff6b6b;
       text-align: center;
       padding: 20px;
       font-family: system-ui;
+      font-size: 1rem;
     }
 
     .black-bar {
@@ -101,21 +108,19 @@
 
     /* MÓVIL: PANTALLA COMPLETA HORIZONTAL */
     @media (max-width: 768px) {
-      #videoTv {
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(90deg);
-        transform-origin: center;
+      .black-bar { height: 35px; }
+      .tv-logo { 
+        width: 70px; 
+        top: 15px; 
+        right: 15px; 
       }
-      #tvContainer {
-        overflow: hidden;
+      .close-btn { 
+        top: 15px; 
+        left: 15px; 
+        width: 40px; 
+        height: 40px; 
       }
-      .black-bar { height: 40px; }
-      .tv-logo, .close-btn {
-        top: 15px;
-      }
-      .tv-logo { right: 15px; width: 70px; }
-      .close-btn { left: 15px; }
+      .close-btn svg { width: 16px; height: 16px; }
     }
   </style>
 </head>
@@ -127,13 +132,15 @@
     <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
     <div class="loading" id="status">Cargando TV en vivo...</div>
 
+    <!-- LOGO -->
     <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
          alt="Logo TV" class="tv-logo" id="logo" />
 
-    <button class="close-btn" title="Volver" onclick="goHome()">
+    <!-- BOTÓN CERRAR -->
+    <button class="close-btn" title="Volver a Radio" onclick="goHome()">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg>
+      </svg
     </button>
   </div>
 
@@ -179,14 +186,17 @@
 
     function initPlayer(streamUrl) {
       document.getElementById('status').textContent = "Conectando...";
+
       player = videojs('videoTv', {
         autoplay: true,
         controls: true,
         fluid: true,
+        fill: true,
         sources: [{ src: streamUrl, type: 'application/x-mpegURL' }],
         html5: {
           vhs: {
-            overrideNative: true
+            overrideNative: true,
+            enableLowInitialPlaylist: true
           },
           nativeVideoTracks: false,
           nativeAudioTracks: false,
@@ -201,21 +211,20 @@
       });
 
       player.on('error', () => {
+        const error = player.error();
         document.getElementById('status').innerHTML = `
           <div class="error">
             Stream no disponible<br>
-            <small>Verifica el enlace en GitHub</small>
+            <small>Código: ${error?.code || 'N/A'}</small>
           </div>`;
       });
     }
 
-    // SOLO EN MÓVIL: girar video 90°
+    // SOLO EN MÓVIL: SUGERIR GIRO
     if (window.innerWidth <= 768) {
       document.addEventListener("DOMContentLoaded", () => {
-        const video = document.getElementById('videoTv');
-        video.style.transform = 'rotate(90deg)';
-        video.style.width = '100vh';
-        video.style.height = '100vw';
+        // No rotamos, solo pedimos pantalla completa
+        goFullscreen();
       });
     }
 
