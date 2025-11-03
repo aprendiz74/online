@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV MAICITO - En Vivo</title>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; overflow:hidden; background:#000; }
+   
+    #tvContainer {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+    #videoTv {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+    }
+    .loading {
+      position: absolute;
+      color: #fff;
+      font-family: system-ui;
+      font-weight: bold;
+      font-size: 1.2rem;
+      z-index: 10;
+      text-align: center;
+      width: 100%;
+    }
+    .error {
+      color: #ff6b6b;
+      text-align: center;
+      padding: 20px;
+      font-family: system-ui;
+    }
+    .black-bar {
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      background: #000;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .black-bar.top { top: 0; }
+    .black-bar.bottom { bottom: 0; }
+
+    /* LOGO ARRIBA */
+    .tv-logo {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      width: 100px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.6s;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+    }
+    .tv-logo.show { opacity: 1; }
+
+    @keyframes neon {
+      0%, 100% { filter: drop-shadow(0 0 6px #000); }
+      50% { filter: drop-shadow(0 0 14px #000); }
+    }
+    .tv-logo { animation: neon 3s infinite; }
+
+    /* BOTÓN CERRAR (NUEVO) */
+    .close-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 15;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    }
+    .close-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .tv-logo { width: 80px; top: 20px; right: 20px; }
+      .black-bar { height: 35px; }
+      .close-btn {
+        top: 15px;
+        left: 15px;
+        width: 42px;
+        height: 42px;
+      }
+      .close-btn svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="tvContainer">
+    <div class="black-bar top"></div>
+    <div class="black-bar bottom"></div>
+   
+    <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
+    <div class="loading" id="status">Cargando TV en vivo...</div>
+
+    <!-- LOGO ARRIBA -->
+    <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
+         alt="Logo TV" class="tv-logo" id="logo" />
+
+    <!-- BOTÓN CERRAR (NUEVO) -->
+    <button class="close-btn" title="Volver a Radio Maicito" onclick="goHome()">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+  <script>
+    let player = null;
+    const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv/stream.txt?t=" + Date.now();
+
+    // FUNCIÓN PARA VOLVER A index.html
+    function goHome() {
+      if (player) player.dispose();
+      window.location.href = "index.html";
+    }
+
+    function goFullscreen() {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (document.fullscreenElement) document.exitFullscreen();
+        goHome(); // Usa goHome en vez de cerrar
+      }
+    });
+
+    async function loadStream() {
+      try {
+        const res = await fetch(GITHUB_STREAM_URL);
+        if (!res.ok) throw new Error("No se pudo cargar el enlace");
+        const url = (await res.text()).trim();
+        if (!url.includes('.m3u8')) throw new Error("Enlace inválido");
+        initPlayer(url);
+      } catch (err) {
+        document.getElementById('status').innerHTML = `
+          <div class="error">
+            Error: ${err.message}<br>
+            <small>Verifica: <a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">GitHub → stream.txt</a></small>
+          </div>`;
+      }
+    }
+
+    function initPlayer(streamUrl) {
+      document.getElementById('status').textContent = "Conectando...";
+      player = videojs('videoTv', {
+        autoplay: true,
+        controls: true,
+        fluid: true,
+        sources: [{ src: streamUrl, type: 'application/x-mpegURL' }]
+      });
+      player.ready(() => {
+        document.getElementById('status').remove();
+        goFullscreen();
+        setTimeout(() => document.getElementById('logo').classList.add('show'), 3000);
+      });
+      player.on('error', () => {
+        document.getElementById('status').innerHTML = `
+          <div class="error">
+            Stream no disponible<br>
+            <small>Verifica el enlace en GitHub</small>
+          </div>`;
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadStream);
+  </script>
+</body>
+</html>
