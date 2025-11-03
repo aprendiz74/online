@@ -9,29 +9,6 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow:hidden; background:#000; }
 
-    /* FORZAR HORIZONTAL EN MÓVIL */
-    @media screen and (max-width: 768px) {
-      html, body {
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(90deg);
-        transform-origin: center;
-        position: fixed;
-        top: 0; left: 0;
-        overflow: hidden;
-      }
-      #tvContainer {
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(-90deg);
-        transform-origin: center;
-        position: absolute;
-        top: 50%; left: 50%;
-        margin-left: -50vw;
-        margin-top: -50vh;
-      }
-    }
-
     #tvContainer {
       position: fixed;
       inset: 0;
@@ -45,6 +22,7 @@
       height: 100vh;
       object-fit: contain;
     }
+
     .loading {
       position: absolute;
       color: #fff;
@@ -61,6 +39,7 @@
       padding: 20px;
       font-family: system-ui;
     }
+
     .black-bar {
       position: absolute;
       width: 100%;
@@ -72,12 +51,12 @@
     .black-bar.top { top: 0; }
     .black-bar.bottom { bottom: 0; }
 
-    /* LOGO ARRIBA DERECHA */
+    /* LOGO SUPERIOR DERECHA */
     .tv-logo {
       position: fixed;
-      top: 30px;
-      right: 30px;
-      width: 100px;
+      top: 20px;
+      right: 20px;
+      width: 80px;
       z-index: 10;
       opacity: 0;
       transition: opacity 0.6s;
@@ -94,15 +73,15 @@
     /* BOTÓN CERRAR */
     .close-btn {
       position: fixed;
-      top: 30px;
-      left: 30px;
+      top: 20px;
+      left: 20px;
       z-index: 15;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -113,29 +92,30 @@
     .close-btn:hover {
       background: rgba(255, 255, 255, 0.35);
       transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
     }
     .close-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: #fff;
     }
 
-    /* AJUSTES MÓVIL */
+    /* MÓVIL: PANTALLA COMPLETA HORIZONTAL */
     @media (max-width: 768px) {
-      .tv-logo { 
-        width: 70px; 
-        top: 15px; 
-        right: 15px; 
+      #videoTv {
+        width: 100vh;
+        height: 100vw;
+        transform: rotate(90deg);
+        transform-origin: center;
       }
-      .black-bar { height: 35px; }
-      .close-btn {
+      #tvContainer {
+        overflow: hidden;
+      }
+      .black-bar { height: 40px; }
+      .tv-logo, .close-btn {
         top: 15px;
-        left: 15px;
-        width: 42px;
-        height: 42px;
       }
-      .close-btn svg { width: 18px; height: 18px; }
+      .tv-logo { right: 15px; width: 70px; }
+      .close-btn { left: 15px; }
     }
   </style>
 </head>
@@ -147,12 +127,10 @@
     <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
     <div class="loading" id="status">Cargando TV en vivo...</div>
 
-    <!-- LOGO -->
     <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/maicito-logo.ico"
          alt="Logo TV" class="tv-logo" id="logo" />
 
-    <!-- BOTÓN CERRAR -->
-    <button class="close-btn" title="Volver a Radio Maicito" onclick="goHome()">
+    <button class="close-btn" title="Volver" onclick="goHome()">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
       </svg>
@@ -164,7 +142,6 @@
     let player = null;
     const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv/stream.txt?t=" + Date.now();
 
-    // VOLVER A index.html
     function goHome() {
       if (player) player.dispose();
       window.location.href = "index.html";
@@ -195,7 +172,7 @@
         document.getElementById('status').innerHTML = `
           <div class="error">
             Error: ${err.message}<br>
-            <small>Verifica: <a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">GitHub → stream.txt</a></small>
+            <small><a href="https://github.com/aprendiz74/online/blob/main/tv/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
           </div>`;
       }
     }
@@ -206,13 +183,23 @@
         autoplay: true,
         controls: true,
         fluid: true,
-        sources: [{ src: streamUrl, type: 'application/x-mpegURL' }]
+        sources: [{ src: streamUrl, type: 'application/x-mpegURL' }],
+        html5: {
+          vhs: {
+            overrideNative: true
+          },
+          nativeVideoTracks: false,
+          nativeAudioTracks: false,
+          nativeTextTracks: false
+        }
       });
+
       player.ready(() => {
         document.getElementById('status').remove();
         goFullscreen();
         setTimeout(() => document.getElementById('logo').classList.add('show'), 3000);
       });
+
       player.on('error', () => {
         document.getElementById('status').innerHTML = `
           <div class="error">
@@ -222,11 +209,13 @@
       });
     }
 
-    // FORZAR ORIENTACIÓN EN MÓVIL
+    // SOLO EN MÓVIL: girar video 90°
     if (window.innerWidth <= 768) {
-      // Solo aplica en móvil
       document.addEventListener("DOMContentLoaded", () => {
-        screen.orientation?.lock?.('landscape').catch(() => {});
+        const video = document.getElementById('videoTv');
+        video.style.transform = 'rotate(90deg)';
+        video.style.width = '100vh';
+        video.style.height = '100vw';
       });
     }
 
