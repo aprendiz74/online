@@ -1,1 +1,1 @@
-﻿https://627bb251f23c7.streamlock.net:444/ExtremaTV/ExtremaTV/playlist.m3u8
+https://cloudflare.streamgato.us:3125/live/megacinetvlive.m3u8
