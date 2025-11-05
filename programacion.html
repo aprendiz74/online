@@ -6,174 +6,215 @@
   <title>Programación</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #333; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #333; }
 
-    /* NAVEGACIÓN CORREGIDA */
-    nav {
-      background: #00A6A6;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0;
-    }
-
+  /* NAVEGACIÓN */
+  nav {
+    background: #00A6A6;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    gap: 10px;
+  }
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 0.95rem;
+  }
+  .menu a:hover, .menu a.active {
+    background: #3498db;
+  }
+  /* BOTÓN EN VIVO */
+  .live-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    color: #00A6A6;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+  }
+  .live-btn.playing {
+    background: #e74c3c;
+    color: white;
+  }
+  .live-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+  .live-btn .live-text {
+    margin-left: 4px;
+  }
+  /* RESPONSIVE: MÓVIL */
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .live-btn { font-size: 0.8rem; padding: 7px 12px; }
     .menu {
-      display: flex;
-      justify-content: center;
-      flex: 1;
-      gap: 10px;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      background: #2c3e50;
+      padding: 10px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+    .menu.active { display: flex; }
+    .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
+  }
+  /* CONTENIDO */
+  .content {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .content h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+  }
+  /* GRID RESPONSIVE DE PROGRAMACIÓN */
+  .programacion-grid {
+    display: grid;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  /* TARJETA DE PROGRAMA */
+  .evento {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  .evento:hover {
+    /* Sin efecto */
+  }
+  .evento h3 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
 
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: 0.3s;
-      font-size: 0.95rem;
-    }
+  /* FECHA Y HORA - ¡AHORA RESALTA! */
+  .fecha {
+    color: #d00000;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #ffe6e6;
+    border-radius: 8px;
+    width: fit-content;
+    box-shadow: 0 2px 6px rgba(208, 0, 0, 0.15);
+    border-left: 4px solid #d00000;
+  }
+  .fecha i {
+    font-size: 1.3rem;
+    color: #d00000;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  }
 
-    .menu a:hover, .menu a.active {
-      background: #3498db;
+  .evento p {
+    color: #34495e;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  /* ANIMACIÓN DE ENTRADA */
+  .evento:nth-child(1) { animation-delay: 0.1s; }
+  .evento:nth-child(2) { animation-delay: 0.2s; }
+  .evento:nth-child(3) { animation-delay: 0.3s; }
+  .evento:nth-child(4) { animation-delay: 0.4s; }
+  .evento:nth-child(5) { animation-delay: 0.5s; }
+  .evento:nth-child(6) { animation-delay: 0.6s; }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    /* BOTÓN EN VIVO */
-    .live-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #fff;
-      color: #00A6A6;
-      border: none;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: all 0.2s;
-    }
-    .live-btn.playing {
-      background: #e74c3c;
-      color: white;
-    }
-    .live-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-    .live-btn .live-text {
-      margin-left: 4px;
-    }
-
-    /* RESPONSIVE: MÓVIL */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-      .live-btn {
-        font-size: 0.8rem;
-        padding: 7px 12px;
-      }
-      .menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: #2c3e50;
-        padding: 10px 0;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      }
-      .menu.active {
-        display: flex;
-      }
-      .menu a {
-        text-align: center;
-        padding: 14px 20px;
-        border-radius: 0;
-      }
-    }
-
-    .content { padding: 60px 20px; text-align: center; }
-    .evento {
-      background: white;
-      margin: 15px auto;
-      padding: 20px;
-      max-width: 700px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
-    }
-    .evento h3 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-    .fecha {
-      color: #e74c3c;
-      font-weight: bold;
-    }
-    footer {
-      background: #00A6A6;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-    }
-
-        /* AUDIO GLOBAL OCULTO (MEJORADO) */
-    #global-live-player {
-      position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      z-index: -9999;
-    }
-
-    /* OCULTAR BOTÓN EN VIVO */
-    #live-btn { display: none !important; }
-  </style>
+  }
+  footer {
+    background: #00A6A6;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+    font-size: 0.95rem;
+  }
+  /* AUDIO GLOBAL OCULTO */
+  #global-live-player {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: -9999;
+  }
+  /* OCULTAR BOTÓN EN VIVO EN ESTA PÁGINA */
+  #live-btn { display: none !important; }
+</style>
 </head>
 <body>
-
   <!-- AUDIO GLOBAL (EN VIVO) -->
   <audio id="global-live-player" preload="none"></audio>
-
-  <!-- NAVEGACIÓN CON BOTÓN EN VIVO -->
+  <!-- NAVEGACIÓN -->
   <nav>
     <div class="container">
       <button class="menu-toggle" aria-label="Menú">
         <i class="fas fa-bars"></i>
       </button>
-
       <div class="menu">
         <a href="index.html">INICIO</a>
         <a href="quienes-somos.html">QUIÉNES SOMOS</a>
@@ -182,8 +223,6 @@
         <a href="noticias.html">NOTICIAS</a>
         <a href="contactanos.html">CONTÁCTANOS</a>
       </div>
-
-      <!-- BOTÓN EN VIVO -->
       <button id="live-btn" class="live-btn">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M8 5v14l11-7z"/>
@@ -195,109 +234,93 @@
       </button>
     </div>
   </nav>
-
+  <!-- CONTENIDO -->
   <div class="content">
     <h1>Programación Semanal</h1>
-
-	  <div class="evento">
-      <h3>Programa Musical</h3>
-      <p class="fecha">Lunes a viernes - 6:00am</p>
-      <p>Despierta con Energia</p>
-    </div>
-	<div class="evento">
-      <h3>Programa Musical</h3>
-      <p class="fecha">Lunes a viernes - 2:00pm</p>
-      <p>Tarde de Exitos</p>
-    </div>
-	<div class="evento">
-      <h3>Programa Musical</h3>
-      <p class="fecha">Lunes a viernes - 6:00pm</p>
-      <p>Atardecer Musical</p>
-    </div>
-	<div class="evento">
-      <h3>Programa Deportivo</h3>
-      <p class="fecha">Lunes a Viernes - 7:00pm</p>
-      <p>El Marcador final, Programa Semanal</p>
-    </div>
-	<div class="evento">
-      <h3>Programa Musical</h3>
-      <p class="fecha">Lunes a Viernes - 8:00pm</p>
-      <p>La Noche</p>
-    </div>
-    <div class="evento">
-      <h3>Programa Musical</h3>
-      <p class="fecha">Sabado y Domingo - 8:00am</p>
-      <p>Programacion Especial Musical</p>
+    <div class="programacion-grid">
+      <div class="evento">
+        <h3>Despierta con Energía</h3>
+        <p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 6:00 AM</p>
+        <p>Música para empezar el día con energía y buen ritmo.</p>
+      </div>
+      <div class="evento">
+        <h3>Tarde de Éxitos</h3>
+        <p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 2:00 PM</p>
+        <p>Los mejores hits del momento y clásicos que no pasan de moda.</p>
+      </div>
+      <div class="evento">
+        <h3>Atardecer Musical</h3>
+        <p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 6:00 PM</p>
+        <p>Relájate con una selección suave y melódica.</p>
+      </div>
+      <div class="evento">
+        <h3>El Marcador Final</h3>
+        <p class="fecha"><i class="fas fa-futbol"></i> Lunes a Viernes - 7:00 PM</p>
+        <p>Resumen deportivo, análisis y pasión por el fútbol.</p>
+      </div>
+      <div class="evento">
+        <h3>La Noche</h3>
+        <p class="fecha"><i class="far fa-moon"></i> Lunes a Viernes - 8:00 PM</p>
+        <p>Música nocturna, baladas y dedicatorias.</p>
+      </div>
+      <div class="evento">
+        <h3>Fin de Semana Musical</h3>
+        <p class="fecha"><i class="fas fa-music"></i> Sábado y Domingo - 8:00 AM</p>
+        <p>Programación especial con lo mejor de la semana.</p>
+      </div>
     </div>
   </div>
-
   <footer>
-   <p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
+    <p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
   </footer>
-
-  <!-- JS: MENÚ + AUDIO GLOBAL -->
+  <!-- JS: MENÚ + AUDIO + PROTECCIÓN -->
   <script>
     // Menú móvil
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
-
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => menu.classList.toggle('active'));
+      document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => menu.classList.remove('active'));
       });
-    });
-
-    // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
+    }
+    // Audio global en vivo
     const player = document.getElementById('global-live-player');
     const btn = document.getElementById('live-btn');
-    const text = btn.querySelector('.live-text');
+    const text = btn?.querySelector('.live-text');
     const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
-    const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-    if (isPlaying) {
-      player.src = stream;
-      player.play().catch(() => {});
-      btn.classList.add('playing');
-      text.textContent = 'PAUSAR';
-    }
-
-    btn.addEventListener('click', () => {
-      if (player.paused) {
+    if (btn && text) {
+      const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
+      if (isPlaying) {
         player.src = stream;
-        player.play().catch(() => alert('Error al reproducir'));
+        player.play().catch(() => {});
         btn.classList.add('playing');
         text.textContent = 'PAUSAR';
-        localStorage.setItem('radio-live-playing', 'true');
-      } else {
-        player.pause();
-        btn.classList.remove('playing');
-        text.textContent = 'EN VIVO';
-        localStorage.setItem('radio-live-playing', 'false');
       }
+      btn.addEventListener('click', () => {
+        if (player.paused) {
+          player.src = stream;
+          player.play().catch(() => {});
+          btn.classList.add('playing');
+          text.textContent = 'PAUSAR';
+          localStorage.setItem('radio-live-playing', 'true');
+        } else {
+          player.pause();
+          btn.classList.remove('playing');
+          text.textContent = 'EN VIVO';
+          localStorage.setItem('radio-live-playing', 'false');
+        }
+      });
+    }
+    // Protección JS
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+      if (e.key === 'F12') e.preventDefault();
     });
   </script>
-  
-  
-  <script>
-  // PROTECCIÓN COMPLETA Y ROBUSTA
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
-</script>
 </body>
-
 </html>
-
-
-
-
-

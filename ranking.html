@@ -9,7 +9,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #333; }
 
-    /* NAVEGACIÓN CORREGIDA */
+    /* NAVEGACIÓN */
     nav {
       background: #00A6A6;
       height: 64px;
@@ -28,7 +28,6 @@
       width: 100%;
       justify-content: space-between;
     }
-
     .menu-toggle {
       display: none;
       background: none;
@@ -38,14 +37,12 @@
       cursor: pointer;
       padding: 0;
     }
-
     .menu {
       display: flex;
       justify-content: center;
       flex: 1;
       gap: 10px;
     }
-
     .menu a {
       color: white;
       text-decoration: none;
@@ -55,7 +52,6 @@
       transition: 0.3s;
       font-size: 0.95rem;
     }
-
     .menu a:hover, .menu a.active {
       background: #3498db;
     }
@@ -91,13 +87,8 @@
 
     /* RESPONSIVE: MÓVIL */
     @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-      .live-btn {
-        font-size: 0.8rem;
-        padding: 7px 12px;
-      }
+      .menu-toggle { display: block; }
+      .live-btn { font-size: 0.8rem; padding: 7px 12px; }
       .menu {
         display: none;
         flex-direction: column;
@@ -109,38 +100,116 @@
         padding: 10px 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       }
-      .menu.active {
-        display: flex;
-      }
-      .menu a {
-        text-align: center;
-        padding: 14px 20px;
-        border-radius: 0;
+      .menu.active { display: flex; }
+      .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
+    }
+
+    /* CONTENIDO */
+    .content {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .content h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 40px;
+    }
+
+    /* GRID RESPONSIVE DE RANKING */
+    .ranking-grid {
+      display: grid;
+      gap: 18px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    /* TARJETA DE CANCIÓN */
+    .cancion {
+      background: white;
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* HOVER ELIMINADO */
+    .cancion:hover {
+      /* Sin efecto al pasar el mouse */
+    }
+
+    .posicion {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+    }
+
+    .info h3 {
+      color: #2c3e50;
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .info .artista {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .info .cancion-titulo {
+      color: #e74c3c;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-top: 2px;
+    }
+
+    /* ANIMACIÓN DE ENTRADA */
+    .cancion:nth-child(1) { animation-delay: 0.1s; }
+    .cancion:nth-child(2) { animation-delay: 0.2s; }
+    .cancion:nth-child(3) { animation-delay: 0.3s; }
+    .cancion:nth-child(4) { animation-delay: 0.4s; }
+    .cancion:nth-child(5) { animation-delay: 0.5s; }
+    .cancion:nth-child(6) { animation-delay: 0.6s; }
+    .cancion:nth-child(7) { animation-delay: 0.7s; }
+    .cancion:nth-child(8) { animation-delay: 0.8s; }
+    .cancion:nth-child(9) { animation-delay: 0.9s; }
+    .cancion:nth-child(10) { animation-delay: 1.0s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    .content { padding: 60px 20px; text-align: center; }
-    table { 
-      width: 100%; 
-      max-width: 800px; 
-      margin: 30px auto; 
-      border-collapse: collapse; 
-      background: white; 
-      box-shadow: 0 0 10px rgba(0,0,0,0.1); 
-    }
-    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
-    th { background: #3498db; color: white; }
-    tr:hover { background: #f1f1f1; }
-    .pos { font-weight: bold; color: #2c3e50; }
-    footer { 
-      background: #00A6A6; 
-      color: white; 
-      text-align: center; 
-      padding: 20px; 
-      margin-top: 50px; 
+    footer {
+      background: #00A6A6;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 60px;
+      font-size: 0.95rem;
     }
 
-       /* AUDIO GLOBAL OCULTO (MEJORADO) */
+    /* AUDIO GLOBAL OCULTO */
     #global-live-player {
       position: fixed;
       top: -9999px;
@@ -162,13 +231,12 @@
   <!-- AUDIO GLOBAL (EN VIVO) -->
   <audio id="global-live-player" preload="none"></audio>
 
-  <!-- NAVEGACIÓN CON BOTÓN EN VIVO -->
+  <!-- NAVEGACIÓN -->
   <nav>
     <div class="container">
       <button class="menu-toggle" aria-label="Menú">
         <i class="fas fa-bars"></i>
       </button>
-
       <div class="menu">
         <a href="index.html">INICIO</a>
         <a href="quienes-somos.html">QUIÉNES SOMOS</a>
@@ -177,8 +245,6 @@
         <a href="noticias.html">NOTICIAS</a>
         <a href="contactanos.html">CONTÁCTANOS</a>
       </div>
-
-      <!-- BOTÓN EN VIVO -->
       <button id="live-btn" class="live-btn">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M8 5v14l11-7z"/>
@@ -191,129 +257,149 @@
     </div>
   </nav>
 
+  <!-- CONTENIDO -->
   <div class="content">
-    <h1>🎶 Ranking Musical - Top 10 ZOOM MUSICAL 🎶</h1>
-    <table>
-      <tr>
-        <th>Pos</th>
-        <th>Artista</th>
-        <th>Canción</th>
-      </tr>
-      <tr>
-        <td class="pos">1</td>
-        <td>Ana Barbara y Yahritza</td>
-        <td>Besos robados</td>
-      </tr>
-      <tr>
-        <td class="pos">2</td>
-        <td>Cuco</td>
-        <td>Para ti</td>
-      </tr>
-      <tr>
-        <td class="pos">3</td>
-        <td>Arthur y Carlos Vives</td>
-        <td>Goodbye</td>
-      </tr>
-      <tr>
-        <td class="pos">4</td>
-        <td>Judeline</td>
-        <td>Chica de cristal</td>
-      </tr>
-      <tr>
-        <td class="pos">5</td>
-        <td>Miguel Bueno</td>
-        <td>Solcito</td>
-      </tr>
-      <tr>
-        <td class="pos">6</td>
-        <td>Morat</td>
-        <td>FEO</td>
-      </tr>
-      <tr>
-        <td class="pos">7</td>
-        <td>Camilo</td>
-        <td>Plis</td>
-      </tr>
-      <tr>
-        <td class="pos">8</td>
-        <td>Bizarrap & Duki</td>
-        <td>Bzrp Music Sessions Vol.57</td>
-      </tr>
-      <tr>
-        <td class="pos">9</td>
-        <td>Rauw Alejandro</td>
-        <td>Touching the Sky</td>
-      </tr>
-      <tr>
-        <td class="pos">10</td>
-        <td>Manuel Turizo & Maria Becerra</td>
-        <td>Déjalo</td>
-      </tr>
-    </table>
+    <h1>Ranking Musical - Top 10 ZOOM MUSICAL</h1>
+
+    <div class="ranking-grid">
+      <div class="cancion">
+        <div class="posicion">1</div>
+        <div class="info">
+          <h3>Besos robados</h3>
+          <p class="artista">Ana Barbara y Yahritza</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">2</div>
+        <div class="info">
+          <h3>Para ti</h3>
+          <p class="artista">Cuco</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">3</div>
+        <div class="info">
+          <h3>Goodbye</h3>
+          <p class="artista">Arthur y Carlos Vives</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">4</div>
+        <div class="info">
+          <h3>Chica de cristal</h3>
+          <p class="artista">Judeline</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">5</div>
+        <div class="info">
+          <h3>Solcito</h3>
+          <p class="artista">Miguel Bueno</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">6</div>
+        <div class="info">
+          <h3>FEO</h3>
+          <p class="artista">Morat</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">7</div>
+        <div class="info">
+          <h3>Plis</h3>
+          <p class="artista">Camilo</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">8</div>
+        <div class="info">
+          <h3>Bzrp Music Sessions Vol.57</h3>
+          <p class="artista">Bizarrap & Duki</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">9</div>
+        <div class="info">
+          <h3>Touching the Sky</h3>
+          <p class="artista">Rauw Alejandro</p>
+        </div>
+      </div>
+
+      <div class="cancion">
+        <div class="posicion">10</div>
+        <div class="info">
+          <h3>Déjalo</h3>
+          <p class="artista">Manuel Turizo & Maria Becerra</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
     <p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- JS: MENÚ + AUDIO GLOBAL -->
+  <!-- JS: MENÚ + AUDIO + PROTECCIÓN -->
   <script>
     // Menú móvil
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
-
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => menu.classList.toggle('active'));
+      document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => menu.classList.remove('active'));
       });
-    });
-
-    // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
-    const player = document.getElementById('global-live-player');
-    const btn = document.getElementById('live-btn');
-    const text = btn.querySelector('.live-text');
-    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
-    const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-    if (isPlaying) {
-      player.src = stream;
-      player.play().catch(() => {});
-      btn.classList.add('playing');
-      text.textContent = 'PAUSAR';
     }
 
-    btn.addEventListener('click', () => {
-      if (player.paused) {
+    // Audio global en vivo
+    const player = document.getElementById('global-live-player');
+    const btn = document.getElementById('live-btn');
+    const text = btn?.querySelector('.live-text');
+    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+
+    if (btn && text) {
+      const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
+      if (isPlaying) {
         player.src = stream;
-        player.play().catch(() => alert('Error al reproducir'));
+        player.play().catch(() => {});
         btn.classList.add('playing');
         text.textContent = 'PAUSAR';
-        localStorage.setItem('radio-live-playing', 'true');
-      } else {
-        player.pause();
-        btn.classList.remove('playing');
-        text.textContent = 'EN VIVO';
-        localStorage.setItem('radio-live-playing', 'false');
       }
+
+      btn.addEventListener('click', () => {
+        if (player.paused) {
+          player.src = stream;
+          player.play().catch(() => {});
+          btn.classList.add('playing');
+          text.textContent = 'PAUSAR';
+          localStorage.setItem('radio-live-playing', 'true');
+        } else {
+          player.pause();
+          btn.classList.remove('playing');
+          text.textContent = 'EN VIVO';
+          localStorage.setItem('radio-live-playing', 'false');
+        }
+      });
+    }
+
+    // Protección JS
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+      if (e.key === 'F12') e.preventDefault();
     });
   </script>
-  
-  
-  <script>
-  // PROTECCIÓN COMPLETA Y ROBUSTA
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
-</script>
 </body>
 </html>
-
