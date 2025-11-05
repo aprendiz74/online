@@ -1,1 +1,1 @@
-https://cloudflare.streamgato.us:3125/live/megacinetvlive.m3u8
+https://live20.bozztv.com/giatv/giatv-bigtv/bigtv/playlist.m3u8
