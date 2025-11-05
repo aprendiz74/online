@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>TV MAICITO - En Vivo</title>
+  <title>TV ZOOM MUSICAL - En Vivo</title>
   <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow:hidden; background:#000; }
 
-    #tvContainer {
+    #tvModal {
       position: fixed;
       inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: none;
       background: #000;
       z-index: 12000;
     }
@@ -51,12 +49,12 @@
     .black-bar.top { top: 0; }
     .black-bar.bottom { bottom: 0; }
 
-    /* LOGO SUPERIOR DERECHA */
+    /* LOGO EN SUPERIOR DERECHA - TODOS LOS DISPOSITIVOS */
     .tv-logo {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 80px;
+      top: 40px;
+      right: 40px;
+      width: 90px;
       z-index: 10;
       opacity: 0;
       transition: opacity 0.6s;
@@ -64,13 +62,38 @@
     }
     .tv-logo.show { opacity: 1; }
 
-    /* Eliminar animación de neón */
-    /* @keyframes neon {
-      0%, 100% { filter: drop-shadow(0 0 6px #000); }
-      50% { filter: drop-shadow(0 0 14px #000); }
+    /* RESPONSIVE: AJUSTE DE TAMAÑO Y MARGEN */
+    @media (max-width: 768px) {
+      .tv-inner {
+        transform: rotate(90deg);
+        transform-origin: center center;
+        width: 100vh;
+        height: 100vw;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+      }
+      #videoTv {
+        width: 100vh;
+        height: 100vw;
+        object-fit: cover;
+      }
+      .black-bar { height: 35px; }
+      .tv-logo {
+        width: 70px;
+        top: 30px;
+        right: 30px;
+      }
     }
-    .tv-logo { animation: neon 3s infinite; } */
-    
+
+    @media (min-width: 1200px) and (min-height: 700px) {
+      .tv-logo {
+        width: 120px;
+        top: 60px;
+        right: 60px;
+      }
+    }
+
     /* BOTÓN CERRAR */
     .close-btn {
       position: fixed;
@@ -100,31 +123,7 @@
       fill: #fff;
     }
 
-    /* === GIRO MÓVIL (COMO EL SEGUNDO CÓDIGO) === */
     @media (max-width: 768px) {
-      .tv-inner {
-        transform: rotate(90deg);
-        transform-origin: center center;
-        width: 100vh;
-        height: 100vw;
-        left: 50%;
-        top: 50%;
-        translate: -50% -50%;
-      }
-      #videoTv {
-        width: 100vh;
-        height: 100vw;
-        object-fit: cover;
-      }
-      .black-bar { height: 35px; }
-      
-      /* Ajuste del logo en móvil para hacerlo más visible pero sin estar pegado */
-      .tv-logo {
-        width: 80px;   /* Tamaño del logo */
-        top: 40px;     /* Aumenté el margen superior a 60px */
-        right: 40px;   /* Aumenté el margen derecho a 60px */
-      }
-
       .close-btn {
         top: 15px;
         left: 15px;
@@ -133,26 +132,22 @@
       }
       .close-btn svg { width: 16px; height: 16px; }
     }
-
   </style>
 </head>
 <body>
 
-  <!-- MODAL TV (como el segundo código) -->
-  <div id="tvModal" style="display:none;">
+  <div id="tvModal">
     <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
       </svg>
     </button>
-
     <div class="tv-inner">
       <div class="video-wrapper">
         <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
         <div class="black-bar top"></div>
         <div class="black-bar bottom"></div>
       </div>
-
       <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
            alt="Logo TV" class="tv-logo" id="logo" />
     </div>
@@ -166,7 +161,6 @@
     function openTVPlayer() {
       const modal = document.getElementById('tvModal');
       modal.style.display = 'block';
-
       const logo = document.getElementById('logo');
       logo.classList.remove('show');
 
@@ -186,7 +180,6 @@
         });
       }
 
-      // Cargar stream desde GitHub
       fetch(GITHUB_STREAM_URL)
         .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
         .then(url => {
@@ -210,33 +203,25 @@
       if (player) player.pause();
       modal.style.display = 'none';
       document.getElementById('logo').classList.remove('show');
-      window.location.href = "index.html"; // ← Vuelve a la página principal
+      window.location.href = "index.html";
     }
 
-    // Eventos
     document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
     document.getElementById('tvModal').onclick = (e) => { if (e.target === e.currentTarget) closeTVPlayer(); };
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTVPlayer(); });
 
-    // ABRIR AUTOMÁTICAMENTE
     document.addEventListener("DOMContentLoaded", openTVPlayer);
   </script>
-  
+
   <script>
-  // PROTECCIÓN COMPLETA Y ROBUSTA
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
-</script>
-
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+      if (e.key === 'F12') e.preventDefault();
+    });
+  </script>
 </body>
-
 </html>
-
-
-
