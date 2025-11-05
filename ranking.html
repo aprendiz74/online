@@ -5,226 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ranking Musical | ZOOM MUSICAL</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #333; }
+ <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  /* === AJUSTE GLOBAL PARA FOOTER AL FINAL === */
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* NAVEGACIÓN */
-    nav {
-      background: #00A6A6;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      justify-content: space-between;
-    }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0;
-    }
+  /* CONTENIDO - IGUAL QUE EN "QUIÉNES SOMOS" */
+  .content {
+    flex: 1;
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .content h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+  }
+
+  /* GRID RESPONSIVE DE RANKING - USA TODO EL ANCHO DEL CONTENEDOR */
+.ranking-grid {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  max-width: 900px;     /* ← NUEVO */
+  margin: 0 auto;       /* ← CLAVE: CENTRADO */
+  padding: 0 10px;      /* ← opcional: espacio interno */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+  /* NAVEGACIÓN */
+  nav {
+    background: #00A6A6;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    gap: 10px;
+  }
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 0.95rem;
+  }
+  .menu a:hover, .menu a.active {
+    background: #3498db;
+  }
+
+  /* BOTÓN EN VIVO */
+  .live-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    color: #00A6A6;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+  }
+  .live-btn.playing {
+    background: #e74c3c;
+    color: white;
+  }
+  .live-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+  .live-btn .live-text {
+    margin-left: 4px;
+  }
+
+  /* RESPONSIVE: MÓVIL */
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .live-btn { font-size: 0.8rem; padding: 7px 12px; }
     .menu {
-      display: flex;
-      justify-content: center;
-      flex: 1;
-      gap: 10px;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      background: #2c3e50;
+      padding: 10px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 18px;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: 0.3s;
-      font-size: 0.95rem;
-    }
-    .menu a:hover, .menu a.active {
-      background: #3498db;
-    }
+    .menu.active { display: flex; }
+    .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
+  }
 
-    /* BOTÓN EN VIVO */
-    .live-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #fff;
-      color: #00A6A6;
-      border: none;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: all 0.2s;
-    }
-    .live-btn.playing {
-      background: #e74c3c;
-      color: white;
-    }
-    .live-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-    .live-btn .live-text {
-      margin-left: 4px;
-    }
+  /* TARJETA DE CANCIÓN */
+  .cancion {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  .cancion:hover {
+    /* Sin efecto al pasar el mouse */
+  }
+  .posicion {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+  }
+  .info h3 {
+    color: #2c3e50;
+    margin: 0 0 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .info .artista {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
 
-    /* RESPONSIVE: MÓVIL */
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .live-btn { font-size: 0.8rem; padding: 7px 12px; }
-      .menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: #2c3e50;
-        padding: 10px 0;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      }
-      .menu.active { display: flex; }
-      .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
+  /* ANIMACIÓN DE ENTRADA */
+  .cancion:nth-child(1) { animation-delay: 0.1s; }
+  .cancion:nth-child(2) { animation-delay: 0.2s; }
+  .cancion:nth-child(3) { animation-delay: 0.3s; }
+  .cancion:nth-child(4) { animation-delay: 0.4s; }
+  .cancion:nth-child(5) { animation-delay: 0.5s; }
+  .cancion:nth-child(6) { animation-delay: 0.6s; }
+  .cancion:nth-child(7) { animation-delay: 0.7s; }
+  .cancion:nth-child(8) { animation-delay: 0.8s; }
+  .cancion:nth-child(9) { animation-delay: 0.9s; }
+  .cancion:nth-child(10) { animation-delay: 1.0s; }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    /* CONTENIDO */
-    .content {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .content h1 {
-      font-size: 2.5rem;
-      color: #2c3e50;
-      margin-bottom: 40px;
-    }
+  /* FOOTER */
+  footer {
+    background: #00A6A6;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 0.95rem;
+    margin-top: auto;
+  }
 
-    /* GRID RESPONSIVE DE RANKING */
-    .ranking-grid {
-      display: grid;
-      gap: 18px;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
+  /* AUDIO GLOBAL OCULTO */
+  #global-live-player {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: -9999;
+  }
 
-    /* TARJETA DE CANCIÓN */
-    .cancion {
-      background: white;
-      padding: 18px;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
+  /* OCULTAR BOTÓN EN VIVO */
+  #live-btn { display: none !important; }
 
-    /* HOVER ELIMINADO */
-    .cancion:hover {
-      /* Sin efecto al pasar el mouse */
-    }
-
-    .posicion {
-      background: linear-gradient(135deg, #3498db, #2980b9);
-      color: white;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
-    }
-
-    .info h3 {
-      color: #2c3e50;
-      margin: 0 0 4px;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .info .artista {
-      color: #7f8c8d;
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    .info .cancion-titulo {
-      color: #e74c3c;
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-top: 2px;
-    }
-
-    /* ANIMACIÓN DE ENTRADA */
-    .cancion:nth-child(1) { animation-delay: 0.1s; }
-    .cancion:nth-child(2) { animation-delay: 0.2s; }
-    .cancion:nth-child(3) { animation-delay: 0.3s; }
-    .cancion:nth-child(4) { animation-delay: 0.4s; }
-    .cancion:nth-child(5) { animation-delay: 0.5s; }
-    .cancion:nth-child(6) { animation-delay: 0.6s; }
-    .cancion:nth-child(7) { animation-delay: 0.7s; }
-    .cancion:nth-child(8) { animation-delay: 0.8s; }
-    .cancion:nth-child(9) { animation-delay: 0.9s; }
-    .cancion:nth-child(10) { animation-delay: 1.0s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    footer {
-      background: #00A6A6;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 60px;
-      font-size: 0.95rem;
-    }
-
-    /* AUDIO GLOBAL OCULTO */
-    #global-live-player {
-      position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      z-index: -9999;
-    }
-
-    /* OCULTAR BOTÓN EN VIVO */
-    #live-btn { display: none !important; }
-  </style>
+  /* BOTÓN PLAY EN CADA CANCIÓN */
+  .play-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+    font-size: 0.9rem;
+    margin-left: auto;
+  }
+  .play-btn:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+  }
+  .play-btn.playing {
+    background: #27ae60;
+  }
+  .play-btn.playing i::before {
+    content: "\f28b";
+  }
+  .play-btn i {
+    margin-left: 2px;
+  }
+</style>
 </head>
 <body>
 
@@ -257,149 +300,208 @@
     </div>
   </nav>
 
-  <!-- CONTENIDO -->
-  <div class="content">
-    <h1>Ranking Musical - Top 10 ZOOM MUSICAL</h1>
-
-    <div class="ranking-grid">
-      <div class="cancion">
-        <div class="posicion">1</div>
-        <div class="info">
-          <h3>Besos robados</h3>
-          <p class="artista">Ana Barbara y Yahritza</p>
+  <!-- WRAPPER PARA EMPUJAR FOOTER AL FINAL -->
+  <div class="wrapper">
+    <!-- CONTENIDO -->
+    <div class="content">
+      <h1>🎶 Ranking Musical - Top 10 ZOOM MUSICAL</h1>
+      <div class="ranking-grid">
+        <div class="cancion">
+          <div class="posicion">1</div>
+          <div class="info">
+            <h3>Besos robados</h3>
+            <p class="artista">Ana Barbara y Yahritza</p>
+          </div>
+          <button class="play-btn" data-src="https://raw.githack.com/aprendiz74/online/main/pistas/1.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">2</div>
-        <div class="info">
-          <h3>Para ti</h3>
-          <p class="artista">Cuco</p>
+        <div class="cancion">
+          <div class="posicion">2</div>
+          <div class="info">
+            <h3>Para ti</h3>
+            <p class="artista">Cuco</p>
+          </div>
+          <button class="play-btn" data-src="https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">3</div>
-        <div class="info">
-          <h3>Goodbye</h3>
-          <p class="artista">Arthur y Carlos Vives</p>
+        <div class="cancion">
+          <div class="posicion">3</div>
+          <div class="info">
+            <h3>Goodbye</h3>
+            <p class="artista">Arthur y Carlos Vives</p>
+          </div>
+          <button class="play-btn" data-src="https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">4</div>
-        <div class="info">
-          <h3>Chica de cristal</h3>
-          <p class="artista">Judeline</p>
+        <div class="cancion">
+          <div class="posicion">4</div>
+          <div class="info">
+            <h3>Chica de cristal</h3>
+            <p class="artista">Judeline</p>
+          </div>
+          <button class="play-btn" data-src="https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">5</div>
-        <div class="info">
-          <h3>Solcito</h3>
-          <p class="artista">Miguel Bueno</p>
+        <div class="cancion">
+          <div class="posicion">5</div>
+          <div class="info">
+            <h3>Solcito</h3>
+            <p class="artista">Miguel Bueno</p>
+          </div>
+          <button class="play-btn" data-src="https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">6</div>
-        <div class="info">
-          <h3>FEO</h3>
-          <p class="artista">Morat</p>
+        <div class="cancion">
+          <div class="posicion">6</div>
+          <div class="info">
+            <h3>Saturno</h3>
+            <p class="artista">Pablo Alboran</p>
+          </div>
+          <button class="play-btn" data-src="https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/029%20Saturno%20%28Pablo%20Alboran%29.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">7</div>
-        <div class="info">
-          <h3>Plis</h3>
-          <p class="artista">Camilo</p>
+        <div class="cancion">
+          <div class="posicion">7</div>
+          <div class="info">
+            <h3>Vuelveme a querer</h3>
+            <p class="artista">Thalia</p>
+          </div>
+          <button class="play-btn" data-src="https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/009%20Vu%C3%A9lveme%20a%20Querer%20%28Thalia%29.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">8</div>
-        <div class="info">
-          <h3>Bzrp Music Sessions Vol.57</h3>
-          <p class="artista">Bizarrap & Duki</p>
+        <div class="cancion">
+          <div class="posicion">8</div>
+          <div class="info">
+            <h3>Atulado</h3>
+            <p class="artista">Paula Arenas</p>
+          </div>
+          <button class="play-btn" data-src="https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/021%20A%20Tu%20Lado%20%28Paula%20Arenas%29.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">9</div>
-        <div class="info">
-          <h3>Touching the Sky</h3>
-          <p class="artista">Rauw Alejandro</p>
+        <div class="cancion">
+          <div class="posicion">9</div>
+          <div class="info">
+            <h3>Por tu amor</h3>
+            <p class="artista">Carlos Rivera</p>
+          </div>
+          <button class="play-btn" data-src="https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/034%20Por%20Tu%20Amor%20%28Si%20Fuera%20M%C3%ADa%29%20%28Carlos%20Rivera%29.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </div>
-
-      <div class="cancion">
-        <div class="posicion">10</div>
-        <div class="info">
-          <h3>Déjalo</h3>
-          <p class="artista">Manuel Turizo & Maria Becerra</p>
+        <div class="cancion">
+          <div class="posicion">10</div>
+          <div class="info">
+            <h3>Girasoles</h3>
+            <p class="artista">Luis Fonsi</p>
+          </div>
+          <button class="play-btn" data-src="https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/033%20Girasoles%20%28Luis%20Fonsi%29.mp3">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- Fin de .wrapper -->
 
+  <!-- FOOTER SIEMPRE AL FINAL -->
   <footer>
     <p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
   </footer>
 
   <!-- JS: MENÚ + AUDIO + PROTECCIÓN -->
   <script>
-    // Menú móvil
-    const toggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => menu.classList.toggle('active'));
-      document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', () => menu.classList.remove('active'));
-      });
-    }
+  // Menú móvil
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => menu.classList.toggle('active'));
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.
 
-    // Audio global en vivo
-    const player = document.getElementById('global-live-player');
-    const btn = document.getElementById('live-btn');
-    const text = btn?.querySelector('.live-text');
-    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
-    if (btn && text) {
-      const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-      if (isPlaying) {
-        player.src = stream;
-        player.play().catch(() => {});
-        btn.classList.add('playing');
-        text.textContent = 'PAUSAR';
-      }
-
-      btn.addEventListener('click', () => {
-        if (player.paused) {
-          player.src = stream;
-          player.play().catch(() => {});
-          btn.classList.add('playing');
-          text.textContent = 'PAUSAR';
-          localStorage.setItem('radio-live-playing', 'true');
-        } else {
-          player.pause();
-          btn.classList.remove('playing');
-          text.textContent = 'EN VIVO';
-          localStorage.setItem('radio-live-playing', 'false');
-        }
-      });
-    }
-
-    // Protección JS
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
+addEventListener('click', () => menu.classList.remove('active'));
     });
+  }
+
+  // Audio global en vivo
+  const livePlayer = document.getElementById('global-live-player');
+  const liveBtn = document.getElementById('live-btn');
+  const liveText = liveBtn?.querySelector('.live-text');
+  const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+  if (liveBtn && liveText) {
+    const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
+    if (isPlaying) {
+      livePlayer.src = stream;
+      livePlayer.play().catch(() => {});
+      liveBtn.classList.add('playing');
+      liveText.textContent = 'PAUSAR';
+    }
+    liveBtn.addEventListener('click', () => {
+      if (livePlayer.paused) {
+        livePlayer.src = stream;
+        livePlayer.play().catch(() => {});
+        liveBtn.classList.add('playing');
+        liveText.textContent = 'PAUSAR';
+        localStorage.setItem('radio-live-playing', 'true');
+      } else {
+        livePlayer.pause();
+        liveBtn.classList.remove('playing');
+        liveText.textContent = 'EN VIVO';
+        localStorage.setItem('radio-live-playing', 'false');
+      }
+    });
+  }
+
+  // === REPRODUCTOR DE CANCIONES DEL RANKING ===
+  const songButtons = document.querySelectorAll('.play-btn');
+  const songPlayer = document.createElement('audio');
+  songPlayer.id = 'song-player';
+  document.body.appendChild(songPlayer);
+  let currentPlaying = null;
+  songButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-src');
+      if (currentPlaying === btn && !songPlayer.paused) {
+        songPlayer.pause();
+        btn.classList.remove('playing');
+        currentPlaying = null;
+      } else {
+        if (currentPlaying) {
+          currentPlaying.classList.remove('playing');
+        }
+        songPlayer.src = src;
+        songPlayer.play().catch(err => {
+          console.error("Error al reproducir:", err);
+          alert("No se pudo reproducir la canción. Asegúrate de que el enlace sea directo al MP3.");
+        });
+        btn.classList.add('playing');
+        currentPlaying = btn;
+      }
+    });
+  });
+
+  songPlayer.addEventListener('ended', () => {
+    if (currentPlaying) {
+      currentPlaying.classList.remove('playing');
+      currentPlaying = null;
+    }
+  });
+
+  // Protección JS
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
   </script>
 </body>
 </html>
