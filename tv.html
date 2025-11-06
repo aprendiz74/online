@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>TV ZOOM MUSICAL - En Vivo</title>
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow:hidden; background:#000; }
@@ -15,7 +15,7 @@
       background: #000;
       z-index: 12000;
     }
-    .tv-inner {
+    .tv-container {
       position: absolute;
       inset: 0;
       display: flex;
@@ -23,19 +23,14 @@
       align-items: center;
       transition: transform 0.3s ease;
     }
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    #videoTv {
+    #videoPlayer {
       width: 100%;
       height: 100%;
       object-fit: cover;
       background: #000;
     }
 
-    /* LOGO: FIJO EN LA ESQUINA SUPERIOR DERECHA DEL VIDEO (SIEMPRE) */
+    /* LOGO FIJO EN ESQUINA (SIEMPRE DERECHA) */
     .tv-logo {
       position: absolute;
       top: 30px;
@@ -55,9 +50,9 @@
       top: 20px;
       left: 20px;
       z-index: 15;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       width: 44px;
       height: 44px;
@@ -65,168 +60,137 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: scale(1.1);
-    }
-    .close-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #fff;
-    }
+    .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
+    .close-btn svg { width: 18px; height: 18px; fill: #fff; }
 
-    /* MÓVIL: Solo rotar si está en landscape real */
     @media (max-width: 768px) {
-      .close-btn {
-        top: 15px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-      }
+      .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
       .close-btn svg { width: 16px; height: 16px; }
     }
   </style>
 </head>
 <body>
   <div id="tvModal">
-    <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
+    <button id="closeBtn" class="close-btn" aria-label="Cerrar">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
       </svg>
     </button>
 
-    <div class="tv-inner" id="tvInner">
-      <div class="video-wrapper">
-        <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
-        <!-- LOGO DENTRO DEL CONTENEDOR PARA QUE ROTE CON EL VIDEO -->
-        <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
-             alt="Logo TV" class="tv-logo" id="logo" />
-      </div>
+    <div class="tv-container" id="tvContainer">
+      <video id="videoPlayer" playsinline preload="auto"></video>
+      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
+           alt="Logo" class="tv-logo" id="logo">
     </div>
   </div>
 
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <script>
-    let player = null;
-    const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
+    const GITHUB_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
+    let hls;
 
-    function openTVPlayer() {
+    function initPlayer() {
       const modal = document.getElementById('tvModal');
-      modal.style.display = 'block';
+      const video = document.getElementById('videoPlayer');
       const logo = document.getElementById('logo');
+      const container = document.getElementById('tvContainer');
+
+      modal.style.display = 'block';
       logo.classList.remove('show');
 
-      if (!player) {
-        player = videojs('videoTv', {
-          autoplay: true,
-          controls: true,
-          fluid: true,
-          fill: true,
-          sources: [],
-          html5: {
-            vhs: { overrideNative: true },
-            nativeVideoTracks: false,
-            nativeAudioTracks: false,
-            nativeTextTracks: false
-          }
-        });
-      }
-
-      fetch(GITHUB_STREAM_URL)
-        .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
+      // Cargar stream
+      fetch(GITHUB_URL)
+        .then(r => r.ok ? r.text() : Promise.reject("No se pudo cargar el enlace"))
         .then(url => {
           const streamUrl = url.trim();
-          if (!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
-          player.src({ src: streamUrl, type: 'application/x-mpegURL' });
-          player.play().catch(() => {});
+
+          if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(streamUrl);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              video.play().catch(() => {});
+            });
+          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = streamUrl;
+            video.play().catch(() => {});
+          } else {
+            throw new Error("Formato no soportado");
+          }
+
+          // Volumen al 100%
+          video.volume = 1.0;
+
+          // Mostrar logo tras 3s
           setTimeout(() => logo.classList.add('show'), 3000);
         })
         .catch(err => {
-          document.querySelector('.video-wrapper').innerHTML += `
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;font-family:system-ui;">
+          container.innerHTML += `
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;">
               Error: ${err.message}<br>
               <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
             </div>`;
         });
     }
 
-    function closeTVPlayer() {
-      const modal = document.getElementById('tvModal');
-      if (player) player.pause();
-      modal.style.display = 'none';
-      document.getElementById('logo').classList.remove('show');
-      window.location.href = "index.html";
-    }
-
-    // === CONTROL INTELIGENTE DE ROTACIÓN ===
+    // === ROTACIÓN INTELIGENTE ===
     function updateOrientation() {
-      const inner = document.getElementById('tvInner');
+      const container = document.getElementById('tvContainer');
       const logo = document.getElementById('logo');
-
-      // Solo rotar si: móvil + ancho > alto (landscape real) + giro automático permitido
       const isMobile = window.innerWidth <= 768;
       const isLandscape = window.innerWidth > window.innerHeight;
 
       if (isMobile && isLandscape) {
-        // Rotar contenedor y video
-        inner.style.transform = 'rotate(90deg)';
-        inner.style.width = '100vh';
-        inner.style.height = '100vw';
-        inner.style.left = '50%';
-        inner.style.top = '50%';
-        inner.style.translate = '-50% -50%';
+        container.style.transform = 'rotate(90deg)';
+        container.style.width = '100vh';
+        container.style.height = '100vw';
+        container.style.left = '50%';
+        container.style.top = '50%';
+        container.style.translate = '-50% -50%';
 
-        // Ajustar video
-        document.getElementById('videoTv').style.width = '100vh';
-        document.getElementById('videoTv').style.height = '100vw';
-
-        // Logo: más cerca del borde en landscape
         logo.style.top = '20px';
         logo.style.right = '20px';
         logo.style.width = '65px';
       } else {
-        // Modo normal (portrait o giro desactivado)
-        inner.style.transform = 'none';
-        inner.style.width = '100%';
-        inner.style.height = '100%';
-        inner.style.left = '0';
-        inner.style.top = '0';
-        inner.style.translate = 'none';
+        container.style.transform = 'none';
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.left = '0';
+        container.style.top = '0';
+        container.style.translate = 'none';
 
-        document.getElementById('videoTv').style.width = '100%';
-        document.getElementById('videoTv').style.height = '100%';
-
-        // Logo: posición estándar
         logo.style.top = '30px';
         logo.style.right = '30px';
         logo.style.width = '70px';
       }
     }
 
-    // Ejecutar al cargar y al girar
-    window.addEventListener('orientationchange', () => {
-      setTimeout(updateOrientation, 100);
-    });
+    // Cerrar
+    document.getElementById('closeBtn').onclick = () => {
+      if (hls) hls.destroy();
+      document.getElementById('tvModal').style.display = 'none';
+      window.location.href = "index.html";
+    };
+
+    document.getElementById('tvModal').onclick = (e) => {
+      if (e.target === e.currentTarget) document.getElementById('closeBtn').click();
+    };
+
+    window.addEventListener('orientationchange', () => setTimeout(updateOrientation, 100));
     window.addEventListener('resize', updateOrientation);
 
-    document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
-    document.getElementById('tvModal').onclick = (e) => { if (e.target === e.currentTarget) closeTVPlayer(); };
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTVPlayer(); });
-
+    // Iniciar
     document.addEventListener("DOMContentLoaded", () => {
-      openTVPlayer();
-      updateOrientation(); // Aplica estado inicial
+      initPlayer();
+      updateOrientation();
     });
-  </script>
 
-  <!-- PROTECCIÓN CONTRA COPIAR -->
-  <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
+    // PROTECCIÓN
+    ['contextmenu', 'selectstart', 'dragstart'].forEach(ev =>
+      document.addEventListener(ev, e => e.preventDefault())
+    );
     document.addEventListener('keydown', e => {
       if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
