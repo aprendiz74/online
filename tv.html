@@ -8,7 +8,6 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow:hidden; background:#000; }
-
     #tvModal {
       position: fixed;
       inset: 0;
@@ -16,7 +15,6 @@
       background: #000;
       z-index: 12000;
     }
-
     .tv-inner {
       position: absolute;
       inset: 0;
@@ -24,13 +22,11 @@
       justify-content: center;
       align-items: center;
     }
-
     .video-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
     }
-
     #videoTv {
       width: 100%;
       height: 100%;
@@ -38,61 +34,19 @@
       background: #000;
     }
 
-    .black-bar {
-      position: absolute;
-      width: 100%;
-      height: 50px;
-      background: #000;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .black-bar.top { top: 0; }
-    .black-bar.bottom { bottom: 0; }
-
-    /* LOGO EN SUPERIOR DERECHA - TODOS LOS DISPOSITIVOS */
+    /* LOGO: TAMAÑO Y POSICIÓN FIJA EN TODOS LOS DISPOSITIVOS */
     .tv-logo {
       position: fixed;
-      top: 40px;
-      right: 40px;
-      width: 90px;
+      top: 30px;
+      right: 30px;
+      width: 70px;
       z-index: 10;
       opacity: 0;
-      transition: opacity 0.6s;
+      transition: opacity 0.6s, transform 0.3s ease;
       filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+      transform-origin: top right;
     }
     .tv-logo.show { opacity: 1; }
-
-    /* RESPONSIVE: AJUSTE DE TAMAÑO Y MARGEN */
-    @media (max-width: 768px) {
-      .tv-inner {
-        transform: rotate(90deg);
-        transform-origin: center center;
-        width: 100vh;
-        height: 100vw;
-        left: 50%;
-        top: 50%;
-        translate: -50% -50%;
-      }
-      #videoTv {
-        width: 100vh;
-        height: 100vw;
-        object-fit: cover;
-      }
-      .black-bar { height: 35px; }
-      .tv-logo {
-        width: 70px;
-        top: 30px;
-        right: 30px;
-      }
-    }
-
-    @media (min-width: 1200px) and (min-height: 700px) {
-      .tv-logo {
-        width: 120px;
-        top: 60px;
-        right: 60px;
-      }
-    }
 
     /* BOTÓN CERRAR */
     .close-btn {
@@ -123,7 +77,23 @@
       fill: #fff;
     }
 
+    /* RESPONSIVE: MÓVIL (ROTACIÓN) */
     @media (max-width: 768px) {
+      .tv-inner {
+        transform: rotate(90deg);
+        transform-origin: center center;
+        width: 100vh;
+        height: 100vw;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+      }
+      #videoTv {
+        width: 100vh;
+        height: 100vw;
+        object-fit: cover;
+      }
+
       .close-btn {
         top: 15px;
         left: 15px;
@@ -132,24 +102,34 @@
       }
       .close-btn svg { width: 16px; height: 16px; }
     }
+
+    /* AJUSTE EN LANDSCAPE: Logo más cerca del borde */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .tv-logo {
+        top: 20px;
+        right: 20px;
+        width: 65px;
+      }
+    }
   </style>
 </head>
 <body>
-
   <div id="tvModal">
     <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
       <svg viewBox="0 0 24 24">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
       </svg>
     </button>
+
+    <!-- LOGO FUERA de .tv-inner → fijo en todos los dispositivos -->
+    <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
+         alt="Logo TV" class="tv-logo" id="logo" />
+
     <div class="tv-inner">
       <div class="video-wrapper">
         <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
-        <div class="black-bar top"></div>
-        <div class="black-bar bottom"></div>
+        <!-- BARRAS NEGRAS ELIMINADAS -->
       </div>
-      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
-           alt="Logo TV" class="tv-logo" id="logo" />
     </div>
   </div>
 
@@ -210,9 +190,25 @@
     document.getElementById('tvModal').onclick = (e) => { if (e.target === e.currentTarget) closeTVPlayer(); };
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTVPlayer(); });
 
+    // ROTACIÓN DEL LOGO EN MÓVIL
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        const logo = document.getElementById('logo');
+        logo.style.transition = 'transform 0.3s ease';
+
+        if (window.matchMedia("(orientation: landscape)").matches) {
+          logo.style.transform = 'rotate(-90deg)';
+          logo.style.transformOrigin = 'top right';
+        } else {
+          logo.style.transform = 'rotate(0deg)';
+        }
+      }, 150);
+    });
+
     document.addEventListener("DOMContentLoaded", openTVPlayer);
   </script>
 
+  <!-- PROTECCIÓN CONTRA COPIAR -->
   <script>
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
