@@ -82,76 +82,72 @@
   </div>
 
   <script>
-    const GITHUB_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
-    let hls, lastTime = 0, reloadTimer, checkTimer;
+    // === URL DIRECTA DEL STREAM (SIN GITHUB) ===
+    const STREAM_URL = "https://acceso.radiosportstv.online:3259/live/retroxtvlive.m3u8?t=" + Date.now(); // ← TU M3U8 AQUÍ
 
-    function loadStream() {
-      fetch(GITHUB_URL)
-        .then(r => r.ok ? r.text() : Promise.reject("No se pudo cargar el enlace"))
-        .then(url => {
-          const streamUrl = url.trim() + "?t=" + Date.now(); // Forzar recarga de m3u8
+    let hls, lastTime = 0, checkTimer;
 
-          if (hls) hls.destroy();
-          const video = document.getElementById('videoPlayer');
+    function initPlayer() {
+      const video = document.getElementById('videoPlayer');
+      const logo = document.getElementById('logo');
+      const modal = document.getElementById('tvModal');
 
-          if (Hls.isSupported()) {
-            hls = new Hls({ 
-              enableWorker: true,
-              liveSyncDurationCount: 3,
-              maxBufferLength: 10,
-              maxMaxBufferLength: 20
-            });
-            hls.loadSource(streamUrl);
-            hls.attachMedia(video);
+      modal.style.display = 'block';
+      logo.classList.remove('show');
 
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              video.play().catch(() => {});
-              startMonitoring();
-            });
+      if (Hls.isSupported()) {
+        hls = new Hls({
+          liveSyncDurationCount: 3,
+          maxBufferLength: 10,
+          maxMaxBufferLength: 20
+        });
+        hls.loadSource(STREAM_URL);
+        hls.attachMedia(video);
 
-            hls.on(Hls.Events.ERROR, (event, data) => {
-              if (data.fatal) {
-                console.error("HLS Error:", data);
-                setTimeout(loadStream, 3000); // Reintentar
-              }
-            });
-          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamUrl;
-            video.play().catch(() => {});
-            startMonitoring();
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {});
+          startMonitoring();
+        });
+
+        hls.on(Hls.Events.ERROR, (event, data) => {
+          if (data.fatal) {
+            console.error("HLS Error:", data);
+            setTimeout(initPlayer, 3000);
           }
-        })
-        .catch(err => showError(err.message));
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = STREAM_URL;
+        video.play().catch(() => {});
+        startMonitoring();
+      } else {
+        showError("Formato no soportado");
+      }
+
+      video.volume = 1.0;
+      setTimeout(() => logo.classList.add('show'), 3000);
     }
 
     function startMonitoring() {
       clearInterval(checkTimer);
       lastTime = document.getElementById('videoPlayer').currentTime;
 
-      // Verificar cada 15 segundos si el video avanza
       checkTimer = setInterval(() => {
         const video = document.getElementById('videoPlayer');
         const currentTime = video.currentTime;
 
         if (Math.abs(currentTime - lastTime) < 0.5 && !video.paused && !video.ended) {
           console.log("Stream congelado → recargando...");
-          loadStream(); // Recarga automática
+          initPlayer();
         } else {
           lastTime = currentTime;
         }
       }, 15000);
-
-      // Recargar m3u8 cada 30 segundos (GitHub se actualiza)
-      clearTimeout(reloadTimer);
-      reloadTimer = setTimeout(loadStream, 30000);
     }
 
     function showError(msg) {
-      const container = document.getElementById('tvContainer');
-      container.innerHTML += `
+      document.getElementById('tvContainer').innerHTML += `
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;">
-          Error: ${msg}<br>
-          <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
+          Error: ${msg}
         </div>`;
     }
 
@@ -184,20 +180,10 @@
       }
     }
 
-    // INICIAR
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById('tvModal').style.display = 'block';
-      document.getElementById('logo').classList.remove('show');
-      loadStream();
-      updateOrientation();
-      setTimeout(() => document.getElementById('logo').classList.add('show'), 3000);
-    });
-
     // EVENTOS
     document.getElementById('closeBtn').onclick = () => {
       if (hls) hls.destroy();
       clearInterval(checkTimer);
-      clearTimeout(reloadTimer);
       document.getElementById('tvModal').style.display = 'none';
       window.location.href = "index.html";
     };
@@ -208,6 +194,11 @@
 
     window.addEventListener('orientationchange', () => setTimeout(updateOrientation, 100));
     window.addEventListener('resize', updateOrientation);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initPlayer();
+      updateOrientation();
+    });
 
     // PROTECCIÓN
     ['contextmenu', 'selectstart', 'dragstart'].forEach(ev =>
