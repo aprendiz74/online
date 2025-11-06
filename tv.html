@@ -29,8 +29,6 @@
       object-fit: cover;
       background: #000;
     }
-
-    /* LOGO FIJO EN ESQUINA (SIEMPRE DERECHA) */
     .tv-logo {
       position: absolute;
       top: 30px;
@@ -43,8 +41,6 @@
       pointer-events: none;
     }
     .tv-logo.show { opacity: 1; }
-
-    /* BOTÓN CERRAR */
     .close-btn {
       position: fixed;
       top: 20px;
@@ -65,7 +61,6 @@
     }
     .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
     .close-btn svg { width: 18px; height: 18px; fill: #fff; }
-
     @media (max-width: 768px) {
       .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
       .close-btn svg { width: 16px; height: 16px; }
@@ -79,7 +74,6 @@
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
       </svg>
     </button>
-
     <div class="tv-container" id="tvContainer">
       <video id="videoPlayer" playsinline preload="auto"></video>
       <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
@@ -100,7 +94,6 @@
       modal.style.display = 'block';
       logo.classList.remove('show');
 
-      // Cargar stream
       fetch(GITHUB_URL)
         .then(r => r.ok ? r.text() : Promise.reject("No se pudo cargar el enlace"))
         .then(url => {
@@ -120,10 +113,7 @@
             throw new Error("Formato no soportado");
           }
 
-          // Volumen al 100%
           video.volume = 1.0;
-
-          // Mostrar logo tras 3s
           setTimeout(() => logo.classList.add('show'), 3000);
         })
         .catch(err => {
@@ -135,7 +125,6 @@
         });
     }
 
-    // === ROTACIÓN INTELIGENTE ===
     function updateOrientation() {
       const container = document.getElementById('tvContainer');
       const logo = document.getElementById('logo');
@@ -150,8 +139,9 @@
         container.style.top = '50%';
         container.style.translate = '-50% -50%';
 
-        logo.style.top = '20px';
-        logo.style.right = '20px';
+        // LOGO SUBIDO EN LANDSCAPE
+        logo.style.top = '10px';     // ← Más arriba
+        logo.style.right = '15px';   // ← Más cerca del borde
         logo.style.width = '65px';
       } else {
         container.style.transform = 'none';
@@ -167,7 +157,6 @@
       }
     }
 
-    // Cerrar
     document.getElementById('closeBtn').onclick = () => {
       if (hls) hls.destroy();
       document.getElementById('tvModal').style.display = 'none';
@@ -181,7 +170,6 @@
     window.addEventListener('orientationchange', () => setTimeout(updateOrientation, 100));
     window.addEventListener('resize', updateOrientation);
 
-    // Iniciar
     document.addEventListener("DOMContentLoaded", () => {
       initPlayer();
       updateOrientation();
