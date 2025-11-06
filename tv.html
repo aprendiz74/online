@@ -34,18 +34,26 @@
       transition: transform 0.3s ease;
       height: 100dvh;
       width: 100dvw;
+      /* FORZAR ROTACIÓN 90° */
+      transform: rotate(90deg);
+      transform-origin: center;
+      width: 100dvh;
+      height: 100dvw;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
     }
     #videoPlayer {
-      width: 100%;
-      height: 100%;
+      width: 100dvh;
+      height: 100dvw;
       object-fit: cover;
       background: #000;
     }
     .tv-logo {
       position: absolute;
-      top: 30px;
-      right: 30px;
-      width: 70px;
+      top: 10px;
+      right: 15px;
+      width: 65px;
       z-index: 10;
       opacity: 0;
       transition: opacity 0.6s ease;
@@ -55,15 +63,15 @@
     .tv-logo.show { opacity: 1; }
     .close-btn {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
       z-index: 15;
       background: rgba(255,255,255,0.2);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.3);
       border-radius: 50%;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -72,11 +80,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
     .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
-    .close-btn svg { width: 18px; height: 18px; fill: #fff; }
-    @media (max-width: 768px) {
-      .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
-      .close-btn svg { width: 16px; height: 16px; }
-    }
+    .close-btn svg { width: 16px; height: 16px; fill: #fff; }
   </style>
 </head>
 <body>
@@ -96,6 +100,28 @@
   <script>
     const STREAM_URL = "https://acceso.radiosportstv.online:3259/live/retroxtvlive.m3u8?t=" + Date.now();
     let hls, lastTime = 0, checkTimer;
+
+    // FORZAR ORIENTACIÓN LANDSCAPE
+    async function lockToLandscape() {
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('landscape');
+        }
+      } catch (err) {
+        console.log("No se pudo bloquear orientación (normal en iOS)");
+      }
+
+      // Forzar pantalla completa
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      }
+
+      // Ocultar barra de URL
+      setTimeout(() => window.scrollTo(0, 1), 100);
+    }
 
     function initPlayer() {
       const video = document.getElementById('videoPlayer');
@@ -120,8 +146,6 @@
         video.src = STREAM_URL;
         video.play().catch(() => {});
         startMonitoring();
-      } else {
-        showError("Formato no soportado");
       }
 
       video.volume = 1.0;
@@ -142,62 +166,11 @@
       }, 15000);
     }
 
-    function showError(msg) {
-      document.getElementById('tvContainer').innerHTML += `
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;">
-          Error: ${msg}
-        </div>`;
-    }
-
-    function updateOrientation() {
-      const container = document.getElementById('tvContainer');
-      const logo = document.getElementById('logo');
-      const isMobile = window.innerWidth <= 768;
-      const isLandscape = window.innerWidth > window.innerHeight;
-
-      if (isMobile && isLandscape) {
-        container.style.transform = 'rotate(90deg)';
-        container.style.width = '100dvh';
-        container.style.height = '100dvw';
-        container.style.left = '50%';
-        container.style.top = '50%';
-        container.style.translate = '-50% -50%';
-        logo.style.top = '10px';
-        logo.style.right = '15px';
-        logo.style.width = '65px';
-
-        // FORZAR PANTALLA COMPLETA AL GIRAR
-        setTimeout(() => {
-          if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-          } else if (document.documentElement.webkitRequestFullscreen) {
-            document.documentElement.webkitRequestFullscreen();
-          }
-        }, 300);
-      } else {
-        container.style.transform = 'none';
-        container.style.width = '100dvw';
-        container.style.height = '100dvh';
-        container.style.left = '0';
-        container.style.top = '0';
-        container.style.translate = 'none';
-        logo.style.top = '30px';
-        logo.style.right = '30px';
-        logo.style.width = '70px';
-      }
-
-      // OCULTAR BARRA DE URL
-      setTimeout(() => window.scrollTo(0, 1), 100);
-    }
-
-    // SALIR DE PANTALLA COMPLETA AL CERRAR
     document.getElementById('closeBtn').onclick = () => {
       if (hls) hls.destroy();
       clearInterval(checkTimer);
-      if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      }
+      if (document.fullscreenElement) document.exitFullscreen();
+      if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
       document.getElementById('tvModal').style.display = 'none';
       window.location.href = "index.html";
     };
@@ -206,14 +179,11 @@
       if (e.target === e.currentTarget) document.getElementById('closeBtn').click();
     };
 
-    window.addEventListener('orientationchange', () => setTimeout(updateOrientation, 100));
-    window.addEventListener('resize', updateOrientation);
-
+    // INICIAR TODO
     document.addEventListener("DOMContentLoaded", () => {
-      // Ocultar barra al inicio
-      setTimeout(() => window.scrollTo(0, 1), 500);
+      lockToLandscape();
       initPlayer();
-      updateOrientation();
+      setTimeout(() => window.scrollTo(0, 1), 500);
     });
 
     // PROTECCIÓN
