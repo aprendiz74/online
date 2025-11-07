@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TV ZOOM MUSICAL - En Vivo</title>
   <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow:hidden; background:#000; }
-
     #tvModal {
       position: fixed;
       inset: 0;
@@ -16,7 +15,6 @@
       background: #000;
       z-index: 12000;
     }
-
     .tv-inner {
       position: absolute;
       inset: 0;
@@ -24,72 +22,13 @@
       justify-content: center;
       align-items: center;
     }
-
     .video-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
     }
-
-    #videoTv {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #000;
-    }
-
-    /* LOGO SOBRE EL VIDEO - SIEMPRE VISIBLE */
-    .tv-logo-overlay {
-      position: absolute;
-      top: 40px;
-      right: 100px;
-      width: 90px;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-      user-select: none;
-    }
-    .tv-logo-overlay.show { opacity: 1; }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .tv-inner {
-        transform: rotate(90deg);
-        transform-origin: center center;
-        width: 100vh;
-        height: 100vw;
-        left: 50%;
-        top: 50%;
-        translate: -50% -50%;
-      }
-      .video-wrapper, #videoTv {
-        width: 100vh;
-        height: 100vw;
-      }
-      .tv-logo-overlay {
-        width: 70px;
-        top: 30px;
-        right: 30px;
-      }
-    }
-
-    @media (min-width: 1200px) and (min-height: 700px) {
-      .tv-logo-overlay {
-        width: 140px;
-        top: 70px;
-        right: 70px;
-      }
-    }
-
-    @media (min-width: 1920px) {
-      .tv-logo-overlay {
-        width: 180px;
-        top: 90px;
-        right: 90px;
-      }
-    }
+    #videoTv { width: 100%; height: 100%; object-fit: cover; background: #000; }
 
     /* BOTÓN CERRAR */
     .close-btn {
@@ -116,106 +55,105 @@
       .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
       .close-btn svg { width: 16px; height: 16px; }
     }
+
+    /* Logo responsive overlay */
+    .logo-overlay img {
+      max-width: 15vw;   /* Se adapta al ancho de la pantalla */
+      min-width: 60px;   /* Tamaño mínimo para móviles pequeños */
+      max-height: 15vh;  /* No crece demasiado en pantallas grandes */
+      margin: 2vh 2vw;   /* Márgenes proporcionales */
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
 
-  <div id="tvModal">
-    <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar">
-      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-    </button>
+<div id="tvModal">
+  <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
 
-    <div class="tv-inner">
-      <div class="video-wrapper">
-        <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
-
-        <!-- LOGO SOBRE EL VIDEO -->
-        <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
-             alt="Logo" class="tv-logo-overlay" id="logoOverlay" />
-      </div>
+  <div class="tv-inner">
+    <div class="video-wrapper">
+      <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
     </div>
   </div>
+</div>
 
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-  <script>
-    let player = null;
-    const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/videojs-overlay@2.1.0/dist/videojs-overlay.min.js"></script>
+<script>
+  let player = null;
+  const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
 
-    function openTVPlayer() {
-      document.getElementById('tvModal').style.display = 'block';
-      const logo = document.getElementById('logoOverlay');
-      logo.classList.remove('show');
+  function openTVPlayer() {
+    document.getElementById('tvModal').style.display = 'block';
 
-      if (!player) {
-        player = videojs('videoTv', {
-          autoplay: true,
-          controls: true,
-          fluid: true,
-          fill: true,
-          html5: {
-            vhs: { overrideNative: true },
-            nativeVideoTracks: false,
-            nativeAudioTracks: false,
-            nativeTextTracks: false
-          }
-        });
+    if (!player) {
+      player = videojs('videoTv', {
+        autoplay: true,
+        controls: true,
+        fluid: true,
+        fill: true,
+        html5: {
+          vhs: { overrideNative: true },
+          nativeVideoTracks: false,
+          nativeAudioTracks: false,
+          nativeTextTracks: false
+        }
+      });
 
-        // FORZAR QUE EL LOGO ESTÉ ENCIMA EN FULLSCREEN
-        player.on('fullscreenchange', () => {
-          setTimeout(() => {
-            const logo = document.getElementById('logoOverlay');
-            if (player.isFullscreen()) {
-              logo.style.position = 'fixed';
-              logo.style.top = '40px';
-              logo.style.right = '100px';
-              logo.style.zIndex = '2147483647'; // Máximo z-index
-            } else {
-              logo.style.position = 'absolute';
-            }
-          }, 100);
-        });
-      }
-
-      fetch(GITHUB_STREAM_URL)
-        .then(r => r.ok ? r.text() : Promise.reject("Error de red"))
-        .then(url => {
-          const streamUrl = url.trim();
-          if (!streamUrl.includes('.m3u8')) throw new Error("No es .m3u8");
-          player.src({ src: streamUrl, type: 'application/x-mpegURL' });
-          player.play().catch(() => {});
-          setTimeout(() => logo.classList.add('show'), 3000);
-        })
-        .catch(err => {
-          document.querySelector('.video-wrapper').innerHTML += `
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;z-index:9999;">
-              Error: ${err.message}<br>
-              <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver enlace</a></small>
-            </div>`;
-        });
+      // Overlay responsive del logo
+      player.overlay({
+        overlays: [{
+          content: '<img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp" alt="Logo ZOOM MUSICAL">',
+          start: 'load',
+          end: 'ended',
+          align: 'top-right',
+          class: 'logo-overlay'
+        }]
+      });
     }
 
-    function closeTVPlayer() {
-      if (player) player.pause();
-      document.getElementById('tvModal').style.display = 'none';
-      document.getElementById('logoOverlay').classList.remove('show');
-      window.location.href = "index.html";
-    }
+    fetch(GITHUB_STREAM_URL)
+      .then(r => r.ok ? r.text() : Promise.reject("Error de red"))
+      .then(url => {
+        const streamUrl = url.trim();
+        if (!streamUrl.includes('.m3u8')) throw new Error("No es .m3u8");
+        player.src({ src: streamUrl, type: 'application/x-mpegURL' });
+        player.play().catch(() => {});
+      })
+      .catch(err => {
+        document.querySelector('.video-wrapper').innerHTML += `
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;z-index:9999;">
+            Error: ${err.message}<br>
+            <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver enlace</a></small>
+          </div>`;
+      });
+  }
 
-    // Eventos
-    document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
-    document.getElementById('tvModal').onclick = e => e.target === e.currentTarget && closeTVPlayer();
-    document.addEventListener('keydown', e => e.key === 'Escape' && closeTVPlayer());
-    document.addEventListener("DOMContentLoaded", openTVPlayer);
+  function closeTVPlayer() {
+    if (player) player.pause();
+    document.getElementById('tvModal').style.display = 'none';
+    window.location.href = "index.html";
+  }
 
-    // BLOQUEAR DEVTOOLS
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey && ['a','c','u','s'].includes(e.key)) || 
-          (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) || 
-          e.key === 'F12') e.preventDefault();
-    });
-  </script>
+  // Eventos
+  document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
+  document.getElementById('tvModal').onclick = e => e.target === e.currentTarget && closeTVPlayer();
+  document.addEventListener('keydown', e => e.key === 'Escape' && closeTVPlayer());
+  document.addEventListener('DOMContentLoaded', openTVPlayer);
+
+  // BLOQUEAR DEVTOOLS
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey && ['a','c','u','s'].includes(e.key)) ||
+        (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) ||
+        e.key === 'F12') e.preventDefault();
+  });
+</script>
+
 </body>
 </html>
