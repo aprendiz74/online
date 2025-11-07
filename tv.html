@@ -29,6 +29,7 @@
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden;
     }
 
     #videoTv {
@@ -38,30 +39,21 @@
       background: #000;
     }
 
-    .black-bar {
+    /* LOGO SOBRE EL VIDEO - SIEMPRE VISIBLE */
+    .tv-logo-overlay {
       position: absolute;
-      width: 100%;
-      height: 50px;
-      background: #000;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .black-bar.top { top: 0; }
-    .black-bar.bottom { bottom: 0; }
-
-    /* LOGO EN SUPERIOR DERECHA - TODOS LOS DISPOSITIVOS */
-    .tv-logo {
-      position: fixed;
       top: 40px;
-      right: 80px;
+      right: 100px;
       width: 90px;
-      z-index: 10;
+      z-index: 9999;
       opacity: 0;
-      transition: opacity 0.6s;     
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+      user-select: none;
     }
-    .tv-logo.show { opacity: 1; }
+    .tv-logo-overlay.show { opacity: 1; }
 
-    /* RESPONSIVE: AJUSTE DE TAMAÑO Y MARGEN */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .tv-inner {
         transform: rotate(90deg);
@@ -72,13 +64,11 @@
         top: 50%;
         translate: -50% -50%;
       }
-      #videoTv {
+      .video-wrapper, #videoTv {
         width: 100vh;
         height: 100vw;
-        object-fit: cover;
       }
-      .black-bar { height: 35px; }
-      .tv-logo {
+      .tv-logo-overlay {
         width: 70px;
         top: 30px;
         right: 30px;
@@ -86,10 +76,18 @@
     }
 
     @media (min-width: 1200px) and (min-height: 700px) {
-      .tv-logo {
-        width: 120px;
-        top: 60px;
-        right: 60px;
+      .tv-logo-overlay {
+        width: 140px;
+        top: 70px;
+        right: 70px;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .tv-logo-overlay {
+        width: 180px;
+        top: 90px;
+        right: 90px;
       }
     }
 
@@ -98,10 +96,10 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 15;
-      background: rgba(255, 255, 255, 0.2);
+      z-index: 10000;
+      background: rgba(255,255,255,0.2);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       width: 44px;
       height: 44px;
@@ -109,26 +107,13 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: all 0.3s;
     }
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
-      transform: scale(1.1);
-    }
-    .close-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #fff;
-    }
+    .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
+    .close-btn svg { width: 18px; height: 18px; fill: #fff; }
 
     @media (max-width: 768px) {
-      .close-btn {
-        top: 15px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-      }
+      .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
       .close-btn svg { width: 16px; height: 16px; }
     }
   </style>
@@ -136,17 +121,18 @@
 <body>
 
   <div id="tvModal">
-    <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar TV">
-      <svg viewBox="0 0 24 24">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg>
+    <button id="tvCloseBtn" class="close-btn" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
     </button>
+
     <div class="tv-inner">
       <div class="video-wrapper">
-        <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>        
+        <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
+
+        <!-- LOGO SOBRE EL VIDEO -->
+        <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
+             alt="Logo" class="tv-logo-overlay" id="logoOverlay" />
       </div>
-      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/LOGO-MARCA.webp"
-           alt="Logo TV" class="tv-logo" id="logo" />
     </div>
   </div>
 
@@ -156,9 +142,8 @@
     const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
 
     function openTVPlayer() {
-      const modal = document.getElementById('tvModal');
-      modal.style.display = 'block';
-      const logo = document.getElementById('logo');
+      document.getElementById('tvModal').style.display = 'block';
+      const logo = document.getElementById('logoOverlay');
       logo.classList.remove('show');
 
       if (!player) {
@@ -167,7 +152,6 @@
           controls: true,
           fluid: true,
           fill: true,
-          sources: [],
           html5: {
             vhs: { overrideNative: true },
             nativeVideoTracks: false,
@@ -175,52 +159,63 @@
             nativeTextTracks: false
           }
         });
+
+        // FORZAR QUE EL LOGO ESTÉ ENCIMA EN FULLSCREEN
+        player.on('fullscreenchange', () => {
+          setTimeout(() => {
+            const logo = document.getElementById('logoOverlay');
+            if (player.isFullscreen()) {
+              logo.style.position = 'fixed';
+              logo.style.top = '40px';
+              logo.style.right = '100px';
+              logo.style.zIndex = '2147483647'; // Máximo z-index
+            } else {
+              logo.style.position = 'absolute';
+            }
+          }, 100);
+        });
       }
 
       fetch(GITHUB_STREAM_URL)
-        .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
+        .then(r => r.ok ? r.text() : Promise.reject("Error de red"))
         .then(url => {
           const streamUrl = url.trim();
-          if (!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
+          if (!streamUrl.includes('.m3u8')) throw new Error("No es .m3u8");
           player.src({ src: streamUrl, type: 'application/x-mpegURL' });
           player.play().catch(() => {});
           setTimeout(() => logo.classList.add('show'), 3000);
         })
         .catch(err => {
           document.querySelector('.video-wrapper').innerHTML += `
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;font-family:system-ui;">
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;z-index:9999;">
               Error: ${err.message}<br>
-              <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small>
+              <small><a href="https://github.com/aprendiz74/online/blob/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver enlace</a></small>
             </div>`;
         });
     }
 
     function closeTVPlayer() {
-      const modal = document.getElementById('tvModal');
       if (player) player.pause();
-      modal.style.display = 'none';
-      document.getElementById('logo').classList.remove('show');
+      document.getElementById('tvModal').style.display = 'none';
+      document.getElementById('logoOverlay').classList.remove('show');
       window.location.href = "index.html";
     }
 
+    // Eventos
     document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
-    document.getElementById('tvModal').onclick = (e) => { if (e.target === e.currentTarget) closeTVPlayer(); };
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTVPlayer(); });
-
+    document.getElementById('tvModal').onclick = e => e.target === e.currentTarget && closeTVPlayer();
+    document.addEventListener('keydown', e => e.key === 'Escape' && closeTVPlayer());
     document.addEventListener("DOMContentLoaded", openTVPlayer);
-  </script>
 
-  <script>
+    // BLOQUEAR DEVTOOLS
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
     document.addEventListener('dragstart', e => e.preventDefault());
     document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
+      if ((e.ctrlKey && ['a','c','u','s'].includes(e.key)) || 
+          (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) || 
+          e.key === 'F12') e.preventDefault();
     });
   </script>
 </body>
-
 </html>
-
