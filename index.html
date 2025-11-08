@@ -263,6 +263,32 @@
       opacity: 0;
       pointer-events: none;
     }
+	/* 🔹 Estilos para el contenedor de clima y hora */
+.contenedor-tiempo {
+  text-align: center;
+  margin-top: 25px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  padding: 10px 15px;
+  border-radius: 12px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.fecha-hora {
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.clima {
+  font-size: 15px;
+  font-weight: 600;
+}
+
   </style>
 </head>
 <body>
@@ -420,6 +446,12 @@
             DESCARGAR AHORA
           </a>
         </section>
+		<!-- 🔹 Contenedor de tiempo y clima -->
+<div id="contenedor-tiempo" class="contenedor-tiempo">
+  <div id="fecha-hora" class="fecha-hora">Cargando fecha...</div>
+  <div id="clima" class="clima">Cargando clima...</div>
+</div>
+
 
         <!-- BANNER SOLO EN MÓVILES -->
         <div class="final-banner-mobile">
@@ -575,7 +607,7 @@
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
   </script>
-
+  
   <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -587,6 +619,36 @@
     if (e.key === 'F12') e.preventDefault();
   });
 </script>
+
+<script>
+// 🕒 Mostrar fecha y hora local
+function actualizarFechaHora() {
+  const ahora = new Date();
+  const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const fecha = ahora.toLocaleDateString('es-EC', opciones);
+  const hora = ahora.toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById("fecha-hora").textContent = `${fecha} • ${hora}`;
+}
+actualizarFechaHora();
+setInterval(actualizarFechaHora, 60000);
+
+// 🌤 Obtener clima actual (OpenWeather)
+const apiKey = "df2f4c77e2b9b6c1a66e3db87f8c8c41"; // ejemplo de API pública
+const ciudad = "Quito,EC";
+const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${apiKey}`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    const temp = Math.round(data.main.temp);
+    const desc = data.weather[0].description;
+    document.getElementById("clima").textContent = `${temp}°C • ${desc}`;
+  })
+  .catch(() => {
+    document.getElementById("clima").textContent = "No disponible";
+  });
+</script>
+
 
 </body>
 
