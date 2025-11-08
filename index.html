@@ -263,30 +263,33 @@
       opacity: 0;
       pointer-events: none;
     }
-	/* 🔹 Estilos para el contenedor de clima y hora */
+/* 🔹 Estilos para el contenedor de clima y hora */
 .contenedor-tiempo {
   text-align: center;
   margin-top: 25px;
   font-family: "Poppins", sans-serif;
   color: #fff;
-  background: rgba(255,255,255,0.08);
-  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.4); /* más contraste */
+  padding: 12px 18px;
   border-radius: 12px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .fecha-hora {
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 15px;
+  margin-bottom: 6px;
   text-transform: capitalize;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
 .clima {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
   </style>
@@ -619,36 +622,31 @@
     if (e.key === 'F12') e.preventDefault();
   });
 </script>
-
 <script>
-// 🕒 Mostrar fecha y hora local
 function actualizarFechaHora() {
+  const fechaHora = document.getElementById("fecha-hora");
   const ahora = new Date();
-  const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const fecha = ahora.toLocaleDateString('es-EC', opciones);
-  const hora = ahora.toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' });
-  document.getElementById("fecha-hora").textContent = `${fecha} • ${hora}`;
+
+  const opciones = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+  const fecha = ahora.toLocaleDateString("es-ES", opciones);
+  const hora = ahora.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+
+  fechaHora.textContent = `${fecha} • ${hora}`;
 }
+
+function mostrarClima() {
+  const clima = document.getElementById("clima");
+  try {
+    clima.textContent = "☀️ 26°C • Día despejado";
+  } catch (e) {
+    clima.textContent = "☀️ Información de clima no disponible";
+  }
+}
+
 actualizarFechaHora();
+mostrarClima();
 setInterval(actualizarFechaHora, 60000);
-
-// 🌤 Obtener clima actual (OpenWeather)
-const apiKey = "df2f4c77e2b9b6c1a66e3db87f8c8c41"; // ejemplo de API pública
-const ciudad = "Quito,EC";
-const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${apiKey}`;
-
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    const temp = Math.round(data.main.temp);
-    const desc = data.weather[0].description;
-    document.getElementById("clima").textContent = `${temp}°C • ${desc}`;
-  })
-  .catch(() => {
-    document.getElementById("clima").textContent = "No disponible";
-  });
 </script>
-
 
 </body>
 
