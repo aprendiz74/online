@@ -217,20 +217,21 @@ function openTVPlayer() {
     });
 }
 
-// 🔹 Doble giro cada 20s con brillo
+// 🔹 Doble rotación completa (720°) cada 30s, reiniciando cada ciclo
 function startLogoRotation(logo) {
-  function rotateLogo() {
-    logo.style.transform = 'rotateY(180deg) scale(1.05)';
-    logo.style.filter = 'none';
+  let deg = 0;
 
-    setTimeout(() => {
-      logo.style.transform = 'rotateY(360deg) scale(1)';
-      logo.style.filter = 'none';
-      setTimeout(rotateLogo, 20000);
-    }, 1500);
+  function rotateLogo() {
+    deg += 720; // suma 2 giros completos
+    logo.style.transition = 'transform 4s ease-in-out';
+    logo.style.transform = `rotateY(${deg}deg)`;
+
+    setTimeout(rotateLogo, 30000); // repetir cada 30 segundos
   }
+
   rotateLogo();
 }
+
 
 
 function closeTVPlayer() {
