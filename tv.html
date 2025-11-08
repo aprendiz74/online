@@ -50,22 +50,40 @@ html, body { height:100%; overflow:hidden; background:#000; }
 .black-bar.top { top: 0; }
 .black-bar.bottom { bottom: 0; }
 
-/* Logo siempre visible */
+/* 🔹 Logo con doble cara */
 .logo-container {
   position: absolute;
   top: 2%;
   right: 3%;
   z-index: 9999;
+  perspective: 1000px;
   pointer-events: none;
 }
-.logo-container img {
-  max-width: 12vw;
-  min-width: 60px;
-  max-height: 12vh;
-  opacity: 0;
-  transition: opacity 0.6s ease, transform 1.5s ease-in-out;
-  transform-origin: center center;
+
+.logo-inner {
+  width: 130px;
+  height: 130px;
+  transform-style: preserve-3d;
+  transition: transform 1.5s ease-in-out, filter 1.5s ease;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
+}
+
+.logo-inner img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.logo-front, .logo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
+}
+
+.logo-back {
+  transform: rotateY(180deg);
+  filter: brightness(1.3) saturate(1.2);
 }
 
 /* Botón cerrar */
@@ -90,7 +108,7 @@ html, body { height:100%; overflow:hidden; background:#000; }
 .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
 .close-btn svg { width: 18px; height: 18px; fill: #fff; }
 
-/* Responsivo: móviles y tablets */
+/* Responsivo */
 @media (max-width: 1024px) {
   .tv-inner {
     transform: rotate(90deg);
@@ -104,23 +122,23 @@ html, body { height:100%; overflow:hidden; background:#000; }
   #videoTv { width: 100vh; height: 100vw; object-fit: cover; }
   .black-bar { height: 35px; }
   .logo-container { top: 3%; right: 5%; }
-  .logo-container img { max-width: 20vw; max-height: 15vh; }
+  .logo-inner { width: 100px; height: 100px; }
   .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
   .close-btn svg { width: 16px; height: 16px; }
 }
 
-/* Pantallas grandes y TVs Smart */
+/* Pantallas grandes */
 @media (min-width: 1200px) and (min-height: 700px) {
   .logo-container { top: 60px; right: 120px; }
-  .logo-container img { max-width: 130px; max-height: 15vh; }
+  .logo-inner { width: 150px; height: 150px; }
 }
 
-/* Pantallas ultra grandes TV Smart 4K+ */
+/* TV 4K */
 @media (min-width: 1920px) and (min-height: 1080px) {
   .tv-inner { transform: none; width: 100%; height: 100%; }
   #videoTv { width: 100%; height: 100%; }
   .logo-container { top: 3%; right: 3%; }
-  .logo-container img { max-width: 150px; max-height: 15vh; }
+  .logo-inner { width: 180px; height: 180px; }
 }
 </style>
 </head>
@@ -135,9 +153,16 @@ html, body { height:100%; overflow:hidden; background:#000; }
     <div class="video-wrapper">
       <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
 
-      <!-- Logo -->
+      <!-- 🔹 Logo doble cara -->
       <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/nuevo-logoTV.webp" alt="Logo TV" id="logo">
+        <div class="logo-inner" id="logo">
+          <div class="logo-front">
+            <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/nuevo-logoTV.webp" alt="Logo Frente">
+          </div>
+          <div class="logo-back">
+            <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/nuevo-logoTV.webp" alt="Logo Reverso">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -179,7 +204,7 @@ function openTVPlayer() {
       player.play().catch(()=>{});
       setTimeout(()=>{ 
         logo.style.opacity = 1; 
-        startLogoRotation(logo); // inicia doble giro
+        startLogoRotation(logo);
       }, 1000);
     })
     .catch(err => {
@@ -192,26 +217,16 @@ function openTVPlayer() {
     });
 }
 
-// Doble giro horizontal cada 40s
+// 🔹 Doble giro cada 20s con brillo
 function startLogoRotation(logo) {
   function rotateLogo() {
-    // primer giro
-    logo.style.transition = 'transform 1.5s ease-in-out';
-    logo.style.transform = 'rotateY(180deg)';
+    logo.style.transform = 'rotateY(180deg) scale(1.05)';
+    logo.style.filter = 'drop-shadow(0 0 25px rgba(255,255,255,0.8)) brightness(1.4)';
 
     setTimeout(() => {
-      // segundo giro
-      logo.style.transition = 'transform 1.5s ease-in-out';
-      logo.style.transform = 'rotateY(360deg)';
-
-      setTimeout(() => {
-        // vuelve a posición inicial
-        logo.style.transition = 'transform 1.5s ease-in-out';
-        logo.style.transform = 'rotateY(0deg)';
-
-        // espera 40s antes de repetir
-        setTimeout(rotateLogo, 40000);
-      }, 1500);
+      logo.style.transform = 'rotateY(360deg) scale(1)';
+      logo.style.filter = 'drop-shadow(0 0 10px rgba(255,255,255,0.5)) brightness(1.1)';
+      setTimeout(rotateLogo, 20000);
     }, 1500);
   }
   rotateLogo();
@@ -230,18 +245,8 @@ document.getElementById('tvModal').onclick = (e) => { if(e.target === e.currentT
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeTVPlayer(); });
 document.addEventListener("DOMContentLoaded", openTVPlayer);
 </script>
-   <script>
-  // PROTECCIÓN COMPLETA Y ROBUSTA
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
-</script>
+
+
 
 </body>
 </html>
-
