@@ -140,6 +140,24 @@
       .close-btn svg { width: 16px; height: 16px; }
     }
 
+    /* BOTÓN FULLSCREEN */
+    #fullscreen-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-family: system-ui;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 20;
+      display: none;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -156,6 +174,8 @@
       <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
       <div class="black-bar top"></div>
       <div class="black-bar bottom"></div>
+      <!-- 🔹 Botón fullscreen -->
+      <div id="fullscreen-btn">PANTALLA COMPLETA</div>
     </div>
 
     <!-- 🔹 Logo doble cara -->
@@ -183,9 +203,10 @@ function openTVPlayer() {
 
   const logoContainer = document.getElementById('logo-container');
   const logoInner = document.getElementById('logo-inner');
+  const fsBtn = document.getElementById('fullscreen-btn');
   logoContainer.classList.remove('show');
 
-  if(!player){
+  if (!player) {
     player = videojs('videoTv', {
       autoplay: true,
       controls: true,
@@ -205,14 +226,22 @@ function openTVPlayer() {
     .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
     .then(url => {
       const streamUrl = url.trim();
-      if(!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
+      if (!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
       player.src({ src: streamUrl, type: 'application/x-mpegURL' });
-      player.play().catch(()=>{});
-      
-      // 🔹 Aparece y rota el logo después de 5s
+      player.play().catch(() => {});
+
+      // 🔹 Aparece el logo después de 5s y muestra botón fullscreen
       setTimeout(() => {
         logoContainer.classList.add('show');
         startLogoRotation(logoInner);
+
+        // Mostrar botón fullscreen
+        fsBtn.style.display = 'block';
+        fsBtn.onclick = () => {
+          goFullscreen();
+          fsBtn.style.display = 'none';
+        };
+
       }, 5000);
 
     })
@@ -225,24 +254,47 @@ function openTVPlayer() {
     });
 }
 
-// 🔹 Rotación 3D del logo (suavizada)
+// 🔹 Rotación 3D del logo
 function startLogoRotation(logo) {
   let deg = 0;
   function rotateLogo() {
-    deg += 720; // doble giro
-    logo.style.transition = 'transform 6s ease-in-out'; // antes era 4s
+    deg += 720;
+    logo.style.transition = 'transform 6s ease-in-out';
     logo.style.transform = `rotateY(${deg}deg)`;
-    setTimeout(rotateLogo, 30000); // pausa 24s
+    setTimeout(rotateLogo, 30000);
   }
   rotateLogo();
 }
 
+// 🔹 Función para activar fullscreen (solo por acción del usuario)
+function goFullscreen() {
+  const modal = document.getElementById('tvModal');
+  if (modal.requestFullscreen) {
+    modal.requestFullscreen().catch(() => {});
+  } else if (modal.webkitRequestFullscreen) { 
+    modal.webkitRequestFullscreen().catch(() => {});
+  } else if (modal.msRequestFullscreen) { 
+    modal.msRequestFullscreen().catch(() => {});
+  }
+}
+
+// 🔹 Función para salir de fullscreen
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  } else if (document.webkitExitFullscreen) { 
+    document.webkitExitFullscreen().catch(() => {});
+  } else if (document.msExitFullscreen) { 
+    document.msExitFullscreen().catch(() => {});
+  }
+}
 
 function closeTVPlayer() {
   const modal = document.getElementById('tvModal');
-  if(player) player.pause();
+  if (player) player.pause();
   modal.style.display = 'none';
   document.getElementById('logo-container').classList.remove('show');
+  exitFullscreen();
   window.location.href = "index.html";
 }
 
@@ -251,17 +303,16 @@ document.getElementById('tvModal').onclick = (e) => { if(e.target === e.currentT
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeTVPlayer(); });
 
 document.addEventListener("DOMContentLoaded", openTVPlayer);
-</script>
- <script>
-  // PROTECCIÓN COMPLETA Y ROBUSTA
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
+
+// PROTECCIÓN COMPLETA
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+  if (e.key === 'F12') e.preventDefault();
+});
 </script>
 
 </body>
