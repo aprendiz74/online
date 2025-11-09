@@ -296,7 +296,7 @@
               </div>
             </article>
             <article>
-             +              <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp')"></div>
+              <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp')"></div>
               <div class="section">
                 <h3><a href="noticia-2.html" class="news-link">CR7 NO PUEDE GANAR TÍTULOS EN ARABIA:</a></h3>
                 <p>Karim Benzema deja a Cristiano Ronaldo fuera de la King’s Cup.</p>
@@ -365,132 +365,149 @@
   </footer>
 
   <!-- SCRIPT -->
-  <script>
-    // Fecha actual
-    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
+<script>
+  // Fecha actual
+  document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
 
-    // SLIDER HERO
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.dot');
+  // SLIDER HERO
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.dot');
 
-    function showSlide(n) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slides[n].classList.add('active');
-      dots[n].classList.add('active');
-      currentSlide = n;
-    }
+  function showSlide(n) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[n].classList.add('active');
+    dots[n].classList.add('active');
+    currentSlide = n;
+  }
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
 
-    function goToSlide(n) {
-      showSlide(n);
-    }
+  function goToSlide(n) {
+    showSlide(n);
+  }
 
-    setInterval(nextSlide, 5000);
+  setInterval(nextSlide, 5000);
 
-    // === AUDIO GLOBAL EN VIVO (CORREGIDO PARA MÓVILES) ===
-    const globalPlayer = document.getElementById('global-live-player');
-    const liveBtn = document.getElementById('live-btn');
-    const liveText = liveBtn.querySelector('.live-text');
-    const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+  // === AUDIO GLOBAL EN VIVO (AUTO PLAY) ===
+  const globalPlayer = document.getElementById('global-live-player');
+  const liveBtn = document.getElementById('live-btn');
+  const liveText = liveBtn.querySelector('.live-text');
+  const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
 
-    // Cargar estado (solo preparar)
-    const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
+  // Revisar si antes estaba sonando
+  const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
+
+  window.addEventListener('DOMContentLoaded', () => {
     if (shouldPlay) {
       globalPlayer.src = liveStream;
-      liveBtn.classList.add('playing');
-      liveText.textContent = "PAUSAR";
-    }
-
-    function startLive() {
-      if (globalPlayer.src !== liveStream) globalPlayer.src = liveStream;
-      globalPlayer.play().catch(err => {
-        console.warn("Requiere interacción del usuario:", err);
+      globalPlayer.play().then(() => {
+        liveBtn.classList.add('playing');
+        liveText.textContent = "PAUSAR";
+      }).catch(err => {
+        console.warn("Autoplay bloqueado:", err);
         liveText.textContent = "TOCA PARA REPRODUCIR";
       });
-      liveBtn.classList.add('playing');
+    }
+  });
+
+  function startLive() {
+    if (globalPlayer.src !== liveStream) globalPlayer.src = liveStream;
+    globalPlayer.play().catch(err => {
+      console.warn("Requiere interacción del usuario:", err);
+      liveText.textContent = "TOCA PARA REPRODUCIR";
+    });
+    liveBtn.classList.add('playing');
+    liveText.textContent = "PAUSAR";
+    localStorage.setItem('radio-live-playing', 'true');
+  }
+
+  function pauseLive() {
+    globalPlayer.pause();
+    liveBtn.classList.remove('playing');
+    liveText.textContent = "EN VIVO";
+    localStorage.setItem('radio-live-playing', 'false');
+  }
+
+  liveBtn.addEventListener('click', () => {
+    liveBtn.classList.contains('playing') ? pauseLive() : startLive();
+  });
+
+  globalPlayer.addEventListener('error', () => {
+    if (liveBtn.classList.contains('playing')) {
+      liveText.textContent = "RECONECTANDO...";
+      setTimeout(() => { if (liveBtn.classList.contains('playing')) startLive(); }, 3000);
+    }
+  });
+
+  globalPlayer.addEventListener('canplay', () => {
+    if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
       liveText.textContent = "PAUSAR";
-      localStorage.setItem('radio-live-playing', 'true');
+    }
+  });
+
+  // RANKING
+  let currentPlayBtn = null;
+  const rankingData = [
+    {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://maicitoradio.com/pistas/1.mp3"},
+    {pos:2,artista:"Cuco",cancion:"Para ti",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3"},
+    {pos:3,artista:"Arthur y Carlos Vives",cancion:"GOODBYE",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3"},
+    {pos:4,artista:"Judeline",cancion:"Chica de cristal",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3"},
+    {pos:5,artista:"Miguel Bueno",cancion:"Solcito",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3"}
+  ];
+
+  const list = document.getElementById('ranking-list');
+  rankingData.forEach((item) => {
+    const div = document.createElement('div');
+    div.className = 'ranking-item';
+    div.innerHTML = `
+      <div class="ranking-pos">${item.pos}</div>
+      <div class="ranking-meta">
+        <div class="artist">${item.artista}</div>
+        <div class="song">${item.cancion}</div>
+      </div>
+      <div class="play" data-mp3="${item.mp3}" aria-label="Reproducir ${item.cancion}">
+        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+
+  const audio = document.getElementById('audio-player');
+  list.addEventListener('click', (e) => {
+    const playBtn = e.target.closest('.play');
+    if (!playBtn) return;
+    const mp3 = playBtn.dataset.mp3;
+
+    if (currentPlayBtn === playBtn && !audio.paused) {
+      audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
     }
 
-    function pauseLive() {
-      globalPlayer.pause();
-      liveBtn.classList.remove('playing');
-      liveText.textContent = "EN VIVO";
-      localStorage.setItem('radio-live-playing', 'false');
-    }
+    if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
+    audio.src = mp3; audio.play().catch(() => {});
+    playBtn.classList.add('playing'); currentPlayBtn = playBtn;
+  });
 
-    liveBtn.addEventListener('click', () => {
-      liveBtn.classList.contains('playing') ? pauseLive() : startLive();
-    });
+  audio.addEventListener('ended', () => {
+    if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
+  });
 
-    globalPlayer.addEventListener('error', () => {
-      if (liveBtn.classList.contains('playing')) {
-        liveText.textContent = "RECONECTANDO...";
-        setTimeout(() => { if (liveBtn.classList.contains('playing')) startLive(); }, 3000);
-      }
-    });
-
-    globalPlayer.addEventListener('canplay', () => {
-      if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
-        liveText.textContent = "PAUSAR";
-      }
-    });
-
-    // RANKING
-    let currentPlayBtn = null;
-    const rankingData = [
-      {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://maicitoradio.com/pistas/1.mp3"},
-      {pos:2,artista:"Cuco",cancion:"Para ti",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3"},
-      {pos:3,artista:"Arthur y Carlos Vives",cancion:"GOODBYE",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3"},
-      {pos:4,artista:"Judeline",cancion:"Chica de cristal",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3"},
-      {pos:5,artista:"Miguel Bueno",cancion:"Solcito",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3"}
-    ];
-
-    const list = document.getElementById('ranking-list');
-    rankingData.forEach((item) => {
-      const div = document.createElement('div');
-      div.className = 'ranking-item';
-      div.innerHTML = `
-        <div class="ranking-pos">${item.pos}</div>
-        <div class="ranking-meta">
-          <div class="artist">${item.artista}</div>
-          <div class="song">${item.cancion}</div>
-        </div>
-        <div class="play" data-mp3="${item.mp3}" aria-label="Reproducir ${item.cancion}">
-          <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
-        </div>
-      `;
-      list.appendChild(div);
-    });
-
-    const audio = document.getElementById('audio-player');
-    list.addEventListener('click', (e) => {
-      const playBtn = e.target.closest('.play');
-      if (!playBtn) return;
-      const mp3 = playBtn.dataset.mp3;
-
-      if (currentPlayBtn === playBtn && !audio.paused) {
-        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
-      }
-
-      if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
-      audio.src = mp3; audio.play().catch(() => {});
-      playBtn.classList.add('playing'); currentPlayBtn = playBtn;
-    });
-
-    audio.addEventListener('ended', () => {
-      if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
-    });
-
-    // Protección mínima (opcional)
-    // document.addEventListener('contextmenu', e => e.preventDefault());
-  </script>
+</script>
+<script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
 </body>
 </html>
