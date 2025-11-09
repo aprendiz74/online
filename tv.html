@@ -34,9 +34,20 @@
     #videoTv {
       width: 100%;
       height: 100%;
-      object-fit: cover;      
+      object-fit: cover;
       background: #000;
-    }    
+    }
+
+    .black-bar {
+      position: absolute;
+      width: 100%;
+      height: 30px;
+      background: #000;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .black-bar.top { top: 0; }
+    .black-bar.bottom { bottom: 0; }
 
     /* 🔹 LOGO DOBLE CARA - SUPERIOR DERECHA */
     .tv-logo-container {
@@ -160,7 +171,9 @@
 
   <div class="tv-inner">
     <div class="video-wrapper">
-      <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>    
+      <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
+      <div class="black-bar top"></div>
+      <div class="black-bar bottom"></div>
       <!-- 🔹 Botón fullscreen -->
       <div id="fullscreen-btn">PANTALLA COMPLETA</div>
     </div>
@@ -304,7 +317,3 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
-
-
-
-
