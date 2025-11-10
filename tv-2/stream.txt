@@ -1,2 +1,1 @@
-https://tvservices.fullhd-streaming.com:3953/live/retroxtvlive.m3u8
-
+https://cloudflare.streamgato.us:3125/live/megacinetvlive.m3u8
