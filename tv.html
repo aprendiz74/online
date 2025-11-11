@@ -49,7 +49,7 @@
     .black-bar.top { top: 0; }
     .black-bar.bottom { bottom: 0; }
 
-    /* 🔹 LOGO DOBLE CARA - SUPERIOR DERECHA */
+    /* ðŸ”¹ LOGO DOBLE CARA - SUPERIOR DERECHA */
     .tv-logo-container {
       position: fixed;
       top: 40px;
@@ -110,7 +110,7 @@
       .tv-logo-container { width: 120px; height: 120px; top: 60px; right: 60px; }
     }
 
-    /* BOTÓN CERRAR */
+    /* BOTÃ“N CERRAR */
     .close-btn {
       position: fixed;
       top: 20px;
@@ -140,13 +140,13 @@
       .close-btn svg { width: 16px; height: 16px; }
     }
 
-/* BOT��N FULLSCREEN (rojo c��lido suave) */
+/* BOT¨®N FULLSCREEN (rojo c¨¢lido suave) */
 #fullscreen-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 80, 60, 0.15); /* tono rojo c��lido transl��cido */
+  background: rgba(255, 80, 60, 0.15); /* tono rojo c¨¢lido transl¨²cido */
   color: #fff;
   font-family: system-ui, sans-serif;
   font-weight: 600;
@@ -164,12 +164,12 @@
 
 /* Efecto hover (PC) */
 #fullscreen-btn:hover {
-  background: rgba(255, 100, 80, 0.25); /* un poco m��s brillante */
+  background: rgba(255, 100, 80, 0.25); /* un poco m¨¢s brillante */
   border-color: rgba(255, 120, 100, 0.7);
   transform: translate(-50%, -50%) scale(1.05);
 }
 
-/* Efecto t��ctil (m��viles) */
+/* Efecto t¨¢ctil (m¨®viles) */
 @media (hover: none) {
   #fullscreen-btn:active {
     background: rgba(255, 110, 90, 0.3);
@@ -195,11 +195,11 @@
       <video id="videoTv" class="video-js vjs-default-skin" playsinline preload="auto"></video>
       <div class="black-bar top"></div>
       <div class="black-bar bottom"></div>
-      <!-- 🔹 Botón fullscreen -->
+      <!-- ðŸ”¹ BotÃ³n fullscreen -->
       <div id="fullscreen-btn">AUMENTAR PANTALLA</div>
     </div>
 
-    <!-- 🔹 Logo doble cara -->
+    <!-- ðŸ”¹ Logo doble cara -->
     <div class="tv-logo-container" id="logo-container">
       <div class="tv-logo-inner" id="logo-inner">
         <div class="tv-logo-front">
@@ -247,16 +247,16 @@ function openTVPlayer() {
     .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
     .then(url => {
       const streamUrl = url.trim();
-      if (!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
+      if (!streamUrl.includes('.m3u8')) throw new Error("Enlace invÃ¡lido");
       player.src({ src: streamUrl, type: 'application/x-mpegURL' });
       player.play().catch(() => {});
 
-      // 🔹 Aparece el logo después de 5s y muestra botón fullscreen
+      // ðŸ”¹ Aparece el logo despuÃ©s de 5s y muestra botÃ³n fullscreen
       setTimeout(() => {
         logoContainer.classList.add('show');
         startLogoRotation(logoInner);
 
-        // Mostrar botón fullscreen
+        // Mostrar botÃ³n fullscreen
         fsBtn.style.display = 'block';
         fsBtn.onclick = () => {
           goFullscreen();
@@ -275,7 +275,7 @@ function openTVPlayer() {
     });
 }
 
-// 🔹 Rotación 3D del logo
+// ðŸ”¹ RotaciÃ³n 3D del logo
 function startLogoRotation(logo) {
   let deg = 0;
   function rotateLogo() {
@@ -287,7 +287,7 @@ function startLogoRotation(logo) {
   rotateLogo();
 }
 
-// 🔹 Función para activar fullscreen (solo por acción del usuario)
+// ðŸ”¹ FunciÃ³n para activar fullscreen (solo por acciÃ³n del usuario)
 function goFullscreen() {
   const modal = document.getElementById('tvModal');
   if (modal.requestFullscreen) {
@@ -299,7 +299,7 @@ function goFullscreen() {
   }
 }
 
-// 🔹 Función para salir de fullscreen
+// ðŸ”¹ FunciÃ³n para salir de fullscreen
 function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen().catch(() => {});
@@ -325,7 +325,7 @@ document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeTVPlay
 
 document.addEventListener("DOMContentLoaded", openTVPlayer);
 
-// PROTECCIÓN COMPLETA
+// PROTECCIÃ“N COMPLETA
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
@@ -338,5 +338,6 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
+
 
 
