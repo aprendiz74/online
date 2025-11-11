@@ -1,1 +1,1 @@
-https://cloudflare.streamgato.us:3125/live/megacinetvlive.m3u8
+https://app.viloud.tv/hls/channel/ac8aa69b5b0d0e150a81c3d41c61194e.m3u8
