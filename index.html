@@ -185,33 +185,37 @@
     footer p { margin: 0; font-size: 14px; font-weight: 600; text-align: center; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); opacity: 0.98; }
 
     #global-live-player { position: fixed; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-  /* TV Smart / Pantallas grandes */
+  /* AJUSTES PARA SMART TV (pantallas muy grandes) */
 @media (min-width: 1920px) {
   body {
-    font-size: 18px;
-    line-height: 1.5;
+    background-size: cover;
+  }
+
+  .container {
+    max-width: 1800px; /* ancho más amplio para TV */
+    margin: 0 auto;
+    padding: 0 40px;
   }
 
   header .brand-title { font-size: 36px; }
   header .brand-sub { font-size: 16px; }
 
-  .hero { height: 600px; }
-  .hero-panel { display: flex !important; padding: 40px; }
-  .hero-panel .panel-box { max-width: 600px; padding: 24px; font-size: 18px; }
+  .hero { height: 500px; }
+  .hero-panel .panel-box { max-width: 500px; padding: 24px; }
 
-  .news article { flex-direction: row; gap: 20px; }
-  .news .thumb { width: 300px; height: 180px; }
-  .news .section { padding: 20px; }
+  .news { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .news .thumb { height: 200px; }
 
-  .ranking-item { padding: 20px 24px; font-size: 16px; }
-  .ranking-pos { font-size: 22px; width: 50px; height: 50px; }
+  .ranking-item { padding: 20px 24px; }
+  .ranking-pos { width: 50px; height: 50px; font-size: 20px; }
 
-  .cta .title { font-size: 36px; }
-  .cta p { font-size: 18px; }
-  .btn-relief { font-size: 18px; padding: 18px 20px; }
+  .cta .title { font-size: 32px; }
+  .cta p { font-size: 16px; }
+  .btn-relief { font-size: 16px; padding: 16px 20px; }
 
-  footer p { font-size: 18px; }
+  footer p { font-size: 16px; }
 }
+
 
   </style>
 </head>
