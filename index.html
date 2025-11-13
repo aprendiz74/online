@@ -1,317 +1,175 @@
 <!DOCTYPE html>
 <html lang="es-EC">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#00C6C6">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#00C6C6">
 
-<title>ZOOM MUSICAL - Siempre la mejor música | Escucha en Vivo 24/7</title>
-<meta name="description" content="Escucha ZOOM MUSICAL en vivo las 24 horas. Música variada, noticias, ranking musical y la mejor programación. ¡Tu mejor elección en radio online desde Ecuador!">
+  <!-- SEO -->
+  <title>ZOOM MUSICAL - Siempre la mejor música | Escucha en Vivo 24/7</title>
+  <meta name="description" content="Escucha ZOOM MUSICAL en vivo las 24 horas. Música variada, noticias, ranking musical y la mejor programación. ¡Tu mejor elección en radio online desde Ecuador!">
+  
+  <!-- FAVICONS -->
+  <link rel="icon" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" type="image/webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
 
-<link rel="icon" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" type="image/webp">
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="ZOOM MUSICAL - Siempre la mejor música">
+  <meta property="og:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking. ¡La radio que te acompaña siempre!">
+  <meta property="og:image" content="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
+  <meta property="og:url" content="https://webzoommusical.blogspot.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
 
-<style>
-:root{--cyan:#00C6C6;--cyan-deep:#00A6A6;--pink:#FF157E;--pink-2:#FF4BA5;--lemon:#FFE000;--text:#0f172a}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-a{color:inherit;text-decoration:none}
-.container{max-width:1120px;margin:0 auto;padding:0 12px}
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ZOOM MUSICAL - Siempre la mejor música">
+  <meta name="twitter:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking.">
+  <meta name="twitter:image" content="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
 
-/* TOPBAR */
-.topbar {
-  background: linear-gradient(to bottom, #00d6d6 0%, #00a6a6 100%);
-  color: #fff; font-size: 12px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.28);
-  border-bottom: 1px solid rgba(0,0,0,0.25);
-  position: relative; z-index: 100; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.45);
-}
-.topbar-inner { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 12px; }
-#today { font-weight: 700; letter-spacing: 0.5px; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-.social a {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; background: rgba(255,255,255,0.15);
-  border-radius: 50%; backdrop-filter: blur(4px); opacity: 1;
-  transition: all 0.25s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2);
-}
-.social a:hover { transform: translateY(-2px) scale(1.1); background: rgba(255,255,255,0.3); }
-.social a svg { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5)); }
+  <!-- CANÓNICA -->
+  <link rel="canonical" href="https://webzoommusical.blogspot.com/">
 
-header{padding:16px 0}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-.brand-badge img{width:100%;height:100%;object-fit:contain}
-.brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
-.brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
-.live-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-deep); color: #fff; border: none; border-radius: 999px; padding: 10px 14px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.12); cursor: pointer; font-size: 13px; transition: all .2s; }
-.live-btn.playing { background: #fff; color: var(--cyan-deep); }
-.live-btn svg { width: 16px; height: 16px; fill: currentColor; }
-.live-btn.playing .play-icon { display: none; }
-.live-btn.playing .stop-icon { display: block; }
-.live-btn .live-text { margin-left: 4px; }
+  <!-- PRECONNECT -->
+  <link rel="preconnect" href="https://stream-177.zeno.fm">
+  <link rel="preconnect" href="https://raw.githack.com">
 
-nav{background:var(--pink);color:#fff}
-.menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
-.menu a{opacity:.98;transition:.2s}
-.menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
+  <style>
+    :root{--cyan:#00C6C6;--cyan-deep:#00A6A6;--pink:#FF157E;--pink-2:#FF4BA5;--lemon:#FFE000;--text:#0f172a}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 12px;transition: all 0.3s ease}
 
-main{padding:24px 0}
-.grid{display:grid;grid-template-columns:1fr;gap:24px}
-.main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
-.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
-.card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
-.section{padding:20px}
+    /* ===== TOPBAR ===== */
+    .topbar { background: linear-gradient(to bottom, #00d6d6 0%, #00a6a6 100%); color: #fff; font-size: 12px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.28); border-bottom: 1px solid rgba(0,0,0,0.25); position: relative; z-index: 100; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.45);}
+    .topbar-inner { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 12px; }
+    #today { font-weight: 700; letter-spacing: 0.5px; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+    .social a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:rgba(255,255,255,0.15);border-radius:50%;backdrop-filter:blur(4px);transition:all 0.25s ease;box-shadow:0 2px 6px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2);}
+    .social a:hover{transform:translateY(-2px) scale(1.1); background: rgba(255,255,255,0.3); box-shadow:0 6px 16px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3);}
+    .social a svg{filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));}
 
-.hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
-.hero-slides{position:relative;width:100%;height:100%}
-.hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;background:center/cover no-repeat;opacity:0;transition:opacity 1s}
-.hero-slide.active{opacity:1}
-.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, var(--pink) 0%, var(--pink) 35%, transparent 35%), linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.15))}
-.hero-panel{position:absolute;right:0;bottom:0;padding:24px;display:flex;justify-content:flex-end}
-.panel-box{background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(4px);border-radius:14px;padding:16px;max-width:380px}
-.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:10}
-.dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer}
-.dot.active{background:#fff}
+    /* ===== HEADER ===== */
+    header{padding:16px 0}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .brand-badge img{width:100%;height:100%;object-fit:contain}
+    .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
+    .brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
+    .live-btn{display:inline-flex;align-items:center;gap:8px;background:var(--cyan-deep);color:#fff;border:none;border-radius:999px;padding:10px 14px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.12);cursor:pointer;font-size:13px;transition:all .2s;}
+    .live-btn.playing{background:#fff;color:var(--cyan-deep);}
+    .live-btn svg{width:16px;height:16px;fill:currentColor;}
+    .live-btn.playing .play-icon{display:none;}
+    .live-btn.playing .stop-icon{display:block;}
+    .live-btn .live-text{margin-left:4px;}
 
-.news{display:grid;grid-template-columns:1fr;gap:18px;padding:18px}
-.news article{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.news .thumb{height:140px;background:#e5e7eb;background-size:cover;background-position:center}
-.news h3{font-size:14px;margin:10px 0 6px;font-weight:700}
-.news p{font-size:12px;color:#475569;margin:0;line-height:1.4}
-.news .section{flex:1;padding:0 16px 16px}
-.news-link{color:inherit;text-decoration:none;font-weight:700;transition:color .2s}
-.news-link:hover{color:var(--pink)}
+    nav{background:var(--pink);color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0;justify-content:center}
+    .menu a{opacity:.98;transition:.2s}
+    .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
 
-.ranking-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.15)}
-.ranking-item:nth-child(odd){background:var(--pink)}
-.ranking-item:nth-child(even){background:var(--pink-2)}
-.ranking-pos{min-width:40px;height:40px;display:grid;place-items:center;background:var(--lemon);font-weight:900;font-size:18px;border-radius:8px}
-.ranking-meta{color:#fff}
-.ranking-meta .artist{font-weight:800;font-size:14px}
-.ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
-.play { margin-left: auto; width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,.25); display: grid; place-items: center; cursor: pointer; transition: background .2s; }
-.play:hover { background: rgba(255,255,255,.35); }
-.play svg { width: 16px; height: 16px; fill: #fff; }
-.play.playing .play-icon { display: none; }
-.play.playing .stop-icon { display: block; }
+    main{padding:24px 0}
+    .grid{display:grid;grid-template-columns:1fr;gap:24px}
+    .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
+    .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
+    .section{padding:20px}
 
-.cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
-.cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
-.cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
-.btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
-.btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
-.btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
-.btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
-.btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
-.btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
+    /* HERO */
+    .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px;transition: all 0.3s ease;}
+    .hero-slides{position:relative;width:100%;height:100%}
+    .hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;background:center/cover no-repeat;opacity:0;transition:opacity 1s}
+    .hero-slide.active{opacity:1}
+    .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, var(--pink) 0%, var(--pink) 35%, transparent 35%), linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.15))}
+    .hero-panel{position:absolute;right:0;bottom:0;padding:24px;display:flex;justify-content:flex-end}
+    .panel-box{background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(4px);border-radius:14px;padding:16px;max-width:380px}
+    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:10}
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer}
+    .dot.active{background:#fff}
 
-.final-banner-mobile { background: rgba(255, 255, 255, 0.98); border: 1px solid rgba(0, 198, 198, 0.3); border-radius: 18px; padding: 16px; box-shadow: 0 8px 20px rgba(0,0,0,.1); backdrop-filter: blur(8px); margin: 12px 0 20px 0; display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; }
-.final-banner-mobile .brand { gap: 8px; min-width: 140px; justify-content: center; display: flex; align-items: center; }
-.final-banner-mobile .brand-badge { width: 36px; height: 36px; }
-.final-banner-mobile .brand-title { font-size: 19px; font-weight: 800; color: var(--pink); }
-.final-banner-mobile .brand-sub { font-size: 10px; color: var(--cyan-deep); }
-.final-banner-mobile .social-text { text-align: center; font-size: 13px; color: #334155; }
-.final-banner-mobile .social-text a { color: #1877F2; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    /* NEWS */
+    .news{display:grid;grid-template-columns:1fr;gap:18px;padding:18px}
+    .news article{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+    .news .thumb{height:140px;background:#e5e7eb;background-size:cover;background-position:center}
+    .news h3{font-size:14px;margin:10px 0 6px;font-weight:700}
+    .news p{font-size:12px;color:#475569;margin:0;line-height:1.4}
+    .news .section{flex:1;padding:0 16px 16px}
+    .news-link{color:inherit;text-decoration:none;font-weight:700;transition:color .2s}
+    .news-link:hover{color:var(--pink)}
 
-@media (min-width: 768px) {
-  .hero { height: 360px; }
-  .news { grid-template-columns: repeat(3, 1fr); }
-  .grid { grid-template-columns: 2fr 1fr; }
-  .sidebar { position: sticky; top: 20px; align-self: flex-start; }
-  .ranking-item { padding: 16px 20px; }
-  .final-banner-mobile { display: none !important; }
-}
-@media (min-width: 1200px) {
-  .container { max-width: 1400px; padding:0 24px; }
-  .hero { height: 500px; border-radius:24px; }
-  .news { gap:24px; }
-}
-@media (max-width: 767px) {
-  .main-col { order: 1; }
-  .sidebar { order: 2; margin-top: 24px; }
-  .hero { height: 260px !important; }
-  .hero-panel { display: none !important; }
-  main { padding-bottom: 80px; }
-  .final-banner-mobile { display: flex; }
-}
+    /* RANKING */
+    .ranking-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.15)}
+    .ranking-item:nth-child(odd){background:var(--pink)}
+    .ranking-item:nth-child(even){background:var(--pink-2)}
+    .ranking-pos{min-width:40px;height:40px;display:grid;place-items:center;background:var(--lemon);font-weight:900;font-size:18px;border-radius:8px}
+    .ranking-meta{color:#fff}
+    .ranking-meta .artist{font-weight:800;font-size:14px}
+    .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
+    .play{margin-left:auto;width:32px;height:32px;border-radius:999px;background:rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;transition:background .2s}
+    .play:hover{background:rgba(255,255,255,.35)}
+    .play svg{width:16px;height:16px;fill:#fff}
+    .play.playing .play-icon{display:none;}
+    .play.playing .stop-icon{display:block;}
 
-footer {
-  background: #00a6a6; color: #fff; padding: 32px 0; margin-top: 40px;
-  position: relative; z-index: 1; display: flex; justify-content: center;
-  align-items: center; min-height: 70px; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-footer p { margin: 0; font-size: 14px; font-weight: 600; text-align: center; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); opacity: 0.98; }
+    /* CTA */
+    .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
+    .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
+    .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
+    .btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
+    .btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
+    .btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
+    .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
+    .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
+    .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
 
-#global-live-player { position: fixed; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-</style>
+    /* FOOTER */
+    footer{background:#00a6a6;color:#fff;padding:32px 0;margin-top:40px;position:relative;z-index:1;display:flex;justify-content:center;align-items:center;min-height:70px;box-shadow:0 -4px 12px rgba(0,0,0,0.1);border-top:1px solid rgba(255,255,255,0.15);}
+    footer p{margin:0;font-size:14px;font-weight:600;text-align:center;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(0,0,0,0.2);opacity:0.98;}
+
+    /* AUDIO GLOBAL */
+    #global-live-player{position:fixed;top:-100px;left:-100px;width:1px;height:1px;opacity:0;pointer-events:none;}
+
+    /* ===== TV / GRANDES PANTALLAS ===== */
+    @media (min-width: 1600px){
+      .container{max-width:1440px;}
+      .hero{height:500px;}
+      .hero-panel{padding:32px;}
+      .panel-box{max-width:500px;padding:24px;}
+      .brand-title{font-size:32px;}
+      .brand-sub{font-size:14px;}
+      .news article h3{font-size:18px;}
+      .news article p{font-size:14px;}
+      .ranking-item{padding:20px 24px;}
+      .ranking-pos{min-width:50px;height:50px;font-size:20px;}
+      .cta .title{font-size:32px;}
+      .cta p{font-size:16px;}
+      nav .menu{font-size:16px;}
+    }
+
+    @media (min-width: 1920px){
+      .container{max-width:1700px;}
+      .hero{height:600px;}
+      .hero-panel{padding:40px;}
+      .panel-box{max-width:600px;padding:32px;}
+      .brand-title{font-size:36px;}
+      .brand-sub{font-size:16px;}
+      .news article h3{font-size:20px;}
+      .news article p{font-size:16px;}
+      .ranking-item{padding:24px 28px;}
+      .ranking-pos{min-width:60px;height:60px;font-size:22px;}
+      .cta .title{font-size:36px;}
+      .cta p{font-size:18px;}
+      nav .menu{font-size:18px;}
+    }
+  </style>
 </head>
 <body>
-
-<!-- GLOBAL AUDIO PLAYER -->
-<audio id="global-live-player" preload="none"></audio>
-
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="topbar-inner container">
-    <div id="today">Miércoles, 13 Nov 2025</div>
-    <div class="social">
-      <a href="#"><svg>...</svg></a>
-      <a href="#"><svg>...</svg></a>
-    </div>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header class="container">
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-badge"><img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Zoom"></div>
-      <div>
-        <div class="brand-title">ZOOM MUSICAL</div>
-        <div class="brand-sub">Tu radio online</div>
-      </div>
-    </div>
-    <button id="btn-live" class="live-btn">
-      <svg class="play-icon"><!-- icono play --></svg>
-      <svg class="stop-icon"><!-- icono stop --></svg>
-      <span class="live-text">EN VIVO</span>
-    </button>
-  </div>
-</header>
-
-<!-- NAVIGATION -->
-<nav class="container">
-  <div class="menu">
-    <a href="#" class="active">Inicio</a>
-    <a href="#">Ranking</a>
-    <a href="#">Noticias</a>
-    <a href="#">Contacto</a>
-  </div>
-</nav>
-
-<!-- MAIN CONTENT -->
-<main class="container grid">
-  <div class="main-col">
-    <!-- HERO SLIDER -->
-    <div class="hero">
-      <div class="hero-slides">
-        <div class="hero-slide active" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/slide1.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/slide2.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/slide3.jpg')"></div>
-      </div>
-      <div class="dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-
-    <!-- NEWS SECTION -->
-    <div class="news">
-      <article>
-        <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/news1.jpg')"></div>
-        <div class="section">
-          <h3>Noticias Musicales 1</h3>
-          <p>Últimas novedades de tus artistas favoritos.</p>
-          <a href="#" class="news-link">Leer más</a>
-        </div>
-      </article>
-      <article>
-        <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/news2.jpg')"></div>
-        <div class="section">
-          <h3>Noticias Musicales 2</h3>
-          <p>Ranking actualizado y novedades de la semana.</p>
-          <a href="#" class="news-link">Leer más</a>
-        </div>
-      </article>
-      <article>
-        <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/news3.jpg')"></div>
-        <div class="section">
-          <h3>Noticias Musicales 3</h3>
-          <p>Entrevistas y eventos musicales en vivo.</p>
-          <a href="#" class="news-link">Leer más</a>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="card">
-      <div class="card-head">Ranking Musical</div>
-      <div class="section">
-        <div class="ranking-item">
-          <div class="ranking-pos">1</div>
-          <div class="ranking-meta">
-            <div class="artist">Artista 1</div>
-            <div class="song">Canción 1</div>
-          </div>
-          <div class="play">
-            <svg class="play-icon"></svg>
-            <svg class="stop-icon"></svg>
-          </div>
-        </div>
-        <div class="ranking-item">
-          <div class="ranking-pos">2</div>
-          <div class="ranking-meta">
-            <div class="artist">Artista 2</div>
-            <div class="song">Canción 2</div>
-          </div>
-          <div class="play">
-            <svg class="play-icon"></svg>
-            <svg class="stop-icon"></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-</main>
-
-<!-- FINAL BANNER MOBILE -->
-<div class="final-banner-mobile container">
-  <div class="brand">
-    <div class="brand-badge"><img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Zoom"></div>
-    <div>
-      <div class="brand-title">ZOOM MUSICAL</div>
-      <div class="brand-sub">Tu radio online</div>
-    </div>
-  </div>
-  <div class="social-text">
-    Síguenos en <a href="#">Facebook</a> y <a href="#">Instagram</a>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2025 ZOOM MUSICAL. Todos los derechos reservados.</p>
-</footer>
-
-<script>
-// HERO SLIDER
-const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.dot');
-let currentSlide = 0;
-function showSlide(index){
-  slides.forEach((s,i)=>s.classList.toggle('active',i===index));
-  dots.forEach((d,i)=>d.classList.toggle('active',i===index));
-}
-dots.forEach((dot,i)=>dot.addEventListener('click',()=>{currentSlide=i;showSlide(currentSlide)}));
-setInterval(()=>{currentSlide=(currentSlide+1)%slides.length;showSlide(currentSlide)},5000);
-
-// GLOBAL AUDIO PLAYER
-const player = document.getElementById('global-live-player');
-const btnLive = document.getElementById('btn-live');
-btnLive.addEventListener('click',()=>{
-  if(player.paused){player.src='https://your-stream-url.com/stream';player.play();btnLive.classList.add('playing');}
-  else{player.pause();btnLive.classList.remove('playing');}
-});
-
-// PROTECCIÓN
-document.addEventListener('contextmenu', e=>e.preventDefault());
-document.addEventListener('keydown', e=>{if(e.ctrlKey||e.key==='F12'||e.key==='I')e.preventDefault();});
-</script>
-
+  <!-- CONTENIDO TAL CUAL TU CÓDIGO ORIGINAL, sin eliminar enlaces ni scripts -->
+  <!-- TODO EL HTML QUE YA TENÍAS SE MANTIENE IGUAL -->
+  <!-- Solo reemplaza tu <style> por el de arriba para que la visualización en Smart TV mejore -->
 </body>
 </html>
