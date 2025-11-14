@@ -253,8 +253,48 @@
   footer p { font-size: 16px; }
 }
 
-  </style>
+/* Reducir al mínimo los márgenes de la sección CTA dentro del sidebar */
+.sidebar .cta {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Reducir el gap general del sidebar */
+.sidebar {
+  gap: 6px; /* antes 12px, antes aún 24px */
+}
+/* ==== AJUSTE ESPACIO CTA SIDEBAR ==== */
+.sidebar .cta {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Reducir espacio general en sidebar */
+.sidebar {
+  gap: 6px; /* Antes 24px */
+}
+
+/* Móvil: mantener separación mínima sin estorbar */
+@media (max-width: 767px) {
+  .sidebar .cta {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .sidebar {
+    gap: 4px;
+  }
+}
+
+</style>
 </head>
+
 <body>
   <!-- AUDIO GLOBAL -->
   <audio id="global-live-player" preload="none"></audio>
@@ -389,14 +429,40 @@
 
         <audio id="audio-player" preload="none"></audio>
 
-        <section class="cta">
-          <div class="title">DESCARGA LA APP</div>
-          <p>Escucha en vivo y vota por tu canción.</p>
-          <a href="https://play.google.com/store/apps/details?id=com.ecuaserverhd.zoommusical" class="btn-relief btn-app" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M19 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path><path d="M7 11V7a5 5 0 1 1 10 0v4"></path></svg>
-            DESCARGAR AHORA
-          </a>
-        </section>
+<!-- 🔵 TARJETA DESCARGA -->
+<section class="cta">
+  <div class="title">DESCARGA LA APP</div>
+  <p>Escucha en vivo y vota por tu canción.</p>
+
+  <a href="https://play.google.com/store/apps/details?id=com.ecuaserverhd.zoommusical" 
+     class="btn-relief btn-app" target="_blank">
+     <svg viewBox="0 0 24 24" fill="none">
+       <path d="M19 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path>
+       <path d="M7 11V7a5 5 0 1 1 10 0v4"></path>
+     </svg>
+     DESCARGAR AHORA
+  </a>
+</section>
+<!-- 🔵 FIN DE TARJETA DESCARGA -->
+
+
+
+<!-- 🟣 TARJETA DEL CLIMA (independiente) -->
+<section class="cta">
+  <div style="text-align:center;">
+    <div class="dj-text">
+      <h3><b>Información del Tiempo</b></h3>
+    </div>
+
+    <div id="TT_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3">
+      El tiempo - Tutiempo.net
+    </div>
+
+    <script type="text/javascript" src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
+  </div>
+</section>
+<!-- 🟣 FIN CLIMA -->
+
 
         <div class="final-banner-mobile">
           <div class="brand">
@@ -573,4 +639,3 @@
 </body>
 
 </html>
-
