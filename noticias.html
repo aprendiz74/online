@@ -250,7 +250,6 @@
         <a href="noticias.html" class="active">NOTICIAS</a>
         <a href="contactanos.html">CONTÁCTANOS</a>
       </div>
-      <!-- BOTÓN EN VIVO (OCULTO VISUALMENTE) -->
       <button id="live-btn" class="live-btn">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <svg class="stop-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
@@ -261,7 +260,7 @@
 
   <div class="content">
     <header>
-      <h1>Mas Noticias</h1>
+      <h1>Últimas Noticias</h1>
     </header>
     <div class="noticia-wrapper" id="noticias-container"></div>
     <div class="paginacion" id="paginacion"></div>
@@ -273,7 +272,6 @@
     </div>
   </footer>
 
-  <!-- JS: MENÚ + NOTICIAS + RADIO EN VIVO -->
   <script>
     // === MENÚ MÓVIL ===
     const menuToggle = document.querySelector('.menu-toggle');
@@ -328,6 +326,7 @@
     // === PAGINACIÓN ===
     const noticiasPorPagina = 3;
     let paginaActual = 1;
+
     function mostrarNoticias() {
       const container = document.getElementById('noticias-container');
       if (!container) return;
@@ -335,11 +334,12 @@
       const inicio = (paginaActual - 1) * noticiasPorPagina;
       const fin = Math.min(inicio + noticiasPorPagina, noticias.length);
       const noticiasPagina = noticias.slice(inicio, fin);
+
       noticiasPagina.forEach(noticia => {
         const div = document.createElement('div');
         div.className = 'noticia';
         div.innerHTML = `
-          <div class="noticia-img" style="background-image: url('${noticha.img}');"></div>
+          <div class="noticia-img" style="background-image: url('${noticia.img}');"></div>
           <h2 class="noticia-title">${noticia.titulo}</h2>
           <div class="meta">
             <i class="fas fa-calendar-alt"></i> Publicado el ${noticia.fecha}
@@ -353,11 +353,13 @@
       actualizarPaginacion();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     function actualizarPaginacion() {
       const totalPaginas = Math.ceil(noticias.length / noticiasPorPagina);
       const paginacion = document.getElementById('paginacion');
       if (!paginacion) return;
       paginacion.innerHTML = '';
+
       const btnPrev = document.createElement('button');
       btnPrev.textContent = 'Anterior';
       btnPrev.disabled = paginaActual === 1;
@@ -380,13 +382,13 @@
       paginacion.appendChild(btnNext);
     }
 
-    // === RADIO EN VIVO (IGUAL QUE EN LA PRIMERA PÁGINA) ===
+    // === RADIO EN VIVO (100% FUNCIONAL) ===
     const player = document.getElementById('global-live-player');
     const btn = document.getElementById('live-btn');
     const text = btn.querySelector('.live-text');
     const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
 
-    // Reproducir automáticamente si estaba activado
+    // Reproducir si estaba activado
     const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
     if (isPlaying) {
       player.src = stream;
@@ -395,7 +397,7 @@
       text.textContent = 'PAUSAR';
     }
 
-    // Controlar con clic (incluso si el botón está oculto, funciona)
+    // Controlar con clic (funciona aunque esté oculto)
     btn.addEventListener('click', () => {
       if (player.paused) {
         player.src = stream;
@@ -412,9 +414,7 @@
     });
 
     // === INICIALIZAR ===
-    document.addEventListener('DOMContentLoaded', () => {
-      mostrarNoticias();
-    });
+    document.addEventListener('DOMContentLoaded', mostrarNoticias);
 
     // Evitar caché al volver atrás
     window.addEventListener('pageshow', (e) => {
@@ -423,6 +423,5 @@
       }
     });
   </script>
-
 </body>
 </html>
