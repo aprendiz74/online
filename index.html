@@ -288,6 +288,24 @@
         margin: 0 auto;
       }
     }
+	
+	
+	/* Contenedor del clima más compacto y centrado */
+.clima-inner {
+  margin: 5px 0 !important;
+  padding: 10px 12px;
+  text-align: center !important;      /* 🔹 centra el texto */
+  display: flex !important;           /* 🔹 centra el widget */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;                /* 🔹 centra horizontal */
+}
+
+/* Asegura que el widget de Tutiempo quede centrado */
+.clima-inner > div {
+  margin: 0 auto !important;          /* 🔹 FORZAR centrado */
+}
+
 </style>
 </head>
 <body>
@@ -332,14 +350,7 @@
       <a href="#ranking">RANKING</a>
       <a href="#programacion">PROGRAMACIÓN</a>
       <a href="#noticias">NOTICIAS</a>
-      <a href="#contacto">CONTÁCTANOS</a>
-      <a href="https://raw.githack.com/aprendiz74/online/main/tv.html" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   class="tv-link">
-  <i class="fas fa-tv"></i> SEÑAL DE TV
-</a>
-      </a>
+      <a href="#contacto">CONTÁCTANOS</a>    
     </div>
   </div>
 </nav>
@@ -411,13 +422,18 @@
               DESCARGAR AHORA
             </a>
           </section>
-          <section class="cta">
-            <div style="text-align:center">
-              <h3><b>Información del Tiempo</b></h3>
-              <div id="TT_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3">El tiempo - Tutiempo.net</div>
-              <script src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
-            </div>
-          </section>
+          <section class="cta clima-box">
+  <div class="clima-inner">
+    <h3><b>Información del Tiempo</b></h3>
+    
+    <div id="TT_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3">
+      El tiempo - Tutiempo.net
+    </div>
+
+    <script src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
+  </div>
+</section>
+
           <div class="final-banner-mobile">
             <div class="brand">
               <div class="brand-badge">
@@ -785,14 +801,53 @@
       audio.src = src; audio.play().catch(() => {});
       btn.classList.add('playing'); currentSongBtn = btn;
     });
-    audio.addEventListener('ended', () => {
-      if (currentSongBtn) { currentSongBtn.classList.remove('playing'); currentSongBtn = null; }
-    });
-   
-   
-   
-   
-  </script>
-</body>
+     audio.addEventListener('ended', () => {
+    if (currentSongBtn) { currentSongBtn.classList.remove('playing'); currentSongBtn = null; }
+  });
+</script>
 
+<!-- === BOTÓN TV FLOTANTE — AGREGADO === -->
+<a href="https://raw.githack.com/aprendiz74/online/main/tv.html"
+   target="_blank"
+   id="tvFloatingBtn">
+  <i class="fas fa-tv"></i>
+</a>
+
+<style>
+  #tvFloatingBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:#00A6A6;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    z-index:9999;
+    cursor:pointer;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+    transition:all .25s ease;
+  }
+  #tvFloatingBtn:hover{
+    transform:scale(1.12) translateY(-3px);
+    background:#008B8B;
+    box-shadow:0 12px 30px rgba(0,0,0,0.35);
+  }
+  @media (max-width:768px){
+    #tvFloatingBtn{
+      width:52px;
+      height:52px;
+      font-size:24px;
+      bottom:16px;
+      right:16px;
+    }
+  }
+</style>
+<!-- === FIN BOTÓN TV === -->
+
+</body>
 </html>
