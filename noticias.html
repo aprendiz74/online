@@ -123,6 +123,7 @@
       margin-bottom: 50px; 
     }
 
+    /* NOTICIA - CORREGIDA PARA MÓVIL */
     .noticia {
       display: grid;
       grid-template-columns: 300px 1fr;
@@ -132,6 +133,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       overflow: hidden;
       min-height: 250px;
+      width: 100%;
     }
 
     .noticia-img {
@@ -142,6 +144,7 @@
       min-height: 250px;
       background: center/cover no-repeat;
       border-radius: 12px 0 0 12px;
+      object-fit: cover;
     }
 
     .noticia-title {
@@ -184,75 +187,84 @@
     }
     .texto-scroll p:last-child { margin-bottom: 0; }
 
+    /* RESPONSIVE MÓVIL - CORREGIDO */
     @media (max-width: 768px) {
       .noticia {
         grid-template-columns: 1fr;
         grid-template-rows: 200px auto auto auto;
+        min-height: auto;
       }
+
       .noticia-img {
         grid-column: 1 / 2;
-        grid-row: 1;
+        grid-row: 1 / 2;
         height: 200px;
+        min-height: auto;
         border-radius: 12px 12px 0 0;
       }
-      .noticia-title, .meta, .texto-scroll {
+
+      .noticia-title {
         grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        text-align: center;
+        padding: 15px 20px 8px;
+        font-size: 1.6rem;
       }
-      .texto-scroll { 
-        max-height: none; 
-        overflow-y: visible; 
+
+      .meta {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        justify-content: center;
+        padding: 0 20px 10px;
+      }
+
+      .texto-scroll {
+        grid-column: 1 / 2;
+        grid-row: 4 / 5;
+        max-height: none;
+        overflow-y: visible;
         padding: 0 20px 20px;
-      }
-      .noticia-title { 
-        text-align: center; 
-        padding: 15px 20px 8px; 
-      }
-      .meta { 
-        justify-content: center; 
-        padding: 0 20px 10px; 
       }
     }
 
-    /* FOOTER - CORREGIDO PARA CENTRADO EN PC Y MÓVIL */
-    /* FOOTER - CENTRADO PERFECTO EN PC Y MÓVIL */
-footer {
-  background: #00A6A6;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  margin-top: 50px;
-  font-size: 0.9rem;
-}
+    /* FOOTER */
+    footer {
+      background: #00A6A6;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+      font-size: 0.9rem;
+    }
 
-footer .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-footer p {
-  margin: 0;
-  line-height: 1.5;
-  width: 100%;
-}
+    footer p {
+      margin: 0;
+      line-height: 1.5;
+      width: 100%;
+    }
 
-/* OCULTAR BOTÓN EN VIVO */
-#live-btn { display: none !important; }
-#global-live-player {
-  position: fixed;
-  top: -9999px;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  z-index: -9999;
-}
-
+    /* OCULTAR BOTÓN EN VIVO */
+    #live-btn { display: none !important; }
+    #global-live-player {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: -9999;
+    }
   </style>
 </head>
 <body>
@@ -386,12 +398,12 @@ footer p {
     </div>
   </div>
 
-  <!-- FOOTER CORREGIDO -->
+  <!-- FOOTER -->
   <footer>
-  <div class="container">
-    <p>&copy; 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
-  </div>
-</footer>
+    <div class="container">
+      <p>&copy; 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
   <!-- SCRIPT MENÚ MÓVIL -->
   <script>
