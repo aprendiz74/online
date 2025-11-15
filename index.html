@@ -117,7 +117,6 @@
     .final-banner-mobile .social-text a{color:#1877F2;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
     @media (min-width:768px){
       .hero{height:360px}
-_tot
       .news{grid-template-columns:repeat(3,1fr)}
       .grid{grid-template-columns:2fr 1fr}
       .sidebar{position:sticky;top:20px;align-self:flex-start}
@@ -147,8 +146,64 @@ _tot
     .fecha i{font-size:1.3rem;color:#d00000}
     .evento p{color:#34495e;font-size:1.05rem;line-height:1.5}
     @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
-    /* NOTICIAS */
-    .noticia-wrapper{display:flex;flex-direction:column;gap:30px;margin-bottom:50px}
+/* NOTICIAS - CONTENEDOR MÁS ANCHO */
+.noticia-wrapper{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  margin-bottom:50px;
+  max-width: 100% !important;
+  padding: 0 20px;
+}
+
+@media (min-width: 992px) {
+  .noticia-wrapper {
+    padding: 0 40px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.noticia{
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  min-height: 280px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  overflow:hidden;
+}
+
+.noticia-img{
+  width:100%;
+  height:100%;
+  min-height:280px;
+  background:center/cover no-repeat;
+  border-radius:12px 0 0 12px;
+}
+
+@media (max-width: 768px) {
+  .noticia {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px auto auto auto;
+    gap: 16px;
+    min-height: auto;
+  }
+  .noticia-img {
+    height: 220px !important;
+    min-height: auto;
+    border-radius:12px 12px 0 0;
+  }
+  .noticia-title {
+    text-align:center;
+    padding:15px 20px 8px;
+    font-size:1.6rem;
+  }
+  .meta { justify-content:center; padding:0 20px 10px; }
+  .texto-scroll { padding:0 20px 20px; max-height:none; overflow:visible; }
+}
     .noticia{display:grid;grid-template-columns:300px 1fr;grid-template-rows:auto auto 1fr;background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);overflow:hidden;min-height:250px;width:100%}
     .noticia-img{grid-column:1/2;grid-row:1/4;width:100%;height:100%;min-height:250px;background:center/cover no-repeat;border-radius:12px 0 0 12px}
     .noticia-title{grid-column:2/3;grid-row:1;margin:0;padding:20px 25px 8px;font-size:1.9rem;color:#222;font-weight:700;line-height:1.3}
@@ -217,7 +272,6 @@ _tot
       .sidebar .cta{margin:3px 0;padding:6px}
       .sidebar{gap:4px}
     }
-
     /* PROGRAMACIÓN: 3 columnas + TODO el ancho en PC */
     @media (min-width: 992px) {
       #programacion {
@@ -236,12 +290,10 @@ _tot
       }
     }
   </style>
-
 </head>
 <body>
   <audio id="global-live-player" preload="none"></audio>
   <audio id="song-player" preload="none"></audio>
-
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="container topbar-inner">
@@ -253,7 +305,6 @@ _tot
       </div>
     </div>
   </div>
-
   <!-- HEADER -->
   <header class="container">
     <div class="header-inner">
@@ -273,7 +324,6 @@ _tot
       </button>
     </div>
   </header>
-
   <!-- NAV -->
   <nav>
     <div class="container">
@@ -287,10 +337,8 @@ _tot
       </div>
     </div>
   </nav>
-
   <!-- SECCIONES -->
   <main class="container">
-
     <!-- INICIO -->
     <section id="inicio" class="seccion active">
       <div class="grid">
@@ -328,7 +376,6 @@ _tot
               <span class="dot" onclick="goToSlide(2)"></span>
             </div>
           </section>
-
           <section class="card">
             <div class="card-head">ÚLTIMAS NOTICIAS</div>
             <div class="news" id="inicio-news">
@@ -336,7 +383,6 @@ _tot
             </div>
           </section>
         </div>
-
         <aside class="sidebar">
           <section class="card">
             <div class="card-head">LAS MÁS PEDIDAS</div>
@@ -348,7 +394,6 @@ _tot
               </a>
             </div>
           </section>
-
           <section class="cta">
             <div class="title">DESCARGA LA APP</div>
             <p>Escucha en vivo y vota por tu canción.</p>
@@ -360,7 +405,6 @@ _tot
               DESCARGAR AHORA
             </a>
           </section>
-
           <section class="cta">
             <div style="text-align:center">
               <h3><b>Información del Tiempo</b></h3>
@@ -368,7 +412,6 @@ _tot
               <script src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
             </div>
           </section>
-
           <div class="final-banner-mobile">
             <div class="brand">
               <div class="brand-badge">
@@ -390,7 +433,6 @@ _tot
         </aside>
       </div>
     </section>
-
     <!-- QUIÉNES SOMOS -->
     <section id="quienes-somos" class="seccion">
       <div class="about-content">
@@ -401,7 +443,6 @@ _tot
         <p><strong>Visión:</strong> Consolidarnos como una emisora digital líder en el mundo de la radio online, reconocida por su innovación, calidad musical y compromiso con la cultura sonora de Latinoamérica y el mundo.</p>
       </div>
     </section>
-
     <!-- RANKING -->
     <section id="ranking" class="seccion">
       <div class="about-content">
@@ -409,7 +450,6 @@ _tot
         <div class="ranking-grid" id="full-ranking"></div>
       </div>
     </section>
-
     <!-- PROGRAMACIÓN -->
     <section id="programacion" class="seccion">
       <div class="about-content">
@@ -424,16 +464,19 @@ _tot
         </div>
       </div>
     </section>
-
     <!-- NOTICIAS -->
     <section id="noticias" class="seccion">
-      <div class="about-content">
-        <header><h1>Últimas Noticias</h1></header>
-        <div class="noticia-wrapper" id="noticias-container"></div>
-        <div class="paginacion" id="paginacion"></div>
-      </div>
+      <!-- NOTICIAS - CONTENEDOR ANCHO -->
+<div style="max-width: 100%; padding: 0;">
+  <div class="about-content" style="max-width: 100%; padding: 20px 0;">
+    <header style="text-align: center; margin-bottom: 30px;">
+      <h1 style="font-size: 2.5rem; color: var(--pink);">Últimas Noticias</h1>
+    </header>
+    <div class="noticia-wrapper" id="noticias-container"></div>
+    <div class="paginacion" id="paginacion"></div>
+  </div>
+</div>
     </section>
-
     <!-- CONTACTO -->
     <section id="contacto" class="seccion">
       <div class="about-content">
@@ -452,17 +495,13 @@ _tot
         <p><small>Usamos <a href="https://formsubmit.co" target="_blank" style="color:#3498db;">FormSubmit</a> para recibir mensajes de forma segura y gratuita.</small></p>
       </div>
     </section>
-
   </main>
-
   <footer class="container">
     <p>© 2025 ZOOM MUSICAL. Todos Derechos reservados.</p>
   </footer>
-
   <script>
     // Fecha
     document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
-
     // SLIDER HERO
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
@@ -480,7 +519,6 @@ _tot
     }
     function goToSlide(n) { showSlide(n); }
     setInterval(nextSlide, 5000);
-
     // AUDIO GLOBAL
     const globalPlayer = document.getElementById('global-live-player');
     const liveBtn = document.getElementById('live-btn');
@@ -515,7 +553,6 @@ _tot
         setTimeout(() => { if (liveBtn.classList.contains('playing')) startLive(); }, 3000);
       }
     });
-
     // RANKING INICIO
     const rankingData = [
       {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://maicitoradio.com/pistas/1.mp3"},
@@ -557,7 +594,6 @@ _tot
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-
     // NOTICIAS INICIO
     const inicioNews = [
       {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',titulo:'¿Qué significa hurgarse la nariz?, según la psicología',texto:'Conoce qué revela la psicología sobre el hábito de hurgarse la nariz, cómo se llama médicamente y los riesgos'},
@@ -576,7 +612,6 @@ _tot
       `;
       inicioNewsContainer.appendChild(article);
     });
-
     // PAGINACIÓN INTERNA
     document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', e => {
@@ -588,6 +623,10 @@ _tot
         link.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         history.pushState(null, null, target);
+        if (target === '#noticias') {
+          paginaActual = 1;
+          mostrarNoticias();
+        }
       });
     });
     window.addEventListener('popstate', () => {
@@ -596,21 +635,73 @@ _tot
       document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
       document.querySelector(hash).classList.add('active');
       document.querySelector(`a[href="${hash}"]`).classList.add('active');
+      if (hash === '#noticias') {
+        paginaActual = 1;
+        mostrarNoticias();
+      }
     });
-
-    // NOTICIAS COMPLETAS
+    // NOTICIAS COMPLETAS (9 NOTICIAS)
     const noticias = [
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-6.webp',titulo:'¡PALIZA EN EL CLÁSICO! Bayern Múnich golea 3-0 al Leverkusen',fecha:'1 de noviembre del 2025',texto:'El <strong>Bayern Múnich</strong> aplastó al <strong>Bayer Leverkusen</strong> con un contundente <strong>3-0</strong> en el <strong>Allianz Arena</strong>, consolidándose como líder de la <strong>Bundesliga</strong>.<br><br><strong>Harry Kane</strong> abrió el marcador con un <strong>golazo de volea</strong>, seguido de un <strong>doble de Jamal Musiala</strong>. El Leverkusen no pudo con la presión alta del Bayern. Con este resultado, el Bayern suma <strong>24 puntos</strong> y saca <strong>5 de ventaja</strong> al segundo clasificado.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-8.webp',titulo:'HEGEMONÍA EN SUDAMÉRICA: Brasil alcanza 10 finalistas en 12 ediciones',fecha:'31 de octubre del 2025',texto:'<strong>Brasil</strong> consolida su dominio absoluto en la <strong>Copa Libertadores</strong> con <strong>10 equipos en la final</strong> de las últimas <strong>12 ediciones</strong>.<br><br>Este año, <strong>Palmeiras</strong> y <strong>Flamengo</strong> disputarán la final en el <strong>Maracaná</strong>, repitiendo la histórica final de 2019.<br><br>Desde 2013, solo <strong>Argentina (2)</strong> ha interrumpido la racha brasileña. El fútbol sudamericano vive una <strong>era dorada verdeamarela</strong>.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-5.webp',titulo:'GRAN NOTICIA DEPORTIVA: Cristiano Ronaldo Jr anota su primer gol con Portugal sub16',fecha:'1 de noviembre del 2025',texto:'<strong>Cristiano Ronaldo Jr</strong>, hijo del astro portugués, marcó su <strong>primer gol oficial</strong> con la selección <strong>sub16 de Portugal</strong> en un partido amistoso contra España.<br><br>El joven delantero, de <strong>15 años</strong>, ingresó en el segundo tiempo y definió con un <strong>remate de zurda</strong> tras un gran pase filtrado. El partido terminó <strong>2-1 a favor de Portugal</strong>.<br><br>El propio <strong>Cristiano Ronaldo</strong> celebró el gol en redes sociales: <em>"¡Orgulloso de ti, hijo! Sigue así"</em>.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-7.webp',titulo:'¡AGÓNICA VICTORIA! PSG vence 1-0 al Niza sobre la hora',fecha:'1 de noviembre del 2025',texto:'El <strong>PSG</strong> se llevó los tres puntos en el <strong>Parque de los Príncipes</strong> con un gol en el <strong>minuto 90+3</strong> de <strong>Gonçalo Ramos</strong> ante un <strong>Niza</strong> que jugó con 10 desde el 65\'.<br><br>El partido fue trabado y el PSG dominó, pero no lograba romper el cerrojo defensivo. Finalmente, un <strong>centro de Achraf Hakimi</strong> fue cabeceado al fondo por Ramos.<br><br>Con esta victoria, el PSG se mantiene <strong>invicto en la Ligue 1</strong> y lidera con <strong>27 puntos</strong>.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-9.webp',titulo:'¡IMPACTANTE REVELACIÓN! Robinho: «Han estado diciendo mentiras de que soy un líder acá adentro»',fecha:'29 de octubre del 2025',texto:'El exfutbolista brasileño <strong>Robinho</strong>, condenado a <strong>9 años de prisión</strong> por <strong>violación en grupo</strong> en Italia, rompió el silencio desde la cárcel de <strong>Tremembé</strong> en São Paulo.<br><br>En una entrevista exclusiva, el exjugador del <strong>Real Madrid</strong> y <strong>AC Milan</strong> negó ser un <strong>"líder de facción"</strong> dentro del penal: <em>«Han estado diciendo mentiras de que soy un líder acá adentro. Yo solo quiero cumplir mi condena y volver con mi familia»</em>.<br><br>Robinho fue trasladado a una celda individual tras rumores de que ejercía influencia sobre otros reclusos. Fuentes penitenciarias desmienten que tenga privilegios.<br><br>Su abogado trabaja en un <strong>recurso de revisión</strong> de la sentencia italiana, que Brasil cumple desde marzo de 2024.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-4.webp',titulo:'TENDENCIAS: La IA impulsa la demanda de discos duros',fecha:'1 de noviembre del 2025',texto:'La explosión de la <strong>inteligencia artificial</strong> está generando una <strong>demanda sin precedentes</strong> de almacenamiento masivo. Empresas como <strong>Western Digital</strong> y <strong>Seagate</strong> reportan un aumento del <strong>40%</strong> en ventas de discos duros de alta capacidad.<br><br>Los centros de datos que entrenan modelos de IA requieren <strong>petabytes de datos</strong>, y los discos HDD siguen siendo la opción más económica para almacenamiento a gran escala.<br><br>Western Digital lanzó su nueva línea <strong>Ultrastar DC HC680</strong> de <strong>28 TB</strong>, mientras Seagate responde con el <strong>Exos X28</strong>. Ambas empresas proyectan un crecimiento sostenido hasta 2030.'}
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',
+        titulo: '¿Qué significa hurgarse la nariz?, según la psicología',
+        fecha: '12 de noviembre del 2025',
+        texto: 'Conoce qué revela la psicología sobre el hábito de <strong>hurgarse la nariz</strong>, cómo se llama médicamente y los riesgos que implica.<br><br><h2>¿Qué dice la psicología sobre quienes se hurgan la nariz?</h2><p>Según un estudio publicado por la <strong>Asociación Americana de Psicología (APA)</strong>, hurgarse la nariz puede estar relacionado con <strong>comportamientos repetitivos centrados en el cuerpo</strong>, similares a morderse las uñas o arrancarse el cabello. Los psicólogos lo asocian con una <strong>necesidad inconsciente de liberar ansiedad o tensión</strong>.</p><p>Por su parte, un artículo de la <strong>Universidad de Colorado</strong> explicó que algunas personas lo hacen por simple costumbre, mientras que otras lo convierten en un <strong>acto compulsivo</strong> que puede requerir intervención terapéutica si se vuelve excesivo.</p><p>Desde la perspectiva médica, este comportamiento se conoce como <strong>rinotillexomanía</strong>, y aunque en la mayoría de los casos es inofensivo, hacerlo con frecuencia o de manera agresiva puede causar <strong>infecciones nasales, sangrado o irritación</strong>.</p>'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp',
+        titulo: 'Cristiano Ronaldo dejó fríos a sus fans con inesperado anuncio, ¿se retira de las canchas?',
+        fecha: '28 de octubre del 2025',
+        texto: '<strong>Cristiano Ronaldo</strong> rompió el silencio sobre su futuro en plena entrevista y sus declaraciones entristecieron a sus fanáticos: <em>“Será el momento”</em>.<br><br><h2>¿Cuáles fueron las declaraciones de Cristiano Ronaldo sobre su retiro del fútbol?</h2><p><strong>Cristiano Ronaldo</strong> ha puesto su nombre en lo más alto de la historia del fútbol tras su paso por clubes como el <strong>Real Madrid</strong>, <strong>Juventus</strong> y <strong>Manchester United</strong>.</p><p>Sin embargo, en los últimos años, el delantero portugués se ha alejado del fútbol de élite y actualmente milita en el <strong>Al Nassr</strong> de Arabia Saudí, donde al parecer está viviendo sus últimos años como futbolista profesional.</p><p>Durante la entrevista, el astro luso reflexionó sobre su carrera, su legado y el momento en que llegará el retiro definitivo, dejando claro que se prepara emocionalmente para esa etapa.</p><p>“He dado todo al fútbol, y cuando llegue el momento, lo sabré. Estoy tranquilo con lo que he logrado”, afirmó Ronaldo con tono sereno, generando una ola de reacciones entre sus millones de seguidores en todo el mundo.</p>'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp',
+        titulo: 'La ciencia logra lo imposible: así luce el alucinante primer atlas del cerebro humano',
+        fecha: '29 de octubre del 2025',
+        texto: 'Por medio de una investigación científica, se plasmó el <strong>primer atlas del cerebro humano</strong>. Un hito histórico para la ciencia moderna.<br><br>La publicación, que se encuentra en la reconocida revista <strong>Nature</strong>, pertenece a la <strong>Red del Atlas Celular de la Iniciativa BRAIN (BICAN)</strong>, la cual a su vez forma parte de los <strong>Institutos Nacionales de Salud de Estados Unidos</strong>.<br><br>Todo lo anterior con un solo objetivo: lograr plasmar el <strong>atlas del cerebro humano</strong>, algo que antes no se había conseguido.<br><br><h2>¿Cómo se espera aprovechar el primer atlas del cerebro humano?</h2><p>Como el cerebro es un campo extenso de estudio que continúa revelando nuevos misterios, este <strong>borrador del atlas</strong> brinda a los científicos una herramienta más precisa para entender el desarrollo y funcionamiento de la parte superior del sistema nervioso.</p><p>Asimismo, uno de los objetivos a futuro es que con este descubrimiento se puedan desarrollar <strong>terapias génicas y celulares</strong> más exactas y efectivas para tratar distintas enfermedades humanas.</p>'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-6.webp',
+        titulo: '¡PALIZA EN EL CLÁSICO! Bayern Múnich golea 3-0 al Leverkusen',
+        fecha: '1 de noviembre del 2025',
+        texto: 'El <strong>Bayern Múnich</strong> aplastó al <strong>Bayer Leverkusen</strong> con un contundente <strong>3-0</strong> en el <strong>Allianz Arena</strong>, consolidándose como líder de la <strong>Bundesliga</strong>.<br><br><strong>Harry Kane</strong> abrió el marcador con un <strong>golazo de volea</strong>, seguido de un <strong>doble de Jamal Musiala</strong>. El Leverkusen no pudo con la presión alta del Bayern. Con este resultado, el Bayern suma <strong>24 puntos</strong> y saca <strong>5 de ventaja</strong> al segundo clasificado.'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-8.webp',
+        titulo: 'HEGEMONÍA EN SUDAMÉRICA: Brasil alcanza 10 finalistas en 12 ediciones',
+        fecha: '31 de octubre del 2025',
+        texto: '<strong>Brasil</strong> consolida su dominio absoluto en la <strong>Copa Libertadores</strong> con <strong>10 equipos en la final</strong> de las últimas <strong>12 ediciones</strong>.<br><br>Este año, <strong>Palmeiras</strong> y <strong>Flamengo</strong> disputarán la final en el <strong>Maracaná</strong>, repitiendo la histórica final de 2019.<br><br>Desde 2013, solo <strong>Argentina (2)</strong> ha interrumpido la racha brasileña. El fútbol sudamericano vive una <strong>era dorada verdeamarela</strong>.'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-5.webp',
+        titulo: 'GRAN NOTICIA DEPORTIVA: Cristiano Ronaldo Jr anota su primer gol con Portugal sub16',
+        fecha: '1 de noviembre del 2025',
+        texto: '<strong>Cristiano Ronaldo Jr</strong>, hijo del astro portugués, marcó su <strong>primer gol oficial</strong> con la selección <strong>sub16 de Portugal</strong> en un partido amistoso contra España.<br><br>El joven delantero, de <strong>15 años</strong>, ingresó en el segundo tiempo y definió con un <strong>remate de zurda</strong> tras un gran pase filtrado. El partido terminó <strong>2-1 a favor de Portugal</strong>.<br><br>El propio <strong>Cristiano Ronaldo</strong> celebró el gol en redes sociales: <em>"¡Orgulloso de ti, hijo! Sigue así"</em>.'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-7.webp',
+        titulo: '¡AGÓNICA VICTORIA! PSG vence 1-0 al Niza sobre la hora',
+        fecha: '1 de noviembre del 2025',
+        texto: 'El <strong>PSG</strong> se llevó los tres puntos en el <strong>Parque de los Príncipes</strong> con un gol en el <strong>minuto 90+3</strong> de <strong>Gonçalo Ramos</strong> ante un <strong>Niza</strong> que jugó con 10 desde el 65\'.<br><br>El partido fue trabado y el PSG dominó, pero no lograba romper el cerrojo defensivo. Finalmente, un <strong>centro de Achraf Hakimi</strong> fue cabeceado al fondo por Ramos.<br><br>Con esta victoria, el PSG se mantiene <strong>invicto en la Ligue 1</strong> y lidera con <strong>27 puntos</strong>.'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-9.webp',
+        titulo: '¡IMPACTANTE REVELACIÓN! Robinho: «Han estado diciendo mentiras de que soy un líder acá adentro»',
+        fecha: '29 de octubre del 2025',
+        texto: 'El exfutbolista brasileño <strong>Robinho</strong>, condenado a <strong>9 años de prisión</strong> por <strong>violación en grupo</strong> en Italia, rompió el silencio desde la cárcel de <strong>Tremembé</strong> en São Paulo.<br><br>En una entrevista exclusiva, el exjugador del <strong>Real Madrid</strong> y <strong>AC Milan</strong> negó ser un <strong>"líder de facción"</strong> dentro del penal: <em>«Han estado diciendo mentiras de que soy un líder acá adentro. Yo solo quiero cumplir mi condena y volver con mi familia»</em>.<br><br>Robinho fue trasladado a una celda individual tras rumores de que ejercía influencia sobre otros reclusos. Fuentes penitenciarias desmienten que tenga privilegios.<br><br>Su abogado trabaja en un <strong>recurso de revisión</strong> de la sentencia italiana, que Brasil cumple desde marzo de 2024.'
+      },
+      {
+        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-4.webp',
+        titulo: 'TENDENCIAS: La IA impulsa la demanda de discos duros',
+        fecha: '1 de noviembre del 2025',
+        texto: 'La explosión de la <strong>inteligencia artificial</strong> está generando una <strong>demanda sin precedentes</strong> de almacenamiento masivo. Empresas como <strong>Western Digital</strong> y <strong>Seagate</strong> reportan un aumento del <strong>40%</strong> en ventas de discos duros de alta capacidad.<br><br>Los centros de datos que entrenan modelos de IA requieren <strong>petabytes de datos</strong>, y los discos HDD siguen siendo la opción más económica para almacenamiento a gran escala.<br><br>Western Digital lanzó su nueva línea <strong>Ultrastar DC HC680</strong> de <strong>28 TB</strong>, mientras Seagate responde con el <strong>Exos X28</strong>. Ambas empresas proyectan un crecimiento sostenido hasta 2030.'
+      }
     ];
     const noticiasPorPagina = 3;
     let paginaActual = 1;
     function mostrarNoticias() {
       const container = document.getElementById('noticias-container');
+      if (!container) return;
       container.innerHTML = '';
       const inicio = (paginaActual - 1) * noticiasPorPagina;
       const fin = Math.min(inicio + noticiasPorPagina, noticias.length);
@@ -648,10 +739,10 @@ _tot
       next.onclick = () => { if (paginaActual < total) { paginaActual++; mostrarNoticias(); } };
       pag.appendChild(next);
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.location.hash === '#noticias') mostrarNoticias();
-    });
-
+    // Carga inicial si estás en #noticias
+    if (window.location.hash === '#noticias') {
+      document.addEventListener('DOMContentLoaded', mostrarNoticias);
+    }
     // RANKING COMPLETO
     const fullRanking = [
       {pos:1,titulo:"Besos robados",artista:"Ana Barbara y Yahritza",src:"https://raw.githack.com/aprendiz74/online/main/pistas/1.mp3"},
@@ -691,16 +782,10 @@ _tot
     audio.addEventListener('ended', () => {
       if (currentSongBtn) { currentSongBtn.classList.remove('playing'); currentSongBtn = null; }
     });
-
-    // PROTECCIÓN
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
-    });
+   
+   
+   
+   
   </script>
 </body>
 </html>
