@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias - ZOOM MUSICAL</title>
+  <title>Noticias</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -105,156 +105,158 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       }
       .menu.active { display: flex; }
-      .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
-    }
-
-    /* CONTENIDO - GRID RESPONSIVE */
-    .content {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .content h1 {
-      font-size: 2.5rem;
-      color: #2c3e50;
-      margin-bottom: 40px;
-    }
-
-    .noticias-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* 2 COLUMNAS EN PC */
-    @media (min-width: 769px) {
-      .noticias-grid {
-        grid-template-columns: 1fr 1fr;
+      .menu a {
+        text-align: center;
+        padding: 14px 20px;
+        border-radius: 0;
       }
     }
 
-    /* 3 COLUMNAS EN PANTALLAS GRANDES (OPCIONAL) */
-    @media (min-width: 1200px) {
-      .noticias-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    /* CONTENIDO */
+    header { text-align: center; margin: 40px 0; }
+    header h1 { font-size: 2.5rem; color: #00A6A6; font-weight: bold; }
+
+    .noticia-wrapper { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 30px; 
+      margin-bottom: 50px; 
     }
 
-    /* NOTICIAS */
     .noticia {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      grid-template-rows: auto auto 1fr;
       background: white;
-      padding: 22px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      min-height: 250px;
+    }
+
+    .noticia-img {
+      grid-column: 1 / 2;
+      grid-row: 1 / 4;
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      background: center/cover no-repeat;
+      border-radius: 12px 0 0 12px;
+    }
+
+    .noticia-title {
+      grid-column: 2 / 3;
+      grid-row: 1;
       margin: 0;
-      height: fit-content;
-    }
-
-    /* ENLACE QUE OCUPA TODO EL BLOQUE */
-    .noticia-link {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      padding: 8px;
-      border-radius: 12px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .noticia-link:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
-
-    .noticia-link h3,
-    .noticia-link .fecha,
-    .noticia-link p {
-      pointer-events: none;
-      color: inherit !important;
-    }
-
-    .noticia h3 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-      font-size: 1.4rem;
+      padding: 20px 25px 8px;
+      font-size: 1.9rem;
+      color: #222;
       font-weight: 700;
+      line-height: 1.3;
     }
 
-    .fecha {
-      color: #7f8c8d;
+    .meta {
+      grid-column: 2 / 3;
+      grid-row: 2;
+      padding: 0 25px 12px;
       font-size: 0.9rem;
-      margin-bottom: 12px;
-      font-weight: 500;
+      color: #777;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    .meta i { color: #00A6A6; }
 
-    .noticia p:not(.leer-mas) {
-      color: #34495e;
+    .texto-scroll {
+      grid-column: 2 / 3;
+      grid-row: 3;
+      padding: 0 25px 20px;
+      overflow-y: auto;
+      max-height: 190px;
+    }
+    .texto-scroll p {
+      margin: 0 0 6px 0;
       font-size: 1.05rem;
+      color: #444;
+      text-align: justify;
       line-height: 1.6;
     }
+    .texto-scroll p:last-child { margin-bottom: 0; }
 
-    /* VER NOTICIA COMPLETA - GUÍA AMIGABLE */
-    .leer-mas {
-      margin-top: 12px;
-      font-size: 0.85rem;
-      color: #00A6A6;
-      font-style: italic;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-      opacity: 0.9;
-      transition: all 0.2s ease;
-      pointer-events: none;
-      font-weight: 500;
-    }
-
-    .noticia-link:hover .leer-mas,
-    .noticia-link:active .leer-mas {
-      opacity: 1;
-      transform: translateX(4px);
-      color: #007a7a;
-    }
-
-    /* En móvil: efecto al tocar */
     @media (max-width: 768px) {
-      .noticia-link:active {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+      .noticia {
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px auto auto auto;
       }
-      .noticia-link:active .leer-mas {
-        transform: translateX(6px);
-        color: #e74c3c;
+      .noticia-img {
+        grid-column: 1 / 2;
+        grid-row: 1;
+        height: 200px;
+        border-radius: 12px 12px 0 0;
+      }
+      .noticia-title, .meta, .texto-scroll {
+        grid-column: 1 / 2;
+      }
+      .texto-scroll { 
+        max-height: none; 
+        overflow-y: visible; 
+        padding: 0 20px 20px;
+      }
+      .noticia-title { 
+        text-align: center; 
+        padding: 15px 20px 8px; 
+      }
+      .meta { 
+        justify-content: center; 
+        padding: 0 20px 10px; 
       }
     }
 
-    footer {
-      background: #00A6A6;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 60px;
-      font-size: 0.95rem;
-    }
+    /* FOOTER - CORREGIDO PARA CENTRADO EN PC Y MÓVIL */
+    /* FOOTER - CENTRADO PERFECTO EN PC Y MÓVIL */
+footer {
+  background: #00A6A6;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+  font-size: 0.9rem;
+}
 
-    /* AUDIO GLOBAL OCULTO */
-    #global-live-player {
-      position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      z-index: -9999;
-    }
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    /* OCULTAR BOTÓN EN VIVO EN PÁGINAS DE NOTICIA */
-    #live-btn { display: none !important; }
+footer p {
+  margin: 0;
+  line-height: 1.5;
+  width: 100%;
+}
+
+/* OCULTAR BOTÓN EN VIVO */
+#live-btn { display: none !important; }
+#global-live-player {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -9999;
+}
+
   </style>
 </head>
 <body>
 
-  <!-- AUDIO GLOBAL (EN VIVO) -->
   <audio id="global-live-player" preload="none"></audio>
 
   <!-- NAVEGACIÓN -->
@@ -273,6 +275,7 @@
         <a href="contactanos.html">CONTÁCTANOS</a>
       </div>
 
+      <!-- BOTÓN EN VIVO (OCULTO) -->
       <button id="live-btn" class="live-btn">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M8 5v14l11-7z"/>
@@ -285,136 +288,119 @@
     </div>
   </nav>
 
-  <!-- CONTENIDO PRINCIPAL -->
   <div class="content">
-    <h1>Últimas Noticias</h1>
+    <header>
+      <h1>Últimas Noticias</h1>
+    </header>
 
-    <div class="noticias-grid">
+    <div class="noticia-wrapper">
+      <!-- Noticia 1 -->
       <div class="noticia">
-        <a href="noticia-tendencias.html" class="noticia-link">
-          <h3>TENDENCIAS</h3>
-          <p class="fecha">1 de noviembre de 2025</p>
-          <p>La IA impulsa la demanda de discos duros de Western Digital y Seagate</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-6.webp');"></div>
+        <div class="noticia-title">¡PALIZA EN EL CLÁSICO! Bayern Múnich golea 3-0 al Leverkusen</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 1 de noviembre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p>El <strong>Bayern Múnich</strong> aplastó al <strong>Bayer Leverkusen</strong> con un contundente <strong>3-0</strong> en el <strong>Allianz Arena</strong>, consolidándose como líder de la <strong>Bundesliga</strong>.</p>
+          <p><strong>Harry Kane</strong> abrió el marcador con un <strong>golazo de volea</strong>, seguido de un <strong>doble de Jamal Musiala</strong>. El Leverkusen no pudo con la presión alta del Bayern. Con este resultado, el Bayern suma <strong>24 puntos</strong> y saca <strong>5 de ventaja</strong> al segundo clasificado.</p>
+        </div>
       </div>
 
+      <!-- Noticia 2 -->
       <div class="noticia">
-        <a href="noticia-cristiano-jr.html" class="noticia-link">
-          <h3>GRAN NOTICIA DEPORTIVA</h3>
-          <p class="fecha">1 de noviembre de 2025</p>
-          <p>Cristiano Ronaldo Jr convierte su primer gol con Portugal sub16</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-8.webp');"></div>
+        <div class="noticia-title">HEGEMONÍA EN SUDAMÉRICA: Brasil alcanza 10 finalistas en 12 ediciones</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 31 de octubre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p><strong>Brasil</strong> consolida su dominio absoluto en la <strong>Copa Libertadores</strong> con <strong>10 equipos en la final</strong> de las últimas <strong>12 ediciones</strong>.</p>
+          <p>Este año, <strong>Palmeiras</strong> y <strong>Flamengo</strong> disputarán la final en el <strong>Maracaná</strong>, repitiendo la histórica final de 2019.</p>
+          <p>Desde 2013, solo <strong>Argentina (2)</strong> ha interrumpido la racha brasileña. El fútbol sudamericano vive una <strong>era dorada verdeamarela</strong>.</p>
+        </div>
       </div>
 
+      <!-- Noticia 3 -->
       <div class="noticia">
-        <a href="noticia-bayern.html" class="noticia-link">
-          <h3>¡PALIZA EN EL CLÁSICO!</h3>
-          <p class="fecha">1 de noviembre de 2025</p>
-          <p>Bayern Múnich golea por (3-0) al Leverkusen en la Bundesliga</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-5.webp');"></div>
+        <div class="noticia-title">GRAN NOTICIA DEPORTIVA: Cristiano Ronaldo Jr anota su primer gol con Portugal sub16</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 1 de noviembre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p><strong>Cristiano Ronaldo Jr</strong>, hijo del astro portugués, marcó su <strong>primer gol oficial</strong> con la selección <strong>sub16 de Portugal</strong> en un partido amistoso contra España.</p>
+          <p>El joven delantero, de <strong>15 años</strong>, ingresó en el segundo tiempo y definió con un <strong>remate de zurda</strong> tras un gran pase filtrado. El partido terminó <strong>2-1 a favor de Portugal</strong>.</p>
+          <p>El propio <strong>Cristiano Ronaldo</strong> celebró el gol en redes sociales: <em>"¡Orgulloso de ti, hijo! Sigue así"</em>.</p>
+        </div>
       </div>
 
+      <!-- Noticia 4 -->
       <div class="noticia">
-        <a href="noticia-psg.html" class="noticia-link">
-          <h3>¡AGÓNICA VICTORIA!</h3>
-          <p class="fecha">1 de noviembre de 2025</p>
-          <p>PSG venció sobre la hora (1-0) al Niza en la Ligue 1</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-7.webp');"></div>
+        <div class="noticia-title">¡AGÓNICA VICTORIA! PSG vence 1-0 al Niza sobre la hora</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 1 de noviembre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p>El <strong>PSG</strong> se llevó los tres puntos en el <strong>Parque de los Príncipes</strong> con un gol en el <strong>minuto 90+3</strong> de <strong>Gonçalo Ramos</strong> ante un <strong>Niza</strong> que jugó con 10 desde el 65'.</p>
+          <p>El partido fue trabado y el PSG dominó, pero no lograba romper el cerrojo defensivo. Finalmente, un <strong>centro de Achraf Hakimi</strong> fue cabeceado al fondo por Ramos.</p>
+          <p>Con esta victoria, el PSG se mantiene <strong>invicto en la Ligue 1</strong> y lidera con <strong>27 puntos</strong>.</p>
+        </div>
       </div>
 
+      <!-- Noticia 5 -->
       <div class="noticia">
-        <a href="noticia-brasil.html" class="noticia-link">
-          <h3>PODER SUDAMERICANO</h3>
-          <p class="fecha">31 de octubre de 2025</p>
-          <p>Brasil alcanzó 10 finalistas en las últimas 12 ediciones de la copa libertadores</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-9.webp');"></div>
+        <div class="noticia-title">¡IMPACTANTE REVELACIÓN! Robinho: «Han estado diciendo mentiras de que soy un líder acá adentro»</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 29 de octubre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p>El exfutbolista brasileño <strong>Robinho</strong>, condenado a <strong>9 años de prisión</strong> por <strong>violación en grupo</strong> en Italia, rompió el silencio desde la cárcel de <strong>Tremembé</strong> en São Paulo.</p>
+          <p>En una entrevista exclusiva, el exjugador del <strong>Real Madrid</strong> y <strong>AC Milan</strong> negó ser un <strong>"líder de facción"</strong> dentro del penal: <em>«Han estado diciendo mentiras de que soy un líder acá adentro. Yo solo quiero cumplir mi condena y volver con mi familia»</em>.</p>
+          <p>Robinho fue trasladado a una celda individual tras rumores de que ejercía influencia sobre otros reclusos. Fuentes penitenciarias desmienten que tenga privilegios.</p>
+          <p>Su abogado trabaja en un <strong>recurso de revisión</strong> de la sentencia italiana, que Brasil cumple desde marzo de 2024.</p>
+        </div>
       </div>
 
+      <!-- Noticia 6 -->
       <div class="noticia">
-        <a href="noticia-robinho.html" class="noticia-link">
-          <h3>¡IMPACTANTE REVELACIÓN!</h3>
-          <p class="fecha">29 de octubre de 2025</p>
-          <p>Robinho y su vida en la cárcel: «Han estado diciendo mentiras de que soy un líder acá adentro»</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
-      </div>
-	  
-	  <div class="noticia">
-        <a href="noticia-LigaPro" class="noticia-link">
-          <h3>LigaPro 2025</h3>
-          <p class="fecha">28 de octubre de 2025</p>
-          <p>LigaPro suspende cambios en Hexagonalde Ascenso hasta fallo del TAS»</p>
-          <p class="leer-mas">→ Ver noticia completa</p>
-        </a>
+        <div class="noticia-img" style="background-image: url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-4.webp');"></div>
+        <div class="noticia-title">TENDENCIAS: La IA impulsa la demanda de discos duros</div>
+        <div class="meta">
+          <i class="fas fa-calendar-alt"></i> Publicado el 1 de noviembre del 2025 
+          <i class="fas fa-user"></i> ZOOM MUSICAL
+        </div>
+        <div class="texto-scroll">
+          <p>La explosión de la <strong>inteligencia artificial</strong> está generando una <strong>demanda sin precedentes</strong> de almacenamiento masivo. Empresas como <strong>Western Digital</strong> y <strong>Seagate</strong> reportan un aumento del <strong>40%</strong> en ventas de discos duros de alta capacidad.</p>
+          <p>Los centros de datos que entrenan modelos de IA requieren <strong>petabytes de datos</strong>, y los discos HDD siguen siendo la opción más económica para almacenamiento a gran escala.</p>
+          <p>Western Digital lanzó su nueva línea <strong>Ultrastar DC HC680</strong> de <strong>28 TB</strong>, mientras Seagate responde con el <strong>Exos X28</strong>. Ambas empresas proyectan un crecimiento sostenido hasta 2030.</p>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- FOOTER CORREGIDO -->
   <footer>
-    <p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
-  </footer>
+  <div class="container">
+    <p>&copy; 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
+  </div>
+</footer>
 
-  <!-- JS: MENÚ + AUDIO + PROTECCIÓN -->
+  <!-- SCRIPT MENÚ MÓVIL -->
   <script>
-    // Menú móvil
-    const toggle = document.querySelector('.menu-toggle');
+    const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => menu.classList.toggle('active'));
-      document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', () => menu.classList.remove('active'));
-      });
-    }
-
-    // Audio global en vivo
-    const player = document.getElementById('global-live-player');
-    const btn = document.getElementById('live-btn');
-    const text = btn?.querySelector('.live-text');
-    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-
-    if (btn && text) {
-      const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-      if (isPlaying) {
-        player.src = stream;
-        player.play().catch(() => {});
-        btn.classList.add('playing');
-        text.textContent = 'PAUSAR';
-      }
-
-      btn.addEventListener('click', () => {
-        if (player.paused) {
-          player.src = stream;
-          player.play().catch(() => {});
-          btn.classList.add('playing');
-          text.textContent = 'PAUSAR';
-          localStorage.setItem('radio-live-playing', 'true');
-        } else {
-          player.pause();
-          btn.classList.remove('playing');
-          text.textContent = 'EN VIVO';
-          localStorage.setItem('radio-live-playing', 'false');
-        }
-      });
-    }
-  </script>
-
-  <script>
-    // Protección JS
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
-      if (e.key === 'F12') e.preventDefault();
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
     });
   </script>
+
 </body>
 </html>
-
-
