@@ -280,22 +280,54 @@
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
+ /* === NOTICIAS FULL SCREEN EN MÓVIL - OPTIMIZADO Y CON ESPACIO CORRECTO === */
+@media (max-width: 768px) {
+  #noticias .noticias-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .noticia-wrapper {
+    gap: 20px !important;
+    padding: 0 !important;
+    margin: 0 0 50px 0 !important;
+  }
+  .noticia {
+    border-radius: 0 !important;
+    margin: 0 -16px !important;
+    width: calc(100% + 32px) !important;
+    box-shadow: none !important;
+    overflow: hidden;
+  }
+  .noticia-img {
+    border-radius: 0 !important;
+    height: 240px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
   .noticia-title {
-  font-size: 1.6rem !important;
-  text-align: center !important;
-  padding: 28px 20px 8px 20px !important; /* ↑ más espacio arriba */
-  margin: 0 !important;
-  line-height: 1.3 !important;
-}
+    font-size: 1.6rem !important;
+    text-align: center !important;
+    padding: 28px 20px 8px 20px !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    color: #222 !important;
+  }
   .meta {
     justify-content: center !important;
+    padding: 0 20px 12px !important;
+    font-size: 0.9rem !important;
+  }
+  .texto-scroll {
+    padding: 0 20px 28px !important;
   }
   .paginacion {
     padding: 0 10px !important;
+    margin: 40px 0 20px !important;
   }
 }
 
-/* Animación suave al cargar noticias */
+/* === ANIMACIÓN SUAVE AL CARGAR NOTICIAS (ÚNICO BLOQUE) === */
 .noticia {
   opacity: 0;
   transform: translateY(20px);
@@ -308,7 +340,6 @@
 @keyframes fadeInUp {
   to { opacity: 1; transform: translateY(0); }
 }
-	
     /* TV */
     @media (min-width:1920px){
       .container{max-width:1800px;padding:0 40px}
