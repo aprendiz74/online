@@ -249,6 +249,66 @@
     .play-btn.playing{background:#27ae60}
     .play-btn.playing i::before{content:"\f28b"}
     @media (min-width:769px){.ranking-grid{grid-template-columns:repeat(2,1fr)}}
+	
+	/* === NOTICIAS FULL SCREEN EN MÓVIL - BORDE A BORDE === */
+@media (max-width: 768px) {
+  #noticias .noticias-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .noticia-wrapper {
+    gap: 20px !important;
+    padding: 0 !important;
+    margin: 0 0 50px 0 !important;
+  }
+  .noticia {
+    border-radius: 0 !important;
+    margin: 0 -16px !important;
+    width: calc(100% + 32px) !important;
+    box-shadow: none !important;
+    overflow: hidden;
+  }
+  .noticia-img {
+    border-radius: 0 !important;
+    height: 240px !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  .noticia-title,
+  .meta,
+  .texto-scroll {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .noticia-title {
+  font-size: 1.6rem !important;
+  text-align: center !important;
+  padding: 24px 20px 8px 20px !important; /* ↑ más espacio arriba */
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+  .meta {
+    justify-content: center !important;
+  }
+  .paginacion {
+    padding: 0 10px !important;
+  }
+}
+
+/* Animación suave al cargar noticias */
+.noticia {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+.noticia:nth-child(1) { animation-delay: 0.1s; }
+.noticia:nth-child(2) { animation-delay: 0.2s; }
+.noticia:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+	
     /* TV */
     @media (min-width:1920px){
       .container{max-width:1800px;padding:0 40px}
@@ -486,19 +546,19 @@
         </div>
       </div>
     </section>
-    <!-- NOTICIAS -->
-    <section id="noticias" class="seccion">
-      <!-- NOTICIAS - CONTENEDOR ANCHO -->
-<div style="max-width: 100%; padding: 0;">
-  <div class="about-content" style="max-width: 100%; padding: 20px 0;">
-    <header style="text-align: center; margin-bottom: 30px;">
-      <h1 style="font-size: 2.5rem; color: var(--pink);">Últimas Noticias</h1>
-    </header>
-    <div class="noticia-wrapper" id="noticias-container"></div>
-    <div class="paginacion" id="paginacion"></div>
+  
+   <!-- NOTICIAS -->
+<section id="noticias" class="seccion">
+  <div class="noticias-full-container">
+    <div class="noticias-content">
+      <header style="text-align: center; margin: 40px 0 30px; padding: 0 16px;">
+        <h1 style="font-size: 2.5rem; color: var(--pink); margin: 0;">Últimas Noticias</h1>
+      </header>
+      <div class="noticia-wrapper" id="noticias-container"></div>
+      <div class="paginacion" id="paginacion"></div>
+    </div>
   </div>
-</div>
-    </section>
+</section>
     <!-- CONTACTO -->
     <section id="contacto" class="seccion">
       <div class="about-content">
