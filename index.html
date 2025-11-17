@@ -292,68 +292,7 @@
   }
 }
 
-    /* Banner horizontal en PC */
-@media (min-width: 769px) {
-  .noticia-full {
-    display: flex; /* fila horizontal */
-    flex-direction: row; /* imagen a la izquierda, contenido a la derecha */
-    max-width: 1200px;
-    margin: 40px auto;
-    border-radius: 14px;
-    overflow: hidden;
-  }
 
-  .noticia-img {
-    flex: 1; /* ocupa 50% aprox */
-    height: auto;
-    min-height: 400px;
-    background-position: center;
-    background-size: cover;
-  }
-
-  .noticia-content {
-    flex: 1; /* ocupa 50% aprox */
-    padding: 40px 30px;
-  }
-}
-
-/* Móvil sigue igual (vertical) */
-@media (max-width: 768px) {
-  .noticia-full {
-    display: block;
-    margin: 20px 10px;
-  }
-
-  .noticia-img {
-    height: 250px;
-    border-radius: 12px 12px 0 0;
-    background-position: center top !important;
-    background-size: cover !important;
-  }
-
-  .noticia-content {
-    padding: 20px;
-  }
-
-  .noticia-content h1 {
-    font-size: 1.7rem;
-    line-height: 1.4;
-  }
-
-  .noticia-content p {
-    font-size: 1rem;
-  }
-
-  .btn-volver {
-    padding: 10px 22px;
-    font-size: 0.9rem;
-  }
-}
-
-</style>
-</head>
-
-<body>
   <!-- AUDIO GLOBAL -->
   <audio id="global-live-player" preload="none"></audio>
 
@@ -697,4 +636,5 @@
 </body>
 
 </html>
+
 
