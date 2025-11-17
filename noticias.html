@@ -47,6 +47,24 @@ footer a:hover { text-decoration:underline; }
 #global-live-player { position:fixed; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; visibility:hidden; pointer-events:none; z-index:-9999; }
 #live-btn { display:none !important; }
 .noticias-header { text-align:center; margin:30px 0; }
+
+/* Títulos de noticias estilo Ranking Musical */
+.titulo-ranking {
+  font-size: 2.2rem;         /* tamaño igual al h1 del ranking */
+  color: #2c3e50;            /* mismo color */
+  text-align: center;         /* centrado */
+  margin-bottom: 40px;        /* espaciado similar */
+  font-weight: 700;
+}
+
+/* Opcional: agregar emojis decorativos dentro del título */
+.titulo-ranking::before {
+  content: "🎶 ";
+}
+.titulo-ranking::after {
+  content: " 🎶";
+}
+
 </style>
 </head>
 <body>
@@ -72,9 +90,9 @@ footer a:hover { text-decoration:underline; }
 </div>
 </nav>
 
-<!-- ======= Título Noticias ======= -->
+<!-- ======= Noticias ======= -->
 <header class="noticias-header">
-  <h1>NOTICIAS</h1>
+  <h1>Noticias Destacadas</h1>
 </header>
 
 <!-- ======= Noticias ======= -->
