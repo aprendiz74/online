@@ -694,32 +694,17 @@
     });
     // NOTICIAS INICIO
     const inicioNews = [
-  {
-    img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',
-    titulo: '¿Qué significa hurgarse la nariz?, según la psicología',
-    texto: 'Conoce qué revela la psicología sobre el hábito de hurgarse la nariz, cómo se llama médicamente y los riesgos',
-    url: 'noticia1.html'
-  },
-  {
-    img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp',
-    titulo: 'Cristiano Ronaldo dejó fríos a sus fans.',
-    texto: 'Cristiano Ronaldo rompió el silencio sobre su futuro en plena entrevista.',
-    url: 'noticia2.html'
-  },
-  {
-    img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp',
-    titulo: 'La ciencia logra lo imposible:',
-    texto: 'Por medio de una investigación científica, se plasmó el primer atlas del cerebro humano',
-    url: 'noticia3.html'
-  }
-];
+      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',titulo:'¿Qué significa hurgarse la nariz?, según la psicología',texto:'Conoce qué revela la psicología sobre el hábito de hurgarse la nariz, cómo se llama médicamente y los riesgos'},
+      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp',titulo:'Cristiano Ronaldo dejó fríos a sus fans.',texto:'Cristiano Ronaldo rompió el silencio sobre su futuro en plena entrevista.'},
+      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp',titulo:'La ciencia logra lo imposible:',texto:'Por medio de una investigación científica, se plasmó el primer atlas del cerebro humano'}
+    ];
     const inicioNewsContainer = document.getElementById('inicio-news');
     inicioNews.forEach(n => {
       const article = document.createElement('article');
       article.innerHTML = `
         <div class="thumb" style="background-image:url('${n.img}')"></div>
         <div class="section">
-          <h3><a href="${n.url}" class="news-link" target="_blank">${n.titulo}</a></h3>
+          <h3><a href="#noticias" class="news-link">${n.titulo}</a></h3>
           <p>${n.texto}</p>
         </div>
       `;
