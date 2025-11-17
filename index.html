@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#00C6C6">
+
   <!-- SEO -->
   <title>ZOOM MUSICAL - Siempre la mejor música | Escucha en Vivo 24/7</title>
   <meta name="description" content="Escucha ZOOM MUSICAL en vivo las 24 horas. Música variada, noticias, ranking musical y la mejor programación. ¡Tu mejor elección en radio online desde Ecuador!">
+  
   <!-- FAVICONS -->
   <link rel="icon" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" type="image/webp">
   <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
   <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
+
   <!-- OPEN GRAPH -->
   <meta property="og:title" content="ZOOM MUSICAL - Siempre la mejor música">
   <meta property="og:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking. ¡La radio que te acompaña siempre!">
@@ -20,383 +23,291 @@
   <meta property="og:url" content="https://webzoommusical.blogspot.com/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_EC">
+
   <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ZOOM MUSICAL - Siempre la mejor música">
   <meta name="twitter:description" content="Escucha en vivo las 24 horas. Música, noticias y ranking.">
   <meta name="twitter:image" content="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp">
+
   <!-- CANÓNICA -->
   <link rel="canonical" href="https://webzoommusical.blogspot.com/">
+
   <!-- PRECONNECT -->
   <link rel="preconnect" href="https://stream-177.zeno.fm">
   <link rel="preconnect" href="https://raw.githack.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-  :root{--cyan:#6e9796;--cyan-deep:#ab5959;--pink:#266d9b;--pink-2:#3f6f8f;--lemon:#dbedd8;--text:#0f172a}
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-  a{color:inherit;text-decoration:none}
-  .container{max-width:1120px;margin:0 auto;padding:0 12px}
-  /* TOPBAR */
-  .topbar{background:linear-gradient(to bottom,#00d6d6 0%,#00a6a6 100%);color:#fff;font-size:12px;box-shadow:inset 0 2px 6px rgba(0,0,0,0.35),0 4px 12px rgba(0,0,0,0.28);border-bottom:1px solid rgba(0,0,0,0.25);position:relative;z-index:100;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,0.45)}
-  .topbar-inner{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:10px 12px}
-  #today{font-weight:700;letter-spacing:0.5px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.5)}
-  .social a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:rgba(255,255,255,0.15);border-radius:50%;backdrop-filter:blur(4px);opacity:1;transition:all .25s ease;box-shadow:0 2px 6px rgba(0,0,0,0.3),inset 0 1px 1px rgba(255,255,255,0.2)}
-  .social a:hover{transform:translateY(-2px) scale(1.1);background:rgba(255,255,255,0.3);box-shadow:0 6px 16px rgba(0,0,0,0.4),inset 0 1px 2px rgba(255,255,255,0.3)}
-  .social a svg{filter:drop-shadow(0 1px 1px rgba(0,0,0,0.5))}
-  header{padding:16px 0}
-  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-  .brand-badge img{width:100%;height:100%;object-fit:contain}
-  .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
-  .brand-sub{margin-top:-4px,font-weight:700;font-size:10px;color:var(--cyan-deep)}
-  .live-btn{display:inline-flex;align-items:center;gap:8px;background:var(--cyan-deep);color:#fff;border:none;border-radius:999px;padding:10px 14px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.12);cursor:pointer;font-size:13px;transition:all .2s}
-  .live-btn.playing{background:#fff;color:var(--cyan-deep)}
-  .live-btn svg{width:16px;height:16px;fill:currentColor}
-  .live-btn.playing .play-icon{display:none}
-  .live-btn.playing .stop-icon{display:block}
-  .live-btn .live-text{margin-left:4px}
-  nav{background:var(--pink);color:#fff}
-  .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
-  .menu a{opacity:.98;transition:.2s}
-  .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
-  .seccion{display:none;padding:24px 0}
-  .seccion.active{display:block}
-  main{padding:24px 0}
-  .grid{display:grid;grid-template-columns:1fr;gap:24px}
-  .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
-  .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
-  .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
-  .section{padding:20px}
-  .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
-  .hero-slides{position:relative;width:100%;height:100%}
-  .hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;background:center/cover no-repeat;opacity:0;transition:opacity 1s}
-  .hero-slide.active{opacity:1}
-  .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,var(--pink) 0%,var(--pink) 35%,transparent 35%),linear-gradient(0deg,rgba(0,0,0,.15),rgba(0,0,0,.15))}
-  .hero-panel{position:absolute;right:0;bottom:0;padding:24px;display:flex;justify-content:flex-end}
-  .panel-box{background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(4px);border-radius:14px;padding:16px;max-width:380px}
-  .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:10}
-  .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer}
-  .dot.active{background:#fff}
-  .news{display:grid;grid-template-columns:1fr;gap:18px;padding:18px}
-  .news article{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-  .news .thumb{height:140px;background:#e5e7eb;background-size:cover;background-position:center}
-  .news h3{font-size:14px;margin:10px 0 6px;font-weight:700}
-  .news p{font-size:12px;color:#475569;margin:0;line-height:1.4}
-  .news .section{flex:1;padding:0 16px 16px}
-  .news-link{color:inherit;text-decoration:none;font-weight:700;transition:color .2s}
-  .news-link:hover{color:var(--pink)}
-  .ranking-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.15)}
-  .ranking-item:nth-child(odd){background:var(--pink)}
-  .ranking-item:nth-child(even){background:var(--pink-2)}
-  .ranking-pos{min-width:40px;height:40px;display:grid;place-items:center;background:var(--lemon);font-weight:900;font-size:18px;border-radius:8px}
-  .ranking-meta{color:#fff}
-  .ranking-meta .artist{font-weight:800;font-size:14px}
-  .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
-  .play{margin-left:auto;width:32px;height:32px;border-radius:999px;background:rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;transition:background .2s}
-  .play:hover{background:rgba(255,255,255,.35)}
-  .play svg{width:16px;height:16px;fill:#fff}
-  .play.playing .play-icon{display:none}
-  .play.playing .stop-icon{display:block}
-  .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
-  .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
-  .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
-  .btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
-  .btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
-  .btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
-  .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
-  .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
-  .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
-  .final-banner-mobile{background:rgba(255,255,255,0.98);border:1px solid rgba(0,198,198,0.3);border-radius:18px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.1);backdrop-filter:blur(8px);margin:12px 0 20px 0;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap}
-  .final-banner-mobile .brand{gap:8px;min-width:140px;justify-content:center;display:flex;align-items:center}
-  .final-banner-mobile .brand-badge{width:36px;height:36px}
-  .final-banner-mobile .brand-title{font-size:19px;font-weight:800;color:var(--pink)}
-  .final-banner-mobile .brand-sub{font-size:10px;color:var(--cyan-deep)}
-  .final-banner-mobile .social-text{text-align:center;font-size:13px;color:#334155}
-  .final-banner-mobile .social-text a{color:#1877F2;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-  @media (min-width:768px){
-    .hero{height:360px}
-    .news{grid-template-columns:repeat(3,1fr)}
-    .grid{grid-template-columns:2fr 1fr}
-    .sidebar{position:sticky;top:20px;align-self:flex-start}
-    .ranking-item{padding:16px 20px}
-    .final-banner-mobile{display:none !important}
+    :root{--cyan:#6e9796;--cyan-deep:#ab5959;--pink:#266d9b;--pink-2:#3f6f8f;--lemon:#dbedd8;--text:#0f172a}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:radial-gradient(1200px 420px at 50% -220px, rgba(0,198,198,.13), transparent) #f6f7fb;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 12px}
+
+    /* TOPBAR */
+    .topbar {
+      background: linear-gradient(to bottom, #00d6d6 0%, #00a6a6 100%);
+      color: #fff;
+      font-size: 12px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.28);
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 100;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+    }
+    .topbar-inner { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 12px; }
+    #today { font-weight: 700; letter-spacing: 0.5px; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+    .social a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; background: rgba(255,255,255,0.15);
+      border-radius: 50%; backdrop-filter: blur(4px); opacity: 1;
+      transition: all 0.25s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2);
+    }
+    .social a:hover {
+      transform: translateY(-2px) scale(1.1); background: rgba(255,255,255,0.3);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+    .social a svg { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5)); }
+
+    header{padding:16px 0}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-badge{width:48px;height:48px;border-radius:999px;background:var(--lemon);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .brand-badge img{width:100%;height:100%;object-fit:contain}
+    .brand-title{font-weight:800;font-size:26px;letter-spacing:-.5px;color:var(--pink)}
+    .brand-sub{margin-top:-4px;font-weight:700;font-size:10px;color:var(--cyan-deep)}
+    .live-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-deep); color: #fff;
+      border: none; border-radius: 999px; padding: 10px 14px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.12);
+      cursor: pointer; font-size: 13px; transition: all .2s;
+    }
+    .live-btn.playing { background: #fff; color: var(--cyan-deep); }
+    .live-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .live-btn.playing .play-icon { display: none; }
+    .live-btn.playing .stop-icon { display: block; }
+    .live-btn .live-text { margin-left: 4px; }
+
+    nav{background:var(--pink);color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:18px;font-weight:700;font-size:13px;padding:12px 0}
+    .menu a{opacity:.98;transition:.2s}
+    .menu a:hover,.menu a.active{opacity:1;text-decoration:underline}
+
+    main{padding:24px 0}
+    .grid{display:grid;grid-template-columns:1fr;gap:24px}
+    .main-col,.sidebar{display:flex;flex-direction:column;gap:24px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(2,8,23,.06)}
+    .card-head{background:var(--lemon);padding:14px 20px;font-weight:800;font-size:18px;color:#000}
+    .section{padding:20px}
+
+    .hero{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 26px rgba(2,8,23,.12);height:260px}
+    .hero-slides{position:relative;width:100%;height:100%}
+    .hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;background:center/cover no-repeat;opacity:0;transition:opacity 1s}
+    .hero-slide.active{opacity:1}
+    .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, var(--pink) 0%, var(--pink) 35%, transparent 35%), linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.15))}
+    .hero-panel{position:absolute;right:0;bottom:0;padding:24px;display:flex;justify-content:flex-end}
+    .panel-box{background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(4px);border-radius:14px;padding:16px;max-width:380px}
+    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;z-index:10}
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer}
+    .dot.active{background:#fff}
+
+    .news{display:grid;grid-template-columns:1fr;gap:18px;padding:18px}
+    .news article{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+    .news .thumb{height:140px;background:#e5e7eb;background-size:cover;background-position:center}
+    .news h3{font-size:14px;margin:10px 0 6px;font-weight:700}
+    .news p{font-size:12px;color:#475569;margin:0;line-height:1.4}
+    .news .section{flex:1;padding:0 16px 16px}
+    .news-link{color:inherit;text-decoration:none;font-weight:700;transition:color .2s}
+    .news-link:hover{color:var(--pink)}
+
+    .ranking-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.15)}
+    .ranking-item:nth-child(odd){background:var(--pink)}
+    .ranking-item:nth-child(even){background:var(--pink-2)}
+    .ranking-pos{min-width:40px;height:40px;display:grid;place-items:center;background:var(--lemon);font-weight:900;font-size:18px;border-radius:8px}
+    .ranking-meta{color:#fff}
+    .ranking-meta .artist{font-weight:800;font-size:14px}
+    .ranking-meta .song{font-size:12px;opacity:.95;margin-top:2px}
+    .play {
+      margin-left: auto; width: 32px; height: 32px; border-radius: 999px; background: rgba(255,255,255,.25);
+      display: grid; place-items: center; cursor: pointer; transition: background .2s;
+    }
+    .play:hover { background: rgba(255,255,255,.35); }
+    .play svg { width: 16px; height: 16px; fill: #fff; }
+    .play.playing .play-icon { display: none; }
+    .play.playing .stop-icon { display: block; }
+
+    .cta{background:var(--cyan);color:#fff;padding:24px;border-radius:18px;box-shadow:0 10px 22px rgba(2,8,23,.12);text-align:center;position:relative;z-index:1;margin-bottom:12px}
+    .cta .title{font-weight:900;font-size:26px;margin-bottom:8px}
+    .cta p{opacity:.9;font-size:14px;margin:8px 0 16px}
+    .btn-relief{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;font-weight:900;font-size:15px;letter-spacing:-.5px;border-radius:12px;cursor:pointer;transition:all .2s ease;overflow:hidden;text-transform:uppercase}
+    .btn-ranking{background:#fff;color:var(--pink);box-shadow:0 6px 16px rgba(255,21,126,.25)}
+    .btn-ranking:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,21,126,.35)}
+    .btn-app{background:#fff;color:var(--cyan-deep);box-shadow:0 6px 16px rgba(0,198,198,.25)}
+    .btn-app:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,198,198,.35)}
+    .btn-relief svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5}
+
+    .final-banner-mobile {
+      background: rgba(255, 255, 255, 0.98); border: 1px solid rgba(0, 198, 198, 0.3);
+      border-radius: 18px; padding: 16px; box-shadow: 0 8px 20px rgba(0,0,0,.1);
+      backdrop-filter: blur(8px); margin: 12px 0 20px 0; display: flex;
+      justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .final-banner-mobile .brand { gap: 8px; min-width: 140px; justify-content: center; display: flex; align-items: center; }
+    .final-banner-mobile .brand-badge { width: 36px; height: 36px; }
+    .final-banner-mobile .brand-title { font-size: 19px; font-weight: 800; color: var(--pink); }
+    .final-banner-mobile .brand-sub { font-size: 10px; color: var(--cyan-deep); }
+    .final-banner-mobile .social-text { text-align: center; font-size: 13px; color: #334155; }
+    .final-banner-mobile .social-text a { color: #1877F2; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+
+    @media (min-width: 768px) {
+      .hero { height: 360px; }
+      .news { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: 2fr 1fr; }
+      .sidebar { position: sticky; top: 20px; align-self: flex-start; }
+      .ranking-item { padding: 16px 20px; }
+      .final-banner-mobile { display: none !important; }
+    }
+    @media (max-width: 767px) {
+      .main-col { order: 1; }
+      .sidebar { order: 2; margin-top: 24px; }
+      .hero { height: 260px !important; }
+      .hero-panel { display: none !important; }
+      main { padding-bottom: 80px; }
+      .final-banner-mobile { display: flex; }
+    }
+
+    footer {
+      background: #00a6a6; color: #fff; padding: 32px 0; margin-top: 40px;
+      position: relative; z-index: 1; display: flex; justify-content: center;
+      align-items: center; min-height: 70px; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    footer p { margin: 0; font-size: 14px; font-weight: 600; text-align: center; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); opacity: 0.98; }
+
+    #global-live-player { position: fixed; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  
+  /* AJUSTES PARA SMART TV (pantallas muy grandes) */
+@media (min-width: 1920px) {
+  body {
+    background-size: cover;
   }
-  @media (max-width:767px){
-    .main-col{order:1}
-    .sidebar{order:2;margin-top:24px}
-    .hero{height:260px !important}
-    .hero-panel{display:none !important}
-    main{padding-bottom:80px}
-    .final-banner-mobile{display:flex}
-  }
-  footer{background:#00a6a6;color:#fff;padding:32px 0;margin-top:40px;position:relative;z-index:1;display:flex;justify-content:center;align-items:center;min-height:70px;box-shadow:0 -4px 12px rgba(0,0,0,0.1);border-top:1px solid rgba(255,255,255,0.15)}
-  footer p{margin:0;font-size:14px;font-weight:600;text-align:center;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(0,0,0,0.2);opacity:0.98}
-  #global-live-player{position:fixed;top:-100px;left:-100px;width:1px;height:1px;opacity:0;pointer-events:none}
-  /* QUIÉNES SOMOS */
-  .about-content{max-width:900px;margin:0 auto;text-align:center;padding:20px}
-  .about-content h1{font-size:2.5rem;color:var(--pink);margin-bottom:20px}
-  .about-content p{font-size:1.1rem;line-height:1.8;color:#333;margin-bottom:18px}
-  /* PROGRAMACIÓN */
-  .programacion-grid{display:grid;gap:24px;max-width:1200px;margin:0 auto;padding:0 20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .evento{background:#fff;padding:22px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.08);opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease forwards}
-  .evento h3{color:#2c3e50;margin-bottom:8px;font-size:1.3rem;font-weight:700}
-  .fecha{color:#d00000;font-weight:800;font-size:1.05rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;padding:6px 10px;background:#ffe6e6;border-radius:8px;width:fit-content;box-shadow:0 2px 6px rgba(208,0,0,0.15);border-left:4px solid #d00000}
-  .fecha i{font-size:1.3rem;color:#d00000}
-  .evento p{color:#34495e;font-size:1.05rem;line-height:1.5}
-  @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
-/* NOTICIAS - CONTENEDOR MÁS ANCHO */
-.noticia-wrapper{
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  margin-bottom:50px;
-  max-width: 100% !important;
-  padding: 0 20px;
-}
-@media (min-width: 992px) {
-  .noticia-wrapper {
+
+  .container {
+    max-width: 1800px; /* ancho más amplio para TV */
+    margin: 0 auto;
     padding: 0 40px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
   }
-}
-.noticia{
-  display:grid;
-  grid-template-columns: 320px 1fr;
-  gap: 24px;
-  min-height: 280px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
-  overflow:hidden;
-}
-.noticia-img{
-  width:100%;
-  height:100%;
-  min-height:280px;
-  background:center/cover no-repeat;
-  border-radius:12px 0 0 12px;
-  background-size: 150% auto;     /* ← FOTO MÁS ANCHA */
-  background-position: center center;
-}
-@media (max-width: 768px) {
-  .noticia {
-    grid-template-columns: 1fr;
-    grid-template-rows: 220px auto auto auto;
-    gap: 16px;
-    min-height: auto;
-  }
-  .noticia-img {
-    height: 220px !important;
-    min-height: auto;
-    border-radius:12px 12px 0 0;
-    background-size: 140% auto;   /* ← En móvil también más ancha */
-  }
-  .noticia-title {
-    text-align:center;
-    padding:15px 20px 8px;
-    font-size:1.6rem;
-  }
-  .meta { justify-content:center; padding:0 20px 10px; }
-  .texto-scroll { padding:0 20px 20px; max-height:none; overflow:visible; }
-}
-    .noticia{display:grid;grid-template-columns:300px 1fr;grid-template-rows:auto auto 1fr;background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);overflow:hidden;min-height:250px;width:100%}
-    .noticia-img{grid-column:1/2;grid-row:1/4;width:100%;height:100%;min-height:250px;background:center/cover no-repeat;border-radius:12px 0 0 12px; background-size: 150% auto; background-position: center center;}
-    .noticia-title{grid-column:2/3;grid-row:1;margin:0;padding:20px 25px 8px;font-size:1.9rem;color:#222;font-weight:700;line-height:1.3}
-    .meta{grid-column:2/3;grid-row:2;padding:0 25px 12px;font-size:0.9rem;color:#777;font-style:italic;display:flex;align-items:center;gap:8px}
-    .meta i{color:#00A6A6}
-    .texto-scroll{grid-column:2/3;grid-row:3;padding:0 25px 20px;overflow-y:auto;max-height:190px}
-    .texto-scroll p{margin:0 0 6px 0;font-size:1.05rem;color:#444;text-align:justify;line-height:1.6}
-    @media (max-width:768px){
-      .noticia{grid-template-columns:1fr;grid-template-rows:200px auto auto auto;min-height:auto}
-      .noticia-img{grid-column:1/2;grid-row:1/2;height:200px;min-height:auto;border-radius:12px 12px 0 0; background-size: 140% auto;}
-      .noticia-title{grid-column:1/2;grid-row:2/3;text-align:center;padding:15px 20px 8px;font-size:1.6rem}
-      .meta{grid-column:1/2;grid-row:3/4;justify-content:center;padding:0 20px 10px}
-      .texto-scroll{grid-column:1/2;grid-row:4/5;max-height:none;overflow-y:visible;padding:0 20px 20px}
-    }
-    /* CONTACTO */
-    .contact-form{max-width:600px;margin:30px auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.1);text-align:center}
-    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:5px;font-size:1rem}
-    .contact-form button{background:#3498db;color:#fff;padding:12px 30px;border:none;border-radius:5px;font-size:1.1rem;cursor:pointer}
-    .contact-form button:hover{background:#2980b9}
-    /* RANKING COMPLETO */
-    .ranking-full h1{font-size:2.2rem;color:#2c3e50;margin-bottom:40px;text-align:center}
-    .ranking-grid{display:grid;gap:20px;grid-template-columns:1fr}
-    .cancion{background:#fff;padding:20px;border-radius:16px;box-shadow:0 5px 18px rgba(0,0,0,0.1);display:flex;align-items:center;gap:16px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease forwards}
-    .cancion:nth-child(1){animation-delay:.1s}
-    .cancion:nth-child(2){animation-delay:.2s}
-    .cancion:nth-child(3){animation-delay:.3s}
-    .cancion:nth-child(4){animation-delay:.4s}
-    .cancion:nth-child(5){animation-delay:.5s}
-    .cancion:nth-child(6){animation-delay:.6s}
-    .cancion:nth-child(7){animation-delay:.7s}
-    .cancion:nth-child(8){animation-delay:.8s}
-    .cancion:nth-child(9){animation-delay:.9s}
-    .cancion:nth-child(10){animation-delay:1s}
-    .posicion{background:linear-gradient(135deg,#3498db,#2980b9);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;flex-shrink:0}
-    .info{flex:1;text-align:left}
-    .info h3{color:#2c3e50;margin-bottom:6px;font-size:1.25rem;font-weight:700}
-    .info .artista{color:#7f8c8d;font-size:1rem;font-weight:500}
-    .play-btn{background:#e74c3c;color:#fff;border:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;flex-shrink:0;font-size:1rem}
-    .play-btn:hover{background:#c0392b;transform:scale(1.1)}
-    .play-btn.playing{background:#27ae60}
-    .play-btn.playing i::before{content:"\f28b"}
-    @media (min-width:769px){.ranking-grid{grid-template-columns:repeat(2,1fr)}}
-	
-/* === NOTICIAS EN MÓVIL - ANCHO AMPLIO, CÓMODO Y SIN FULL SCREEN === */
-@media (max-width: 768px) {
-  #noticias .noticias-content {
-    padding: 0 8px !important;
-    margin: 0 !important;
-  }
-  .noticia-wrapper {
-    gap: 20px !important;
-    padding: 0 !important;
-    margin: 0 0 36px 0 !important;
-  }
-  .noticia {
-    border-radius: 14px !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
-    overflow: hidden;
-    background: #fff;
-    /* Animación también en móvil */
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
-  }
-  .noticia:nth-child(1) { animation-delay: 0.1s; }
-  .noticia:nth-child(2) { animation-delay: 0.2s; }
-  .noticia:nth-child(3) { animation-delay: 0.3s; }
-  .noticia:nth-child(4) { animation-delay: 0.4s; }
-  .noticia:nth-child(5) { animation-delay: 0.5s; }
 
-  .noticia-img {
-    border-radius: 14px 14px 0 0 !important;
-    height: 230px !important;
-    background-size: cover !important;
-    background-position: center !important;
+  /* NAV y menú: asegurar clics y colores */
+  nav {
+    position: relative;
+    z-index: 10; /* menú siempre encima */
+    background: var(--pink); /* mantener color original */
   }
-  .noticia-title {
-    font-size: 1.6rem !important;
-    text-align: center !important;
-    padding: 26px 16px 8px 16px !important;
-    margin: 0 !important;
-    line-height: 1.3 !important;
-    font-weight: 700 !important;
-    color: #1a1a1a !important;
-  }
-  .meta {
-    justify-content: center !important;
-    padding: 0 16px 12px !important;
-    font-size: 0.89rem !important;
-    color: #555 !important;
-  }
-  .texto-scroll {
-    padding: 0 16px 28px !important;
-    font-size: 1.02rem !important;
-    line-height: 1.65 !important;
-    color: #333 !important;
-  }
-}
 
-/* === ANIMACIÓN SUAVE EN ESCRITORIO (Y SI NO HAY MEDIA QUERY) === */
-@media (min-width: 769px) {
-  .noticia {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
+  .menu a {
+    color: inherit; /* mantener color original */
+    opacity: 0.98;
   }
-  .noticia:nth-child(1) { animation-delay: 0.1s; }
-  .noticia:nth-child(2) { animation-delay: 0.2s; }
-  .noticia:nth-child(3) { animation-delay: 0.3s; }
-  .noticia:nth-child(4) { animation-delay: 0.4s; }
-  .noticia:nth-child(5) { animation-delay: 0.5s; }
-}
 
-/* === KEYFRAMES (siempre fuera de media queries) === */
-@keyframes fadeInUp {
-  to {
+  .menu a:hover,
+  .menu a.active {
     opacity: 1;
-    transform: translateY(0);
+    text-decoration: underline;
   }
-}
-    /* TV */
-    @media (min-width:1920px){
-      .container{max-width:1800px;padding:0 40px}
-      header .brand-title{font-size:36px}
-      header .brand-sub{font-size:16px}
-      .hero{height:500px}
-      .hero-panel .panel-box{max-width:500px;padding:24px}
-      .news{grid-template-columns:repeat(3,1fr);gap:24px}
-      .news .thumb{height:200px}
-      .ranking-item{padding:20px 24px}
-      .ranking-pos{width:50px;height:50px;font-size:20px}
-      .cta .title{font-size:32px}
-      .cta p{font-size:16px}
-      .btn-relief{font-size:16px;padding:16px 20px}
-      footer p{font-size:16px}
-    }
-    .sidebar .cta{margin:4px 0;padding:8px}
-    .sidebar{gap:6px}
-    @media (max-width:767px){
-      .sidebar .cta{margin:3px 0;padding:6px}
-      .sidebar{gap:4px}
-    }
-    /* PROGRAMACIÓN: 3 columnas + TODO el ancho en PC */
-    @media (min-width: 992px) {
-      #programacion {
-        padding: 0 40px;
-      }
-      #programacion .about-content {
-        max-width: none;
-        padding: 0;
-        margin: 0 auto;
-      }
-      #programacion .programacion-grid {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: none;
-        padding: 0;
-        margin: 0 auto;
-      }
-    }
-	
-	
-	/* Contenedor del clima más compacto y centrado */
-.clima-inner {
-  margin: 5px 0 !important;
-  padding: 10px 12px;
-  text-align: center !important;      /* 🔹 centra el texto */
-  display: flex !important;           /* 🔹 centra el widget */
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;                /* 🔹 centra horizontal */
+
+  header .brand-title { font-size: 36px; }
+  header .brand-sub { font-size: 16px; }
+
+  .hero {
+    height: 500px;
+    position: relative;
+    z-index: 1; /* asegurar que hero no tape menú */
+  }
+
+  .hero-panel .panel-box {
+    max-width: 500px;
+    padding: 24px;
+    z-index: 2; /* encima del hero, debajo del nav */
+  }
+
+  .news {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .news .thumb { height: 200px; }
+
+  .ranking-item { padding: 20px 24px; }
+  .ranking-pos {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .cta .title { font-size: 32px; }
+  .cta p { font-size: 16px; }
+  .btn-relief { font-size: 16px; padding: 16px 20px; }
+
+  footer p { font-size: 16px; }
 }
 
-/* Asegura que el widget de Tutiempo quede centrado */
-.clima-inner > div {
-  margin: 0 auto !important;          /* 🔹 FORZAR centrado */
+/* Reducir al mínimo los márgenes de la sección CTA dentro del sidebar */
+.sidebar .cta {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Reducir el gap general del sidebar */
+.sidebar {
+  gap: 6px; /* antes 12px, antes aún 24px */
+}
+/* ==== AJUSTE ESPACIO CTA SIDEBAR ==== */
+.sidebar .cta {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Reducir espacio general en sidebar */
+.sidebar {
+  gap: 6px; /* Antes 24px */
+}
+
+/* Móvil: mantener separación mínima sin estorbar */
+@media (max-width: 767px) {
+  .sidebar .cta {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .sidebar {
+    gap: 4px;
+  }
 }
 
 </style>
 </head>
+
 <body>
+  <!-- AUDIO GLOBAL -->
   <audio id="global-live-player" preload="none"></audio>
-  <audio id="song-player" preload="none"></audio>
+
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="container topbar-inner">
       <span id="today">Cargando...</span>
-      <div class="social">
-        <a href="https://instagram.com/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm5.75-3.25a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/></svg></a>
-        <a href="https://www.facebook.com/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg></a>
-        <a href="https://wa.me/+593" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.47 2 2 6.47 2 12.04c0 2.18.69 4.19 1.86 5.85l-1.24 4.58 4.7-1.23c1.62 1.1 3.57 1.73 5.72 1.73 5.57 0 10.04-4.47 10.04-10.04C22.08 6.47 17.61 2 12.04 2zm5.8 14.24c-.29.82-1.08 1.52-1.94 1.7-.79.17-1.83.17-2.94-.36c-.91-.44-1.69-.99-2.45-1.68c-1.77-1.6-2.9-3.57-3.25-5.76c-.15-.93.04-1.79.53-2.51c.34-.5.81-.79 1.35-.79c.17 0 .34.02.5.06c.53.13 1.05.55 1.45.99c.52.58.99 1.2 1.4 1.86c.32.52.56 1.08.5 1.69c-.06.53-.34.99-.73 1.35c-.27.25-.24.48.02.72c.53.48 1.15 1.03 1.77 1.58c.62.55 1.34 1.07 2.12 1.47c.44.22.75.14 1-.17c.28-.35.6-.7.88-1.06c.25-.32.52-.36.85-.24c.36.13.73.26 1.09.4c.43.16.76.34.92.62c.24.41.22.9-.07 1.33z"/></svg></a>
-      </div>
+<div class="social">
+  <a href="https://instagram.com/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm5.75-3.25a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/></svg></a>
+  <a href="https://www.facebook.com/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg></a>
+  <a href="https://wa.me/+593" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.47 2 2 6.47 2 12.04c0 2.18.69 4.19 1.86 5.85l-1.24 4.58 4.7-1.23c1.62 1.1 3.57 1.73 5.72 1.73 5.57 0 10.04-4.47 10.04-10.04C22.08 6.47 17.61 2 12.04 2zm5.8 14.24c-.29.82-1.08 1.52-1.94 1.7-.79.17-1.83.17-2.94-.36c-.91-.44-1.69-.99-2.45-1.68c-1.77-1.6-2.9-3.57-3.25-5.76c-.15-.93.04-1.79.53-2.51c.34-.5.81-.79 1.35-.79c.17 0 .34.02.5.06c.53.13 1.05.55 1.45.99c.52.58.99 1.2 1.4 1.86c.32.52.56 1.08.5 1.69c-.06.53-.34.99-.73 1.35c-.27.25-.24.48.02.72c.53.48 1.15 1.03 1.77 1.58c.62.55 1.34 1.07 2.12 1.47c.44.22.75.14 1-.17c.28-.35.6-.7.88-1.06c.25-.32.52-.36.85-.24c.36.13.73.26 1.09.4c.43.16.76.34.92.62c.24.41.22.9-.07 1.33z"/></svg></a>
+</div>
     </div>
   </div>
   <!-- HEADER -->
@@ -418,486 +329,313 @@
       </button>
     </div>
   </header>
+
   <!-- NAV -->
-<nav>
-  <div class="container">
-    <div class="menu">
-      <a href="#inicio" class="active">INICIO</a>
-      <a href="#quienes-somos">QUIÉNES SOMOS</a>
-      <a href="#ranking">RANKING</a>
-      <a href="#programacion">PROGRAMACIÓN</a>
-      <a href="#noticias">NOTICIAS</a>
-      <a href="#contacto">CONTÁCTANOS</a>    
+  <nav>
+    <div class="container">
+      <div class="menu">
+        <a href="index.html" class="active">INICIO</a>
+        <a href="quienes-somos.html">QUIÉNES SOMOS</a>
+        <a href="ranking.html">RANKING</a>
+        <a href="programacion.html">PROGRAMACIÓN</a>
+        <a href="noticias.html">NOTICIAS</a>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+        <a href="tv.html">SEÑAL DE TV</a>
+      </div>
     </div>
-  </div>
-</nav>
-  <!-- SECCIONES -->
+  </nav>
+
+  <!-- MAIN -->
   <main class="container">
-    <!-- INICIO -->
-    <section id="inicio" class="seccion active">
-      <div class="grid">
-        <div class="main-col">
-          <section class="hero" aria-label="Carrusel">
-            <div class="hero-slides">
-              <div class="hero-slide active" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-1.webp')"></div>
-              <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-2.webp')"></div>
-              <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-3.webp')"></div>
-            </div>
-            <div class="hero-overlay"></div>
-            <div class="hero-panel">
-              <div class="panel-box">
-                <div class="brand" style="gap:10px;align-items:center">
-                  <div class="brand-badge" style="width:40px;height:40px">
-                    <img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Logo" loading="lazy">
-                  </div>
-                  <div>
-                    <div class="brand-title" style="font-size:22px;margin:0;line-height:1">ZOOM MUSICAL</div>
-                    <div class="brand-sub" style="margin:0;font-size:10px;color:var(--cyan-deep)">Siempre la mejor música</div>
-                  </div>
+    <div class="grid">
+      <!-- IZQUIERDA -->
+      <div class="main-col">
+        <!-- HERO -->
+        <section class="hero" aria-label="Carrusel de imágenes destacadas">
+          <div class="hero-slides">
+            <div class="hero-slide active" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-1.webp')"></div>
+            <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-2.webp')"></div>
+            <div class="hero-slide" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/banner-3.webp')"></div>
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="hero-panel">
+            <div class="panel-box">
+              <div class="brand" style="gap:10px; align-items:center">
+                <div class="brand-badge" style="width:40px;height:40px">
+                  <img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Logo ZOOM MUSICAL" style="width:100%; height:100%; object-fit:contain;" loading="lazy" />
                 </div>
-                <div style="margin-top:12px;font-size:12px;color:#334155;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                  <p style="margin:6px 0">Síguenos en:</p>
-                  <a href="https://www.facebook.com/" style="color:#1877F2;font-weight:900;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:4px">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg>
-                    /facebook
-                  </a>
+                <div>
+                  <div class="brand-title" style="font-size:22px; margin:0; line-height:1">ZOOM MUSICAL</div>
+                  <div class="brand-sub" style="margin:0; font-size:10px; color:var(--cyan-deep)">Siempre la mejor música</div>
                 </div>
               </div>
+              <div style="margin-top:12px; font-size:12px; color:#334155; display:flex; align-items:center; gap:6px; flex-wrap:wrap">
+                <p style="margin:6px 0">Síguenos en:</p>
+                <a href="https://www.facebook.com/" style="color:#1877F2; font-weight:900; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg>
+                  /facebook
+                </a>
+              </div>
             </div>
-            <div class="dots">
-              <span class="dot active" onclick="goToSlide(0)"></span>
-              <span class="dot" onclick="goToSlide(1)"></span>
-              <span class="dot" onclick="goToSlide(2)"></span>
-            </div>
-          </section>
-          <section class="card">
-            <div class="card-head">ÚLTIMAS NOTICIAS</div>
-            <div class="news" id="inicio-news">
-              <!-- Noticias del inicio -->
-            </div>
-          </section>
-        </div>
-        <aside class="sidebar">
-          <section class="card">
-            <div class="card-head">LAS MÁS PEDIDAS</div>
-            <div id="ranking-list"></div>
-            <div class="section" style="background:var(--cyan);padding:18px 20px">
-              <a href="#ranking" class="btn-relief btn-ranking">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z"></path><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 9v12"></path><path d="M15 9v12"></path></svg>
-                VER RANKING MUSICAL
-              </a>
-            </div>
-          </section>
-          <section class="cta">
-            <div class="title">DESCARGA LA APP</div>
-            <p>Escucha en vivo y vota por tu canción.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.ecuaserverhd.zoommusical" class="btn-relief btn-app" target="_blank">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M19 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path>
-                <path d="M7 11V7a5 5 0 1 1 10 0v4"></path>
-              </svg>
-              DESCARGAR AHORA
+          </div>
+          <div class="dots">
+            <span class="dot active" onclick="goToSlide(0)" aria-label="Ir a diapositiva 1"></span>
+            <span class="dot" onclick="goToSlide(1)" aria-label="Ir a diapositiva 2"></span>
+            <span class="dot" onclick="goToSlide(2)" aria-label="Ir a diapositiva 3"></span>
+          </div>
+        </section>
+
+        <!-- NOTICIAS -->
+        <section class="card">
+          <div class="card-head">ÚLTIMAS NOTICIAS</div>
+          <div class="news">
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-1.html" class="news-link">¿Qué significa hurgarse la nariz?, según la psicología</a></h3>
+                <p>Conoce qué revela la psicología sobre el hábito de hurgarse la nariz, cómo se llama médicamente y los riesgos </p>
+              </div>
+            </article>
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-2.html" class="news-link">Cristiano Ronaldo dejó fríos a sus fans.</a></h3>
+                <p>Cristiano Ronaldo rompió el silencio sobre su futuro en plena entrevista.</p>
+              </div>
+            </article>
+            <article>
+              <div class="thumb" style="background-image:url('https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp')"></div>
+              <div class="section">
+                <h3><a href="noticia-3.html" class="news-link">La ciencia logra lo imposible:</a></h3>
+                <p>Por medio de una investigación científica, se plasmó el primer atlas del cerebro humano</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- DERECHA -->
+      <aside class="sidebar">
+        <section class="card">
+          <div class="card-head">LAS MÁS PEDIDAS</div>
+          <div id="ranking-list"></div>
+          <div class="section" style="background:var(--cyan);padding:18px 20px">
+            <a href="ranking.html" class="btn-relief btn-ranking">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z"></path><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 9v12"></path><path d="M15 9v12"></path></svg>
+              VER RANKING MUSICAL
             </a>
-          </section>
-          <section class="cta clima-box">
-  <div class="clima-inner">
-    <h3><b>Información del Tiempo</b></h3>
-    
+          </div>
+        </section>
+
+        <audio id="audio-player" preload="none"></audio>
+
+<!-- 🔵 TARJETA DESCARGA -->
+<section class="cta">
+  <div class="title">DESCARGA LA APP</div>
+  <p>Escucha en vivo y vota por tu canción.</p>
+
+  <a href="https://play.google.com/store/apps/details?id=com.ecuaserverhd.zoommusical" 
+     class="btn-relief btn-app" target="_blank">
+     <svg viewBox="0 0 24 24" fill="none">
+       <path d="M19 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path>
+       <path d="M7 11V7a5 5 0 1 1 10 0v4"></path>
+     </svg>
+     DESCARGAR AHORA
+  </a>
+</section>
+<!-- 🔵 FIN DE TARJETA DESCARGA -->
+
+
+
+<!-- 🟣 TARJETA DEL CLIMA (independiente) -->
+<section class="cta">
+  <div style="text-align:center;">
+    <div class="dj-text">
+      <h3><b>Información del Tiempo</b></h3>
+    </div>
+
     <div id="TT_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3">
       El tiempo - Tutiempo.net
     </div>
 
-    <script src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
+    <script type="text/javascript" src="https://www.tutiempo.net/s-widget/l_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3"></script>
   </div>
 </section>
+<!-- 🟣 FIN CLIMA -->
 
-          <div class="final-banner-mobile">
-            <div class="brand">
-              <div class="brand-badge">
-                <img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Logo" loading="lazy">
-              </div>
-              <div>
-                <div class="brand-title">ZOOM MUSICAL</div>
-                <div class="brand-sub">Siempre la mejor música</div>
-              </div>
+
+        <div class="final-banner-mobile">
+          <div class="brand">
+            <div class="brand-badge">
+              <img src="https://raw.githack.com/aprendiz74/online/main/imagenes/zoom-logo2.webp" alt="Logo" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
             </div>
-            <div class="social-text">
-              <span>Síguenos en:</span>
-              <a href="https://www.facebook.com/">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg>
-                /facebook
-              </a>
+            <div>
+              <div class="brand-title">ZOOM MUSICAL</div>
+              <div class="brand-sub">Siempre la mejor música</div>
             </div>
           </div>
-        </aside>
-      </div>
-    </section>
-    <!-- QUIÉNES SOMOS -->
-    <section id="quienes-somos" class="seccion">
-      <div class="about-content">
-        <h1>Quiénes Somos</h1>
-        <p><strong>ZOOM MUSICAL</strong> es una emisora digital creada para llevarte la mejor música las 24 horas del día. Nacimos con la misión de acompañarte en cada momento con una mezcla perfecta de ritmo, energía y buena vibra. Nuestra pasión es conectar emociones a través del sonido.</p>
-        <p>Desde nuestros comienzos, en <strong>ZOOM MUSICAL</strong> nos hemos distinguido por una programación fresca, variada y con un toque humano. Creemos en el poder de la música para unir personas, despertar sentimientos y crear experiencias únicas en cada transmisión.</p>
-        <p><strong>Misión:</strong> Ofrecer una propuesta musical moderna y diversa que inspire, entretenga y conecte con nuestra audiencia. En <strong>ZOOM MUSICAL</strong> impulsamos el talento emergente y promovemos contenidos positivos que marquen la diferencia.</p>
-        <p><strong>Visión:</strong> Consolidarnos como una emisora digital líder en el mundo de la radio online, reconocida por su innovación, calidad musical y compromiso con la cultura sonora de Latinoamérica y el mundo.</p>
-      </div>
-    </section>
-    <!-- RANKING -->
-    <section id="ranking" class="seccion">
-      <div class="about-content">
-        <h1>Ranking Musical - Top 10 ZOOM MUSICAL</h1>
-        <div class="ranking-grid" id="full-ranking"></div>
-      </div>
-    </section>
-    <!-- PROGRAMACIÓN -->
-    <section id="programacion" class="seccion">
-      <div class="about-content">
-        <h1>Programación Semanal</h1>
-        <div class="programacion-grid">
-          <div class="evento"><h3>Despierta con Energía</h3><p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 6:00 AM</p><p>Música para empezar el día con energía y buen ritmo.</p></div>
-          <div class="evento"><h3>Tarde de Éxitos</h3><p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 2:00 PM</p><p>Los mejores hits del momento y clásicos que no pasan de moda.</p></div>
-          <div class="evento"><h3>Atardecer Musical</h3><p class="fecha"><i class="far fa-clock"></i> Lunes a Viernes - 6:00 PM</p><p>Relájate con una selección suave y melódica.</p></div>
-          <div class="evento"><h3>El Marcador Final</h3><p class="fecha"><i class="fas fa-futbol"></i> Lunes a Viernes - 7:00 PM</p><p>Resumen deportivo, análisis y pasión por el fútbol.</p></div>
-          <div class="evento"><h3>La Noche</h3><p class="fecha"><i class="far fa-moon"></i> Lunes a Viernes - 8:00 PM</p><p>Música nocturna, baladas y dedicatorias.</p></div>
-          <div class="evento"><h3>Fin de Semana Musical</h3><p class="fecha"><i class="fas fa-music"></i> Sáb y Dom - 8:00 AM</p><p>Programación especial con lo mejor de la semana.</p></div>
+          <div class="social-text">
+            <span>Síguenos en:</span>
+            <a href="https://www.facebook.com/">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5 3.66 9.16 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.77 8.44-4.93 8.44-9.93z"/></svg>
+              /facebook
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
-  
-   <!-- NOTICIAS -->
-<section id="noticias" class="seccion">
-  <div class="noticias-full-container">
-    <div class="noticias-content">
-      <header style="text-align: center; margin: 40px 0 30px; padding: 0 16px;">
-        <h1 style="font-size: 2.5rem; color: var(--pink); margin: 0;">Últimas Noticias</h1>
-      </header>
-      <div class="noticia-wrapper" id="noticias-container"></div>
+      </aside>
     </div>
-  </div>
-</section>
-    <!-- CONTACTO -->
-    <section id="contacto" class="seccion">
-      <div class="about-content">
-        <h1>Contáctanos</h1>
-        <p>Escríbenos y te responderemos en menos de 24 horas.</p>
-        <form class="contact-form" action="https://formsubmit.co/----@gmail.com" method="POST">
-          <input type="text" name="nombre" placeholder="Tu nombre" required>
-          <input type="email" name="email" placeholder="Tu correo" required>
-          <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
-          <input type="hidden" name="_next" value="https://tu-pagina-gracias.html">
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde Radio Maicito">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <button type="submit">Enviar Mensaje</button>
-        </form>
-        <p><small>Usamos <a href="https://formsubmit.co" target="_blank" style="color:#3498db;">FormSubmit</a> para recibir mensajes de forma segura y gratuita.</small></p>
-      </div>
-    </section>
   </main>
+
+  <!-- FOOTER -->
   <footer class="container">
     <p>© 2025 ZOOM MUSICAL. Todos Derechos reservados.</p>
   </footer>
-  <script>
-    // Fecha
-    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
-    // SLIDER HERO
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.dot');
-    function showSlide(n) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slides[n].classList.add('active');
-      dots[n].classList.add('active');
-      currentSlide = n;
-    }
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }
-    function goToSlide(n) { showSlide(n); }
-    setInterval(nextSlide, 5000);
-    // AUDIO GLOBAL
-    const globalPlayer = document.getElementById('global-live-player');
-    const liveBtn = document.getElementById('live-btn');
-    const liveText = liveBtn.querySelector('.live-text');
-    const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
-    const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
-    window.addEventListener('DOMContentLoaded', () => {
-      if (shouldPlay) {
-        globalPlayer.src = liveStream;
-        globalPlayer.play().catch(() => {});
+
+  <!-- SCRIPT -->
+<script>
+  // Fecha actual
+  document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
+
+  // SLIDER HERO
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function showSlide(n) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[n].classList.add('active');
+    dots[n].classList.add('active');
+    currentSlide = n;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  function goToSlide(n) {
+    showSlide(n);
+  }
+
+  setInterval(nextSlide, 5000);
+
+  // === AUDIO GLOBAL EN VIVO (AUTO PLAY) ===
+  const globalPlayer = document.getElementById('global-live-player');
+  const liveBtn = document.getElementById('live-btn');
+  const liveText = liveBtn.querySelector('.live-text');
+  const liveStream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+
+  // Revisar si antes estaba sonando
+  const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (shouldPlay) {
+      globalPlayer.src = liveStream;
+      globalPlayer.play().then(() => {
         liveBtn.classList.add('playing');
         liveText.textContent = "PAUSAR";
-      }
+      }).catch(err => {
+        console.warn("Autoplay bloqueado:", err);
+        liveText.textContent = "TOCA PARA REPRODUCIR";
+      });
+    }
+  });
+
+  function startLive() {
+    if (globalPlayer.src !== liveStream) globalPlayer.src = liveStream;
+    globalPlayer.play().catch(err => {
+      console.warn("Requiere interacción del usuario:", err);
+      liveText.textContent = "TOCA PARA REPRODUCIR";
     });
-    function startLive() {
-      globalPlayer.src = liveStream;
-      globalPlayer.play().catch(() => liveText.textContent = "TOCA PARA REPRODUCIR");
-      liveBtn.classList.add('playing');
+    liveBtn.classList.add('playing');
+    liveText.textContent = "PAUSAR";
+    localStorage.setItem('radio-live-playing', 'true');
+  }
+
+  function pauseLive() {
+    globalPlayer.pause();
+    liveBtn.classList.remove('playing');
+    liveText.textContent = "EN VIVO";
+    localStorage.setItem('radio-live-playing', 'false');
+  }
+
+  liveBtn.addEventListener('click', () => {
+    liveBtn.classList.contains('playing') ? pauseLive() : startLive();
+  });
+
+  globalPlayer.addEventListener('error', () => {
+    if (liveBtn.classList.contains('playing')) {
+      liveText.textContent = "RECONECTANDO...";
+      setTimeout(() => { if (liveBtn.classList.contains('playing')) startLive(); }, 3000);
+    }
+  });
+
+  globalPlayer.addEventListener('canplay', () => {
+    if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
       liveText.textContent = "PAUSAR";
-      localStorage.setItem('radio-live-playing', 'true');
     }
-    function pauseLive() {
-      globalPlayer.pause();
-      liveBtn.classList.remove('playing');
-      liveText.textContent = "EN VIVO";
-      localStorage.setItem('radio-live-playing', 'false');
+  });
+
+  // RANKING
+  let currentPlayBtn = null;
+  const rankingData = [
+    {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://maicitoradio.com/pistas/1.mp3"},
+    {pos:2,artista:"Cuco",cancion:"Para ti",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3"},
+    {pos:3,artista:"Arthur y Carlos Vives",cancion:"GOODBYE",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3"},
+    {pos:4,artista:"Judeline",cancion:"Chica de cristal",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3"},
+    {pos:5,artista:"Miguel Bueno",cancion:"Solcito",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3"}
+  ];
+
+  const list = document.getElementById('ranking-list');
+  rankingData.forEach((item) => {
+    const div = document.createElement('div');
+    div.className = 'ranking-item';
+    div.innerHTML = `
+      <div class="ranking-pos">${item.pos}</div>
+      <div class="ranking-meta">
+        <div class="artist">${item.artista}</div>
+        <div class="song">${item.cancion}</div>
+      </div>
+      <div class="play" data-mp3="${item.mp3}" aria-label="Reproducir ${item.cancion}">
+        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+
+  const audio = document.getElementById('audio-player');
+  list.addEventListener('click', (e) => {
+    const playBtn = e.target.closest('.play');
+    if (!playBtn) return;
+    const mp3 = playBtn.dataset.mp3;
+
+    if (currentPlayBtn === playBtn && !audio.paused) {
+      audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
     }
-    liveBtn.addEventListener('click', () => liveBtn.classList.contains('playing') ? pauseLive() : startLive());
-    globalPlayer.addEventListener('error', () => {
-      if (liveBtn.classList.contains('playing')) {
-        liveText.textContent = "RECONECTANDO...";
-        setTimeout(() => { if (liveBtn.classList.contains('playing')) startLive(); }, 3000);
-      }
-    });
-    // RANKING INICIO
-    const rankingData = [
-      {pos:1,artista:"Ana Barbara y Yahritza",cancion:"Besos Robados",mp3:"https://maicitoradio.com/pistas/1.mp3"},
-      {pos:2,artista:"Cuco",cancion:"Para ti",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3"},
-      {pos:3,artista:"Arthur y Carlos Vives",cancion:"GOODBYE",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3"},
-      {pos:4,artista:"Judeline",cancion:"Chica de cristal",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3"},
-      {pos:5,artista:"Miguel Bueno",cancion:"Solcito",mp3:"https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3"}
-    ];
-    const list = document.getElementById('ranking-list');
-    const audio = document.getElementById('song-player');
-    let currentPlayBtn = null;
-    rankingData.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'ranking-item';
-      div.innerHTML = `
-        <div class="ranking-pos">${item.pos}</div>
-        <div class="ranking-meta">
-          <div class="artist">${item.artista}</div>
-          <div class="song">${item.cancion}</div>
-        </div>
-        <div class="play" data-mp3="${item.mp3}">
-          <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
-        </div>
-      `;
-      list.appendChild(div);
-    });
-    list.addEventListener('click', e => {
-      const playBtn = e.target.closest('.play');
-      if (!playBtn) return;
-      const mp3 = playBtn.dataset.mp3;
-      if (currentPlayBtn === playBtn && !audio.paused) {
-        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
-      }
-      if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
-      audio.src = mp3; audio.play().catch(() => {});
-      playBtn.classList.add('playing'); currentPlayBtn = playBtn;
-    });
-    audio.addEventListener('ended', () => {
-      if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
-    });
-    // NOTICIAS INICIO
-    const inicioNews = [
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',titulo:'¿Qué significa hurgarse la nariz?, según la psicología',texto:'Conoce qué revela la psicología sobre el hábito de hurgarse la nariz, cómo se llama médicamente y los riesgos'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp',titulo:'Cristiano Ronaldo dejó fríos a sus fans.',texto:'Cristiano Ronaldo rompió el silencio sobre su futuro en plena entrevista.'},
-      {img:'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp',titulo:'La ciencia logra lo imposible:',texto:'Por medio de una investigación científica, se plasmó el primer atlas del cerebro humano'}
-    ];
-    const inicioNewsContainer = document.getElementById('inicio-news');
-    inicioNews.forEach(n => {
-      const article = document.createElement('article');
-      article.innerHTML = `
-        <div class="thumb" style="background-image:url('${n.img}')"></div>
-        <div class="section">
-          <h3><a href="#noticias" class="news-link">${n.titulo}</a></h3>
-          <p>${n.texto}</p>
-        </div>
-      `;
-      inicioNewsContainer.appendChild(article);
-    });
-    // PAGINACIÓN INTERNA
-    document.querySelectorAll('.menu a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = link.getAttribute('href');
-        document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
-        document.querySelector(target).classList.add('active');
-        link.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        history.pushState(null, null, target);
-        if (target === '#noticias') {
-          mostrarNoticias();
-        }
-      });
-    });
-    window.addEventListener('popstate', () => {
-      const hash = window.location.hash || '#inicio';
-      document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
-      document.querySelector(hash).classList.add('active');
-      document.querySelector(`a[href="${hash}"]`).classList.add('active');
-      if (hash === '#noticias') {
-        mostrarNoticias();
-      }
-    });
-    // NOTICIAS COMPLETAS (TODAS EN UNA PÁGINA)
-    const noticias = [
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-3.webp',
-        titulo: '¿Qué significa hurgarse la nariz?, según la psicología',
-        fecha: '12 de noviembre del 2025',
-        texto: 'Conoce qué revela la psicología sobre el hábito de <strong>hurgarse la nariz</strong>, cómo se llama médicamente y los riesgos que implica.<br><br><h2>¿Qué dice la psicología sobre quienes se hurgan la nariz?</h2><p>Según un estudio publicado por la <strong>Asociación Americana de Psicología (APA)</strong>, hurgarse la nariz puede estar relacionado con <strong>comportamientos repetitivos centrados en el cuerpo</strong>, similares a morderse las uñas o arrancarse el cabello. Los psicólogos lo asocian con una <strong>necesidad inconsciente de liberar ansiedad o tensión</strong>.</p><p>Por su parte, un artículo de la <strong>Universidad de Colorado</strong> explicó que algunas personas lo hacen por simple costumbre, mientras que otras lo convierten en un <strong>acto compulsivo</strong> que puede requerir intervención terapéutica si se vuelve excesivo.</p><p>Desde la perspectiva médica, este comportamiento se conoce como <strong>rinotillexomanía</strong>, y aunque en la mayoría de los casos es inofensivo, hacerlo con frecuencia o de manera agresiva puede causar <strong>infecciones nasales, sangrado o irritación</strong>.</p>'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-2.webp',
-        titulo: 'Cristiano Ronaldo dejó fríos a sus fans con inesperado anuncio, ¿se retira de las canchas?',
-        fecha: '28 de octubre del 2025',
-        texto: '<strong>Cristiano Ronaldo</strong> rompió el silencio sobre su futuro en plena entrevista y sus declaraciones entristecieron a sus fanáticos: <em>“Será el momento”</em>.<br><br><h2>¿Cuáles fueron las declaraciones de Cristiano Ronaldo sobre su retiro del fútbol?</h2><p><strong>Cristiano Ronaldo</strong> ha puesto su nombre en lo más alto de la historia del fútbol tras su paso por clubes como el <strong>Real Madrid</strong>, <strong>Juventus</strong> y <strong>Manchester United</strong>.</p><p>Sin embargo, en los últimos años, el delantero portugués se ha alejado del fútbol de élite y actualmente milita en el <strong>Al Nassr</strong> de Arabia Saudí, donde al parecer está viviendo sus últimos años como futbolista profesional.</p><p>Durante la entrevista, el astro luso reflexionó sobre su carrera, su legado y el momento en que llegará el retiro definitivo, dejando claro que se prepara emocionalmente para esa etapa.</p><p>“He dado todo al fútbol, y cuando llegue el momento, lo sabré. Estoy tranquilo con lo que he logrado”, afirmó Ronaldo con tono sereno, generando una ola de reacciones entre sus millones de seguidores en todo el mundo.</p>'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-1.webp',
-        titulo: 'La ciencia logra lo imposible: así luce el alucinante primer atlas del cerebro humano',
-        fecha: '29 de octubre del 2025',
-        texto: 'Por medio de una investigación científica, se plasmó el <strong>primer atlas del cerebro humano</strong>. Un hito histórico para la ciencia moderna.<br><br>La publicación, que se encuentra en la reconocida revista <strong>Nature</strong>, pertenece a la <strong>Red del Atlas Celular de la Iniciativa BRAIN (BICAN)</strong>, la cual a su vez forma parte de los <strong>Institutos Nacionales de Salud de Estados Unidos</strong>.<br><br>Todo lo anterior con un solo objetivo: lograr plasmar el <strong>atlas del cerebro humano</strong>, algo que antes no se había conseguido.<br><br><h2>¿Cómo se espera aprovechar el primer atlas del cerebro humano?</h2><p>Como el cerebro es un campo extenso de estudio que continúa revelando nuevos misterios, este <strong>borrador del atlas</strong> brinda a los científicos una herramienta más precisa para entender el desarrollo y funcionamiento de la parte superior del sistema nervioso.</p><p>Asimismo, uno de los objetivos a futuro es que con este descubrimiento se puedan desarrollar <strong>terapias génicas y celulares</strong> más exactas y efectivas para tratar distintas enfermedades humanas.</p>'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-6.webp',
-        titulo: '¡PALIZA EN EL CLÁSICO! Bayern Múnich golea 3-0 al Leverkusen',
-        fecha: '1 de noviembre del 2025',
-        texto: 'El <strong>Bayern Múnich</strong> aplastó al <strong>Bayer Leverkusen</strong> con un contundente <strong>3-0</strong> en el <strong>Allianz Arena</strong>, consolidándose como líder de la <strong>Bundesliga</strong>.<br><br><strong>Harry Kane</strong> abrió el marcador con un <strong>golazo de volea</strong>, seguido de un <strong>doble de Jamal Musiala</strong>. El Leverkusen no pudo con la presión alta del Bayern. Con este resultado, el Bayern suma <strong>24 puntos</strong> y saca <strong>5 de ventaja</strong> al segundo clasificado.'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-8.webp',
-        titulo: 'HEGEMONÍA EN SUDAMÉRICA: Brasil alcanza 10 finalistas en 12 ediciones',
-        fecha: '31 de octubre del 2025',
-        texto: '<strong>Brasil</strong> consolida su dominio absoluto en la <strong>Copa Libertadores</strong> con <strong>10 equipos en la final</strong> de las últimas <strong>12 ediciones</strong>.<br><br>Este año, <strong>Palmeiras</strong> y <strong>Flamengo</strong> disputarán la final en el <strong>Maracaná</strong>, repitiendo la histórica final de 2019.<br><br>Desde 2013, solo <strong>Argentina (2)</strong> ha interrumpido la racha brasileña. El fútbol sudamericano vive una <strong>era dorada verdeamarela</strong>.'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-5.webp',
-        titulo: 'GRAN NOTICIA DEPORTIVA: Cristiano Ronaldo Jr anota su primer gol con Portugal sub16',
-        fecha: '1 de noviembre del 2025',
-        texto: '<strong>Cristiano Ronaldo Jr</strong>, hijo del astro portugués, marcó su <strong>primer gol oficial</strong> con la selección <strong>sub16 de Portugal</strong> en un partido amistoso contra España.<br><br>El joven delantero, de <strong>15 años</strong>, ingresó en el segundo tiempo y definió con un <strong>remate de zurda</strong> tras un gran pase filtrado. El partido terminó <strong>2-1 a favor de Portugal</strong>.<br><br>El propio <strong>Cristiano Ronaldo</strong> celebró el gol en redes sociales: <em>"¡Orgulloso de ti, hijo! Sigue así"</em>.'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-7.webp',
-        titulo: '¡AGÓNICA VICTORIA! PSG vence 1-0 al Niza sobre la hora',
-        fecha: '1 de noviembre del 2025',
-        texto: 'El <strong>PSG</strong> se llevó los tres puntos en el <strong>Parque de los Príncipes</strong> con un gol en el <strong>minuto 90+3</strong> de <strong>Gonçalo Ramos</strong> ante un <strong>Niza</strong> que jugó con 10 desde el 65\'.<br><br>El partido fue trabado y el PSG dominó, pero no lograba romper el cerrojo defensivo. Finalmente, un <strong>centro de Achraf Hakimi</strong> fue cabeceado al fondo por Ramos.<br><br>Con esta victoria, el PSG se mantiene <strong>invicto en la Ligue 1</strong> y lidera con <strong>27 puntos</strong>.'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-9.webp',
-        titulo: '¡IMPACTANTE REVELACIÓN! Robinho: «Han estado diciendo mentiras de que soy un líder acá adentro»',
-        fecha: '29 de octubre del 2025',
-        texto: 'El exfutbolista brasileño <strong>Robinho</strong>, condenado a <strong>9 años de prisión</strong> por <strong>violación en grupo</strong> en Italia, rompió el silencio desde la cárcel de <strong>Tremembé</strong> en São Paulo.<br><br>En una entrevista exclusiva, el exjugador del <strong>Real Madrid</strong> y <strong>AC Milan</strong> negó ser un <strong>"líder de facción"</strong> dentro del penal: <em>«Han estado diciendo mentiras de que soy un líder acá adentro. Yo solo quiero cumplir mi condena y volver con mi familia»</em>.<br><br>Robinho fue trasladado a una celda individual tras rumores de que ejercía influencia sobre otros reclusos. Fuentes penitenciarias desmienten que tenga privilegios.<br><br>Su abogado trabaja en un <strong>recurso de revisión</strong> de la sentencia italiana, que Brasil cumple desde marzo de 2024.'
-      },
-      {
-        img: 'https://raw.githack.com/aprendiz74/online/main/imagenes/foto-4.webp',
-        titulo: 'TENDENCIAS: La IA impulsa la demanda de discos duros',
-        fecha: '1 de noviembre del 2025',
-        texto: 'La explosión de la <strong>inteligencia artificial</strong> está generando una <strong>demanda sin precedentes</strong> de almacenamiento masivo. Empresas como <strong>Western Digital</strong> y <strong>Seagate</strong> reportan un aumento del <strong>40%</strong> en ventas de discos duros de alta capacidad.<br><br>Los centros de datos que entrenan modelos de IA requieren <strong>petabytes de datos</strong>, y los discos HDD siguen siendo la opción más económica para almacenamiento a gran escala.<br><br>Western Digital lanzó su nueva línea <strong>Ultrastar DC HC680</strong> de <strong>28 TB</strong>, mientras Seagate responde con el <strong>Exos X28</strong>. Ambas empresas proyectan un crecimiento sostenido hasta 2030.'
-      }
-    ];
-    const noticiasPorPagina = noticias.length; // ← Muestra TODAS
-    function mostrarNoticias() {
-      const container = document.getElementById('noticias-container');
-      if (!container) return;
-      container.innerHTML = '';
-      noticias.forEach(n => {
-        const div = document.createElement('div');
-        div.className = 'noticia';
-        div.innerHTML = `
-          <div class="noticia-img" style="background-image:url('${n.img}')"></div>
-          <h2 class="noticia-title">${n.titulo}</h2>
-          <div class="meta"><i class="fas fa-calendar-alt"></i> Publicado el ${n.fecha}</div>
-          <div class="texto-scroll"><p>${n.texto.replace(/<br><br>/g, '</p><p>')}</p></div>
-        `;
-        container.appendChild(div);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    // Carga inicial si estás en #noticias
-    if (window.location.hash === '#noticias') {
-      document.addEventListener('DOMContentLoaded', mostrarNoticias);
-    }
-    // RANKING COMPLETO
-    const fullRanking = [
-      {pos:1,titulo:"Besos robados",artista:"Ana Barbara y Yahritza",src:"https://raw.githack.com/aprendiz74/online/main/pistas/1.mp3"},
-      {pos:2,titulo:"Para ti",artista:"Cuco",src:"https://raw.githack.com/aprendiz74/online/main/pistas/2.mp3"},
-      {pos:3,titulo:"Goodbye",artista:"Arthur y Carlos Vives",src:"https://raw.githack.com/aprendiz74/online/main/pistas/3.mp3"},
-      {pos:4,titulo:"Chica de cristal",artista:"Judeline",src:"https://raw.githack.com/aprendiz74/online/main/pistas/4.mp3"},
-      {pos:5,titulo:"Solcito",artista:"Miguel Bueno",src:"https://raw.githack.com/aprendiz74/online/main/pistas/5.mp3"},
-      {pos:6,titulo:"Saturno",artista:"Pablo Alboran",src:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/029%20Saturno%20%28Pablo%20Alboran%29.mp3"},
-      {pos:7,titulo:"Vuelveme a querer",artista:"Thalia",src:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/009%20Vu%C3%A9lveme%20a%20Querer%20%28Thalia%29.mp3"},
-      {pos:8,titulo:"Atulado",artista:"Paula Arenas",src:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/021%20A%20Tu%20Lado%20%28Paula%20Arenas%29.mp3"},
-      {pos:9,titulo:"Lo siento mucho",artista:"Rio Roma",src:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/050%20Lo%20Siento%20Mucho%20%28R%C3%ADo%20Roma%29.mp3"},
-      {pos:10,titulo:"Girasoles",artista:"Luis Fonsi",src:"https://dl4.beelody.com/Free/2022/2/Hits%20Romanticos%20%28Playlist%29%20%5BBeelody%5D/033%20Girasoles%20%28Luis%20Fonsi%29.mp3"}
-    ];
-    const fullList = document.getElementById('full-ranking');
-    let currentSongBtn = null;
-    fullRanking.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'cancion';
-      div.innerHTML = `
-        <div class="posicion">${item.pos}</div>
-        <div class="info"><h3>${item.titulo}</h3><p class="artista">${item.artista}</p></div>
-        <button class="play-btn" data-src="${item.src}"><i class="fas fa-play"></i></button>
-      `;
-      fullList.appendChild(div);
-    });
-    fullList.addEventListener('click', e => {
-      const btn = e.target.closest('.play-btn');
-      if (!btn) return;
-      const src = btn.dataset.src;
-      if (currentSongBtn === btn && !audio.paused) {
-        audio.pause(); btn.classList.remove('playing'); currentSongBtn = null; return;
-      }
-      if (currentSongBtn) currentSongBtn.classList.remove('playing');
-      audio.src = src; audio.play().catch(() => {});
-      btn.classList.add('playing'); currentSongBtn = btn;
-    });
-     audio.addEventListener('ended', () => {
-    if (currentSongBtn) { currentSongBtn.classList.remove('playing'); currentSongBtn = null; }
+
+    if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
+    audio.src = mp3; audio.play().catch(() => {});
+    playBtn.classList.add('playing'); currentPlayBtn = playBtn;
+  });
+
+  audio.addEventListener('ended', () => {
+    if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
+  });
+
+</script>
+<script>
+  // PROTECCIÓN COMPLETA Y ROBUSTA
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
   });
 </script>
-
-<!-- === BOTÓN TV FLOTANTE — AGREGADO === -->
-<a href="https://raw.githack.com/aprendiz74/online/main/tv.html"
-   target="_blank"
-   id="tvFloatingBtn">
-  <i class="fas fa-tv"></i>
-</a>
-
-<style>
-  #tvFloatingBtn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:60px;
-    height:60px;
-    background:#00A6A6;
-    color:white;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:28px;
-    z-index:9999;
-    cursor:pointer;
-    box-shadow:0 8px 25px rgba(0,0,0,0.25);
-    transition:all .25s ease;
-  }
-  #tvFloatingBtn:hover{
-    transform:scale(1.12) translateY(-3px);
-    background:#008B8B;
-    box-shadow:0 12px 30px rgba(0,0,0,0.35);
-  }
-  @media (max-width:768px){
-    #tvFloatingBtn{
-      width:52px;
-      height:52px;
-      font-size:24px;
-      bottom:16px;
-      right:16px;
-    }
-  }
-</style>
-<!-- === FIN BOTÓN TV === -->
-
 </body>
+
 </html>

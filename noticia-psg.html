@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PSG vence 1-0 al Niza con gol agónico en la Ligue 1.">
+  <title>¡AGÓNICA VICTORIA! PSG 1-0 Niza</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; color: #333; line-height: 1.7; }
+    nav { background: #00A6A6; height: 64px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; width: 100%; justify-content: space-between; }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .menu { display: flex; justify-content: center; flex: 1; gap: 10px; }
+    .menu a { color: white; text-decoration: none; padding: 10px 18px; font-weight: bold; border-radius: 5px; transition: all 0.3s ease; font-size: 0.95rem; }
+    .menu a:hover, .menu a.active { background: #3498db; }
+    .live-btn { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: #00A6A6; border: none; border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.2s; }
+    .live-btn.playing { background: #e74c3c; color: white; }
+    .live-btn svg { width: 14px; height: 14px; fill: currentColor; }
+    .live-btn .live-text { margin-left: 4px; }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .live-btn { font-size: 0.8rem; padding: 7px 12px; }
+      .menu { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; width: 100%; background: #2c3e50; padding: 10px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+      .menu.active { display: flex; }
+      .menu a { text-align: center; padding: 14px 20px; border-radius: 0; }
+    }
+    .noticia-full { background: white; margin: 40px auto; max-width: 900px; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 25px rgba(0,0,0,0.08); }
+    .noticia-img { height: 420px; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://maicitoradio.com/imagenes/7.png') center/cover no-repeat; position: relative; }
+    .noticia-img::after { content: "Ligue 1: Gol en el último segundo"; position: absolute; bottom: 20px; left: 30px; color: white; font-weight: bold; font-size: 1.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+    .noticia-content { padding: 35px; }
+    .noticia-content h1 { font-size: 2.3rem; color: #1a2a44; margin-bottom: 14px; line-height: 1.3; font-weight: 700; }
+    .meta { color: #7f8c9e; font-size: 0.85rem; font-style: italic; font-weight: 500; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 20px; padding-top: 8px; border-top: 1px solid #ecf0f1; }
+    .noticia-content p { margin-bottom: 18px; font-size: 1.15rem; color: #2c3e50; }
+    .btn-volver { display: inline-block; background: #e74c3c; color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; margin-top: 25px; font-size: 1rem; transition: background 0.3s ease; }
+    .btn-volver:hover { background: #c0392b; }
+    .btn-volver::before { content: "← "; }
+    footer { background: #00A6A6; color: white; text-align: center; padding: 25px; margin-top: 60px; font-size: 0.9rem; }
+    footer a { color: #a8e6cf; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .noticia-img { height: 300px; }
+      .noticia-content h1 { font-size: 1.9rem; }
+      .noticia-content { padding: 25px; }
+    }
+    #global-live-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; visibility: hidden; pointer-events: none; z-index: -9999; }
+    #live-btn { display: none !important; }
+  </style>
+</head>
+<body>
+  <audio id="global-live-player" preload="none"></audio>
+  <nav>
+    <div class="container">
+      <button class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
+      <div class="menu">
+        <a href="index.html">INICIO</a>
+        <a href="quienes-somos.html">QUIÉNES SOMOS</a>
+        <a href="ranking.html">RANKING</a>
+        <a href="programacion.html">PROGRAMACIÓN</a>
+        <a href="noticias.html" class="active">NOTICIAS</a>
+        <a href="contactanos.html">CONTÁCTANOS</a>
+      </div>
+      <button id="live-btn" class="live-btn">
+        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="stop-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+        <span class="live-text">EN VIVO</span>
+      </button>
+    </div>
+  </nav>
+
+  <article class="noticia-full">
+    <div class="noticia-img" role="img" aria-label="PSG vs Niza"></div>
+    <div class="noticia-content">
+      <h1>¡AGÓNICA VICTORIA! PSG vence 1-0 al Niza sobre la hora</h1>
+      <p class="meta">Publicado el 1 de noviembre del 2025 | ZOOM MUSICAL</p>
+      <p>El <strong>PSG</strong> se llevó los tres puntos en el <strong>Parque de los Príncipes</strong> con un gol en el <strong>minuto 90+3</strong> de <strong>Gonçalo Ramos</strong> ante un <strong>Niza</strong> que jugó con 10 desde el 65'.</p>
+      <p>El partido fue trabado y el PSG dominó, pero no lograba romper el cerrojo defensivo. Finalmente, un <strong>centro de Achraf Hakimi</strong> fue cabeceado al fondo por Ramos.</p>
+      <p>Con esta victoria, el PSG se mantiene <strong>invicto en la Ligue 1</strong> y lidera con <strong>27 puntos</strong>.</p>
+      <a href="noticias.html" class="btn-volver">Volver a Noticias</a>
+    </div>
+  </article>
+
+  <footer><p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p></footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => menu.classList.toggle('active'));
+      document.querySelectorAll('.menu a').forEach(link => link.addEventListener('click', () => menu.classList.remove('active')));
+    }
+    const player = document.getElementById('global-live-player');
+    const btn = document.getElementById('live-btn');
+    const text = btn.querySelector('.live-text');
+    const stream = 'https://stream-177.zeno.fm/yd1g03o6if2tv';
+    if (localStorage.getItem('radio-live-playing') === 'true') {
+      player.src = stream; player.play().catch(() => {});
+      btn.classList.add('playing'); text.textContent = 'PAUSAR';
+    }
+    btn.addEventListener('click', () => {
+      if (player.paused) {
+        player.src = stream; player.play().catch(() => {});
+        btn.classList.add('playing'); text.textContent = 'PAUSAR';
+        localStorage.setItem('radio-live-playing', 'true');
+      } else {
+        player.pause(); btn.classList.remove('playing'); text.textContent = 'EN VIVO';
+        localStorage.setItem('radio-live-playing', 'false');
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+      if (e.key === 'F12') e.preventDefault();
+    });
+  </script>
+</body>
+
+</html>
