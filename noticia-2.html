@@ -214,6 +214,42 @@ footer a:hover { text-decoration: underline; }
 }
 #live-btn { display: none !important; }
 
+    @media (max-width: 768px) {
+  .noticia-full {
+    margin: 20px auto; /* margen lateral automático */
+    width: calc(100% - 20px); /* deja un pequeño margen lateral */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .noticia-img {
+    height: 250px;
+    border-radius: 12px 12px 0 0;
+    background-position: center top !important; /* centra la imagen */
+    background-size: contain !important; /* que no se recorte */
+    background-repeat: no-repeat;
+  }
+
+  .noticia-content {
+    padding: 20px;
+  }
+
+  .noticia-content h1 {
+    font-size: 1.7rem;
+    line-height: 1.4;
+  }
+
+  .noticia-content p {
+    font-size: 1rem;
+  }
+
+  .btn-volver {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -339,6 +375,7 @@ footer a:hover { text-decoration: underline; }
 </body>
 
 </html>
+
 
 
 
