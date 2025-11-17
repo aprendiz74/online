@@ -46,11 +46,13 @@ footer a:hover { text-decoration:underline; }
 }
 #global-live-player { position:fixed; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; visibility:hidden; pointer-events:none; z-index:-9999; }
 #live-btn { display:none !important; }
+.noticias-header { text-align:center; margin:30px 0; }
 </style>
 </head>
 <body>
 <audio id="global-live-player" preload="none"></audio>
 
+<!-- ======= Navegación ======= -->
 <nav>
 <div class="container">
   <button class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
@@ -69,6 +71,11 @@ footer a:hover { text-decoration:underline; }
   </button>
 </div>
 </nav>
+
+<!-- ======= Título Noticias ======= -->
+<header class="noticias-header">
+  <h1>🎶 MAS NOTICIAS</h1>
+</header>
 
 <!-- ======= Noticias ======= -->
 
@@ -165,9 +172,9 @@ footer a:hover { text-decoration:underline; }
          
 	</div>
   </article>
-      <a href="inicio.html" class="btn-volver">Volver a Noticias</a>
-  
-  
+
+<a href="noticias.html" class="btn-volver">Volver a Inicio</a>
+
 <footer><p>© 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p></footer>
 
 <script>
