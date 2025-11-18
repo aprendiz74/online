@@ -292,6 +292,51 @@
   }
 }
 
+
+
+/* Ajustes generales para móviles (hasta 480px) */
+@media (max-width: 480px) {
+  .news h3 a {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    font-weight: 700;
+  }
+
+  .news .section {
+    padding: 6px 4px;
+  }
+
+  .news article {
+    gap: 10px;
+  }
+
+  .thumb {
+    min-width: 90px;
+    height: 90px;
+  }
+}
+
+/* Ajustes especiales para pantallas MUY pequeñas (320–360px) */
+@media (max-width: 360px) {
+  .news h3 a {
+    font-size: 1rem;        /* cómodo y no se corta */
+    line-height: 1.4;       /* más aire */
+  }
+
+  .thumb {
+    min-width: 75px;        /* un poco más compacta */
+    height: 75px;
+  }
+
+  .news article {
+    gap: 8px;
+  }
+
+  .news .section {
+    padding: 5px 2px;
+  }
+}
+    
 </style>
 </head>
 
@@ -639,3 +684,4 @@
 </body>
 
 </html>
+
