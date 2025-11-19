@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -514,17 +514,36 @@ footer .container {
       menu.classList.toggle('active');
     });
   </script>
-  <script>
+  
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  const player = document.getElementById("global-live-player");
 
+  const player = document.getElementById("global-live-player");
+  const streamURL = "https://stream-177.zeno.fm/yd1g03o6if2tv"; // tu URL
+
+  // Si ya estaba encendida la radio en otra página → seguir
   if (sessionStorage.getItem("radioOn") === "1") {
-    player.src = "https://stream-177.zeno.fm/yd1g03o6if2tv";      // <--- tu URL
-    player.play().catch(()=>{});
+    player.src = streamURL;
+    player.play().catch(() => {});
   }
+
+  // Si otra página cambia el estado del player, mantener sincronizado
+  window.addEventListener("storage", (e) => {
+    if (e.key === "radioOn") {
+      if (e.newValue === "1") {
+        player.src = streamURL;
+        player.play().catch(() => {});
+      } else {
+        player.pause();
+      }
+    }
+  });
+
 });
 </script>
 
+
 </body>
 </html>
+
 
