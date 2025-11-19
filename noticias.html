@@ -517,27 +517,73 @@ footer .container {
   
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const player = document.getElementById("player");
+  const playStopBtn = document.getElementById("playStopBtn");
+  const playIcon = document.getElementById("playIcon");
+  const pauseIcon = document.getElementById("pauseIcon");
 
-  const player = document.getElementById("global-live-player");
-  const streamURL = "https://stream-177.zeno.fm/yd1g03o6if2tv"; // tu URL
+  const titleElement = document.getElementById("title");
+  const artistElement = document.getElementById("artist");
+  const artElement = document.getElementById("art");
 
-  // Si ya estaba encendida la radio en otra página → seguir
+  const streamURL = "https://node-27.zeno.fm/7jezfxybcd0uv?zs=jssz3G5RS_yBOC5j7uVrxA";
+  const metadataURL = "https://playerservices.streamtheworld.com/api/livestream-redirect/CRP_CORPORACIONAAC_SC?dist=webmaster&station=829&_=1691075017488";
+
+  function updateMetadata() {
+    fetch(metadataURL)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.data && data.data[0] && data.data[0].main_artists) {
+          titleElement.textContent = data.data[0].title || "Título desconocido";
+          artistElement.textContent = data.data[0].main_artists || "Artista desconocido";
+          artElement.src = data.data[0].cover || "default-cover.jpg";
+        }
+      })
+      .catch(() => {
+        titleElement.textContent = "Sin datos";
+        artistElement.textContent = "Sin datos";
+        artElement.src = "default-cover.jpg";
+      });
+  }
+
+  setInterval(updateMetadata, 15000);
+  updateMetadata();
+
+  playStopBtn.addEventListener("click", () => {
+    if (player.paused) {
+      player.src = streamURL;
+      player.play();
+      playIcon.style.display = "none";
+      pauseIcon.style.display = "inline";
+
+      sessionStorage.setItem("radioOn", "1");
+
+    } else {
+      player.pause();
+      playIcon.style.display = "inline";
+      pauseIcon.style.display = "none";
+
+      sessionStorage.setItem("radioOn", "0");
+    }
+  });
+
+  /* ────────────────────────────────────────────────
+     MANTIENE LA RADIO ENCENDIDA ENTRE PÁGINAS
+  ───────────────────────────────────────────────── */
   if (sessionStorage.getItem("radioOn") === "1") {
     player.src = streamURL;
     player.play().catch(() => {});
   }
 
-  // Si otra página cambia el estado del player, mantener sincronizado
-  window.addEventListener("storage", (e) => {
-    if (e.key === "radioOn") {
-      if (e.newValue === "1") {
-        player.src = streamURL;
-        player.play().catch(() => {});
-      } else {
-        player.pause();
-      }
-    }
-  });
+  /* ────────────────────────────────────────────────
+     ✔ AUTOPLAY CUANDO VIENES DESDE LA PÁGINA PRINCIPAL
+     (ESTA ES LA PARTE NUEVA QUE ME PEDISTE)
+  ───────────────────────────────────────────────── */
+  if (sessionStorage.getItem("fromHome") === "1") {
+    sessionStorage.removeItem("fromHome"); // evitar repetir autoplay
+    player.src = streamURL;
+    player.play().catch(() => {});
+  }
 
 });
 </script>
