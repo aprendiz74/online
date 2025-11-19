@@ -499,9 +499,7 @@ footer .container {
   </div> <!-- Cierra noticia-wrapper -->
 
 </div> <!-- Cierra content -->
-
-
-  <!-- FOOTER CORREGIDO -->
+ <!-- FOOTER CORREGIDO -->
   <footer>
     <div class="container">
       <p>&copy; 2025 <strong>ZOOM MUSICAL</strong>. Todos los derechos reservados.</p>
@@ -516,6 +514,16 @@ footer .container {
       menu.classList.toggle('active');
     });
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const player = document.getElementById("global-live-player");
+
+  if (sessionStorage.getItem("radioOn") === "1") {
+    player.src = "TU-STREAM-AQUÍ";      // <--- tu URL
+    player.play().catch(()=>{});
+  }
+});
+</script>
 
 </body>
 </html>
