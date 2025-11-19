@@ -9,7 +9,31 @@
 <style>
 /* ===== BASE ===== */
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f8f9fa; color:#333; line-height:1.7; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f8f9fa; color:#333; line-height:1.7; } body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:#333;
+  line-height:1.7;
+
+  /* 🎵 Fondo musical elegante */
+  background: 
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      url("https://raw.githack.com/aprendiz74/online/main/imagenes/1200.webp");
+
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; /* efecto profesional en pc */
+  background-repeat: no-repeat;
+}
+
+.noticias-header {
+  background: rgba(0,0,0,0.4); /* fondo oscuro */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.noticias-header .titulo-ranking {
+  color: #fff;
+}
 
 /* ===== NAVEGACIÓN ===== */
 nav {
