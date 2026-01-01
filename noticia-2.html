@@ -83,7 +83,7 @@
 <script>
 const toggle=document.querySelector('.menu-toggle'); const menu=document.querySelector('.menu');
 if(toggle&&menu){ toggle.addEventListener('click',()=>{menu.classList.toggle('active');}); document.querySelectorAll('.menu a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('active');});}); }
-const player=document.getElementById('global-live-player'); const btn=document.getElementById('live-btn'); const text=btn.querySelector('.live-text'); const stream='https://stream-177.zeno.fm/yd1g03o6if2tv';
+const player=document.getElementById('global-live-player'); const btn=document.getElementById('live-btn'); const text=btn.querySelector('.live-text'); const stream='https://sonicpanel.zonaradio.net/8126/stream';
 const isPlaying=localStorage.getItem('radio-live-playing')==='true';
 if(isPlaying){ player.src=stream; player.play().catch(()=>{}); btn.classList.add('playing'); text.textContent='PAUSAR'; }
 btn.addEventListener('click',()=>{ if(player.paused){ player.src=stream; player.play().catch(()=>alert('Error')); btn.classList.add('playing'); text.textContent='PAUSAR'; localStorage.setItem('radio-live-playing','true'); } else{ player.pause(); btn.classList.remove('playing'); text.textContent='EN VIVO'; localStorage.setItem('radio-live-playing','false'); }});
@@ -98,3 +98,4 @@ document.addEventListener('keydown',e=>{if(e.ctrlKey&&['a','c','u'].includes(e.k
 
 </body>
 </html>
+
