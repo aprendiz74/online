@@ -343,7 +343,38 @@
     padding: 5px 2px;
   }
 }
-    
+.ad-section {
+  padding: 16px;
+  text-align: center;
+}
+
+.ad-section img {
+  width: 100%;
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.ad-section img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}   
+ .banner-publicidad {
+  margin: 20px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,.1);
+}
+
+.banner-publicidad img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .3s ease;
+}
+
+.banner-publicidad img:hover {
+  transform: scale(1.02);
+}   
 </style>
 </head>
 
@@ -445,6 +476,12 @@
             </article>
           </div>
         </section>
+      		
+		<section class="banner-publicidad">
+  <a href="#" target="_blank">
+    <img src="https://maicitoradio.com/imagenes/Banner promocional de Radio Maicito.webp" alt="Publicidad Radio Maicito">
+  </a>
+</section>
       </div>
 
       <!-- DERECHA -->
@@ -461,6 +498,17 @@
         </section>
 
         <audio id="audio-player" preload="none"></audio>
+		
+		       <audio id="audio-player" preload="none"></audio>
+		
+		<section class="card">
+  <div class="card-head">PUBLICIDAD</div>
+  <div class="section ad-section">
+    <a href="#" target="_blank">
+      <img src="https://via.placeholder.com/300x250?text=ANUNCIO" alt="Publicidad">
+    </a>
+  </div>
+</section>
 
 <!-- 🔵 TARJETA DESCARGA -->
 <section class="cta">
@@ -484,7 +532,7 @@
 <section class="cta">
   <div style="text-align:center;">
     <div class="dj-text">
-      <h3><b>Información del Tiempo</b></h3>
+      <h3><b>El Tiempo en Guayas</b></h3>
     </div>
 
     <div id="TT_FCNk1EEEESKaQeIKjfxjDjzjDWuKLpQ2rtkYEciIK1Dom5GI3">
