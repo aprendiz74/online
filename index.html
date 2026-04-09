@@ -379,6 +379,41 @@
 .banner-publicidad img:hover {
   transform: scale(1.02);
 }   
+/* === FIX UNIVERSAL PARA IFRAME (MÓVILES) === */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* CONTENIDO PRINCIPAL FLEXIBLE */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* EVITA QUE SE CORTE EN CELULARES */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+.banner-publicidad img {
+  width: 100%;
+  height: 180px; /* MISMA ALTURA SIEMPRE */
+  object-fit: cover; /* recorta sin deformar */
+}
+@media (min-width: 768px) {
+  .banner-publicidad img {
+    height: 220px;
+  }
+}
 </style>
 </head>
 
@@ -433,7 +468,7 @@
   </nav>
 
   <!-- MAIN -->
-  <main class="container">
+  <main class="container main-content">
     <div class="grid">
       <!-- IZQUIERDA -->
       <div class="main-col">
@@ -724,3 +759,5 @@
 </script>
 </body>
 </html>
+
+
