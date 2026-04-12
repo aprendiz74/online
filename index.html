@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<head>
+	
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/banner-1.webp">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/banner-2.webp">
 <link rel="preload" as="image" href="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/banner-3.webp">
@@ -245,29 +245,27 @@
       .final-banner-mobile { display: flex; }
     }
 
-    footer {
-      background: #00a6a6;
-      color: #fff;
-      padding: 32px 0;
-      margin-top: 40px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 70px;
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    footer p {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 600;
-      text-align: center;
-      letter-spacing: 0.5px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      opacity: 0.98;
-    }
+    footer.footer{
+  width:100%;
+  background:#00a6a6;
+  color:#fff;
+  padding:16px 12px;
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 -4px 12px rgba(0,0,0,.1);
+  border-top:1px solid rgba(255,255,255,.15);
+}
+
+footer.footer p{
+  margin:0;
+  font-size:14px;
+  font-weight:600;
+  text-align:center;
+  letter-spacing:0.5px;
+}
+  
 
     /* AUDIO GLOBAL OCULTO */
     #global-live-player {
@@ -530,10 +528,9 @@
     </div>
   </main>
   
-  <!-- FOOTER -->
-  <footer class="container">
-    <p>© 2026 Derechos reservados.</p>
-  </footer>
+ <footer class="footer">
+  <p>© 2026 Derechos reservados.</p>
+</footer>
 
   <!-- SCRIPT -->
   <script>
@@ -672,7 +669,5 @@
     if (e.key === 'F12') e.preventDefault();
   });
 </script>
-
 </body>
-
 </html>
