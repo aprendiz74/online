@@ -380,8 +380,28 @@
   transform: scale(1.02);
 } 
 
+/* ====== ALINEACIÓN CORRECTA GLOBAL ====== */
 
-.site-wrapper {
+/* Contenedor único para TODO */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* Header, nav y footer ocupan todo el fondo */
+header,
+nav,
+footer,
+.topbar {
+  width: 100%;
+}
+
+/* Asegurar que TODO el contenido interno use container */
+header .container,
+nav .container,
+footer .container,
+.topbar .container {
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 12px;
