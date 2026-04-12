@@ -391,10 +391,16 @@ footer {
 header .container,
 nav .container,
 footer .container {
-  max-width: 1800px; /* igual que tu modo TV */
-  margin: 0 auto;
-  padding: 0 40px;
-}	  
+  max-width: 100%;
+  padding: 0 20px;
+}
+@media (max-width: 480px) {
+  header .container,
+  nav .container,
+  footer .container {
+    padding: 0 12px; /* menos espacio en móviles */
+  }
+}
 </style>
 </head>
 
@@ -414,7 +420,8 @@ footer .container {
     </div>
   </div>
   <!-- HEADER -->
-  <header class="container">
+  <header>
+  <div class="container">
     <div class="header-inner">
       <div class="brand">
         <div class="brand-badge">
