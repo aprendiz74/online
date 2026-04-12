@@ -378,7 +378,23 @@
 
 .banner-publicidad img:hover {
   transform: scale(1.02);
-}   
+} 
+
+/* === FULL WIDTH PARA HEADER, NAV Y FOOTER === */
+header,
+nav,
+footer {
+  width: 100%;
+}
+
+/* Mantener contenido centrado */
+header .container,
+nav .container,
+footer .container {
+  max-width: 1800px; /* igual que tu modo TV */
+  margin: 0 auto;
+  padding: 0 40px;
+}	  
 </style>
 </head>
 
