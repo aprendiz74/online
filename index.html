@@ -62,12 +62,12 @@
 }
 
     .topbar-inner {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
 
     #today {
       font-weight: 700;
@@ -332,6 +332,33 @@ footer.footer p{
   height: 100%;
   object-fit: contain;
   display: block;
+}
+#weather {
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 12px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+
+  #weather {
+    max-width: 110px;
+    font-size: 11px;
+  }
+
+  .social {
+    flex-shrink: 0;
+    display: flex;
+    gap: 6px;
+  }
+
+  #today {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
 }
   </style>
 </head>
