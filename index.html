@@ -568,18 +568,19 @@ async function cargarClima() {
     let desc = data.current_condition[0].weatherDesc[0].value;
 
     const traducciones = {
-      "Partly cloudy": "Parcialmente nublado",
+      "Partly cloudy": "nublado",
       "Sunny": "Soleado",
       "Clear": "Despejado",
       "Cloudy": "Nublado",
       "Overcast": "Cubierto",
-      "Light rain": "Lluvia ligera",
-      "Moderate rain": "Lluvia moderada",
-      "Heavy rain": "Lluvia fuerte",
+      "Light rain": "ligera",
+      "Moderate rain": "moderada",
+      "Heavy rain": "fuerte",
       "Thunderstorm": "Tormenta",
       "Mist": "Neblina",
       "Fog": "Niebla"
     };
+
 
     desc = traducciones[desc] || desc;
 
