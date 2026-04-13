@@ -564,11 +564,8 @@ async function cargarClima() {
 
   // MOSTRAR CLIMA
   function mostrar(data, ciudad) {
-  const temp = data.current_condition[0].temp_C;
-
-  // SOLO ciudad + temperatura
-  weatherEl.textContent = `🌡️ ${ciudad} ${temp}°C`;
-}
+    const temp = data.current_condition[0].temp_C;
+    let desc = data.current_condition[0].weatherDesc[0].value;
 
     const traducciones = {
       "Partly cloudy": "Parcialmente nublado",
