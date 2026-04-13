@@ -62,12 +62,12 @@
 }
 
     .topbar-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: nowrap;
-}
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
 
     #today {
       font-weight: 700;
@@ -333,33 +333,6 @@ footer.footer p{
   object-fit: contain;
   display: block;
 }
-#weather {
-  white-space: nowrap;
-  flex-shrink: 0;
-  font-size: 12px;
-  max-width: 160px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-@media (max-width: 600px) {
-
-  #weather {
-    max-width: 110px;
-    font-size: 11px;
-  }
-
-  .social {
-    flex-shrink: 0;
-    display: flex;
-    gap: 6px;
-  }
-
-  #today {
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-}
   </style>
 </head>
 <body>
@@ -591,8 +564,11 @@ async function cargarClima() {
 
   // MOSTRAR CLIMA
   function mostrar(data, ciudad) {
-    const temp = data.current_condition[0].temp_C;
-    let desc = data.current_condition[0].weatherDesc[0].value;
+  const temp = data.current_condition[0].temp_C;
+
+  // SOLO ciudad + temperatura
+  weatherEl.textContent = `🌡️ ${ciudad} ${temp}°C`;
+}
 
     const traducciones = {
       "Partly cloudy": "Parcialmente nublado",
