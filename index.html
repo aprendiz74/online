@@ -649,7 +649,7 @@ footer.footer p{
   <div class="featured-news">
 
     <!-- NOTICIA GRANDE -->
-    <a href="noticia-1.html" class="featured-main" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp')">
+    <a href="noticia-3.html" class="featured-main" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp')">
       <div class="overlay">
         <span class="badge">DESTACADO</span>
         <h2>La ciencia logra lo imposible</h2>
@@ -683,7 +683,7 @@ footer.footer p{
 	  
 	  
 
-      <a href="noticia-3.html">
+      <a href="noticia-1.html">
         <article>
           <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-3.webp">
           <div>
@@ -737,7 +737,7 @@ footer.footer p{
         <audio id="audio-player" preload="none"></audio>
 		
 		<section class="card">
-  <div class="card-head">PUBLICIDAD ZOOM</div>
+  <div class="card-head">PUBLICIDAD</div>
   <div class="section ad-section">
     <a href="#" target="_blank">
       <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Alexa.webp" alt="Publicidad">
@@ -929,66 +929,70 @@ footer.footer p{
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-	
 fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.8891&current_weather=true")
   .then(res => res.json())
   .then(data => {
-   const w = data.current_weather;
-const temp = w.temperature;
-const code = w.weathercode;
-const isDay = w.is_day;
 
-    document.getElementById("temp").textContent = temp + "°C";
+    // 🔒 Validación segura
+    if (!data?.current_weather) {
+      throw new Error("Datos no válidos");
+    }
 
-    let desc = "";
-let icon = "⛅";
+    const w = data.current_weather;
 
-// 🌙 NOCHE
-if (isDay === 0) {
-  if (code === 0) {
-    desc = "Despejado";
-    icon = "🌙";
-  } else if (code <= 3) {
-    desc = "Parcialmente nublado";
-    icon = "☁️🌙";
-  } else if (code <= 67) {
-    desc = "Lluvia nocturna";
-    icon = "🌧️🌙";
-  } else {
-    desc = "Clima nocturno";
-    icon = "🌙";
-  }
-}
-// ☀️ DÍA
-else {
-  if (code === 0) {
-    desc = "Despejado";
-    icon = "☀️";
-  } else if (code <= 3) {
-    desc = "Parcialmente nublado";
-    icon = "🌤️";
-  } else if (code <= 48) {
-    desc = "Niebla";
-    icon = "🌫️";
-  } else if (code <= 67) {
-    desc = "Lluvia";
-    icon = "🌧️";
-  } else if (code <= 77) {
-    desc = "Nieve";
-    icon = "❄️";
-  } else {
-    desc = "Clima variable";
-    icon = "🌡️";
-  }
-}
+    const temp = w.temperature ?? "--";
 
-    document.getElementById("desc").textContent = desc;
+    // 🔥 Compatibilidad API
+    const code = w.weathercode ?? w.weather_code ?? -1;
 
-    document.getElementById("weather-icon").textContent = icon;
+    const isDay = w.is_day ?? 1;
+
+    let desc = "Clima no disponible";
+    let icon = "🌡️";
+
+       // 🌤️ LÓGICA REALISTA (AJUSTE HUMANO)
+    if (code === 0) {
+      desc = "Despejado";
+      icon = isDay ? "☀️" : "🌙";
+
+    } else if (code === 1 || code === 2) {
+  desc = "Parcialmente nublado";
+  icon = "🌤️☁️";
+
+    } else if (code === 3) {
+      desc = "Parcialmente despejado";
+      icon = "🌤️";
+
+    } else if ([45,48].includes(code)) {
+      desc = "Niebla";
+      icon = "🌫️";
+
+    } else if ([51,53,55,61,63,65,66,67,80,81,82].includes(code)) {
+      desc = "Lluvia";
+      icon = "🌧️";
+
+    } else if ([71,73,75,77].includes(code)) {
+      desc = "Nieve";
+      icon = "❄️";
+    }
+    // 🔒 Seguridad DOM
+    const tempEl = document.getElementById("temp");
+    const descEl = document.getElementById("desc");
+    const iconEl = document.getElementById("weather-icon");
+
+    if (tempEl) tempEl.textContent = temp + "°C";
+    if (descEl) descEl.textContent = desc;
+    if (iconEl) iconEl.textContent = icon;
+
   })
-  .catch(() => {
-    document.getElementById("desc").textContent =
-      "No se pudo cargar el clima";
+  .catch(err => {
+    console.error("Error clima:", err);
+
+    const descEl = document.getElementById("desc");
+    const iconEl = document.getElementById("weather-icon");
+
+    if (descEl) descEl.textContent = "No se pudo cargar el clima";
+    if (iconEl) iconEl.textContent = "⚠️";
   });
   </script>
 <script>
