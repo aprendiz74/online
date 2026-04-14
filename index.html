@@ -351,23 +351,74 @@ footer.footer p{
     0 6px 14px rgba(0,0,0,.4) !important;
 }
 
-/* 🌍 TEXTO PRINCIPAL (MÁS SUAVE Y ELEGANTE) */
-.weather-card .section.weather-body #desc{
-  font-weight:800 !important;
-  color:#0b2b3c !important; /* azul oscuro elegante */
-  margin-top:6px !important;
-  font-size:14px;
-  text-shadow: 0 1px 0 rgba(255,255,255,.15);
+/* 🌦️ CONTENEDOR (MÁS COMPACTO) */
+.weather-card .weather-body{
+  padding:10px 18px; /* menos alto arriba/abajo */
+  text-align:center;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color:#fff;
+  border-radius:0 0 18px 18px;
+  position:relative;
+  overflow:hidden;
 }
 
-/* 🧾 TEXTO PEQUEÑO */
-.weather-card .section.weather-body div{
-  color:#0b2b3c !important;
-  font-weight:700 !important;
-  font-size:12px;
-  letter-spacing:0.3px;
-  margin-top:6px !important;
-  opacity:0.9;
+/* ✨ BRILLO ANIMADO */
+.weather-card .weather-body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  top:-50%;
+  left:-50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+  animation: moveGlow 6s linear infinite;
+}
+
+@keyframes moveGlow{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+
+/* 🌤️ FILA ICONO + TEMPERATURA (MISMA LÍNEA REAL) */
+.weather-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  position:relative;
+  z-index:2;
+}
+
+/* ☀️ ICONO */
+.weather-icon{
+  font-size:38px;
+  line-height:1;
+}
+
+/* 🌡️ TEMPERATURA */
+.weather-temp{
+  font-size:48px;
+  font-weight:900;
+  margin:0;
+  line-height:1;
+  color:#fff !important;
+  text-shadow:0 4px 12px rgba(0,0,0,.35);
+}
+
+/* 🌍 DESCRIPCIÓN */
+.weather-desc{
+  font-size:16px;
+  font-weight:800;
+  margin-top:4px;
+  opacity:.95;
+  position:relative;
+  z-index:2;
+  color:#fff;
+}
+
+/* 🧾 EVITA CONFLICTOS DE COLORES INTERNOS */
+.weather-card .weather-body div{
+  color:inherit;
 }
   </style>
 </head>
@@ -529,16 +580,20 @@ footer.footer p{
 </section>
 
 <section class="card weather-card">
-  <div class="card-head">Información Del Clima</div>
+  <div class="card-head">El Clima en Guayaquil</div>
 
-  <div class="section weather-body">
+  <div class="weather-body">
     
-    <div style="font-size:18px; font-weight:800;" id="temp">--°C</div>
-    <div style="margin-top:4px; color:#475569;" id="desc">Cargando clima...</div>
-
-    <div style="margin-top:10px; font-size:12px; color:#64748b;">
-      Actualizado en tiempo real
+    <div class="weather-top">
+      
+      <div class="weather-icon" id="weather-icon">⛅</div>
     </div>
+
+    <div class="weather-temp" id="temp">--°C</div>
+
+    <div class="weather-desc" id="desc">Cargando clima...</div>
+
+    
 
   </div>
 </section>
@@ -712,22 +767,29 @@ footer.footer p{
 fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.8891&current_weather=true")
   .then(res => res.json())
   .then(data => {
-    const temp = data.current_weather.temperature;
+    const w = data.current_weather;
+    const temp = w.temperature;
+    const code = w.weathercode;
 
     document.getElementById("temp").textContent = temp + "°C";
 
-    document.getElementById("desc").textContent =
-      "Guayaquil, Ecuador • " +
-      (
-        temp >= 30 ? "Calor fuerte ☀️🔥" :
-        temp >= 24 ? "Clima cálido 🌤️" :
-        temp >= 18 ? "Clima fresco 🌥️" :
-        "Clima frío ❄️"
-      );
+    let desc = "";
+    let icon = "⛅";
+
+    if (code === 0) { desc = "Despejado"; icon = "☀️"; }
+    else if (code <= 3) { desc = "Parcialmente nublado"; icon = "🌤️"; }
+    else if (code <= 48) { desc = "Niebla"; icon = "🌫️"; }
+    else if (code <= 67) { desc = "Lluvia"; icon = "🌧️"; }
+    else if (code <= 77) { desc = "Nieve"; icon = "❄️"; }
+    else { desc = "Clima variable"; icon = "🌡️"; }
+
+    document.getElementById("desc").textContent = desc;
+
+    document.getElementById("weather-icon").textContent = icon;
   })
   .catch(() => {
     document.getElementById("desc").textContent =
-      "Guayaquil, Ecuador • No se pudo cargar el clima";
+      "No se pudo cargar el clima";
   });
   </script>
 <script>
@@ -740,6 +802,7 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.889
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
     if (e.key === 'F12') e.preventDefault();
   });
-</script>  
+</script>
+  
 </body>
 </html>
