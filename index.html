@@ -767,21 +767,54 @@ footer.footer p{
 fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.8891&current_weather=true")
   .then(res => res.json())
   .then(data => {
-    const w = data.current_weather;
-    const temp = w.temperature;
-    const code = w.weathercode;
+   const w = data.current_weather;
+const temp = w.temperature;
+const code = w.weathercode;
+const isDay = w.is_day;
 
     document.getElementById("temp").textContent = temp + "°C";
 
     let desc = "";
-    let icon = "⛅";
+let icon = "⛅";
 
-    if (code === 0) { desc = "Despejado"; icon = "☀️"; }
-    else if (code <= 3) { desc = "Parcialmente nublado"; icon = "🌤️"; }
-    else if (code <= 48) { desc = "Niebla"; icon = "🌫️"; }
-    else if (code <= 67) { desc = "Lluvia"; icon = "🌧️"; }
-    else if (code <= 77) { desc = "Nieve"; icon = "❄️"; }
-    else { desc = "Clima variable"; icon = "🌡️"; }
+// 🌙 NOCHE
+if (isDay === 0) {
+  if (code === 0) {
+    desc = "Despejado";
+    icon = "🌙";
+  } else if (code <= 3) {
+    desc = "Parcialmente nublado";
+    icon = "☁️🌙";
+  } else if (code <= 67) {
+    desc = "Lluvia nocturna";
+    icon = "🌧️🌙";
+  } else {
+    desc = "Clima nocturno";
+    icon = "🌙";
+  }
+}
+// ☀️ DÍA
+else {
+  if (code === 0) {
+    desc = "Despejado";
+    icon = "☀️";
+  } else if (code <= 3) {
+    desc = "Parcialmente nublado";
+    icon = "🌤️";
+  } else if (code <= 48) {
+    desc = "Niebla";
+    icon = "🌫️";
+  } else if (code <= 67) {
+    desc = "Lluvia";
+    icon = "🌧️";
+  } else if (code <= 77) {
+    desc = "Nieve";
+    icon = "❄️";
+  } else {
+    desc = "Clima variable";
+    icon = "🌡️";
+  }
+}
 
     document.getElementById("desc").textContent = desc;
 
