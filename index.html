@@ -420,6 +420,107 @@ footer.footer p{
 .weather-card .weather-body div{
   color:inherit;
 }
+
+.featured-news{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap:16px;
+  padding:16px;
+}
+
+/* NOTICIA GRANDE */
+.featured-main{
+  position:relative;
+  background-size:cover;
+  background-position:center;
+  border-radius:14px;
+  min-height:260px;
+  overflow:hidden;
+}
+
+.featured-main .overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding:16px;
+  background:linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  color:#fff;
+}
+
+.featured-main h2{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+/* LADO DERECHO */
+.featured-side{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.featured-side article{
+  display:flex;
+  gap:10px;
+  background:#fff;
+  border-radius:12px;
+  padding:8px;
+  align-items:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+}
+
+.featured-side img{
+  width:80px;
+  height:70px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.featured-side h4{
+  font-size:13px;
+  margin:0;
+}
+
+.featured-side p{
+  font-size:11px;
+  color:#475569;
+  margin:4px 0 0;
+}
+
+/* 🔥 RESPONSIVE MEJORADO */
+@media(max-width:768px){
+  .featured-news{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:12px;
+  }
+
+  .featured-main{
+    min-height:200px;
+  }
+
+  .featured-main h2{
+    font-size:16px;
+  }
+
+  .featured-side article{
+    padding:6px;
+  }
+
+  .featured-side img{
+    width:70px;
+    height:60px;
+  }
+
+  .featured-side h4{
+    font-size:12px;
+  }
+
+  .featured-side p{
+    font-size:10px;
+  }
+}
   </style>
 </head>
 <body>
@@ -541,17 +642,82 @@ footer.footer p{
             </article>
           </div>
         </section>
+		
+<section class="card">
+  <div class="card-head">NOTICIAS DESTACADAS</div>
+
+  <div class="featured-news">
+
+    <!-- NOTICIA GRANDE -->
+    <a href="noticia-1.html" class="featured-main" style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp')">
+      <div class="overlay">
+        <span class="badge">DESTACADO</span>
+        <h2>La ciencia logra lo imposible</h2>
+        <p>Se presentó el primer atlas del cerebro humano...</p>
+      </div>
+    </a>
+
+    <!-- LADO DERECHO -->
+    <div class="featured-side">
+
+      <a href="noticia-2.html">
+        <article>
+          <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-2.webp">
+          <div>
+            <h4>Cristiano Ronaldo dejó fríos a sus fans</h4>
+            <p>Habló sobre su futuro...</p>
+          </div>
+        </article>
+      </a>
+	  
+	  
+	   <a href="noticia-2.html">
+        <article>
+          <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-2.webp">
+          <div>
+            <h4>Cristiano Ronaldo dejó fríos a sus fans</h4>
+            <p>Habló sobre su futuro...</p>
+          </div>
+        </article>
+      </a>
+	  
+	  
+
+      <a href="noticia-3.html">
+        <article>
+          <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-3.webp">
+          <div>
+            <h4>¿Qué significa este hábito?</h4>
+            <p>Explicación psicológica...</p>
+          </div>
+        </article>
+      </a>
+
+    </div>
+
+  </div>
+</section>
       		
 		<section class="banner-publicidad">
   <a href="#" target="_blank">
     <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Música para todos los días.jpg" alt="ZOOM MUSICAL">
   </a>
 </section>
-      </div>	  
+      </div>
+
+	  
 	  
       <!-- DERECHA -->
       <aside class="sidebar">
         <section class="card">
+			<section class="card">
+  <div class="card-head">PUBLICIDAD</div>
+  <div class="section ad-section">
+    <a href="#" target="_blank">
+      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Anuncio llamativo con megáfono.jpg" alt="Publicidad">
+    </a>
+  </div>
+</section>
           <div class="card-head">LAS MÁS PEDIDAS</div>
           <div id="ranking-list"></div>
           <div class="section" style="background:var(--cyan);padding:18px 20px">
@@ -574,7 +740,7 @@ footer.footer p{
   <div class="card-head">PUBLICIDAD</div>
   <div class="section ad-section">
     <a href="#" target="_blank">
-      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Anuncio llamativo con megáfono.jpg" alt="Publicidad">
+      <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Alexa.webp" alt="Publicidad">
     </a>
   </div>
 </section>
@@ -835,7 +1001,6 @@ else {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
     if (e.key === 'F12') e.preventDefault();
   });
-</script>
-  
+</script>  
 </body>
 </html>
