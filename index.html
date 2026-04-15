@@ -958,67 +958,47 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.889
   .then(res => res.json())
   .then(data => {
 
-    // 🔒 Validación segura
-    if (!data?.current_weather) {
-      throw new Error("Datos no válidos");
-    }
+/* 🌤️ FILA ICONO + TEMPERATURA (MISMA LÍNEA REAL) */
+.weather-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  position:relative;
+  z-index:2;
+}
 
-    const w = data.current_weather;
+/* ☀️ ICONO */
+.weather-icon{
+  font-size:38px;
+  line-height:1;
+}
 
-    const temp = w.temperature ?? "--";
+/* 🌡️ TEMPERATURA */
+.weather-temp{
+  font-size:48px;
+  font-weight:900;
+  margin:0;
+  line-height:1;
+  color:#fff !important;
+  text-shadow:0 4px 12px rgba(0,0,0,.35);
+}
 
-    // 🔥 Compatibilidad API
-    const code = w.weathercode ?? w.weather_code ?? -1;
+/* 🌍 DESCRIPCIÓN */
+.weather-desc{
+  font-size:16px;
+  font-weight:800;
+  margin-top:4px;
+  opacity:.95;
+  position:relative;
+  z-index:2;
+  color:#fff;
+}
 
-    const isDay = w.is_day ?? 1;
-
-    let desc = "Clima no disponible";
-    let icon = "🌡️";
-
-       // 🌤️ LÓGICA REALISTA (AJUSTE HUMANO)
-    if (code === 0) {
-      desc = "Despejado";
-      icon = isDay ? "☀️" : "🌙";
-
-    } else if (code === 1 || code === 2) {
-  desc = "Parcialmente nublado";
-  icon = "🌤️☁️";
-
-    } else if (code === 3) {
-      desc = "Parcialmente despejado";
-      icon = "🌤️";
-
-    } else if ([45,48].includes(code)) {
-      desc = "Niebla";
-      icon = "🌫️";
-
-    } else if ([51,53,55,61,63,65,66,67,80,81,82].includes(code)) {
-      desc = "Lluvia";
-      icon = "🌧️";
-
-    } else if ([71,73,75,77].includes(code)) {
-      desc = "Nieve";
-      icon = "❄️";
-    }
-    // 🔒 Seguridad DOM
-    const tempEl = document.getElementById("temp");
-    const descEl = document.getElementById("desc");
-    const iconEl = document.getElementById("weather-icon");
-
-    if (tempEl) tempEl.textContent = temp + "°C";
-    if (descEl) descEl.textContent = desc;
-    if (iconEl) iconEl.textContent = icon;
-
-  })
-  .catch(err => {
-    console.error("Error clima:", err);
-
-    const descEl = document.getElementById("desc");
-    const iconEl = document.getElementById("weather-icon");
-
-    if (descEl) descEl.textContent = "No se pudo cargar el clima";
-    if (iconEl) iconEl.textContent = "⚠️";
-  });
+/* 🧾 EVITA CONFLICTOS DE COLORES INTERNOS */
+.weather-card .weather-body div{
+  color:inherit;
+}
   </script>
 <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
