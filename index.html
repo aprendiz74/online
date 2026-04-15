@@ -342,14 +342,17 @@ footer.footer p{
 }
 
 /* 🌡️ TEMPERATURA (SOLO ESTO BLANCO) */
-.weather-card .section.weather-body #temp{
-  font-size:36px !important;
-  font-weight:900 !important;
+/* 🌡️ TEMPERATURA DESTACADA (SOLO NÚMERO BLANCO) */
+.weather-temp{
+  font-size:52px;
+  font-weight:900;
   color:#ffffff !important;
-  text-shadow:
-    0 2px 0 rgba(0,0,0,.5),
-    0 6px 14px rgba(0,0,0,.4) !important;
+  line-height:1;
+  text-shadow: 0 4px 12px rgba(0,0,0,.35);
+  position: relative;
+  z-index: 2;
 }
+
 
 /* 🌦️ CONTENEDOR (MÁS COMPACTO) */
 .weather-card .weather-body{
@@ -954,71 +957,70 @@ footer.footer p{
     audio.addEventListener('ended', () => {
       if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
     });
-fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1894&longitude=-79.8891&current_weather=true")
-  .then(res => res.json())
-  .then(data => {
+function cargarClima() {
 
-    // 🔒 Validación segura
-    if (!data?.current_weather) {
-      throw new Error("Datos no válidos");
-    }
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&current_weather=true&timezone=auto")
+    .then(res => res.json())
+    .then(data => {
 
-    const w = data.current_weather;
+      if (!data?.current_weather) {
+        throw new Error("Datos no válidos");
+      }
 
-    const temp = w.temperature ?? "--";
+      const w = data.current_weather;
 
-    // 🔥 Compatibilidad API
-    const code = w.weathercode ?? w.weather_code ?? -1;
+      const temp = w.temperature ?? "--";
+      const code = w.weathercode ?? w.weather_code ?? -1;
 
-    const isDay = w.is_day ?? 1;
+    const hour = new Date().getHours();
 
-    let desc = "Clima no disponible";
-    let icon = "🌡️";
+      const isDay = hour >= 6 && hour < 18;
 
-       // 🌤️ LÓGICA REALISTA (AJUSTE HUMANO)
-    if (code === 0) {
-      desc = "Despejado";
-      icon = isDay ? "☀️" : "🌙";
+      let desc = "Clima no disponible";
+      let icon = "🌡️";
 
-    } else if (code === 1 || code === 2) {
-  desc = "Parcialmente nublado";
-  icon = "🌤️☁️";
+      if (code === 0) {
+        desc = "Despejado";
+        icon = isDay ? "☀️" : "🌙";
 
-    } else if (code === 3) {
-      desc = "Parcialmente despejado";
-      icon = "🌤️";
+      } else if (code === 1 || code === 2) {
+        desc = "Parcialmente nublado";
+        icon = isDay ? "🌤️" : "☁️🌙";
 
-    } else if ([45,48].includes(code)) {
-      desc = "Niebla";
-      icon = "🌫️";
+      } else if (code === 3) {
+        desc = "Nublado";
+        icon = "☁️";
 
-    } else if ([51,53,55,61,63,65,66,67,80,81,82].includes(code)) {
-      desc = "Lluvia";
-      icon = "🌧️";
+      } else if ([45,48].includes(code)) {
+        desc = "Niebla";
+        icon = "🌫️";
 
-    } else if ([71,73,75,77].includes(code)) {
-      desc = "Nieve";
-      icon = "❄️";
-    }
-    // 🔒 Seguridad DOM
-    const tempEl = document.getElementById("temp");
-    const descEl = document.getElementById("desc");
-    const iconEl = document.getElementById("weather-icon");
+      } else if ([51,53,55,61,63,65,66,67,80,81,82].includes(code)) {
+        desc = "Lluvia";
+        icon = "🌧️";
 
-    if (tempEl) tempEl.textContent = temp + "°C";
-    if (descEl) descEl.textContent = desc;
-    if (iconEl) iconEl.textContent = icon;
+      } else if ([71,73,75,77].includes(code)) {
+        desc = "Nieve";
+        icon = "❄️";
+      }
 
-  })
-  .catch(err => {
-    console.error("Error clima:", err);
+      document.getElementById("temp").textContent = temp + "°C";
+      document.getElementById("desc").textContent = desc;
+      document.getElementById("weather-icon").textContent = icon;
 
-    const descEl = document.getElementById("desc");
-    const iconEl = document.getElementById("weather-icon");
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("desc").textContent = "No se pudo cargar el clima";
+      document.getElementById("weather-icon").textContent = "⚠️";
+    });
+}
 
-    if (descEl) descEl.textContent = "No se pudo cargar el clima";
-    if (iconEl) iconEl.textContent = "⚠️";
-  });
+// 🚀 cargar al inicio
+cargarClima();
+
+// 🔄 actualizar cada 10 minutos
+setInterval(cargarClima, 600000);
   </script>
 <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
