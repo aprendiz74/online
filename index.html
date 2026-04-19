@@ -1031,7 +1031,7 @@ function cargarClima() {
 
       const isDay = hour >= 6 && hour < 18;
 
-      let desc = "Clima no disponible";
+      let desc = "Alta Temperatura";
       let icon = "🌡️";
 
       if (code === 0) {
@@ -1043,8 +1043,8 @@ function cargarClima() {
         icon = isDay ? "🌤️" : "☁️🌙";
 
       } else if (code === 3) {
-        desc = "Nublado";
-        icon = "☁️";
+        desc = "Soleado Nubes dispersas";
+        icon = "🌤️";
 
       } else if ([45,48].includes(code)) {
         desc = "Niebla";
@@ -1055,7 +1055,7 @@ function cargarClima() {
         icon = "🌧️";
 
       } else if ([71,73,75,77].includes(code)) {
-        desc = "Nieve";
+        desc = "Clima Fresco";
         icon = "❄️";
       }
 
