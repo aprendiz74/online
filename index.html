@@ -318,7 +318,6 @@ footer.footer p{
   letter-spacing:0.5px;
 }
   
-
     /* AUDIO GLOBAL OCULTO */
     #global-live-player {
       position: fixed;
@@ -330,15 +329,11 @@ footer.footer p{
       pointer-events: none;
     }
 	
-
-
-/* 🔥 FIX DEFINITIVO SOLO EN MÓVIL */
-@media (max-width: 768px){
-  .final-banner-mobile .brand-badge{
-    background: none !important;
-    box-shadow: none !important;
+@media (min-width: 768px){
+  .hero-panel{
+    display: none !important;
   }
-}	  
+}
 .ad-section {
   padding: 16px;
   text-align: center;
