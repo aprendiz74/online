@@ -330,12 +330,15 @@ footer.footer p{
       pointer-events: none;
     }
 	
-@media (min-width: 768px){
-  .hero-panel{
-    display: none !important;
-  }
-}
 
+
+/* 🔥 FIX DEFINITIVO SOLO EN MÓVIL */
+@media (max-width: 768px){
+  .final-banner-mobile .brand-badge{
+    background: none !important;
+    box-shadow: none !important;
+  }
+}	  
 .ad-section {
   padding: 16px;
   text-align: center;
@@ -385,13 +388,7 @@ footer.footer p{
   object-fit: contain;
   display: block;
 }
-/* 🔥 FIX DEFINITIVO SOLO EN MÓVIL */
-@media (max-width: 768px){
-  .final-banner-mobile .brand-badge{
-    background: none !important;
-    box-shadow: none !important;
-  }
-}	  
+
 .weather-card .section.weather-body{
   text-align:center !important;
   padding:22px !important;
@@ -400,7 +397,7 @@ footer.footer p{
   box-shadow: inset 0 0 18px rgba(0,0,0,.25);
 }
 
-/* 🌡️ TEMPERATURA (SOLO ESTO BLANCO) */
+
 /* 🌡️ TEMPERATURA DESTACADA (SOLO NÚMERO BLANCO) */
 .weather-temp{
   font-size:52px;
