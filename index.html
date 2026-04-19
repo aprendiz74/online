@@ -123,11 +123,16 @@
 .brand-badge{
   width:48px;
   height:48px;
+  min-width:48px;
+  min-height:48px;
+  max-width:48px;
+  max-height:48px;
   border-radius:999px;
-  background: orange; /* ✅ eliminado el amarillo */
-  display:grid;
-  place-items:center;
-  box-shadow:0 8px 20px rgba(0,0,0,.15)
+  background: orange;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
 .brand-badge svg{
@@ -380,8 +385,7 @@ footer.footer p{
 .brand-badge img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
+  object-fit: cover;
 }
 
 .weather-card .section.weather-body{
@@ -792,7 +796,7 @@ footer.footer p{
 			<section class="card">
   <div class="card-head">PUBLICIDAD</div>
   <div class="section ad-section">
-    <a href="#" target="_blank">
+    <a href="https://play.google.com/store/apps/details?id=com.ecuaserverhd.zoommusical" target="_blank">
       <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/playsore-radio-foto.webp" alt="Publicidad">
     </a>
   </div>
