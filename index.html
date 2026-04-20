@@ -1002,6 +1002,13 @@ footer.footer p{
       const playBtn = e.target.closest('.play');
       if (!playBtn) return;
       const mp3 = playBtn.dataset.mp3;
+	  // 🔴 PAUSAR RADIO EN VIVO SI ESTÁ ACTIVA
+if (!globalPlayer.paused) {
+  globalPlayer.pause();
+  liveBtn.classList.remove('playing');
+  liveText.textContent = "EN VIVO";
+  localStorage.setItem('radio-live-playing', 'false');
+}
       if (currentPlayBtn === playBtn && !audio.paused) {
         audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
       }
