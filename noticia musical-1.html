@@ -79,22 +79,12 @@ footer a:hover{text-decoration:underline;}
 </footer>
 
 <script>
-const player = document.getElementById('global-live-player');
-const stream = 'https://sonicpanel.zonaradio.net/8126/stream';
-
-// 🔥 SOLO conectar si no existe ya
-if (!player.src) {
-  player.src = stream;
-}
-
-// 🔥 Mantener estado SIN reiniciar
-const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-
-if (isPlaying) {
-  player.play().catch(() => {});
-}
-
-// 🔥 NO volver a asignar src si ya está reproduciendo
+const toggle=document.querySelector('.menu-toggle'); const menu=document.querySelector('.menu');
+if(toggle&&menu){ toggle.addEventListener('click',()=>{menu.classList.toggle('active');}); document.querySelectorAll('.menu a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('active');});}); }
+const player=document.getElementById('global-live-player'); const btn=document.getElementById('live-btn'); const text=btn.querySelector('.live-text'); const stream='https://sonicpanel.zonaradio.net/8126/stream';
+const isPlaying=localStorage.getItem('radio-live-playing')==='true';
+if(isPlaying){ player.src=stream; player.play().catch(()=>{}); btn.classList.add('playing'); text.textContent='PAUSAR'; }
+btn.addEventListener('click',()=>{ if(player.paused){ player.src=stream; player.play().catch(()=>alert('Error')); btn.classList.add('playing'); text.textContent='PAUSAR'; localStorage.setItem('radio-live-playing','true'); } else{ player.pause(); btn.classList.remove('playing'); text.textContent='EN VIVO'; localStorage.setItem('radio-live-playing','false'); }});
 </script>
 
 <script>
