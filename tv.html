@@ -139,8 +139,8 @@ html, body { height:100%; overflow:hidden; background:#000; }
     <!-- 🔹 Logo doble cara -->
     <div class="tv-logo-container" id="logo-container">
       <div class="tv-logo-inner" id="logo-inner">
-        <div class="tv-logo-front"><img src="https://maicitoradio.com/imagenes/logo-marca.webp" alt="Logo Frente"></div>
-        <div class="tv-logo-back"><img src="https://maicitoradio.com/imagenes/logo-marca.webp" alt="Logo Reverso"></div>
+        <div class="tv-logo-front"><img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/nuevo-logoTV.webp" alt="Logo Frente"></div>
+        <div class="tv-logo-back"><img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/nuevo-logoTV.webp" alt="Logo Reverso"></div>
       </div>
     </div>
   </div>
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let player = null;
-const GITHUB_STREAM_URL = "https://maicitoradio.com/tv/stream.txt?t=" + Date.now();
+const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
 
 function startLogoRotation(logo, container) {
   let deg = 0;
@@ -226,7 +226,7 @@ function openTVPlayer() {
     })
     .catch(err => {
       document.querySelector('.video-wrapper').innerHTML += `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;font-family:system-ui;">
-      Error: ${err.message}<br><small><a href="https://maicitoradio.com/tv/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small></div>`;
+      Error: ${err.message}<br><small><a href="https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small></div>`;
     });
 }
 
