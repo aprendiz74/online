@@ -477,14 +477,21 @@ footer .container {
   });
 
   // 🔥 DETENER RADIO SI SE REPRODUCE EL ÁLBUM
-  document.querySelectorAll('.texto-scroll audio').forEach(audio => {
+  document.querySelectorAll('audio:not(#global-live-player)').forEach(audio => {
+  audio.addEventListener('play', () => {
+    if (!player.paused) {
+      player.pause();
+    }
+  });
+});
     audio.addEventListener('play', () => {
       if (!player.paused) {
         player.pause();
       }
     });
   });
-</script>    
+</script>
+     
   <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -495,8 +502,15 @@ footer .container {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
     if (e.key === 'F12') e.preventDefault();
   });
-</script> 
+</script>
+ 
 </body>
 </html>
+
+
+
+
+
+
 
 
