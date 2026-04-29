@@ -433,57 +433,73 @@ footer .container {
 
  <!-- JS: MENÚ + AUDIO GLOBAL -->
 <script>
-  // Menú móvil
+  // =========================
+  // MENÚ MÓVIL (SIN CAMBIOS)
+  // =========================
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.menu');
 
-  toggle.addEventListener('click', () => {
-    menu.classList.toggle('active');
-  });
-
-  document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('active');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
     });
-  });
 
-  // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
-  const player = document.getElementById('global-live-player');
-  const btn = document.getElementById('live-btn');
-  const text = btn.querySelector('.live-text');
-  const stream = 'https://sonicpanel';
-
-  const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-  if (isPlaying) {
-    player.src = stream;
-    player.play().catch(() => {});
-    btn.classList.add('playing');
-    text.textContent = 'PAUSAR';
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('active');
+      });
+    });
   }
 
-  btn.addEventListener('click', () => {
-    if (player.paused) {
-      player.src = stream;
-      player.play().catch(() => alert('Error al reproducir'));
-      btn.classList.add('playing');
-      text.textContent = 'PAUSAR';
-      localStorage.setItem('radio-live-playing', 'true');
-    } else {
-      player.pause();
-      btn.classList.remove('playing');
-      text.textContent = 'EN VIVO';
-      localStorage.setItem('radio-live-playing', 'false');
-    }
-  });
+  // =========================
+  // RADIO (PROTEGIDA)
+  // =========================
+  const player = document.getElementById('global-live-player');
+  const btn = document.getElementById('live-btn');
 
-  // 🔥 DETENER RADIO SI SE REPRODUCE EL ÁLBUM
-  document.querySelectorAll('.texto-scroll audio').forEach(audio => {
-    audio.addEventListener('play', () => {
-      if (!player.paused) {
+  if (player && btn) {
+    const text = btn.querySelector('.live-text');
+    const stream = 'https://sonicpanel'; // ⚠️ pon aquí tu URL REAL
+
+    const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
+
+    if (isPlaying) {
+      player.src = stream;
+      player.play().catch(() => {});
+      btn.classList.add('playing');
+      if (text) text.textContent = 'PAUSAR';
+    }
+
+    btn.addEventListener('click', () => {
+      if (player.paused) {
+        player.src = stream;
+        player.play().catch(() => {});
+        btn.classList.add('playing');
+        if (text) text.textContent = 'PAUSAR';
+        localStorage.setItem('radio-live-playing', 'true');
+      } else {
         player.pause();
+        btn.classList.remove('playing');
+        if (text) text.textContent = 'EN VIVO';
+        localStorage.setItem('radio-live-playing', 'false');
       }
     });
-  });
+
+    // =========================
+    // SOLUCIÓN DEFINITIVA AUDIO
+    // =========================
+    document.querySelectorAll('audio:not(#global-live-player)').forEach(audio => {
+
+      const detenerRadio = () => {
+        if (!player.paused) {
+          player.pause();
+        }
+      };
+
+      audio.addEventListener('play', detenerRadio);
+      audio.addEventListener('playing', detenerRadio);
+    });
+  }
 </script>
      
   <script>
