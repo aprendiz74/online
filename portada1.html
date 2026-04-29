@@ -447,44 +447,16 @@ footer .container {
     });
   });
 
-  // === AUDIO GLOBAL EN VIVO (PERSISTENTE) ===
-  const player = document.getElementById('global-live-player');
-  const btn = document.getElementById('live-btn');
-  const text = btn.querySelector('.live-text');
-  const stream = 'https://sonicpanel';
-
-  const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
-  if (isPlaying) {
-    player.src = stream;
-    player.play().catch(() => {});
-    btn.classList.add('playing');
-    text.textContent = 'PAUSAR';
-  }
-
-  btn.addEventListener('click', () => {
-    if (player.paused) {
-      player.src = stream;
-      player.play().catch(() => alert('Error al reproducir'));
-      btn.classList.add('playing');
-      text.textContent = 'PAUSAR';
-      localStorage.setItem('radio-live-playing', 'true');
-    } else {
-      player.pause();
-      btn.classList.remove('playing');
-      text.textContent = 'EN VIVO';
-      localStorage.setItem('radio-live-playing', 'false');
-    }
-  });
-
-  // 🔥 DETENER RADIO SI SE REPRODUCE EL ÁLBUM
-  document.querySelectorAll('.texto-scroll audio').forEach(audio => {
+  // 🔥 DETENER "LO QUE EXISTA" SI SE REPRODUCE EL ÁLBUM
+  document.querySelectorAll('audio').forEach(audio => {
     audio.addEventListener('play', () => {
-      if (!player.paused) {
-        player.pause();
-      }
+      document.querySelectorAll('audio').forEach(a => {
+        if (a !== audio) a.pause();
+      });
     });
   });
-</script>    
+</script>
+     
   <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -495,7 +467,8 @@ footer .container {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
     if (e.key === 'F12') e.preventDefault();
   });
-</script> 
+</script>
+ 
 </body>
 </html>
 
