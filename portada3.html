@@ -452,7 +452,7 @@ footer .container {
   const player = document.getElementById('global-live-player');
   const btn = document.getElementById('live-btn');
   const text = btn.querySelector('.live-text');
-  const stream = 'https://sonicpanel.zonaradio.net/8126/stream';
+  const stream = 'https://sonicpanel';
 
   const isPlaying = localStorage.getItem('radio-live-playing') === 'true';
   if (isPlaying) {
@@ -486,8 +486,7 @@ footer .container {
     });
   });
 </script>
-   
-  
+     
   <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -502,6 +501,7 @@ footer .container {
  
 </body>
 </html>
+
 
 
 
