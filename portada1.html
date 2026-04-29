@@ -477,13 +477,7 @@ footer .container {
   });
 
   // 🔥 DETENER RADIO SI SE REPRODUCE EL ÁLBUM
-  document.querySelectorAll('audio:not(#global-live-player)').forEach(audio => {
-  audio.addEventListener('play', () => {
-    if (!player.paused) {
-      player.pause();
-    }
-  });
-});
+  document.querySelectorAll('.texto-scroll audio').forEach(audio => {
     audio.addEventListener('play', () => {
       if (!player.paused) {
         player.pause();
