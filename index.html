@@ -403,8 +403,6 @@ footer.footer p{
   object-fit: cover;
 }
 
-
-
 .featured-news{
   display:grid;
   grid-template-columns: 2fr 1fr;
@@ -602,6 +600,53 @@ footer.footer p{
 .promo-banners a:active {
   transform:scale(0.97);
 }
+
+:root {
+  --volume-color: #00a6a6;
+}
+
+.custom-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #bfbfbf38;
+  padding: 10px 12px;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+#play-toggle {
+  font-size: 18px;
+  background: #00a6a6;
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+/* 🔥 barra más corta + color personalizable */
+#volume-control {
+  width: 75px;
+  accent-color: var(--volume-color);
+}
+
+#ww_90ec0d694b4d2 a,
+#ww_90ec0d694b4d2_u {
+  display: none !important;
+}
+
+/* oculta el texto "Más previsiones:" */
+#ww_90ec0d694b4d2 {
+  font-size: 0 !important;
+}
   </style>
 </head>
 <body>
@@ -630,19 +675,17 @@ footer.footer p{
           <div class="brand-title">ZOOM MUSICAL</div>
           <div class="brand-sub">Siempre la mejor música</div>
         </div>
-      </div>
-      <button id="live-btn" class="live-btn" aria-label="Reproducir radio en vivo">
-        <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
-        <span class="live-text">EN VIVO</span>
-      </button>
+      </div>	  
+	  <div class="custom-player">
+  <button id="play-toggle">▶</button>
+  <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
+</div>	  	  
     </div>
   </header>
   <!-- NAV -->
   <nav>
     <div class="container">
-      <div class="menu">
-        
+      <div class="menu">       
         <a href="quienes-somos.html">QUIÉNES SOMOS</a>
         <a href="ranking.html">RANKING</a>
         <a href="programacion.html">PROGRAMAS</a>
@@ -651,8 +694,7 @@ footer.footer p{
         <a href="tv.html">SEÑAL TV</a>
       </div>
     </div>
-  </nav>
-	
+  </nav>	
   <!-- MAIN -->
   <main class="container">
     <div class="grid">
@@ -736,10 +778,8 @@ footer.footer p{
     <p>Se presentó el primer atlas del cerebro humano...</p>
   </div>
 </a>
-
     <!-- LADO DERECHO -->
     <div class="featured-side">
-
       <a href="noticia-4.html">
         <article>
           <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-4.jpg">
@@ -749,8 +789,7 @@ footer.footer p{
           </div>
         </article>
       </a>
-	  
-	  
+	  	  
 	   <a href="noticia-2.html">
         <article>
           <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-2.webp">
@@ -761,8 +800,6 @@ footer.footer p{
         </article>
       </a>
 	  
-	  
-
       <a href="noticia-1.html">
         <article>
           <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-3.webp">
@@ -797,15 +834,13 @@ footer.footer p{
 
   </div>
 </section>
-      		
+     		
 		<section class="banner-publicidad">
   <a href="#" target="_blank">
     <img src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/Música para todos los días.webp" alt="ZOOM MUSICAL">
   </a>
 </section>
       </div>
-
-	  
 	  
       <!-- DERECHA -->
       <aside class="sidebar">
@@ -836,7 +871,7 @@ footer.footer p{
 
         <audio id="audio-player" preload="none"></audio>
 		
-		<section class="card">
+	<section class="card">
   <div class="card-head">PUBLICIDAD</div>
   <div class="section ad-section">
     <a href="#" target="_blank">
@@ -846,19 +881,32 @@ footer.footer p{
 </section>
 
 <section class="card">
-  <div class="card-head">Informacion del Clima</div>
+  <div class="card-head">Información del Clima</div>
   <div class="section">
 
-    <div id="ww_90ec0d694b4d2" v='1.3' loc='auto' a='{"t":"horizontal","lang":"es","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","el_whr":3}'>
+    <!-- Widget clima principal -->
+    <div id="ww_90ec0d694b4d2" v='1.3' loc='auto'
+      a='{"t":"horizontal","lang":"es","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","el_whr":3}'>
+      
       Más previsiones:
       <a href="https://tiempolargo.com/madrid_tiempo_25_dias/" id="ww_90ec0d694b4d2_u" target="_blank">
         Tiempo en 25 días
       </a>
     </div>
 
+    <!-- NUEVO WIDGET AGREGADO -->
+    <div id="ww_4c0eeba337101" v='1.3' loc='id'
+      a='{"t":"horizontal","lang":"es","sl_lpl":1,"ids":["wl11069"],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","el_whr":3}'>
+      <a href="https://weatherwidget.org/" id="ww_4c0eeba337101_u" target="_blank">
+        Widget weather
+      </a>
+    </div>
+
   </div>
 </section>
 
+<!-- SCRIPT (IMPORTANTE: solo una vez en toda la página) -->
+<script async src="https://app3.weatherwidget.org/js/?id=ww_4c0eeba337101"></script>
         <section class="cta">
           <div class="title">DESCARGA LA APP</div>
           <p>Escucha en vivo y vota por tu canción.</p>
@@ -870,7 +918,6 @@ footer.footer p{
             DESCARGAR AHORA
           </a>
         </section>
-
 
         <!-- BANNER SOLO EN MÓVILES -->
         <div class="final-banner-mobile">
@@ -900,139 +947,141 @@ footer.footer p{
 </footer>
 
   <!-- SCRIPT -->
-  <script>
-    document.getElementById('today').textContent = new Intl.DateTimeFormat('es-EC', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
+ <script>
+document.getElementById('today').textContent =
+  new Intl.DateTimeFormat('es-EC', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date());
 
-    // SLIDER HERO
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.dot');
-    function showSlide(n) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slides[n].classList.add('active');
-      dots[n].classList.add('active');
-      currentSlide = n;
-    }
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }
-    setInterval(nextSlide, 3000);
+// SLIDER HERO
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.dot');
 
-    // === AUDIO GLOBAL EN VIVO (CORREGIDO Y PERSISTENTE) ===
-    const globalPlayer = document.getElementById('global-live-player');
-    const liveBtn = document.getElementById('live-btn');
-    const liveText = liveBtn.querySelector('.live-text');
-    const liveStream = 'https://sonicpanel.zonaradio.net/8126/stream';
-
-    // Función para iniciar reproducción
-    function startLive() {
-      if (globalPlayer.src !== liveStream) {
-        globalPlayer.src = liveStream;
-      }
-      globalPlayer.play().catch(err => {
-        console.warn("Error al reproducir stream:", err);
-      });
-      liveBtn.classList.add('playing');
-      liveText.textContent = "PAUSAR";
-      localStorage.setItem('radio-live-playing', 'true');
-    }
-
-    // Función para pausar
-    function pauseLive() {
-      globalPlayer.pause();
-      liveBtn.classList.remove('playing');
-      liveText.textContent = "EN VIVO";
-      localStorage.setItem('radio-live-playing', 'false');
-    }
-
-    // Cargar estado al inicio
-    const shouldPlay = localStorage.getItem('radio-live-playing') === 'true';
-    if (shouldPlay) {
-      globalPlayer.src = liveStream;
-      startLive();
-    }
-
-    // Evento del botón
-    liveBtn.addEventListener('click', () => {
-      if (liveBtn.classList.contains('playing')) {
-        pauseLive();
-      } else {
-        startLive();
-      }
-    });
-
-    // Reconexión automática si falla el stream
-    globalPlayer.addEventListener('error', () => {
-      if (liveBtn.classList.contains('playing')) {
-        liveText.textContent = "RECONECTANDO...";
-        setTimeout(() => {
-          if (liveBtn.classList.contains('playing')) {
-            startLive();
-          }
-        }, 3000);
-      }
-    });
-
-    globalPlayer.addEventListener('canplay', () => {
-      if (liveBtn.classList.contains('playing') && liveText.textContent === "RECONECTANDO...") {
-        liveText.textContent = "PAUSAR";
-      }
-    });
-
-    // RANKING
-  let currentPlayBtn = null;
-  const rankingData = [
-    {pos:1,artista:"Bebe",cancion:"Siempre me quedará",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Bebe - Siempre me quedará.mp3"},
-    {pos:2,artista:"Marta Sánchez",cancion:"Desesperada",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Marta Sánchez - Desesperada.mp3"},
-    {pos:3,artista:"Melendi",cancion:"Que el cielo espere sentao",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Melendi - Que el cielo espere sentao.mp3"},
-    {pos:4,artista:"Natalie",cancion:"Bachata Rosa",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Natalie Cole - Bachata Rosa.mp3"},
-    {pos:5,artista:"Soraya",cancion:"De Repente",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Soraya - De Repente.mp3"}
-  ];
-  
-    const list = document.getElementById('ranking-list');
-    rankingData.forEach((item) => {
-      const div = document.createElement('div');
-      div.className = 'ranking-item';
-      div.innerHTML = `
-        <div class="ranking-pos">${item.pos}</div>
-        <div class="ranking-meta">
-          <div class="artist">${item.artista}</div>
-          <div class="song">${item.cancion}</div>
-        </div>
-        <div class="play" data-mp3="${item.mp3}">
-          <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
-        </div>
-      `;
-      list.appendChild(div);
-    });
-    const audio = document.getElementById('audio-player');
-    list.addEventListener('click', (e) => {
-      const playBtn = e.target.closest('.play');
-      if (!playBtn) return;
-      const mp3 = playBtn.dataset.mp3;
-	  // 🔴 PAUSAR RADIO EN VIVO SI ESTÁ ACTIVA
-if (!globalPlayer.paused) {
-  globalPlayer.pause();
-  liveBtn.classList.remove('playing');
-  liveText.textContent = "EN VIVO";
-  localStorage.setItem('radio-live-playing', 'false');
+function showSlide(n) {
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  slides[n].classList.add('active');
+  dots[n].classList.add('active');
+  currentSlide = n;
 }
-      if (currentPlayBtn === playBtn && !audio.paused) {
-        audio.pause(); playBtn.classList.remove('playing'); currentPlayBtn = null; return;
-      }
-      if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
-      audio.src = mp3; audio.play().catch(() => {});
-      playBtn.classList.add('playing'); currentPlayBtn = playBtn;
-    });
-    audio.addEventListener('ended', () => {
-      if (currentPlayBtn) { currentPlayBtn.classList.remove('playing'); currentPlayBtn = null; }
-    });
-</script> 
-<script async src="https://app3.weatherwidget.org/js/?id=ww_90ec0d694b4d2"></script>
 
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+setInterval(nextSlide, 3000);
+
+// =========================
+// AUDIO GLOBAL
+// =========================
+const globalPlayer = document.getElementById('global-live-player');
+const playToggle = document.getElementById('play-toggle');
+const volumeControl = document.getElementById('volume-control');
+
+const streamURL = "https://sonicpanel.zonaradio.net/8126/stream";
+
+// PLAY / PAUSA (BOTÓN NUEVO)
+playToggle.addEventListener('click', () => {
+  if (globalPlayer.paused) {
+    globalPlayer.src = streamURL;
+    globalPlayer.play();
+    playToggle.textContent = "⏸";
+    localStorage.setItem('radio-live-playing', 'true');
+  } else {
+    globalPlayer.pause();
+    playToggle.textContent = "▶";
+    localStorage.setItem('radio-live-playing', 'false');
+  }
+});
+
+// VOLUMEN
+volumeControl.addEventListener('input', () => {
+  globalPlayer.volume = volumeControl.value;
+});
+
+// ESTADO AL RECARGAR
+window.addEventListener('load', () => {
+  if (localStorage.getItem('radio-live-playing') === 'true') {
+    globalPlayer.src = streamURL;
+    globalPlayer.play().then(() => {
+      playToggle.textContent = "⏸";
+    }).catch(() => {});
+  }
+});
+
+// =========================
+// RANKING PLAYER
+// =========================
+let currentPlayBtn = null;
+
+const rankingData = [
+  {pos:1,artista:"Bebe",cancion:"Siempre me quedará",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Bebe - Siempre me quedará.mp3"},
+  {pos:2,artista:"Marta Sánchez",cancion:"Desesperada",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Marta Sánchez - Desesperada.mp3"},
+  {pos:3,artista:"Melendi",cancion:"Que el cielo espere sentao",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Melendi - Que el cielo espere sentao.mp3"},
+  {pos:4,artista:"Natalie",cancion:"Bachata Rosa",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Natalie Cole - Bachata Rosa.mp3"},
+  {pos:5,artista:"Soraya",cancion:"De Repente",mp3:"https://raw.githubusercontent.com/aprendiz74/online/main/pistas/Soraya - De Repente.mp3"}
+];
+
+const list = document.getElementById('ranking-list');
+const audio = document.getElementById('audio-player');
+
+rankingData.forEach((item) => {
+  const div = document.createElement('div');
+  div.className = 'ranking-item';
+  div.innerHTML = `
+    <div class="ranking-pos">${item.pos}</div>
+    <div class="ranking-meta">
+      <div class="artist">${item.artista}</div>
+      <div class="song">${item.cancion}</div>
+    </div>
+    <div class="play" data-mp3="${item.mp3}">
+      <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="stop-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 6h12v12H6z"/></svg>
+    </div>
+  `;
+  list.appendChild(div);
+});
+
+list.addEventListener('click', (e) => {
+  const playBtn = e.target.closest('.play');
+  if (!playBtn) return;
+
+  const mp3 = playBtn.dataset.mp3;
+
+  // 🔴 si radio está sonando, la pausamos
+  if (!globalPlayer.paused) {
+    globalPlayer.pause();
+    playToggle.textContent = "▶";
+    localStorage.setItem('radio-live-playing', 'false');
+  }
+
+  if (currentPlayBtn === playBtn && !audio.paused) {
+    audio.pause();
+    playBtn.classList.remove('playing');
+    currentPlayBtn = null;
+    return;
+  }
+
+  if (currentPlayBtn) currentPlayBtn.classList.remove('playing');
+
+  audio.src = mp3;
+  audio.play().catch(() => {});
+
+  playBtn.classList.add('playing');
+  currentPlayBtn = playBtn;
+});
+
+audio.addEventListener('ended', () => {
+  if (currentPlayBtn) {
+    currentPlayBtn.classList.remove('playing');
+    currentPlayBtn = null;
+  }
+});
+</script>
 <script>
   // PROTECCIÓN COMPLETA Y ROBUSTA
   document.addEventListener('contextmenu', e => e.preventDefault());
@@ -1044,5 +1093,8 @@ if (!globalPlayer.paused) {
     if (e.key === 'F12') e.preventDefault();
   });
 </script>  
+</body>
+</html>
+
 </body>
 </html>
