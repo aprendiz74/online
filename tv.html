@@ -114,8 +114,18 @@ html, body { height:100%; overflow:hidden; background:#000; }
 .close-btn svg { width: 18px; height: 18px; fill: #fff; }
 
 @media (max-width: 768px) {
-  .close-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
-  .close-btn svg { width: 16px; height: 16px; }
+  .close-btn { 
+    top: auto;        /* 🔥 quitamos arriba */
+    bottom: 20px;     /* 🔥 lo bajamos */
+    left: 15px;       /* mantiene misma alineación */
+    width: 40px; 
+    height: 40px; 
+  }
+
+  .close-btn svg { 
+    width: 16px; 
+    height: 16px; 
+  }
 }
 </style>
 </head>
@@ -166,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let player = null;
-const GITHUB_STREAM_URL = "https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt?t=" + Date.now();
 
 function startLogoRotation(logo, container) {
   let deg = 0;
@@ -174,10 +183,12 @@ function startLogoRotation(logo, container) {
     deg += 720;
     logo.style.transition = 'transform 6s ease-in-out';
     logo.style.transform = `rotateY(${deg}deg)`;
+
     setTimeout(() => {
       container.classList.add('halo');
       setTimeout(() => container.classList.remove('halo'), 5000);
     }, 6000);
+
     setTimeout(rotateLogo, 30000);
   }
   rotateLogo();
@@ -193,9 +204,11 @@ function goFullscreen() {
 function openTVPlayer() {
   const modal = document.getElementById('tvModal');
   modal.style.display = 'block';
+
   const logoContainer = document.getElementById('logo-container');
   const logoInner = document.getElementById('logo-inner');
   const fsBtn = document.getElementById('fullscreen-btn');
+
   logoContainer.classList.remove('show');
 
   if(!player){
@@ -205,56 +218,117 @@ function openTVPlayer() {
       fluid: true,
       fill: true,
       sources: [],
-      html5: { vhs: { overrideNative: true }, nativeVideoTracks: false, nativeAudioTracks: false, nativeTextTracks: false }
+      html5: {
+        vhs: { overrideNative: true },
+        nativeVideoTracks: false,
+        nativeAudioTracks: false,
+        nativeTextTracks: false
+      }
     });
   }
 
-  fetch(GITHUB_STREAM_URL)
-    .then(res => res.ok ? res.text() : Promise.reject("No se pudo cargar el enlace"))
-    .then(url => {
-      const streamUrl = url.trim();
-      if(!streamUrl.includes('.m3u8')) throw new Error("Enlace inválido");
-      player.src({ src: streamUrl, type: 'application/x-mpegURL' });
-      player.play().catch(()=>{});
+  // 🔥 SOLO UN FETCH (EL BUENO)
+  fetch("https://raw.githubusercontent.com/ZOOMMUSICAL/RADIO/main/programacion.json")
+  .then(res => res.json())
+  .then(data => {
 
-      setTimeout(() => {
-        logoContainer.classList.add('show');
-        startLogoRotation(logoInner, logoContainer);
-        fsBtn.style.display = 'block';
-        fsBtn.onclick = () => { goFullscreen(); fsBtn.style.display = 'none'; };
-      }, 5000);
-    })
-    .catch(err => {
-      document.querySelector('.video-wrapper').innerHTML += `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff6b6b;text-align:center;font-family:system-ui;">
-      Error: ${err.message}<br><small><a href="https://raw.githubusercontent.com/aprendiz74/online/main/tv-2/stream.txt" target="_blank" style="color:#4ade80">Ver GitHub</a></small></div>`;
+    const today = new Date().getDay();
+    const map = {1:"1",2:"2",3:"3",4:"4",5:"5",6:"6",0:"7"};
+    const schedule = data[map[today]];
+
+    const now = new Date();
+    const currentSec = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+
+    let currentVideo = schedule[0];
+
+    for(let i=0;i<schedule.length;i++){
+      const [h,m] = schedule[i].start.split(":").map(Number);
+      const start = h*3600 + m*60;
+
+      const next = (i+1 < schedule.length)
+        ? schedule[i+1].start.split(":").map(Number)
+        : [24,0];
+
+      const nextSec = next[0]*3600 + next[1]*60;
+
+      if(currentSec >= start && currentSec < nextSec){
+        currentVideo = schedule[i];
+        break;
+      }
+    }
+
+    let type = currentVideo.url.includes(".m3u8")
+      ? "application/x-mpegURL"
+      : "video/mp4";
+
+    player.src({
+      src: currentVideo.url,
+      type: type
     });
+
+    player.play().catch(()=>{});
+
+    setTimeout(() => {
+      logoContainer.classList.add('show');
+      startLogoRotation(logoInner, logoContainer);
+
+      fsBtn.style.display = 'block';
+      fsBtn.onclick = () => {
+        goFullscreen();
+        fsBtn.style.display = 'none';
+      };
+    }, 5000);
+
+  })
+  .catch(err => {
+    document.querySelector('.video-wrapper').innerHTML += `
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    color:#ff6b6b;text-align:center;font-family:system-ui;">
+    Error: ${err.message}<br>
+    <small>
+    <a href="https://raw.githubusercontent.com/ZOOMMUSICAL/RADIO/main/programacion.json"
+    target="_blank" style="color:#4ade80">Ver JSON</a>
+    </small>
+    </div>`;
+  });
 }
 
 function closeTVPlayer() {
   const modal = document.getElementById('tvModal');
   if(player) player.pause();
+
   modal.style.display = 'none';
   document.getElementById('logo-container').classList.remove('show');
+
   window.location.href = "index.html";
 }
 
+// Eventos
 document.getElementById('tvCloseBtn').onclick = closeTVPlayer;
-document.getElementById('tvModal').onclick = (e) => { if(e.target === e.currentTarget) closeTVPlayer(); };
-document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeTVPlayer(); });
 
+document.getElementById('tvModal').onclick = (e) => {
+  if(e.target === e.currentTarget) closeTVPlayer();
+};
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeTVPlayer();
+});
+
+// Auto iniciar
 document.addEventListener("DOMContentLoaded", openTVPlayer);
 </script>
 
 <script>
+// 🔒 Protección básica
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
+
 document.addEventListener('keydown', e => {
   if (e.ctrlKey && ['a','c','u'].includes(e.key)) e.preventDefault();
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
   if (e.key === 'F12') e.preventDefault();
 });
 </script>
-
 </body>
 </html>
