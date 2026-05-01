@@ -112,19 +112,15 @@ html, body { height:100%; overflow:hidden; background:#000; }
 .close-btn { position: fixed; top: 20px; left: 20px; z-index: 15; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
 .close-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
 .close-btn svg { width: 18px; height: 18px; fill: #fff; }
-
+fetch("https://raw.githubusercontent.com/ZOOMMUSICAL/RADIO/main/programacion.json")
 @media (max-width: 768px) {
   .close-btn { 
-    top: auto;        /* 🔥 quitamos arriba */
-    bottom: 20px;     /* 🔥 lo bajamos */
-    left: 15px;       /* mantiene misma alineación */
+    top: auto;
+    bottom: 20px;
+    right: 15px;   /* 🔥 usar right en vez de left */
+    left: auto;    /* 🔥 importante */
     width: 40px; 
     height: 40px; 
-  }
-
-  .close-btn svg { 
-    width: 16px; 
-    height: 16px; 
   }
 }
 </style>
