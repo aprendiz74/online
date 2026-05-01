@@ -223,7 +223,7 @@ function openTVPlayer() {
     });
   }
 
-  // 🔥 SOLO UN FETCH (EL BUENO)
+  // 🔥 FETCH CON SINCRONIZACIÓN REAL
   fetch("https://raw.githubusercontent.com/ZOOMMUSICAL/RADIO/main/programacion.json")
   .then(res => res.json())
   .then(data => {
@@ -236,6 +236,7 @@ function openTVPlayer() {
     const currentSec = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
 
     let currentVideo = schedule[0];
+    let startSecGlobal = 0; // 🔥 NUEVO
 
     for(let i=0;i<schedule.length;i++){
       const [h,m] = schedule[i].start.split(":").map(Number);
@@ -249,6 +250,7 @@ function openTVPlayer() {
 
       if(currentSec >= start && currentSec < nextSec){
         currentVideo = schedule[i];
+        startSecGlobal = start; // 🔥 GUARDAMOS INICIO REAL
         break;
       }
     }
@@ -262,7 +264,46 @@ function openTVPlayer() {
       type: type
     });
 
-    player.play().catch(()=>{});
+    player.ready(() => {
+  const offset = currentSec - startSecGlobal;
+
+  if (offset > 0) {
+    try {
+      player.currentTime(offset);
+    } catch(e) {
+      console.warn("No se pudo aplicar offset", e);
+    }
+  }
+
+  player.play().catch(()=>{});
+});
+
+// 🔥 CAMBIO AUTOMÁTICO TIPO TV REAL
+let switching = false;
+
+function checkLiveProgress() {
+  if (switching) return;
+
+  const nowCheck = new Date();
+  const currentCheckSec = nowCheck.getHours()*3600 + nowCheck.getMinutes()*60 + nowCheck.getSeconds();
+
+  const index = schedule.findIndex(item => item === currentVideo);
+
+  const next = (index + 1 < schedule.length)
+    ? schedule[index + 1].start.split(":").map(Number)
+    : [24,0];
+
+  const nextSec = next[0]*3600 + next[1]*60;
+
+  if (currentCheckSec >= nextSec) {
+    switching = true;
+    openTVPlayer(); // 🔥 recarga programación automáticamente
+  } else {
+    player.one("timeupdate", checkLiveProgress);
+  }
+}
+
+player.one("timeupdate", checkLiveProgress);
 
     setTimeout(() => {
       logoContainer.classList.add('show');
@@ -313,7 +354,6 @@ document.addEventListener('keydown', (e) => {
 // Auto iniciar
 document.addEventListener("DOMContentLoaded", openTVPlayer);
 </script>
-
 <script>
 // 🔒 Protección básica
 document.addEventListener('contextmenu', e => e.preventDefault());
