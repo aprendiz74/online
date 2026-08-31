@@ -6,42 +6,58 @@
   "theme_color": "#121211",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "https://listasmp3.blogspot.com/",
-  "scope": "./",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "lang": "es-UY",
   "icons": [
     {
-      "src": "./img/icon_512.png",
+      "src": "./img/512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "./img/icon_192.png",
+      "src": "./img/192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/icon_144.png",
+      "src": "./img/144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "./img/icon_96.png",
-      "sizes": "96x96",
+      "src": "./img/72.png",
+      "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "./img/icon_48.png",
-      "sizes": "48x48",
+      "src": "./img/64.png",
+      "sizes": "64x64",
       "type": "image/png"
     },
     {
-      "src": "./img/favicon_32.png",
-      "sizes": "32x32",
+      "src": "./img/60.png",
+      "sizes": "60x60",
       "type": "image/png"
     },
     {
-      "src": "./img/favicon_16.png",
+      "src": "./img/57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/50.png",
+      "sizes": "50x50",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/40.png",
+      "sizes": "40x40",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/16.png",
       "sizes": "16x16",
       "type": "image/png"
     }
