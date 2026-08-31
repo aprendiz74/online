@@ -10,7 +10,7 @@
   "start_url": "https://listasmp3.blogspot.com/",
   "scope": "https://listasmp3.blogspot.com/",
   "lang": "es-UY",
-  "icons": [
+ "icons": [
   {
     "src": "./img/512.png",
     "sizes": "512x512",
@@ -42,3 +42,4 @@
     "type": "image/png"
   }
 ]
+}
