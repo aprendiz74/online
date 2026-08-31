@@ -6,9 +6,9 @@
   "theme_color": "#121211",
   "orientation": "portrait",
   "display": "standalone",
-  "id": "/",
-  "start_url": "/",
-  "scope": "/",
+  "id": "https://listasmp3.blogspot.com/",
+  "start_url": "https://listasmp3.blogspot.com/",
+  "scope": "https://listasmp3.blogspot.com/",
   "lang": "es-UY",
   "icons": [
     {
