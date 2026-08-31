@@ -1,12 +1,12 @@
 {
-  "name": "Radio Zoom Musical",
-  "short_name": "Zoom Musical",
+  "name": "Radio Demo",
+  "short_name": "RADIO",
   "description": "Siempre la mejor musica",
-  "background_color": "#d78522",
+  "background_color": "#FFFFFF",
   "theme_color": "#121211",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "https://radiozoommusical.com/",
+  "start_url": "https://listasmp3.blogspot.com/",
   "scope": "./",
   "lang": "es-UY",
   "icons": [
