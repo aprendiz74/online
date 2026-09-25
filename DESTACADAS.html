@@ -14,9 +14,13 @@
       content="Noticias destacadas de Zoom Musical.">
 
 <meta name="theme-color"
-      content="#120d0a">
+      content="#f5f5f5">
 
 <style>
+
+/* ================================
+   BASE
+================================ */
 
 * {
     box-sizing: border-box;
@@ -25,9 +29,8 @@
 html {
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
-    background: #120d0a;
-    color-scheme: dark;
+    background: #f5f5f5 !important;
+    color-scheme: light;
 }
 
 body {
@@ -35,7 +38,7 @@ body {
     padding: 0;
     min-height: 100vh;
 
-    background-color: #120d0a;
+    background: #f5f5f5 !important;
 
     font-family:
         'Segoe UI',
@@ -43,141 +46,87 @@ body {
         Arial,
         sans-serif;
 
-    color: #eee4dc;
-
-    background-image:
-
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(120,48,13,.18),
-            transparent 42%
-        ),
-
-        linear-gradient(
-            180deg,
-            #120d0a 0%,
-            #17110d 45%,
-            #0d0d0d 100%
-        );
-
+    color: #222;
 }
 
 
-/* =====================================================
+/* ================================
    CONTENEDOR
-   ===================================================== */
+================================ */
 
 .page {
-
     width: 100%;
-
     max-width: 1100px;
 
     margin: 0 auto;
 
-    padding:
-        8px 20px 40px;
-
+    padding: 8px 20px 40px;
 }
 
 
-/* =====================================================
-   TARJETA
-   ===================================================== */
+/* ================================
+   TARJETA PRINCIPAL
+================================ */
 
 .card {
-
     width: 100%;
 
     overflow: hidden;
 
-    border:
-        1px solid
-        rgba(185,87,24,.32);
+    border: 1px solid #dddddd;
 
     border-radius: 13px;
 
-    background:
-
-        linear-gradient(
-            145deg,
-            #1b130e,
-            #111111
-        );
+    background: #ffffff;
 
     box-shadow:
-
-        0 12px 35px
-        rgba(0,0,0,.45),
-
-        inset 0 1px 0
-        rgba(255,255,255,.025);
-
+        0 8px 25px rgba(0,0,0,.10);
 }
 
 
-/* =====================================================
-   TÍTULO
-   ===================================================== */
+/* ================================
+   TITULO
+================================ */
 
 .card-head {
-
     min-height: 48px;
 
     display: flex;
 
     align-items: center;
 
-    padding:
-        0 18px;
+    padding: 0 18px;
 
-    border-bottom:
-        1px solid
-        rgba(185,87,24,.22);
+    border-bottom: 1px solid #e3e3e3;
 
-    background:
+    background: #ffffff;
 
-        linear-gradient(
-            90deg,
-            #21130b,
-            #32170c,
-            #21130b
-        );
-
-    color: #eee4dc;
+    color: #333;
 
     font-size: 12px;
 
     font-weight: 800;
 
     letter-spacing: 1.4px;
-
 }
 
-
 .card-head::before {
-
     content: '';
 
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
 
     margin-right: 9px;
 
     border-radius: 50%;
 
     background: #b95718;
-
-    box-shadow:
-        0 0 7px
-        rgba(185,87,24,.45);
-
 }
 
 
-/* =====================================================
-   NOTICIAS DESTACADAS
-   ===================================================== */
+/* ================================
+   NOTICIAS
+================================ */
 
 .featured-news {
 
@@ -190,13 +139,12 @@ body {
     gap: 14px;
 
     padding: 14px;
-
 }
 
 
-/* =====================================================
-   NOTICIA GRANDE
-   ===================================================== */
+/* ================================
+   NOTICIA PRINCIPAL
+================================ */
 
 .featured-main {
 
@@ -220,16 +168,15 @@ body {
 
     isolation: isolate;
 
-    border:
-        1px solid
-        rgba(185,87,24,.25);
+    border: 1px solid #dddddd;
 
     box-shadow:
-        0 8px 22px
-        rgba(0,0,0,.35);
-
+        0 6px 18px rgba(0,0,0,.15);
 }
 
+
+/* Oscurece solamente la imagen para
+   que el texto sea legible */
 
 .featured-main::after {
 
@@ -242,71 +189,43 @@ body {
     z-index: -1;
 
     background:
-
         linear-gradient(
             to top,
-            rgba(0,0,0,.90) 0%,
-            rgba(0,0,0,.48) 42%,
-            rgba(0,0,0,.08) 75%,
-            rgba(0,0,0,.02) 100%
+            rgba(0,0,0,.82) 0%,
+            rgba(0,0,0,.45) 42%,
+            rgba(0,0,0,.08) 78%,
+            rgba(0,0,0,0) 100%
         );
-
 }
 
-
-.featured-main::before {
-
-    content: '';
-
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: 10px;
-
-    box-shadow:
-        inset 0 0 0 1px
-        rgba(255,255,255,.025);
-
-    pointer-events: none;
-
-}
-
-
-/* =====================================================
-   TEXTO NOTICIA GRANDE
-   ===================================================== */
 
 .featured-main .overlay {
 
     width: 100%;
 
     padding:
-        24px 22px 21px;
-
+        24px
+        22px
+        21px;
 }
 
 
 .featured-main h2 {
 
-    margin: 0 0 8px;
+    margin:
+        0 0 8px;
 
-    color: #fff;
+    color: #ffffff;
 
-    font-size: clamp(
-        22px,
-        3vw,
-        34px
-    );
+    font-size:
+        clamp(22px, 3vw, 34px);
 
     line-height: 1.12;
 
     font-weight: 800;
 
     text-shadow:
-        0 2px 8px
-        rgba(0,0,0,.85);
-
+        0 2px 8px rgba(0,0,0,.85);
 }
 
 
@@ -314,22 +233,20 @@ body {
 
     margin: 0;
 
-    color: #d8cec7;
+    color: #eeeeee;
 
     font-size: 13px;
 
     line-height: 1.5;
 
     text-shadow:
-        0 1px 4px
-        rgba(0,0,0,.8);
-
+        0 1px 4px rgba(0,0,0,.8);
 }
 
 
-/* =====================================================
-   COLUMNA DERECHA
-   ===================================================== */
+/* ================================
+   NOTICIAS LATERALES
+================================ */
 
 .featured-side {
 
@@ -338,7 +255,6 @@ body {
     flex-direction: column;
 
     gap: 10px;
-
 }
 
 
@@ -353,13 +269,8 @@ body {
     color: inherit;
 
     text-decoration: none;
-
 }
 
-
-/* =====================================================
-   ARTÍCULOS LATERALES
-   ===================================================== */
 
 .featured-side article {
 
@@ -375,25 +286,16 @@ body {
 
     overflow: hidden;
 
-    border:
-        1px solid
-        rgba(185,87,24,.20);
+    border: 1px solid #dddddd;
 
     border-radius: 9px;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            #21140d,
-            #15110f
-        );
+    background: #ffffff;
 
     transition:
         transform .2s ease,
         border-color .2s ease,
         background .2s ease;
-
 }
 
 
@@ -401,23 +303,15 @@ body {
 
     transform: translateX(-2px);
 
-    border-color:
-        rgba(185,87,24,.48);
+    border-color: #c97843;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            #29170d,
-            #17110d
-        );
-
+    background: #fafafa;
 }
 
 
-/* =====================================================
-   IMÁGENES
-   ===================================================== */
+/* ================================
+   IMAGENES
+================================ */
 
 .featured-side img {
 
@@ -434,13 +328,12 @@ body {
     border-radius: 7px;
 
     display: block;
-
 }
 
 
-/* =====================================================
+/* ================================
    TEXTO LATERAL
-   ===================================================== */
+================================ */
 
 .featured-side article div {
 
@@ -451,22 +344,21 @@ body {
     justify-content: center;
 
     min-width: 0;
-
 }
 
 
 .featured-side h4 {
 
-    margin: 0 0 7px;
+    margin:
+        0 0 7px;
 
-    color: #f1e8e1;
+    color: #222222;
 
     font-size: 14px;
 
     line-height: 1.25;
 
     font-weight: 750;
-
 }
 
 
@@ -474,18 +366,17 @@ body {
 
     margin: 0;
 
-    color: #9f9188;
+    color: #777777;
 
     font-size: 11px;
 
     line-height: 1.45;
-
 }
 
 
-/* =====================================================
+/* ================================
    PIE
-   ===================================================== */
+================================ */
 
 .footer {
 
@@ -493,38 +384,34 @@ body {
 
     text-align: center;
 
-    color: #71665f;
+    color: #999999;
 
     font-size: 9px;
 
     letter-spacing: .5px;
-
 }
 
 
 .footer strong {
 
-    color: #9d4b17;
-
+    color: #b95718;
 }
 
 
-/* =====================================================
-   TABLETS
-   ===================================================== */
+/* ================================
+   TABLET
+================================ */
 
 @media screen and (max-width: 800px) {
 
     .featured-news {
 
         grid-template-columns: 1fr;
-
     }
 
     .featured-main {
 
         min-height: 380px;
-
     }
 
     .featured-side {
@@ -533,13 +420,11 @@ body {
 
         grid-template-columns:
             1fr 1fr 1fr;
-
     }
 
     .featured-side article {
 
         flex-direction: column;
-
     }
 
     .featured-side img {
@@ -549,68 +434,69 @@ body {
         height: 125px;
 
         min-height: 125px;
-
     }
-
 }
 
 
-/* =====================================================
-   CELULARES
-   ===================================================== */
+/* ================================
+   CELULAR
+================================ */
 
 @media screen and (max-width: 600px) {
 
     .page {
 
         padding:
-            5px 10px 30px;
-
+            5px
+            10px
+            30px;
     }
+
 
     .card-head {
 
         min-height: 44px;
 
-        padding:
-            0 14px;
+        padding: 0 14px;
 
         font-size: 10px;
-
     }
+
 
     .featured-news {
 
         padding: 10px;
 
         gap: 10px;
-
     }
+
 
     .featured-main {
 
         min-height: 310px;
-
     }
+
 
     .featured-main .overlay {
 
         padding:
-            19px 17px 17px;
-
+            19px
+            17px
+            17px;
     }
+
 
     .featured-main h2 {
 
         font-size: 22px;
-
     }
+
 
     .featured-main p {
 
         font-size: 11px;
-
     }
+
 
     .featured-side {
 
@@ -619,8 +505,8 @@ body {
         flex-direction: column;
 
         gap: 8px;
-
     }
+
 
     .featured-side article {
 
@@ -631,8 +517,8 @@ body {
         flex-direction: row;
 
         padding: 7px;
-
     }
+
 
     .featured-side img {
 
@@ -641,13 +527,8 @@ body {
         height: 89px;
 
         min-height: 89px;
-
     }
 
-
-    /* =================================================
-       TEXTO MÁS GRANDE — SOLO CELULAR
-       ================================================= */
 
     .featured-side h4 {
 
@@ -657,9 +538,9 @@ body {
 
         margin-bottom: 6px;
 
-        color: #f5eee9;
-
+        color: #222222;
     }
+
 
     .featured-side p {
 
@@ -667,51 +548,51 @@ body {
 
         line-height: 1.4;
 
-        color: #b7aaa1;
-
+        color: #666666;
     }
-
 }
 
 
-/* =====================================================
-   CELULARES MUY PEQUEÑOS
-   ===================================================== */
+/* ================================
+   CELULARES PEQUEÑOS
+================================ */
 
 @media screen and (max-width: 360px) {
 
     .page {
 
         padding:
-            4px 7px 25px;
-
+            4px
+            7px
+            25px;
     }
+
 
     .featured-main {
 
         min-height: 270px;
-
     }
+
 
     .featured-main h2 {
 
         font-size: 19px;
-
     }
+
 
     .featured-main p {
 
         font-size: 10px;
-
     }
+
 
     .featured-side article {
 
         height: 94px;
 
         min-height: 94px;
-
     }
+
 
     .featured-side img {
 
@@ -720,25 +601,23 @@ body {
         height: 80px;
 
         min-height: 80px;
-
     }
+
 
     .featured-side h4 {
 
         font-size: 15px;
 
         line-height: 1.18;
-
     }
+
 
     .featured-side p {
 
         font-size: 12px;
 
         line-height: 1.3;
-
     }
-
 }
 
 </style>
@@ -746,7 +625,7 @@ body {
 </head>
 
 
-<body style="background:#120d0a;">
+<body style="background:#f5f5f5;">
 
 <div class="page">
 
@@ -760,14 +639,18 @@ NOTICIAS DESTACADAS
 <div class="featured-news">
 
 
-<!-- =================================================
-     NOTICIA GRANDE
-     ================================================= -->
+<!-- ================================
+     NOTICIA PRINCIPAL
+================================ -->
 
 <a
     href="noticia-3.html"
     class="featured-main"
-    style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp');">
+    style="
+        background-image:
+        url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp');
+    "
+>
 
 <div class="overlay">
 
@@ -784,14 +667,12 @@ Se presentó el primer atlas del cerebro humano...
 </a>
 
 
-<!-- =================================================
-     LADO DERECHO
-     ================================================= -->
+<!-- ================================
+     NOTICIAS LATERALES
+================================ -->
 
 <div class="featured-side">
 
-
-<!-- NOTICIA 4 -->
 
 <a href="noticia-4.html">
 
@@ -800,7 +681,8 @@ Se presentó el primer atlas del cerebro humano...
 <img
     src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-4.jpg"
     alt="A días del Mundial 2026"
-    loading="lazy">
+    loading="lazy"
+>
 
 <div>
 
@@ -819,8 +701,6 @@ Entre conflictos, Trump e Irán...
 </a>
 
 
-<!-- NOTICIA 2 -->
-
 <a href="noticia-2.html">
 
 <article>
@@ -828,7 +708,8 @@ Entre conflictos, Trump e Irán...
 <img
     src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-2.webp"
     alt="Cristiano Ronaldo"
-    loading="lazy">
+    loading="lazy"
+>
 
 <div>
 
@@ -847,8 +728,6 @@ Habló sobre su futuro...
 </a>
 
 
-<!-- NOTICIA 1 -->
-
 <a href="noticia-1.html">
 
 <article>
@@ -856,7 +735,8 @@ Habló sobre su futuro...
 <img
     src="https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-3.webp"
     alt="¿Qué significa este hábito?"
-    loading="lazy">
+    loading="lazy"
+>
 
 <div>
 
@@ -894,3 +774,4 @@ Explicación psicológica...
 
 </body>
 </html>
+
