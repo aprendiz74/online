@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+   content="La ciencia presenta un atlas del cerebro humano que permite visualizar con gran detalle la organización y diversidad de sus células.">
+
+<meta name="theme-color"
+   content="#f5f5f5">
+
+<title>La ciencia logra lo imposible: el primer atlas del cerebro humano | Zoom Musical</title>
+
+<style>
+
+/* ================================
+   BASE
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: #f5f5f5 !important;
+    color-scheme: light;
+}
+
+body {
+    font-family:
+        'Segoe UI',
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    background: #f5f5f5 !important;
+
+    color: #333;
+
+    line-height: 1.7;
+}
+
+
+/* ================================
+   NOTICIA
+================================ */
+
+.noticia-full {
+
+    background: #ffffff;
+
+    margin: 25px auto 40px;
+
+    max-width: 900px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 25px
+        rgba(0,0,0,.10);
+}
+
+
+/* ================================
+   IMAGEN
+================================ */
+
+.noticia-img {
+
+    height: 420px;
+
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.30),
+            rgba(0,0,0,.30)
+        ),
+        url(
+            'https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp'
+        );
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+.noticia-img h2 {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 30px;
+
+    right: 20px;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    font-size: 1.1rem;
+
+    text-shadow:
+        0 1px 3px rgba(0,0,0,.8);
+
+    margin: 0;
+}
+
+
+/* ================================
+   CONTENIDO
+================================ */
+
+.noticia-content {
+
+    padding: 35px;
+}
+
+
+.noticia-content h1 {
+
+    font-size: 2.3rem;
+
+    color: #1a2a44;
+
+    margin-bottom: 14px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+}
+
+
+.noticia-content p {
+
+    margin-bottom: 18px;
+
+    font-size: 1.15rem;
+
+    color: #2c3e50;
+
+    text-align: justify;
+}
+
+
+.noticia-content strong {
+
+    color: #1d2f46;
+}
+
+
+/* ================================
+   FECHA
+================================ */
+
+.meta {
+
+    color: #7f8c9e !important;
+
+    font-size: .85rem !important;
+
+    font-style: italic;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+
+    margin-bottom: 20px !important;
+
+    padding-top: 8px;
+
+    border-top:
+        1px solid #ecf0f1;
+}
+
+
+/* ================================
+   BOTÓN
+================================ */
+
+.btn-volver {
+
+    display: inline-block;
+
+    background: #b95718;
+
+    color: #ffffff !important;
+
+    padding:
+        12px 28px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    margin-top: 10px;
+
+    font-size: 1rem;
+
+    transition:
+        background .3s ease;
+}
+
+
+.btn-volver:hover {
+
+    background: #914510;
+}
+
+
+.btn-volver::before {
+
+    content: "← ";
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+
+    background: #ffffff;
+
+    color: #777777;
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 60px;
+
+    font-size: .9rem;
+
+    border-top:
+        1px solid #e5e5e5;
+}
+
+
+/* ================================
+   CELULAR
+================================ */
+
+@media (max-width: 768px) {
+
+    .noticia-full {
+
+        margin:
+            15px 10px 30px;
+
+        width:
+            calc(100% - 20px);
+
+        border-radius: 11px;
+    }
+
+
+    .noticia-img {
+
+        height: 300px;
+    }
+
+
+    .noticia-img h2 {
+
+        left: 18px;
+
+        bottom: 16px;
+
+        font-size: 1rem;
+    }
+
+
+    .noticia-content {
+
+        padding:
+            24px 20px;
+    }
+
+
+    .noticia-content h1 {
+
+        font-size: 1.9rem;
+
+        line-height: 1.25;
+    }
+
+
+    .noticia-content p {
+
+        font-size: 1.08rem;
+
+        line-height: 1.7;
+
+        text-align: left;
+    }
+
+
+    .meta {
+
+        font-size: .72rem !important;
+
+        letter-spacing: .4px;
+    }
+
+
+    .btn-volver {
+
+        width: 100%;
+
+        text-align: center;
+    }
+}
+
+
+/* ================================
+   CELULARES PEQUEÑOS
+================================ */
+
+@media (max-width: 360px) {
+
+    .noticia-img {
+
+        height: 260px;
+    }
+
+
+    .noticia-content {
+
+        padding:
+            21px 17px;
+    }
+
+
+    .noticia-content h1 {
+
+        font-size: 1.65rem;
+    }
+
+
+    .noticia-content p {
+
+        font-size: 1rem;
+
+        line-height: 1.65;
+    }
+}
+
+</style>
+
+</head>
+
+<body style="background:#f5f5f5;">
+
+<article class="noticia-full">
+
+```
+<div class="noticia-img">
+
+    <h2>
+        Primer atlas del cerebro humano
+    </h2>
+
+</div>
+
+
+<div class="noticia-content">
+
+
+    <h1>
+        La ciencia logra lo imposible: así luce el alucinante
+        primer atlas del cerebro humano
+    </h1>
+
+
+    <p class="meta">
+        Publicado el 29 de octubre del 2025 | ZOOM MUSICAL
+    </p>
+
+
+    <p>
+        Por medio de una investigación científica, se plasmó el
+        <strong>primer atlas del cerebro humano</strong>.
+        Un hito histórico para la ciencia moderna.
+    </p>
+
+
+    <p>
+        La publicación, que se encuentra en la reconocida revista
+        <strong>Nature</strong>, pertenece a la
+        <strong>Red del Atlas Celular de la Iniciativa BRAIN (BICAN)</strong>,
+        la cual forma parte de los
+        <strong>Institutos Nacionales de Salud de Estados Unidos</strong>.
+    </p>
+
+
+    <p>
+        Todo lo anterior con un solo objetivo: lograr plasmar el
+        <strong>atlas del cerebro humano</strong>, algo que hasta hoy
+        parecía imposible por la complejidad de las estructuras
+        cerebrales.
+    </p>
+
+
+    <a
+        href="DESTACADAS.html"
+        class="btn-volver">
+        Más Noticias
+    </a>
+
+
+</div>
+```
+
+</article>
+
+<footer>
+
+```
+<p>
+    © 2026 Todos los derechos reservados.
+</p>
+```
+
+</footer>
+
+</body>
+</html>
