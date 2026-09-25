@@ -14,8 +14,7 @@
       content="Noticias destacadas de Zoom Musical.">
 
 <meta name="theme-color"
-      content="#17100c">
-
+      content="#120d0a">
 
 <style>
 
@@ -23,21 +22,17 @@
     box-sizing: border-box;
 }
 
-
-/* =====================================================
-   FONDO
-   ===================================================== */
-
 html {
+    margin: 0;
+    padding: 0;
     scroll-behavior: smooth;
     background: #120d0a;
+    color-scheme: dark;
 }
 
 body {
-
     margin: 0;
     padding: 0;
-
     min-height: 100vh;
 
     background-color: #120d0a;
@@ -160,10 +155,6 @@ body {
 }
 
 
-/* =====================================================
-   DETALLE NARANJA
-   ===================================================== */
-
 .card-head::before {
 
     content: '';
@@ -240,10 +231,6 @@ body {
 }
 
 
-/* =====================================================
-   CAPA OSCURA
-   ===================================================== */
-
 .featured-main::after {
 
     content: '';
@@ -266,10 +253,6 @@ body {
 
 }
 
-
-/* =====================================================
-   BORDE SUAVE
-   ===================================================== */
 
 .featured-main::before {
 
@@ -407,7 +390,6 @@ body {
         );
 
     transition:
-
         transform .2s ease,
         border-color .2s ease,
         background .2s ease;
@@ -535,8 +517,7 @@ body {
 
     .featured-news {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
     }
 
@@ -765,7 +746,7 @@ body {
 </head>
 
 
-<body>
+<body style="background:#120d0a;">
 
 <div class="page">
 
@@ -786,7 +767,7 @@ NOTICIAS DESTACADAS
 <a
     href="noticia-3.html"
     class="featured-main"
-    style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp')">
+    style="background-image:url('https://raw.githubusercontent.com/aprendiz74/online/main/imagenes/foto-1.webp');">
 
 <div class="overlay">
 
@@ -913,4 +894,3 @@ Explicación psicológica...
 
 </body>
 </html>
-
